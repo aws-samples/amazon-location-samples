@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		114F845E2562E59500D42F59 /* Amazon_Location_Service_DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F845D2562E59500D42F59 /* Amazon_Location_Service_DemoApp.swift */; };
+		114F84602562E59500D42F59 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F845F2562E59500D42F59 /* ContentView.swift */; };
+		114F84622562E59600D42F59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 114F84612562E59600D42F59 /* Assets.xcassets */; };
+		114F84652562E59600D42F59 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 114F84642562E59600D42F59 /* Preview Assets.xcassets */; };
+		114F847E256325CB00D42F59 /* AWSSignatureV4URLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F847D256325CB00D42F59 /* AWSSignatureV4URLHandler.swift */; };
+		114F84812563383300D42F59 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F84802563383300D42F59 /* MapView.swift */; };
+		23264BD981D7ABB6A5897CB2 /* Pods_Amazon_Location_Service_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB594EB9CD3BE69F20813DA /* Pods_Amazon_Location_Service_Demo.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		114F845A2562E59500D42F59 /* Amazon Location Service Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Amazon Location Service Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		114F845D2562E59500D42F59 /* Amazon_Location_Service_DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amazon_Location_Service_DemoApp.swift; sourceTree = "<group>"; };
+		114F845F2562E59500D42F59 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		114F84612562E59600D42F59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		114F84642562E59600D42F59 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		114F84662562E59600D42F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		114F847D256325CB00D42F59 /* AWSSignatureV4URLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSSignatureV4URLHandler.swift; sourceTree = "<group>"; };
+		114F84802563383300D42F59 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		AB9F19E162FA4AF9D7718126 /* Pods-Amazon Location Service Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amazon Location Service Demo.release.xcconfig"; path = "Target Support Files/Pods-Amazon Location Service Demo/Pods-Amazon Location Service Demo.release.xcconfig"; sourceTree = "<group>"; };
+		BA16EE08BA4F2B9190801714 /* Pods-Amazon Location Service Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amazon Location Service Demo.debug.xcconfig"; path = "Target Support Files/Pods-Amazon Location Service Demo/Pods-Amazon Location Service Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		DBB594EB9CD3BE69F20813DA /* Pods_Amazon_Location_Service_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amazon_Location_Service_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		114F84572562E59500D42F59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23264BD981D7ABB6A5897CB2 /* Pods_Amazon_Location_Service_Demo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		114F84512562E59500D42F59 = {
+			isa = PBXGroup;
+			children = (
+				114F845C2562E59500D42F59 /* Amazon Location Service Demo */,
+				114F845B2562E59500D42F59 /* Products */,
+				8ACD614C2630D2439FC24416 /* Pods */,
+				86F6FD562F8C4C6DBF2E0599 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		114F845B2562E59500D42F59 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				114F845A2562E59500D42F59 /* Amazon Location Service Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		114F845C2562E59500D42F59 /* Amazon Location Service Demo */ = {
+			isa = PBXGroup;
+			children = (
+				114F845D2562E59500D42F59 /* Amazon_Location_Service_DemoApp.swift */,
+				114F847D256325CB00D42F59 /* AWSSignatureV4URLHandler.swift */,
+				114F845F2562E59500D42F59 /* ContentView.swift */,
+				114F84802563383300D42F59 /* MapView.swift */,
+				114F84612562E59600D42F59 /* Assets.xcassets */,
+				114F84662562E59600D42F59 /* Info.plist */,
+				114F84632562E59600D42F59 /* Preview Content */,
+			);
+			path = "Amazon Location Service Demo";
+			sourceTree = "<group>";
+		};
+		114F84632562E59600D42F59 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				114F84642562E59600D42F59 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		86F6FD562F8C4C6DBF2E0599 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DBB594EB9CD3BE69F20813DA /* Pods_Amazon_Location_Service_Demo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8ACD614C2630D2439FC24416 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA16EE08BA4F2B9190801714 /* Pods-Amazon Location Service Demo.debug.xcconfig */,
+				AB9F19E162FA4AF9D7718126 /* Pods-Amazon Location Service Demo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		114F84592562E59500D42F59 /* Amazon Location Service Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 114F84692562E59600D42F59 /* Build configuration list for PBXNativeTarget "Amazon Location Service Demo" */;
+			buildPhases = (
+				44E98B68E31DA896514DCE9F /* [CP] Check Pods Manifest.lock */,
+				114F84562562E59500D42F59 /* Sources */,
+				114F84572562E59500D42F59 /* Frameworks */,
+				114F84582562E59500D42F59 /* Resources */,
+				3BB09F0BB66DB58A9D29C1D3 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Amazon Location Service Demo";
+			productName = "Amazon Location Service Demo";
+			productReference = 114F845A2562E59500D42F59 /* Amazon Location Service Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		114F84522562E59500D42F59 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					114F84592562E59500D42F59 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+				};
+			};
+			buildConfigurationList = 114F84552562E59500D42F59 /* Build configuration list for PBXProject "Amazon Location Service Demo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 114F84512562E59500D42F59;
+			productRefGroup = 114F845B2562E59500D42F59 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				114F84592562E59500D42F59 /* Amazon Location Service Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		114F84582562E59500D42F59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				114F84652562E59600D42F59 /* Preview Assets.xcassets in Resources */,
+				114F84622562E59600D42F59 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3BB09F0BB66DB58A9D29C1D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Amazon Location Service Demo/Pods-Amazon Location Service Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Amazon Location Service Demo/Pods-Amazon Location Service Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Amazon Location Service Demo/Pods-Amazon Location Service Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44E98B68E31DA896514DCE9F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Amazon Location Service Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		114F84562562E59500D42F59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				114F847E256325CB00D42F59 /* AWSSignatureV4URLHandler.swift in Sources */,
+				114F84812563383300D42F59 /* MapView.swift in Sources */,
+				114F84602562E59500D42F59 /* ContentView.swift in Sources */,
+				114F845E2562E59500D42F59 /* Amazon_Location_Service_DemoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		114F84672562E59600D42F59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		114F84682562E59600D42F59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		114F846A2562E59600D42F59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA16EE08BA4F2B9190801714 /* Pods-Amazon Location Service Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Amazon Location Service Demo/Preview Content\"";
+				DEVELOPMENT_TEAM = SVHUM2DP35;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Amazon Location Service Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "aws.location.Amazon-Location-Service-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		114F846B2562E59600D42F59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB9F19E162FA4AF9D7718126 /* Pods-Amazon Location Service Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Amazon Location Service Demo/Preview Content\"";
+				DEVELOPMENT_TEAM = SVHUM2DP35;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Amazon Location Service Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "aws.location.Amazon-Location-Service-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		114F84552562E59500D42F59 /* Build configuration list for PBXProject "Amazon Location Service Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				114F84672562E59600D42F59 /* Debug */,
+				114F84682562E59600D42F59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		114F84692562E59600D42F59 /* Build configuration list for PBXNativeTarget "Amazon Location Service Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				114F846A2562E59600D42F59 /* Debug */,
+				114F846B2562E59600D42F59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 114F84522562E59500D42F59 /* Project object */;
+}
