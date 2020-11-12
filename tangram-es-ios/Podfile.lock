@@ -1,0 +1,20 @@
+PODS:
+  - AWSCore (2.19.1)
+  - Tangram-es (0.13.0)
+
+DEPENDENCIES:
+  - AWSCore
+  - Tangram-es
+
+SPEC REPOS:
+  trunk:
+    - AWSCore
+    - Tangram-es
+
+SPEC CHECKSUMS:
+  AWSCore: 55c154ae27efc5c98bdc30a0eeea5a35d10a2ab5
+  Tangram-es: 4f8530731a23035b1a403494abed7523db3f43ac
+
+PODFILE CHECKSUM: cb64538e353d8215ccafc4ef0eaa2cd61f8bca05
+
+COCOAPODS: 1.10.0

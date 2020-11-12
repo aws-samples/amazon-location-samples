@@ -1,0 +1,120 @@
+<!-- Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved. -->
+<!-- SPDX-License-Identifier: MIT-0 -->
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <style>
+      body {
+        margin: 0;
+      }
+
+      #map {
+        height: 100vh;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/tangram"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.784.0.min.js"></script>
+    <script>
+      // configuration
+      // Cognito Identity Pool ID
+      const identityPoolId = "<Identity Pool ID>";
+      // Amazon Location Service Map name; must be HERE-backed
+      const mapName = "<Map name>";
+
+      AWS.config.region = identityPoolId.split(":")[0];
+
+      // instantiate a credential provider
+      credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: identityPoolId,
+      });
+
+      const scene = {
+        import: [
+          // Bubble Wrap style
+          "https://www.nextzen.org/carto/bubble-wrap-style/10/bubble-wrap-style.zip",
+          "https://www.nextzen.org/carto/bubble-wrap-style/10/themes/label-7.zip",
+          "https://www.nextzen.org/carto/bubble-wrap-style/10/themes/bubble-wrap-road-shields-usa.zip",
+          "https://www.nextzen.org/carto/bubble-wrap-style/10/themes/bubble-wrap-road-shields-international.zip",
+        ],
+        // override values beneath the `sources` key in the style above
+        sources: {
+          mapzen: {
+            // point at Amazon Location using a synthetic URL, which will be handled by the service
+            // worker
+            url: `https://amazon.location/${mapName}/{z}/{x}/{y}`,
+          },
+          // effectively disable raster tiles containing encoded normals
+          normals: {
+            max_zoom: 0,
+          },
+          "normals-elevation": {
+            max_zoom: 0,
+          },
+        },
+      };
+
+      /**
+       * Register a service worker that will rewrite and sign requests using Signature Version 4.
+       */
+      async function registerServiceWorker() {
+        if ("serviceWorker" in navigator) {
+          try {
+            const reg = await navigator.serviceWorker.register("./sw.js");
+
+            // refresh credentials from Amazon Cognito
+            await credentials.refreshPromise();
+
+            await reg.active.ready;
+
+            if (navigator.serviceWorker.controller == null) {
+              // trigger a navigate event to active the controller for this page
+              window.location.reload();
+            }
+
+            // pass credentials to the service worker
+            reg.active.postMessage({
+              credentials: {
+                accessKeyId: credentials.accessKeyId,
+                secretAccessKey: credentials.secretAccessKey,
+                sessionToken: credentials.sessionToken,
+              },
+              region: AWS.config.region,
+            });
+          } catch (error) {
+            console.error("Service worker registration failed:", error);
+          }
+        } else {
+          console.warn("Service worker support is required for this example");
+        }
+      }
+
+      /**
+       * Initialize a map.
+       */
+      async function initializeMap() {
+        // register the service worker to handle requests to https://amazon.location
+        await registerServiceWorker();
+
+        // actually initialize the map
+        const map = L.map("map").setView([49.2819, -123.1187], 10);
+        Tangram.leafletLayer({
+          scene,
+        }).addTo(map);
+        map.attributionControl.setPrefix("");
+        map.attributionControl.addAttribution("© 2020 HERE");
+      }
+
+      initializeMap();
+    </script>
+  </body>
+</html>

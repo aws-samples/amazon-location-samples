@@ -1,0 +1,8 @@
+platform :ios, '12.0'
+
+target 'Amazon Location Service Demo' do
+  use_frameworks!
+
+  pod 'AWSCore'
+  pod 'Tangram-es'
+end

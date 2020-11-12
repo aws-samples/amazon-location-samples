@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="identityPoolId">[identity pool id]</string>
+    <string name="mapName">[map name]</string>
+    <string name="awsRegion">[region]</string>
+</resources>
