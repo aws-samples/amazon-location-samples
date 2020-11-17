@@ -1,0 +1,23 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+$LOCAL_REPO = '~/aws-amplify/aws-sdk-ios-staging'
+
+target 'TrackingSample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for TrackingSample
+  pod 'AWSMobileClient', :path => $LOCAL_REPO  
+  pod 'AWSCore', :path => $LOCAL_REPO
+  pod 'AWSLocation', :path => $LOCAL_REPO
+  
+  target 'TrackingSampleTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'TrackingSampleUITests' do
+    # Pods for testing
+  end
+
+end
