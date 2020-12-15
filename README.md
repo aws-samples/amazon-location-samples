@@ -15,6 +15,8 @@ Guide](https://docs.aws.amazon.com/location/latest/developerguide).
 * [Using the Mapbox Maps SDK for iOS with Amazon Location Service](mapbox-gl-native-ios/)
 * [Using Tangram ES for Android with Amazon Location Service](tangram-es-android/)
 * [Using Tangram ES for iOS with Amazon Location Service](tangram-es-ios/)
+* [Location Tracking with AWS Amplify on Android](tracking-android/)
+* [Location Tracking with AWS Amplify on iOS](tracking-ios/)
 
 ## Security
 
