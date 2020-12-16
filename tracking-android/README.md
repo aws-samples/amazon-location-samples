@@ -34,8 +34,8 @@ dependencies in your Amplify Android application.
 2. In the **dependencies** block, add the following lines:
 
     ```groovy
-    implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.19.+'
-    implementation 'com.amazonaws:aws-android-sdk-location:2.19.+'
+    implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.20.+'
+    implementation 'com.amazonaws:aws-android-sdk-location:2.20.+'
     ```
 
 3. Click ***Sync Now*** in the notification bar above the file editor to update your project’s
