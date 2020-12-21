@@ -9,6 +9,7 @@ Guide](https://docs.aws.amazon.com/location/latest/developerguide).
 ## Sample Applications
 
 * [Using Mapbox GL JS with Amazon Location Service](mapbox-gl-js/)
+* [Using Mapbox GL JS and React with Amazon Location Service](mapbox-gl-js-react/)
 * [Using Tangram with Amazon Location Service](tangram-js/)
 * [Using the Mapbox Maps SDK for Android with Amazon Location Service](mapbox-gl-native-android/)
 * [Using the Mapbox Maps SDK for iOS with Amazon Location Service](mapbox-gl-native-ios/)
