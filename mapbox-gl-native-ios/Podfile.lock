@@ -1,24 +1,16 @@
 PODS:
   - AWSCore (2.19.1)
-  - Mapbox-iOS-SDK (5.9.0):
-    - MapboxMobileEvents (= 0.10.2)
-  - MapboxMobileEvents (0.10.2)
 
 DEPENDENCIES:
   - AWSCore
-  - Mapbox-iOS-SDK (~> 5.9.0)
 
 SPEC REPOS:
   trunk:
     - AWSCore
-    - Mapbox-iOS-SDK
-    - MapboxMobileEvents
 
 SPEC CHECKSUMS:
   AWSCore: 55c154ae27efc5c98bdc30a0eeea5a35d10a2ab5
-  Mapbox-iOS-SDK: a5915700ec84bc1a7f8b3e746d474789e35b7956
-  MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
 
-PODFILE CHECKSUM: b9d3b28135ec8e606105223adf1f0e4f8669cff6
+PODFILE CHECKSUM: ce10d51c7e0402b58a1b252bcc7e330d73a9d529
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1
