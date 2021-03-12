@@ -39,4 +39,5 @@ dependencies {
 
     implementation 'org.maplibre.gl:android-sdk:9.4.0'
     implementation 'com.amazonaws:aws-android-sdk-core:2.20.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.3'
 }
