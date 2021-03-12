@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "maplibre-gl-native",
+        "package": "MapLibre GL Native",
         "repositoryURL": "https://github.com/maptiler/maplibre-gl-native-distribution",
         "state": {
           "branch": null,
-          "revision": "7eaf6a9741e1a2bd698c4dfc4184cfa138f2aba3",
-          "version": "5.10.0"
+          "revision": "dc28d9ad9e1b5c52cdeab26e2fe1781db4974e9a",
+          "version": "5.11.0"
         }
       }
     ]
