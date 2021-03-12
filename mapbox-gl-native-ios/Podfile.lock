@@ -1,5 +1,5 @@
 PODS:
-  - AWSCore (2.19.1)
+  - AWSCore (2.23.0)
 
 DEPENDENCIES:
   - AWSCore
@@ -9,7 +9,7 @@ SPEC REPOS:
     - AWSCore
 
 SPEC CHECKSUMS:
-  AWSCore: 55c154ae27efc5c98bdc30a0eeea5a35d10a2ab5
+  AWSCore: 589ad0bd5b72e9a95ce33834f12339b50cfc9f14
 
 PODFILE CHECKSUM: ce10d51c7e0402b58a1b252bcc7e330d73a9d529
 
