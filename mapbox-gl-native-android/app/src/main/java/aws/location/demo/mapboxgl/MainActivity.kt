@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
 
         // initialize Mapbox GL
         Mapbox.getInstance(this, null)
-        Mapbox.getTelemetry()?.disableTelemetrySession()
         HttpRequestUtil.setOkHttpClient(
             OkHttpClient.Builder()
                 .addInterceptor(SigV4Interceptor(credentialProvider, SERVICE_NAME))
