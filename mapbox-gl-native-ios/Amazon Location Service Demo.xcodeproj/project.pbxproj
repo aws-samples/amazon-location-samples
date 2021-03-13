@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		117741E0255A2B9200D4866F /* AWSSignatureV4Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117741DF255A2B9200D4866F /* AWSSignatureV4Delegate.swift */; };
 		117741E3255A2D5200D4866F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117741E2255A2D5200D4866F /* MapView.swift */; };
 		B1BDC68445B18AD800482856 /* Pods_Amazon_Location_Service_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5270A22DC16E59A33EA1537 /* Pods_Amazon_Location_Service_Demo.framework */; };
+		D7CB7CF625C3412500F63D73 /* Mapbox in Frameworks */ = {isa = PBXBuildFile; productRef = D7CB7CF525C3412500F63D73 /* Mapbox */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7CB7CF625C3412500F63D73 /* Mapbox in Frameworks */,
 				B1BDC68445B18AD800482856 /* Pods_Amazon_Location_Service_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,6 +119,9 @@
 			dependencies = (
 			);
 			name = "Amazon Location Service Demo";
+			packageProductDependencies = (
+				D7CB7CF525C3412500F63D73 /* Mapbox */,
+			);
 			productName = "Amazon Location Service Demo";
 			productReference = 117741C7255A216600D4866F /* Amazon Location Service Demo.app */;
 			productType = "com.apple.product-type.application";
@@ -144,6 +149,9 @@
 				Base,
 			);
 			mainGroup = 117741BE255A216600D4866F;
+			packageReferences = (
+				D7CB7CF225C3412500F63D73 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */,
+			);
 			productRefGroup = 117741C8255A216600D4866F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -406,6 +414,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D7CB7CF225C3412500F63D73 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maptiler/maplibre-gl-native-distribution";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D7CB7CF525C3412500F63D73 /* Mapbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7CB7CF225C3412500F63D73 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */;
+			productName = Mapbox;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 117741BF255A216600D4866F /* Project object */;
 }
