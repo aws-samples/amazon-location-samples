@@ -3,7 +3,7 @@
 <html>
   <head>
     <link
-      href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
+      href="https://unpkg.com/maplibre-gl@1.14.0/dist/maplibre-gl.css"
       rel="stylesheet"
     />
     <style>
@@ -19,7 +19,7 @@
 
   <body>
     <div id="map" />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+    <script src="https://unpkg.com/maplibre-gl@1.14.0/dist/maplibre-gl.js"></script>
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.784.0.min.js"></script>
     <script src="https://unpkg.com/@aws-amplify/core@3.7.0/dist/aws-amplify-core.min.js"></script>
     <script>
@@ -72,15 +72,16 @@
         await credentials.getPromise();
 
         // actually initialize the map
-        const map = new mapboxgl.Map({
+        const map = new maplibregl.Map({
           container: "map",
           center: [-123.1187, 49.2819], // initial map centerpoint
           zoom: 10, // initial map zoom
+          hash: false, // set to `true` to show zoom, lat, long in URL
           style: mapName,
           transformRequest,
         });
 
-        map.addControl(new mapboxgl.NavigationControl(), "top-left");
+        map.addControl(new maplibregl.NavigationControl(), "top-left");
       }
 
       initializeMap();
