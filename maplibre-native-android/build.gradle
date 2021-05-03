@@ -18,10 +18,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            // for org.maplibre.gl:android-sdk
-            url = "https://dl.bintray.com/maplibre/maplibre-gl-native"
-        }
+        mavenCentral()
     }
 }
 
