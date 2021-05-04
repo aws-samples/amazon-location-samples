@@ -58,10 +58,11 @@ class MainActivity : AppCompatActivity(), MapView.MapReadyCallback {
     private fun getHttpHandler(): HttpHandler {
         val builder = DefaultHttpHandler.getClientBuilder()
 
+        val identityPoolId = getString(R.string.identityPoolId)
         val credentialsProvider = CognitoCachingCredentialsProvider(
             applicationContext,
-            getString(R.string.identityPoolId),
-            Regions.US_EAST_1
+            identityPoolId,
+            Regions.fromName(identityPoolId.split(":").first())
         )
 
         return DefaultHttpHandler(
