@@ -4,5 +4,5 @@
     <string name="mapName">[map name]</string>
     <string name="awsRegion">[region]</string>
     <string name="sceneUrl">https://www.nextzen.org/carto/cinnabar-style/9/cinnabar-style.zip</string>
-    <string name="attribution">© 2020 HERE</string>
+    <string name="attribution">© 2021 HERE</string>
 </resources>
