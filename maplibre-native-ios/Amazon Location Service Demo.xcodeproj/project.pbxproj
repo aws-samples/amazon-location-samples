@@ -420,8 +420,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/maptiler/maplibre-gl-native-distribution";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.11.0;
+				kind = exactVersion;
+				version = "5.12.0-pre.1";
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
