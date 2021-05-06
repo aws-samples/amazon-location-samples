@@ -15,6 +15,7 @@
 		117741E3255A2D5200D4866F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117741E2255A2D5200D4866F /* MapView.swift */; };
 		B1BDC68445B18AD800482856 /* Pods_Amazon_Location_Service_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5270A22DC16E59A33EA1537 /* Pods_Amazon_Location_Service_Demo.framework */; };
 		D7CB7CF625C3412500F63D73 /* Mapbox in Frameworks */ = {isa = PBXBuildFile; productRef = D7CB7CF525C3412500F63D73 /* Mapbox */; };
+		D7D9C048264494C90053C1AD /* MetalANGLE in Frameworks */ = {isa = PBXBuildFile; productRef = D7D9C047264494C90053C1AD /* MetalANGLE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 			files = (
 				D7CB7CF625C3412500F63D73 /* Mapbox in Frameworks */,
 				B1BDC68445B18AD800482856 /* Pods_Amazon_Location_Service_Demo.framework in Frameworks */,
+				D7D9C048264494C90053C1AD /* MetalANGLE in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +123,7 @@
 			name = "Amazon Location Service Demo";
 			packageProductDependencies = (
 				D7CB7CF525C3412500F63D73 /* Mapbox */,
+				D7D9C047264494C90053C1AD /* MetalANGLE */,
 			);
 			productName = "Amazon Location Service Demo";
 			productReference = 117741C7255A216600D4866F /* Amazon Location Service Demo.app */;
@@ -431,6 +434,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D7CB7CF225C3412500F63D73 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */;
 			productName = Mapbox;
+		};
+		D7D9C047264494C90053C1AD /* MetalANGLE */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7CB7CF225C3412500F63D73 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */;
+			productName = MetalANGLE;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
