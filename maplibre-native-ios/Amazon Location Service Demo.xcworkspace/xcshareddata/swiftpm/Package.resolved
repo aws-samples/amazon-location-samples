@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "MapLibre GL Native",
-        "repositoryURL": "https://github.com/maptiler/maplibre-gl-native-distribution",
+        "repositoryURL": "https://github.com/maplibre/maplibre-gl-native-distribution",
         "state": {
           "branch": null,
           "revision": "f79911a42f605cbaa9eb1ee6330b464eac47569d",
