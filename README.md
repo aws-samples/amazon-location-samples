@@ -17,6 +17,7 @@ Guide](https://docs.aws.amazon.com/location/latest/developerguide).
 * [Using Tangram ES for iOS with Amazon Location Service](tangram-es-ios/)
 * [Location Tracking with AWS Amplify on Android](tracking-android/)
 * [Location Tracking with AWS Amplify on iOS](tracking-ios/)
+* [Asset tracking with Amazon Location, Amplify, and IoT Core](maplibre-js-react-iot-asset-tracking/)
 
 ## Security
 
