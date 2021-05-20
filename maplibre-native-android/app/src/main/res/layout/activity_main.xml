@@ -15,7 +15,10 @@
         app:mapbox_cameraTargetLng="-123.1187"
         app:mapbox_cameraZoom="12"
         app:mapbox_uiAttribution="false"
-        app:mapbox_uiLogo="false" />
+        app:mapbox_uiLogo="false" 
+        app:mapbox_renderTextureMode="true"
+        app:mapbox_renderTextureTranslucentSurface="true"
+        app:mapbox_foregroundLoadColor="@color/white"/>
 
     <TextView
         android:id="@+id/attributionView"
