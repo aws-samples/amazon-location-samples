@@ -1,3 +1,5 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
 #!/bin/sh
 aws iam \
   put-role-policy \
@@ -7,3 +9,4 @@ aws iam \
     { \"Sid\": \"PlaceIndexReadOnly\", \"Effect\": \"Allow\", \"Action\": [ \"geo:GetMapStyleDescriptor\", \"geo:GetMapGlyphs\", \"geo:GetMapSprites\", \"geo:GetMapStyleDescriptor\", \"geo:GetMapTile\" ], \"Resource\": \"arn:aws:geo:$3:$4:map/CreateCustomMapStyle\" }, \\\\\\
   { \"Sid\": \"MapsReadOnly\", \"Effect\": \"Allow\", \"Action\": [ \"geo:GetMapStyleDescriptor\", \"geo:GetMapGlyphs\", \"geo:GetMapSprites\", \"geo:GetMapStyleDescriptor\", \"geo:GetMapTile\" ], \"Resource\": \"arn:aws:geo:$3:$4:map/CreateCustomMapStyle\" } ] }" \
   --profile $2 &
+  

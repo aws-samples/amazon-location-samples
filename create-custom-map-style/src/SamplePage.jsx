@@ -1,3 +1,6 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 import React, { useRef, useState, useEffect } from 'react';
 import transformRequest from './transformRequest';
 import { Auth } from 'aws-amplify';
@@ -7,53 +10,53 @@ import mapboxgl from 'mapbox-gl';
 import './SamplePage.css'
 
 mapboxgl.workerClass = MapboxWorker;
+// This is the default Mapbox token, replace it with your own
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg';
 
 const SamplePage = () => {
-  const maputnik = useRef();
+  const map = useRef();
 
-  const [maputnikCoordinates, setMaputnikCoordinates] = useState({
+  const [coordinates, setCoordinates] = useState({
     lat: 40.7356,
     lng: -74.0541,
     zoom: 12.44,
   });
 
-  // MAPUTNIK MAP
   useEffect(async () => {
     const credentials = await Auth.currentCredentials();
-    const { lat, lng, zoom } = maputnikCoordinates;
-    const maputnikMap = new mapboxgl.Map({
-      container: maputnik.current,
+    const { lat, lng, zoom } = coordinates;
+    const demoMap = new mapboxgl.Map({
+      container: map.current,
       center: { lng, lat },
       zoom,
-      style: 'http://localhost:3000/example-style-descriptor.json',
+      style: `${process.env.PUBLIC_URL}/example-style-descriptor.json`,
       transformRequest: transformRequest(credentials),
     });
-    maputnikMap.on('move', () => {
-      setMaputnikCoordinates({
-        lng: maputnikMap.getCenter().lng.toFixed(4),
-        lat: maputnikMap.getCenter().lat.toFixed(4),
-        zoom: maputnikMap.getZoom().toFixed(2),
+    demoMap.on('move', () => {
+      setCoordinates({
+        lng: demoMap.getCenter().lng.toFixed(4),
+        lat: demoMap.getCenter().lat.toFixed(4),
+        zoom: demoMap.getZoom().toFixed(2),
       });
     });
-    return () => maputnikMap.remove();
+    return () => demoMap.remove();
   }, []);
 
   return (
     <div className="sample-page">
       <h1>Amazon Location Service - Create Your Own Custom Map Style</h1>
-      <div className="maputnik-container">
-        <div className="maputnik-sidebar">
+      <div className="map-container">
+        <div className="demo-sidebar">
           <div>
-            Longitude: {maputnikCoordinates.lng}
+            Longitude: {coordinates.lng}
             <br />
-            Latitude: {maputnikCoordinates.lat}
+            Latitude: {coordinates.lat}
             <br />
-            Zoom: {maputnikCoordinates.zoom}
+            Zoom: {coordinates.zoom}
             <br />
           </div>
         </div>
-        <div ref={maputnik} className="maputnik-map" />
+        <div ref={map} className="demo-map" />
       </div>
       <hr />
     </div>

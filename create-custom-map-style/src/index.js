@@ -1,10 +1,12 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 import  React  from  'react';
 import  ReactDOM  from  'react-dom';
-import  './index.css';
 import  SamplePage from './SamplePage';
-import  reportWebVitals  from  './reportWebVitals';
 import  Amplify  from  'aws-amplify';
 import  awsExports  from  './aws-exports';
+import  './index.css';
 
 Amplify.configure(awsExports);
 

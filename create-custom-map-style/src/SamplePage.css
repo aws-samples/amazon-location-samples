@@ -1,3 +1,6 @@
+/* Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+SPDX-License-Identifier: MIT-0 */
+
 .sample-page {
   display: flex;
   justify-content: center;
@@ -5,7 +8,7 @@
   flex-direction: column;
 }
 
-.maputnik-container {
+.map-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +16,7 @@
   padding: 5px;
 }
 
-.maputnik-map {
+.demo-map {
   height: 500px;
   width: 500px;
   border: 0.25px solid black;

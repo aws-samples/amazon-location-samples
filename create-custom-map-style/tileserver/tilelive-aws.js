@@ -1,20 +1,17 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 "use strict";
 
-var http = require("http"),
-  url = require("url"),
-  util = require("util");
-
-var _debug = require("debug"),
-  mercator = new(require("@mapbox/sphericalmercator"))(),
+var url = require("url"),
+  util = require("util"),
+  _debug = require("debug"),
   request = require("request"),
   retry = require("retry"),
-  semver = require("semver");
-
-var https = require('https'),
+  semver = require("semver"),
   aws4 = require('aws4'),
-  Url = require('url-parse');
-
-var zlib = require('zlib');
+  Url = require('url-parse'),
+  zlib = require('zlib');
 
 var meta = require("./package.json"),
   NAME = meta.name,
@@ -63,7 +60,7 @@ module.exports = function (tilelive, options) {
   var fetch = function (uri, callback) {
     var operation = retry.operation(retryOptions);
     return operation.attempt(function (currentAttempt) {
-      const url = Url(uri);
+      var url = Url(uri);
       var opts = {
         uri,
         encoding: null,
@@ -86,7 +83,6 @@ module.exports = function (tilelive, options) {
           case 200:
           case 403:
           case 404:
-            // var bod = Buffer.from(body).toString('base64');
             return callback(null, rsp, body);
           default:
             err = new Error(util.format("Upstream error: %s returned %d", uri, rsp.statusCode));
@@ -101,10 +97,8 @@ module.exports = function (tilelive, options) {
     });
   };
 
-  var HttpSource = function (uri, callback) {
+  var AwsSource = function (uri, callback) {
     if (semver.satisfies(process.version, ">=0.11.0")) {
-      // Node 0.12 changes the behavior of url.parse such that components are
-      // url-encoded
       uri.hash = uri.hash && decodeURIComponent(uri.hash);
       uri.pathname = decodeURIComponent(uri.pathname);
       uri.path = decodeURIComponent(uri.path);
@@ -144,7 +138,7 @@ module.exports = function (tilelive, options) {
     return callback(null, this);
   };
 
-  HttpSource.prototype.getTile = function (z, x, y, callback) {
+  AwsSource.prototype.getTile = function (z, x, y, callback) {
     console.log('GETTING TILE')
     var tileUrl = this.source
       .replace(/{z}/i, z)
@@ -178,21 +172,20 @@ module.exports = function (tilelive, options) {
     });
   };
 
-  HttpSource.prototype.getInfo = function (callback) {
+  AwsSource.prototype.getInfo = function (callback) {
     return setImmediate(callback, null, this.info);
   };
 
-  HttpSource.prototype.close = function (callback) {
+  AwsSource.prototype.close = function (callback) {
     callback = callback || function () {};
     return callback();
   };
 
-  HttpSource.registerProtocols = function (tilelive) {
-    tilelive.protocols["http:"] = HttpSource;
-    tilelive.protocols["https:"] = HttpSource;
+  AwsSource.registerProtocols = function (tilelive) {
+    tilelive.protocols["aws:"] = AwsSource;
   };
 
-  HttpSource.registerProtocols(tilelive);
+  AwsSource.registerProtocols(tilelive);
 
-  return HttpSource;
+  return AwsSource;
 };
