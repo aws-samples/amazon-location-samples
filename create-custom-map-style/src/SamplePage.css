@@ -1,0 +1,21 @@
+.sample-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.maputnik-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.25px solid black;
+  padding: 5px;
+}
+
+.maputnik-map {
+  height: 500px;
+  width: 500px;
+  border: 0.25px solid black;
+  margin: 5px;
+}

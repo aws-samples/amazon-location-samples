@@ -1,0 +1,8 @@
+{
+  "/": {
+    "source": "https://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/CreateCustomMapStyle/tiles/{z}/{x}/{y}",
+    "cors": false,
+    "timing": false,
+    "tilePath": "/{z}/{x}/{y}"
+  }
+}

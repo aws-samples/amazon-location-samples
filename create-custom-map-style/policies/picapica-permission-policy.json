@@ -1,0 +1,17 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow", "Resource": [ "*" ],
+        "Action": [
+          "codecommit:GetRepository",
+          "codecommit:GitPush",
+          "codecommit:UpdateDefaultBranch",
+          "picapica:GetDestination",
+          "picapica:PutDestination",
+          "picapica:ListDestinations",
+          "picapica:DeleteDestination"
+        ]
+      }
+    ]
+  }
