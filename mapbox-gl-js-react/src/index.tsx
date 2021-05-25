@@ -8,7 +8,6 @@ import { Signer, ICredentials } from "@aws-amplify/core";
 import { Auth } from "aws-amplify";
 import ReactMapGL, {
   NavigationControl,
-  MapRequest,
   ViewportProps,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -27,7 +26,10 @@ const mapName = "<MAP_NAME>";
 const transformRequest = (credentials: ICredentials) => (
   url?: string,
   resourceType?: string
-): MapRequest => {
+): { 
+  url: string,
+  headers?: { [key: string]: string },
+ } => {
   // Resolve to an AWS URL
   if (resourceType === "Style" && !url?.includes("://")) {
     url = `https://maps.geo.${amplifyConfig.aws_project_region}.amazonaws.com/maps/v0/maps/${url}/style-descriptor`;
