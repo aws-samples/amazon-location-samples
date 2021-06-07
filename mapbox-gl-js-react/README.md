@@ -6,7 +6,7 @@
 
 2. Follow steps to [create an Amplify project and enable Amazon Location Service permissions](https://docs.amplify.aws/guides/location-service/setting-up-your-app/q/platform/js#connecting-your-react-app-to-the-amazon-location-service)
 
-3. Create a map in the [Amazon Location Service console](https://console.aws.amazon.com/location/maps/home?region=us-east-1#/) and replace `<MAP_NAME>` with the name of the one you created in `src/index.tsx` on line 14.
+3. Create a map in the [Amazon Location Service console](https://console.aws.amazon.com/location/maps/home?region=us-east-1#/) and replace `<MAP_NAME>` with the name of the one you created in `src/index.tsx` on line 22.
 
 4. Start the app using `npm start`
 
