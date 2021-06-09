@@ -6,14 +6,15 @@
   "dependencies": {
     "amazon-location-helpers": "^1.0.4",
     "aws-amplify": "^3.3.16",
+    "maplibre-gl": "^1.14.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-map-gl": "^5.2.11"
+    "react-map-gl": "^5.3.16"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [
@@ -34,6 +35,7 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^6.1.2",
     "@types/mapbox-gl": "^1.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
