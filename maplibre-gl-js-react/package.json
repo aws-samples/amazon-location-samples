@@ -4,6 +4,7 @@
   "private": true,
   "license": "MIT-0",
   "dependencies": {
+    "amazon-location-helpers": "^1.0.4",
     "aws-amplify": "^3.3.16",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -33,10 +34,10 @@
     ]
   },
   "devDependencies": {
+    "@types/mapbox-gl": "^1.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
-    "@types/mapbox-gl": "^1.0.0",
     "@types/react-map-gl": "^5.2.9",
     "react-scripts": "^4.0.1",
     "typescript": "^4.0.3"
