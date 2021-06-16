@@ -5,13 +5,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import transformRequest from './transformRequest';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
-import mapboxgl from 'mapbox-gl';
+import maplibregl from 'maplibre-gl';
 import './SamplePage.css'
-
-mapboxgl.workerClass = MapboxWorker;
-// This is the default Mapbox token, replace it with your own
-mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg';
 
 const SamplePage = () => {
   const map = useRef();
@@ -25,11 +20,11 @@ const SamplePage = () => {
   useEffect(async () => {
     const credentials = await Auth.currentCredentials();
     const { lat, lng, zoom } = coordinates;
-    const demoMap = new mapboxgl.Map({
+    const demoMap = new maplibregl.Map({
       container: map.current,
-      center: { lng, lat },
+      center: [lng, lat],
       zoom,
-      style: `${process.env.PUBLIC_URL}/example-style-descriptor.json`,
+      style: `${process.env.PUBLIC_URL || 'http://localhost:3000'}/example-style-descriptor.json`,
       transformRequest: transformRequest(credentials),
     });
     demoMap.on('move', () => {
@@ -64,4 +59,3 @@ const SamplePage = () => {
 }
 
 export default withAuthenticator(SamplePage);
-
