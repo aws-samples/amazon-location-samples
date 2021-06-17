@@ -40,7 +40,7 @@ Overview of the steps:
 8. Create a Rule and add the action to send data to a Lambda function
 9. Integrating all resources to the web application
    1. Add Roles to Cognito Authenticated users
-10. Run the Application 
+10. Run the Application
 
 ### 1. `npm install`
 
@@ -53,7 +53,7 @@ Install AWS Amplify library (aws-amplify) and also Amplify React specific UI com
 In the root of the project run:
 
 ```bash
-npm install aws-amplify @aws-amplify/ui-react --legacy-peer-deps
+npm install aws-amplify @aws-amplify/ui-react
 ```
 
 Run the following command and the following options to start an Amplify application project and create it’s environment on AWS cloud:
@@ -284,36 +284,36 @@ authRoleName:
 
 ```yaml
 MapsReadOnlyPolicy:
-  #Policy to be attached to authenticated users role. 
+  #Policy to be attached to authenticated users role.
   #Policy give Authenticated users rights to read information from Amazon Location.
-    Type: AWS::IAM::Policy
-    Properties:
-      PolicyName: "mapsReadOnly"
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Action:
-              - geo:DescribeMap
-              - geo:BatchGetDevicePosition
-              - geo:GetMapGlyphs
-              - geo:GetDevicePositionHistory
-              - geo:DescribeTracker
-              - geo:GetMapSprites
-              - geo:GetMapStyleDescriptor
-              - geo:GetDevicePosition
-              - geo:GetMapTileJson
-              - geo:GetMapTile
-            Resource:
-              - arn:aws:geo:[enter_current_region]:[Enter_Account_Number]:map/assetTracker
-              - arn:aws:geo:[enter_current_region]:[Enter_Account_Number]:tracker/trackedAsset01
-          - Effect: Allow
-            Action:
+  Type: AWS::IAM::Policy
+  Properties:
+    PolicyName: "mapsReadOnly"
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: Allow
+          Action:
+            - geo:DescribeMap
+            - geo:BatchGetDevicePosition
+            - geo:GetMapGlyphs
+            - geo:GetDevicePositionHistory
+            - geo:DescribeTracker
+            - geo:GetMapSprites
+            - geo:GetMapStyleDescriptor
+            - geo:GetDevicePosition
+            - geo:GetMapTileJson
+            - geo:GetMapTile
+          Resource:
+            - arn:aws:geo:[enter_current_region]:[Enter_Account_Number]:map/assetTracker
+            - arn:aws:geo:[enter_current_region]:[Enter_Account_Number]:tracker/trackedAsset01
+        - Effect: Allow
+          Action:
             - geo:ListMaps
             - geo:ListTrackers
-            Resource: "*"
-      Roles:
-        - !Ref authRoleName
+          Resource: "*"
+    Roles:
+      - !Ref authRoleName
 ```
 
 8. Save both the parameters.json file and the current template file.
@@ -323,14 +323,12 @@ Creating resources updating the CloudFormation templates of Amplify ensures best
 
 ### 10. Run the application
 
-With resources in place you are able to run the application and get a result. 
+With resources in place you are able to run the application and get a result.
 
-Run `npm start` and navigate in your WebBrowser to [http://localhost:3000](http://localhost:3000) (This should happen automatically after `npm start`). **Sign Up** in the applicaiton and **Sign In**, if not Logged In already. 
+Run `npm start` and navigate in your WebBrowser to [http://localhost:3000](http://localhost:3000) (This should happen automatically after `npm start`). **Sign Up** in the applicaiton and **Sign In**, if not Logged In already.
 You should be able to get an application such as:
 
 ![](Images/ReadmeImage26.png)
-
-
 
 ### Cleaning up
 
