@@ -1,0 +1,31 @@
+{
+  "name": "amazon-location-helpers",
+  "version": "1.0.4",
+  "description": "Simplified use of Amazon Location Service.",
+  "main": "index.js",
+  "unpkg": "dist/amazon-location.min.js",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aws-samples/amazon-location-samples.git"
+  },
+  "author": "Seth Fitzsimmons <sethfitz@amazon.com>",
+  "license": "MIT-0",
+  "bugs": {
+    "url": "https://github.com/aws-samples/amazon-location-samples/issues"
+  },
+  "homepage": "https://github.com/aws-samples/amazon-location-samples/tree/main/amazon-location-helpers#readme",
+  "dependencies": {
+    "@aws-amplify/core": "^4.0.3",
+    "@types/aws-sdk": "^2.7.0",
+    "@types/maplibre-gl": "^1.13.1",
+    "aws-sdk": "^2.924.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.7.2"
+  },
+  "scripts": {
+    "build": "webpack",
+    "prepack": "npm run build"
+  }
+}
