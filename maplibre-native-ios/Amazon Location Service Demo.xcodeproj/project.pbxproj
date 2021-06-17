@@ -14,6 +14,7 @@
 		117741E0255A2B9200D4866F /* AWSSignatureV4Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117741DF255A2B9200D4866F /* AWSSignatureV4Delegate.swift */; };
 		117741E3255A2D5200D4866F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117741E2255A2D5200D4866F /* MapView.swift */; };
 		B1BDC68445B18AD800482856 /* Pods_Amazon_Location_Service_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5270A22DC16E59A33EA1537 /* Pods_Amazon_Location_Service_Demo.framework */; };
+		D7BE8BB0267833BC00044977 /* MapView OSLog Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = D7BE8BAF267833BC00044977 /* MapView OSLog Extensions */; };
 		D7CB7CF625C3412500F63D73 /* Mapbox in Frameworks */ = {isa = PBXBuildFile; productRef = D7CB7CF525C3412500F63D73 /* Mapbox */; };
 		D7D9C048264494C90053C1AD /* MetalANGLE in Frameworks */ = {isa = PBXBuildFile; productRef = D7D9C047264494C90053C1AD /* MetalANGLE */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7CB7CF625C3412500F63D73 /* Mapbox in Frameworks */,
+				D7BE8BB0267833BC00044977 /* MapView OSLog Extensions in Frameworks */,
 				B1BDC68445B18AD800482856 /* Pods_Amazon_Location_Service_Demo.framework in Frameworks */,
 				D7D9C048264494C90053C1AD /* MetalANGLE in Frameworks */,
 			);
@@ -49,6 +51,7 @@
 		117741BE255A216600D4866F = {
 			isa = PBXGroup;
 			children = (
+				D7D27A61267125EF00217CFA /* Packages */,
 				117741C9255A216600D4866F /* Amazon Location Service Demo */,
 				117741C8255A216600D4866F /* Products */,
 				5628456AD5D23C7EE0DCDC29 /* Pods */,
@@ -95,6 +98,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D7D27A61267125EF00217CFA /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		F0ABBB147FDED617C4A81D04 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +134,7 @@
 			packageProductDependencies = (
 				D7CB7CF525C3412500F63D73 /* Mapbox */,
 				D7D9C047264494C90053C1AD /* MetalANGLE */,
+				D7BE8BAF267833BC00044977 /* MapView OSLog Extensions */,
 			);
 			productName = "Amazon Location Service Demo";
 			productReference = 117741C7255A216600D4866F /* Amazon Location Service Demo.app */;
@@ -154,6 +165,7 @@
 			mainGroup = 117741BE255A216600D4866F;
 			packageReferences = (
 				D7CB7CF225C3412500F63D73 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */,
+				D7BE8BAE267833BC00044977 /* XCRemoteSwiftPackageReference "mapview-log-extensions" */,
 			);
 			productRefGroup = 117741C8255A216600D4866F /* Products */;
 			projectDirPath = "";
@@ -356,6 +368,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Amazon Location Service Demo/Preview Content\"";
 				DEVELOPMENT_TEAM = SVHUM2DP35;
 				ENABLE_PREVIEWS = YES;
@@ -365,6 +378,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = "aws.location.Amazon-Location-Service-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -379,6 +393,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Amazon Location Service Demo/Preview Content\"";
 				DEVELOPMENT_TEAM = SVHUM2DP35;
 				ENABLE_PREVIEWS = YES;
@@ -388,6 +403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = "aws.location.Amazon-Location-Service-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -419,6 +435,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D7BE8BAE267833BC00044977 /* XCRemoteSwiftPackageReference "mapview-log-extensions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/roblabs/mapview-log-extensions.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		D7CB7CF225C3412500F63D73 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution";
@@ -430,6 +454,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D7BE8BAF267833BC00044977 /* MapView OSLog Extensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7BE8BAE267833BC00044977 /* XCRemoteSwiftPackageReference "mapview-log-extensions" */;
+			productName = "MapView OSLog Extensions";
+		};
 		D7CB7CF525C3412500F63D73 /* Mapbox */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D7CB7CF225C3412500F63D73 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */;
