@@ -25,6 +25,7 @@ with Amazon Location Service.
 * [Location Tracking with AWS Amplify on Android](tracking-android/)
 * [Location Tracking with AWS Amplify on iOS](tracking-ios/)
 * [Asset tracking with Amazon Location, Amplify, and IoT Core](maplibre-js-react-iot-asset-tracking/)
+* [Create a custom map style with Amazon Location Service](create-custom-map-style/)
 
 ## Security
 
