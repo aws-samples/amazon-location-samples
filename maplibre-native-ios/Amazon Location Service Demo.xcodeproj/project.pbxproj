@@ -439,8 +439,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/roblabs/mapview-log-extensions.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.78.31415;
 			};
 		};
 		D7CB7CF225C3412500F63D73 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */ = {

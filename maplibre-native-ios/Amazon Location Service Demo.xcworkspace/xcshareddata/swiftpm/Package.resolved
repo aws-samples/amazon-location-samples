@@ -14,9 +14,9 @@
         "package": "MapView OSLog Extensions",
         "repositoryURL": "https://github.com/roblabs/mapview-log-extensions.git",
         "state": {
-          "branch": "main",
-          "revision": "d40a22c748a97bcc78a1435343d0157922448819",
-          "version": null
+          "branch": null,
+          "revision": "a30606ebbaaa1e82234a6d055bcd718a459fb3c2",
+          "version": "2.78.31415"
         }
       }
     ]

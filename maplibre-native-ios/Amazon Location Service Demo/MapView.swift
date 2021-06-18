@@ -36,6 +36,7 @@ struct MapView: UIViewRepresentable {
 
         _attribution = attribution
         OSLog.mapView(.event, "🗺 regionName: \(regionName), mapName: \(mapName), attribution: \(attribution)")
+        OSLog.mapView(.event, "🖼 frame: \(mapView.frame)")
     }
 
     // MARK: - UIViewRepresentable protocol
@@ -64,7 +65,7 @@ struct MapView: UIViewRepresentable {
         var attribution: Binding<String>
 
         init(_ attribution: Binding<String>) {
-            OSLog.mapView(.event, "Coordinator init")
+            OSLog.mapView(.event, OSLog.mapEvents.initDelegate.description)
             OSLog.mapView(.event, OSLog.mapEvents.WillStartRenderingMap.description)
             OSLog.mapView(.begin, OSLog.mapEvents.WillStartRenderingMap.rawValue)
             OSLog.mapView(.begin, OSLog.mapEvents.DidFinishLoadingStyle.rawValue)
