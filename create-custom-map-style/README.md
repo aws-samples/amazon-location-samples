@@ -542,20 +542,6 @@ Navigate to the directory where you have your scripts
     ...
     ```
 
-1. Next fill out some boilerplate
-
-    ```js
-
-    ...
-    // Below your import statements
-    mapboxgl.workerClass = MapboxWorker;
-    mapboxgl.accessToken = 'xx.xxX0XxxxXXxxxXXxXXXxXXXxXxxxX0x0XX01XXXxXX00xxXxx0X0x000x0X0XXX0.xX0X0XXX0x0XxXxXxx0xXx';
-    // This is the default Mapbox access token
-    ...
-    ```
-
-1. Unfortunately Mapbox requires an access token to even instantiate their MapboxGL class, so be sure generate your own one [here](https://account.mapbox.com/access-tokens).
-
 1. Here's where we'll get a chance to fire up our react hooks. We need to add a reference (`useRef`) to the `.demo-map` DOM node, make an asynchronous API call (`useEffect`) to fetch data using Amplify, and keep track of the latitude, longitude, and zoom level of the map (`useState`)
 
     ```js
@@ -825,7 +811,7 @@ Navigate to the directory where you have your scripts
 
 To help you with your map styling decisions, here are some handy tips:
 
-- Learn the Mapbox style document specification <https://maplibre.org/maplibre-gl-js-docs/style-spec/>
+- Learn the MapLibre style document specification <https://maplibre.org/maplibre-gl-js-docs/style-spec/>
 - Learn hexadecimal color values and pick a palette of colors
 - Add map accessibility when needed (i.e. color-blind awareness)
 - Plan for map markers and choose colors that will contrast
@@ -838,8 +824,6 @@ To help you with your map styling decisions, here are some handy tips:
 1. Once you're satisfied with the changes you've made to the map style, the next step is to export and bundle the style JSON with your frontend assets
   
 1. On your Maputnik tab in the browser, click "Export" in the top navigation bar
-  
-1. You can optionally add a Mapbox Access Token here if you have one, then click "Download"
   
 1. You should save the file as `example-file-descriptor.json` and place it back in your project's `public/` directory
   
@@ -918,4 +902,4 @@ The teardown is relatively easy with the Amplify CLI here's how we can do it wit
 
 ## Conclusion
 
-Using Amazon Location Service with other AWS Services and Maputnik/ Mapbox GL JS which are an open source, you can create a fully customizable Map style especially when maps are an integral part of your application and you want to give your maps a personalized touch
+Using Amazon Location Service with other AWS Services and Maputnik/ MapLibre GL JS which are an open source, you can create a fully customizable Map style especially when maps are an integral part of your application and you want to give your maps a personalized touch
