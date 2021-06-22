@@ -1,0 +1,117 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: Geocode address stored in Amazon Redshift using Amazon Location Service
+Metadata:
+  'AWS::CloudFormation::Interface':
+    ParameterGroups:
+      - Label:
+          default: Amazon Redshift
+        Parameters:
+          - RedshiftCluster
+    ParameterLabels:
+      Cluster:
+        default: RedshiftCluster
+Parameters:
+  RedshiftCluster:
+    Default: geocode-redshift
+    Description: Redshift Cluster Identifier
+    Type: String
+    ConstraintDescription: Cluster identifier for Aurora Redshift
+Resources:
+  PlaceIndex:
+    Type: AWS::Location::PlaceIndex
+    Properties:
+      DataSource: Esri
+      DataSourceConfiguration:
+        IntendedUse: Storage
+      Description: Place index for geocoding addresses
+      IndexName:
+        Fn::Sub: ${AWS::StackName}-placeindex.redshift
+      PricingPlan: RequestBasedUsage
+  GeocodeAddressesLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: amazon-location-service-lambda-udf
+        S3Key: geocode-lambda-redshift.zip
+      Description: Function to geocode addresses for Amazon Redshift requests
+      FunctionName:
+        Fn::Sub: ${AWS::StackName}-GeocodeAddresses-Redshift
+      Handler: lambda_function.lambda_handler
+      Role:
+        Fn::GetAtt: [GeocodeAddressesLambdaRole, Arn]
+      Runtime: python3.8
+      Timeout: 300
+      Environment:
+        Variables:
+          PLACE_INDEX:
+            Ref: PlaceIndex
+  GeocodeAddressesLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        Fn::Sub: ${AWS::StackName}-GeocodeAddresses-Redshift-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName:
+            Fn::Sub: ${AWS::StackName}-GeocodeAddresses-Redshift-policy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - geo:SearchPlaceIndexForText
+                Resource:
+                  - Fn::GetAtt: [PlaceIndex, IndexArn]
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+  RedshiftLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        Fn::Sub: ${AWS::StackName}-Redshift-Lambda-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - redshift.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName:
+            Fn::Sub: ${AWS::StackName}-Redshift-Lambda-policy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - lambda:InvokeFunction
+                Resource:
+                  Fn::GetAtt: [GeocodeAddressesLambda, Arn]
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+Outputs:
+  CLICommand:
+    Description: Run this CLI command to add role to Redshift cluster
+    Value:
+      Fn::Sub: 'aws redshift modify-cluster-iam-roles --cluster-identifier ${RedshiftCluster} --add-iam-roles ${RedshiftLambdaRole.Arn}'
+  GeocodeAddressesLambda:
+    Description: Lambda function name to replace <GEOCODE_LAMBDA_FUNCTION_NAME> placeholder in user-defined function code
+    Value:
+      Ref: GeocodeAddressesLambda
+  RedshiftLambdaRole:
+    Description: IAM role to replace <REDSHIFT_LAMBDA_IAM_ROLE> placeholder in user-defined function code
+    Value:
+      Fn::GetAtt: [RedshiftLambdaRole, Arn]

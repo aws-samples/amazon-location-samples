@@ -25,6 +25,8 @@ with Amazon Location Service.
 * [Location Tracking with AWS Amplify on Android](tracking-android/)
 * [Location Tracking with AWS Amplify on iOS](tracking-ios/)
 * [Asset tracking with Amazon Location, Amplify, and IoT Core](maplibre-js-react-iot-asset-tracking/)
+* [Geocode address data in Amazon Aurora](geocode-udf-lambda-aurora)
+* [Geocode address data in Amazon Redshift](geocode-udf-lambda-redshift)
 
 ## Security
 
