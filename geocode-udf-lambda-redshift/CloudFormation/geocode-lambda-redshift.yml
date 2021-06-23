@@ -108,7 +108,7 @@ Outputs:
     Value:
       Fn::Sub: 'aws redshift modify-cluster-iam-roles --cluster-identifier ${RedshiftCluster} --add-iam-roles ${RedshiftLambdaRole.Arn}'
   GeocodeAddressesLambda:
-    Description: Lambda function name to replace <GEOCODE_LAMBBDA_FUNCTION_NAME> placeholder in user-defined function code
+    Description: Lambda function name to replace <GEOCODE_LAMBDA_FUNCTION_NAME> placeholder in user-defined function code
     Value:
       Ref: GeocodeAddressesLambda
   RedshiftLambdaRole:
