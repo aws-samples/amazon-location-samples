@@ -13,9 +13,7 @@ index_name = os.environ["PLACE_INDEX"]
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-location = boto3.client("location", config=botocore.Config(
-    user_agent="Amazon Redshift"
-))
+location = boto3.client("location", config=botocore.config.Config(user_agent="Amazon Redshift"))
 
 def geocode_address(address_line, municipality_name, state_code, post_code, country_code):
 
