@@ -9,8 +9,7 @@ declare
   result varchar(200);
 begin
     SELECT payload into result
-    FROM customer_address,
-         aws_lambda.invoke(aws_commons.create_lambda_function_arn('<GEOCODE_LAMBDA_FUNCTION_NAME>'),
+    FROM aws_lambda.invoke(aws_commons.create_lambda_function_arn('<GEOCODE_LAMBDA_FUNCTION_NAME>'),
          concat('{"address_line":"',p_address_line,'",
                   "municipality_name":"',p_municipality_name,'",
                   "state_code":"',p_state_code,'",
