@@ -11,7 +11,7 @@ Metadata:
         Parameters:
           - RedshiftCluster
     ParameterLabels:
-      Cluster:
+      RedshiftCluster:
         default: RedshiftCluster
 Parameters:
   RedshiftCluster:

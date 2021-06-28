@@ -7,7 +7,8 @@ CREATE TABLE customer_address (
 	country_code varchar(3) NULL,
 	longitude float8 NULL,
 	latitude float8 NULL,
-	geocode_result jsonb NULL
+	geocode_result jsonb NULL,
+	address_status varchar(10)
 );
 CREATE UNIQUE INDEX customer_address_customer_id 
 ON customer_address

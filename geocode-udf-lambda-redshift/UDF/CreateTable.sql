@@ -9,5 +9,6 @@ CREATE TABLE customer_address
 	latitude DOUBLE PRECISION,
 	country_code VARCHAR(3),
 	geocode_result VARCHAR(200),
+	address_status VARCHAR(10),
 	PRIMARY KEY (customer_id)
 )
