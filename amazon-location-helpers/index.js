@@ -1,8 +1,11 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-const AWS = require("aws-sdk");
 const { Signer } = require("@aws-amplify/core");
+const {
+  fromCognitoIdentityPool,
+} = require("@aws-sdk/credential-provider-cognito-identity");
+const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
 let maplibregl;
 let mapboxgl;
 
@@ -30,31 +33,54 @@ async function refreshCredentials(credentials) {
   }
 }
 
+function validateCredentials(credentials) {
+  const { accessKeyId, secretAccessKey } = credentials;
+
+  if (!accessKeyId || !secretAccessKey) {
+    throw new Error("Valid credentials are required to fetch map resources.");
+  }
+}
+
+function validateRegion(region) {
+  if (!region) {
+    throw new Error("A valid region is required to fetch map resources.");
+  }
+}
+
+function createCognitoCredentialProvider(identityPoolId) {
+  return fromCognitoIdentityPool({
+    client: new CognitoIdentityClient({
+      region: identityPoolId.split(":")[0],
+    }),
+    identityPoolId,
+  });
+}
+
 async function createRequestTransformer({
   credentials,
   identityPoolId,
   region,
 }) {
   if (identityPoolId != null) {
+    // use the region containing the identity pool if one wasn't provided
     region = region || identityPoolId.split(":")[0];
-    credentials = new AWS.CognitoIdentityCredentials(
-      {
-        IdentityPoolId: identityPoolId,
-      },
-      {
-        region,
-      }
-    );
+    const provider = createCognitoCredentialProvider(identityPoolId);
+
+    // refresh credentials before they expire
+    async function refreshCognitoCredentials() {
+      credentials = await provider();
+
+      setTimeout(
+        refreshCognitoCredentials,
+        credentials.expiration - new Date()
+      );
+    }
+
+    await refreshCognitoCredentials();
   }
 
-  if (!region) {
-    throw new Error("missing region in config");
-  }
-
-  // refresh credentials, renewing them when necessary
-  if (credentials instanceof AWS.Credentials) {
-    await autoRefreshCredentials(credentials);
-  }
+  validateCredentials(credentials);
+  validateRegion(region);
 
   return (url, resourceType) => {
     if (resourceType === "Style" && !url.includes("://")) {
@@ -65,6 +91,7 @@ async function createRequestTransformer({
     if (url.includes("amazonaws.com")) {
       // only sign AWS requests (with the signature as part of the query string)
       return {
+        // @aws-sdk/signature-v4 would be another option, but this needs to be synchronous
         url: Signer.signUrl(url, {
           access_key: credentials.accessKeyId,
           secret_key: credentials.secretAccessKey,

@@ -54,8 +54,8 @@ npm install amazon-location-helpers
 ```typescript
 function createMap(
   config: {
-    credentials?: AWS.Credentials | CredentialsOptions;
-    identityPoolId?: AWS.CognitoIdentity.IdentityPoolId;
+    credentials?: Credentials;
+    identityPoolId?: string;
     region?: string;
   },
   options: mapboxgl.MapboxOptions,
@@ -83,8 +83,8 @@ For a fully worked example, see [`maplibre-gl-js/index.html`](https://github.com
 
 ```typescript
 function createRequestTransformer(config: {
-  credentials?: AWS.Credentials | CredentialsOptions;
-  identityPoolId?: AWS.CognitoIdentity.IdentityPoolId;
+  credentials?: Credentials;
+  identityPoolId?: string;
   region?: string;
 }): Promise<mapboxgl.TransformRequestFunction>;
 ```

@@ -17,9 +17,9 @@
   "homepage": "https://github.com/aws-samples/amazon-location-samples/tree/main/amazon-location-helpers#readme",
   "dependencies": {
     "@aws-amplify/core": "^4.0.3",
-    "@types/aws-sdk": "^2.7.0",
-    "@types/maplibre-gl": "^1.13.1",
-    "aws-sdk": "^2.924.0"
+    "@aws-sdk/client-cognito-identity": "^3.6.1",
+    "@aws-sdk/credential-provider-cognito-identity": "^3.6.1",
+    "@types/maplibre-gl": "^1.13.1"
   },
   "devDependencies": {
     "webpack-cli": "^4.7.2"
