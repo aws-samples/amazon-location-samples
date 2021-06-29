@@ -1,6 +1,6 @@
 {
   "name": "amazon-location-helpers",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Simplified use of Amazon Location Service.",
   "main": "index.js",
   "unpkg": "dist/amazon-location.min.js",
