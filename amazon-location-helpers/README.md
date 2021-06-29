@@ -54,8 +54,8 @@ npm install amazon-location-helpers
 ```typescript
 function createMap(
   config: {
-    credentials?: AWS.Credentials | CredentialsOptions;
-    identityPoolId?: AWS.CognitoIdentity.IdentityPoolId;
+    credentials?: Credentials;
+    identityPoolId?: string;
     region?: string;
   },
   options: mapboxgl.MapboxOptions,
@@ -83,8 +83,8 @@ For a fully worked example, see [`maplibre-gl-js/index.html`](https://github.com
 
 ```typescript
 function createRequestTransformer(config: {
-  credentials?: AWS.Credentials | CredentialsOptions;
-  identityPoolId?: AWS.CognitoIdentity.IdentityPoolId;
+  credentials?: Credentials;
+  identityPoolId?: string;
   region?: string;
 }): Promise<mapboxgl.TransformRequestFunction>;
 ```
@@ -115,6 +115,23 @@ This can then be used with [`react-map-gl`](https://visgl.github.io/react-map-gl
 ```
 
 For a fully worked example, see [`maplibre-gl-js-react/src/index.tsx`](https://github.com/aws-samples/amazon-location-samples/blob/main/maplibre-gl-js-react/src/index.tsx).
+
+### `getCredentialsForIdentityPool`
+
+```typescript
+
+function getCredentialsForIdentityPool(
+  identity: string
+): Promise<Credentials>;
+```
+
+This will exchange an Amazon Cognito Identity Pool ID for temporary AWS credentials. For example:
+
+```javascript
+const credentials = await AmazonLocation.getCredentialsForIdentityPool("us-east-1:54f2ba88-9390-498d-aaa5-0d97fb7ca3bd");
+
+// use credentials with other AWS services
+```
 
 ## Security
 
