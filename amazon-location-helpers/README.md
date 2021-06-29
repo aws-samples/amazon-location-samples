@@ -116,6 +116,23 @@ This can then be used with [`react-map-gl`](https://visgl.github.io/react-map-gl
 
 For a fully worked example, see [`maplibre-gl-js-react/src/index.tsx`](https://github.com/aws-samples/amazon-location-samples/blob/main/maplibre-gl-js-react/src/index.tsx).
 
+### `getCredentialsForIdentityPool`
+
+```typescript
+
+function getCredentialsForIdentityPool(
+  identity: string
+): Promise<Credentials>;
+```
+
+This will exchange an Amazon Cognito Identity Pool ID for temporary AWS credentials. For example:
+
+```javascript
+const credentials = await AmazonLocation.getCredentialsForIdentityPool("us-east-1:54f2ba88-9390-498d-aaa5-0d97fb7ca3bd");
+
+// use credentials with other AWS services
+```
+
 ## Security
 
 See [CONTRIBUTING](https://github.com/aws-samples/amazon-location-samples/blog/main/CONTRIBUTING.md#security-issue-notifications) for more information.

@@ -19,3 +19,7 @@ export function createMap(
 export function createRequestTransformer(
   config: Config
 ): Promise<mapboxgl.TransformRequestFunction>;
+
+export function getCredentialsForIdentityPool(
+  identity: string
+): Promise<Credentials>;

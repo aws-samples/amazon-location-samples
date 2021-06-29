@@ -114,7 +114,12 @@ async function createMap(config, options, mapgl) {
   });
 }
 
+function getCredentialsForIdentityPool(identityPoolId) {
+  return createCognitoCredentialProvider(identityPoolId)();
+}
+
 module.exports = {
   createMap,
   createRequestTransformer,
+  getCredentialsForIdentityPool,
 };
