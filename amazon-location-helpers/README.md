@@ -26,8 +26,6 @@ npm install amazon-location-helpers
   <body>
     <div id="map" style="height: 100vh" />
     <script src="https://unpkg.com/maplibre-gl@1"></script>
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.924.0.min.js"></script>
-    <script src="https://unpkg.com/@aws-amplify/core@4/dist/aws-amplify-core.min.js"></script>
     <script src="https://unpkg.com/amazon-location-helpers@1"></script>
     <script>
       AmazonLocation.createMap(
