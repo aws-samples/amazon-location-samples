@@ -16,23 +16,6 @@ try {
   mapboxgl = require("mapbox-gl");
 } catch {}
 
-function autoRefreshCredentials(credentials) {
-  return refreshCredentials(credentials);
-}
-
-async function refreshCredentials(credentials) {
-  await credentials.refreshPromise();
-
-  if (credentials.expireTime) {
-    // Set a timer to refresh the credentials before they next expire
-    setTimeout(
-      refreshCredentials,
-      credentials.expireTime - new Date(),
-      credentials
-    );
-  }
-}
-
 function validateCredentials(credentials) {
   const { accessKeyId, secretAccessKey } = credentials;
 
