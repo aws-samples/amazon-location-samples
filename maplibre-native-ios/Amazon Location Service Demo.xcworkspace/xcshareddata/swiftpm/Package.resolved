@@ -3,11 +3,20 @@
     "pins": [
       {
         "package": "MapLibre GL Native",
-        "repositoryURL": "https://github.com/maptiler/maplibre-gl-native-distribution",
+        "repositoryURL": "https://github.com/maplibre/maplibre-gl-native-distribution",
         "state": {
           "branch": null,
-          "revision": "dc28d9ad9e1b5c52cdeab26e2fe1781db4974e9a",
-          "version": "5.11.0"
+          "revision": "f79911a42f605cbaa9eb1ee6330b464eac47569d",
+          "version": "5.12.0-pre.1"
+        }
+      },
+      {
+        "package": "MapView OSLog Extensions",
+        "repositoryURL": "https://github.com/roblabs/mapview-log-extensions.git",
+        "state": {
+          "branch": null,
+          "revision": "a30606ebbaaa1e82234a6d055bcd718a459fb3c2",
+          "version": "2.78.31415"
         }
       }
     ]
