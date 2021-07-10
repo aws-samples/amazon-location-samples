@@ -583,9 +583,9 @@ Navigate to the directory where you have your scripts
       });
       demoMap.on('move', () => {
         setCoordinates({
-        lng:  demoMap.getCenter().lng.toFixed(4),
-        lat:  demoMap.getCenter().lat.toFixed(4),
-        zoom:  demoMap.getZoom().toFixed(2),
+          lng:  demoMap.getCenter().lng.toFixed(4),
+          lat:  demoMap.getCenter().lat.toFixed(4),
+          zoom:  demoMap.getZoom().toFixed(2),
         });
       });
       return () =>  demoMap.remove();
