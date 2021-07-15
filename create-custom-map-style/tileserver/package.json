@@ -2,24 +2,19 @@
   "name": "tileserver",
   "version": "1.0.0",
   "description": "",
-  "main": "tilelive-aws.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@aws-sdk/client-location": "^3.18.0",
-    "aws4": "^1.11.0",
-    "debug": "^4.3.1",
-    "request": "^2.88.2",
-    "retry": "^0.12.0",
-    "semver": "^7.3.5",
-    "url-parse": "^1.5.1"
-  },
   "peerDependencies": {
-    "@mapbox/tilelive": "*",
-    "@mapbox/tilejson": ">= 0.6.4"
+    "@mapbox/tilejson": ">= 0.6.4",
+    "@mapbox/tilelive": "*"
+  },
+  "dependencies": {
+    "tessera": "^0.14.1",
+    "tilelive-aws": "^3.1.0"
   }
 }

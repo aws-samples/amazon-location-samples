@@ -468,7 +468,7 @@ Navigate to the directory where you have your scripts
 
     ```bash
 
-    ./createMapResource.sh Amplify-Default
+    ./createMapResource.sh Amplify-Default CreateCustomMapStyle
     ```
 
     The output will look like the following:
@@ -486,7 +486,7 @@ Navigate to the directory where you have your scripts
 
     ```bash
 
-    ./setIamPermissions.sh <YOUR COGNITO AUTH ROLE NAME>  Amplify-Default <YOUR ACCOUNT ID> us-west-2
+    ./setIamPermissions.sh <YOUR COGNITO AUTH ROLE NAME>  Amplify-Default <YOUR ACCOUNT ID> us-west-2 <YOUR MAP NAME>
     ```
 
 1. Navigate to [AWS IAM Console](https://aws.amazon.com/iam/home) , check under Roles if the role you just created in the above step exists, click on the Role Name > Policy Name and you will be able to find the Policy (JSON object) which will look like this :
@@ -498,18 +498,6 @@ Navigate to the directory where you have your scripts
         "Statement": [
             {
                 "Sid": "PlaceIndexReadOnly",
-                "Effect": "Allow",
-                "Action": [
-                    "geo:GetMapStyleDescriptor",
-                    "geo:GetMapGlyphs",
-                    "geo:GetMapSprites",
-                    "geo:GetMapStyleDescriptor",
-                    "geo:GetMapTile"
-                ],
-                "Resource": "arn:aws:geo:<YOUR ACCOUNT ID>:us-west-2:map/CreateCustomMapStyle"
-            },
-            {
-                "Sid": "MapsReadOnly",
                 "Effect": "Allow",
                 "Action": [
                     "geo:GetMapStyleDescriptor",
@@ -650,15 +638,7 @@ Navigate to the directory where you have your scripts
  ![Empty](media/MaputnikEmpty.png)
  *Empty Canvas*
 
-1. Next we need to add the Amazon Location Service API as a data source. However, in order to do this we need to use a local proxy that can handle SigV4 (TL;DR a way to provide your AWS credentials with http requests). For this we will use [tessera](https://github.com/mojodna/tessera). From a new terminal (the `maputnik` process will be occupying the other terminal) run the following:
-
-    ```bash
-
-    nvm use 12
-    npm i -g tessera tilejson tilelive-xray @mapbox/tilelive @mapbox/tilejson
-    ```
-
-1. Tessera is a pluggable [map tile](https://en.wikipedia.org/wiki/Tiled_web_map) server. Using the power of the [tilelive](https://github.com/mapbox/tilelive) ecosystem, it is capable of serving and rendering map tiles from many sources. To stream data from most sources you can install the tilelive providers as global npm packages. For an Amazon Location Service source we will create and use our own module to get a basic environment set up with minimal code changes.
+1. Tessera is a pluggable [map tile](https://en.wikipedia.org/wiki/Tiled_web_map) server. Using the power of the [tilelive](https://github.com/mapbox/tilelive) ecosystem, it is capable of serving and rendering map tiles from many sources. To stream data from most sources you can install the tilelive providers as npm packages. For an Amazon Location Service source we use tilelive-aws.
 1. From your terminal run
 
     ```bash
@@ -674,37 +654,14 @@ Navigate to the directory where you have your scripts
     npm init --yes
     ```
 
-1. Replace the generated `/tileserver/package.json` (DO NOT overwrite the top-level `package.json`) with the following:
+1. Next we need to add the Amazon Location Service API as a data source. However, in order to do this we need to use a local proxy that can handle SigV4 (TL;DR a way to provide your AWS credentials with http requests). For this we will use [tessera](https://github.com/mojodna/tessera) and [tilelive-aws](https://github.com/beatleboy501/tilelive-aws). From a new terminal (the `maputnik` process will be occupying the other terminal) run the following:
 
-    ```json
+    ```bash
 
-    {
-      "name": "tileserver",
-      "version": "1.0.0",
-      "description": "",
-      "main": "tilelive-aws.js",
-      "scripts": {},
-      "keywords": [],
-      "author": "",
-      "license": "ISC",
-      "dependencies": {
-          "aws4": "^1.11.0",
-        "debug": "^4.3.1",
-        "request": "^2.88.2",
-        "retry": "^0.12.0",
-        "semver": "^7.3.5",
-        "url-parse": "^1.5.1"
-      },
-      "peerDependencies": {
-        "@mapbox/tilelive": "*",
-        "@mapbox/tilejson": ">= 0.6.4"
-      }
-    }
+    nvm use 12
+    npm i tessera tilelive-aws
     ```
 
-1. Install these dependencies by running `npm install`.
-1. In your IDE create a new file called `tileserver/tilelive-aws.js`
-1. Copy and paste (or download) the `tileserver/tilelive-aws.js` file.
 1. The module makes use of several environment variables to be able to sign calls to the AWS API. You can run the following to generate the required AWS credentials:
 
     ```bash
@@ -737,7 +694,7 @@ Navigate to the directory where you have your scripts
 
     ```bash
 
-    tessera -r $(pwd)/tilelive-aws.js aws://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/CreateCustomMapStyle/tiles/\{z\}/\{x\}/\{y\}
+    tessera -r $(pwd)/node_modules/tilelive-aws/tilelive-aws.js aws://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/CreateCustomMapStyle/tiles/\{z\}/\{x\}/\{y\}
     ```
 
 1. You should see some output in sdtout like `Listening at http://0.0.0.0:8080`.

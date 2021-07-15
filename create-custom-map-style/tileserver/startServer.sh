@@ -2,4 +2,4 @@
 # SPDX-License-Identifier: MIT-0
 #!/bin/bash
 
-tessera -r $(pwd)/tilelive-aws.js aws:///CreateCustomMapStyle
+npx tessera -r $(pwd)/node_modules/tilelive-aws/tilelive-aws.js aws:///CreateCustomMapStyle

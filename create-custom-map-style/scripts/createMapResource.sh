@@ -3,7 +3,7 @@
 #!/bin/sh
 aws location \
   create-map \
-  --map-name "CreateCustomMapStyle" \
+  --map-name $2 \
   --configuration "Style=VectorEsriStreets" \
   --pricing-plan "RequestBasedUsage" \
   --profile $1 &
