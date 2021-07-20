@@ -1,0 +1,270 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: Call Amazon Location Service APIs from Amazon Aurora PostgreSQL
+Metadata:
+  "AWS::CloudFormation::Interface":
+    ParameterGroups:
+      - Label:
+          default: Amazon Location Service Resources
+        Parameters:
+          - DataSource
+      - Label:
+          default: AWS Lambda Resources
+        Parameters:
+          - ReservedConcurrentExecutions
+      - Label:
+          default: Amazon Aurora PostgreSQL
+        Parameters:
+          - DBCluster
+          - ShouldCreateLambdaVpcEndpoint
+          - AuroraVpcId
+          - AuroraSubnetIds
+          - AuroraSecurityGroup
+    ParameterLabels:
+      DBCluster:
+        default: Cluster DB identifier
+      ShouldCreateLambdaVpcEndpoint:
+        default: Create a VPC Endpoint for AWS Lambda
+      AuroraVpcId:
+        default: VPC
+      AuroraSubnetIds:
+        default: Subnet ID(s)
+      AuroraSecurityGroup:
+        default: Security group
+      DataSource:
+        default: Place index data source
+      ReservedConcurrentExecutions:
+        default: Reserved concurrency
+
+Parameters:
+  DBCluster:
+    Description: The name of your Aurora cluster
+    Type: String
+    ConstraintDescription: must be the name of an Aurora PostgreSQL cluster in your account
+  ShouldCreateLambdaVpcEndpoint:
+    Description: Whether to create a Lambda VPC endpoint (needed if your cluster is not publicly-accessible)
+    Type: String
+    Default: "Yes"
+    AllowedValues:
+      - "Yes"
+      - "No"
+  AuroraVpcId:
+    Description: The VPC containing your Aurora cluster (required)
+    Type: AWS::EC2::VPC::Id
+  AuroraSubnetIds:
+    Description: Subnet(s) hosting your Aurora cluster (required)
+    Type: List<AWS::EC2::Subnet::Id>
+  AuroraSecurityGroup:
+    Description: A security group shared with your Aurora cluster (required)
+    Type: AWS::EC2::SecurityGroup::Id
+  DataSource:
+    Description: The data source to use when geocoding
+    Type: String
+    Default: Esri
+    AllowedValues:
+      - Esri
+      - Here
+  ReservedConcurrentExecutions:
+    Description: Lambda concurrency (more is not necessarily better, as functions may be rate-limited by Amazon Location)
+    Type: Number
+    Default: 10
+
+Conditions:
+  CreateLambdaVpcEndpoint: !Equals 
+    - !Ref ShouldCreateLambdaVpcEndpoint
+    - "Yes"
+
+Resources:
+  PlaceIndex:
+    Type: AWS::Location::PlaceIndex
+    Properties:
+      DataSource: !Ref DataSource
+      DataSourceConfiguration:
+        IntendedUse: Storage
+      Description: Place index for Amazon Aurora
+      IndexName:
+        Fn::Sub: ${AWS::StackName}
+      PricingPlan: RequestBasedUsage
+
+  SearchPlaceIndexForPositionLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: |
+          from os import environ
+
+          import boto3
+          from botocore.config import Config
+
+          # load the place index name from the environment, falling back to a default
+          PLACE_INDEX_NAME = environ.get("PLACE_INDEX_NAME", "AuroraUDFs")
+
+          location = boto3.client("location",
+              config=Config(user_agent="Amazon Aurora PostgreSQL"))
+
+          """
+          This Lambda function receives a payload from Amazon Aurora and translates it to
+          an Amazon Location `SearchPlaceIndex` call and returns the results as-is, to be
+          post-processed by a PL/pgSQL function.
+          """
+          def handler(event, context):
+              kwargs = {}
+              
+              if event.get("maxResults") is not None:
+                  kwargs["MaxResults"] = event["maxResults"]
+              
+              return location.search_place_index_for_position(
+                  IndexName=PLACE_INDEX_NAME,
+                  Position=event["position"],
+                  **kwargs)["Results"]
+
+      Description: Amazon Aurora PostgreSQL SearchPlaceIndexForPosition UDF
+      FunctionName:
+        Fn::Sub: ${AWS::StackName}-SearchPlaceIndexForPosition
+      Handler: index.handler
+      ReservedConcurrentExecutions: !Ref ReservedConcurrentExecutions
+      Role:
+        Fn::GetAtt: [SearchPlaceIndexLambdaRole, Arn]
+      Runtime: python3.8
+      Timeout: 3
+      Environment:
+        Variables:
+          PLACE_INDEX_NAME:
+            Ref: PlaceIndex
+
+  SearchPlaceIndexForTextLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: |
+          from os import environ
+
+          import boto3
+          from botocore.config import Config
+
+          # load the place index name from the environment, falling back to a default
+          PLACE_INDEX_NAME = environ.get("PLACE_INDEX_NAME", "AuroraUDFs")
+
+          location = boto3.client("location",
+              config=Config(user_agent="Amazon Aurora PostgreSQL"))
+
+          """
+          This Lambda function receives a payload from Amazon Aurora and translates it to
+          an Amazon Location `SearchPlaceIndex` call and returns the results as-is, to be
+          post-processed by a PL/pgSQL function.
+          """
+          def handler(event, context):
+              kwargs = {}
+              
+              if event.get("biasPosition") is not None:
+                  kwargs["BiasPosition"] = event["biasPosition"]
+
+              if event.get("filterBBox") is not None:
+                  kwargs["FilterBBox"] = event["filterBBox"]
+
+              if event.get("filterCountries") is not None:
+                  kwargs["FilterCountries"] = event["filterCountries"]
+
+              if event.get("maxResults") is not None:
+                  kwargs["MaxResults"] = event["maxResults"]
+              
+              return location.search_place_index_for_text(
+                  IndexName=PLACE_INDEX_NAME,
+                  Text=event["text"],
+                  **kwargs)["Results"]
+
+      Description: Amazon Aurora PostgreSQL SearchPlaceIndexForText UDF
+      FunctionName:
+        Fn::Sub: ${AWS::StackName}-SearchPlaceIndexForText
+      Handler: index.handler
+      ReservedConcurrentExecutions: !Ref ReservedConcurrentExecutions
+      Role:
+        Fn::GetAtt: [SearchPlaceIndexLambdaRole, Arn]
+      Runtime: python3.8
+      Timeout: 3
+      Environment:
+        Variables:
+          PLACE_INDEX_NAME:
+            Ref: PlaceIndex
+
+  SearchPlaceIndexLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        Fn::Sub: ${AWS::StackName}-SearchPlaceIndex-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName:
+            Fn::Sub: ${AWS::StackName}-PlaceIndexReadOnly
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - geo:SearchPlaceIndex*
+                Resource:
+                  - Fn::GetAtt: [PlaceIndex, Arn]
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  LambdaVPCEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Condition: CreateLambdaVpcEndpoint
+    Properties: 
+      PrivateDnsEnabled: true
+      SecurityGroupIds: 
+        - !Ref AuroraSecurityGroup
+      ServiceName:
+        Fn::Sub: "com.amazonaws.${AWS::Region}.lambda"
+      SubnetIds: !Ref AuroraSubnetIds
+      VpcEndpointType: Interface
+      VpcId: !Ref AuroraVpcId
+
+  AuroraLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        Fn::Sub: ${AWS::StackName}-Aurora-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - rds.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName:
+            Fn::Sub: ${AWS::StackName}-LambdaInvoke
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - lambda:InvokeFunction
+                Resource:
+                  - Fn::GetAtt: [SearchPlaceIndexForPositionLambda, Arn]
+                  - Fn::GetAtt: [SearchPlaceIndexForTextLambda, Arn]
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+Outputs:
+  CLICommand:
+    Description: Run this CLI command to add Lambda UDF support to your Aurora cluster
+    Value:
+      Fn::Sub: "aws rds add-role-to-db-cluster --db-cluster ${DBCluster} --role-arn ${AuroraLambdaRole.Arn} --feature-name Lambda"
+  StackName:
+    Description: Replace "AuroraUDFs" in each UDF with this value
+    Value:
+      Fn::Sub: "${AWS::StackName}"
