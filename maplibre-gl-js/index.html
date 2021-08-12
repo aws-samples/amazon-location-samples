@@ -1,0 +1,48 @@
+<!-- Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved. -->
+<!-- SPDX-License-Identifier: MIT-0 -->
+<html>
+  <head>
+    <link
+      href="https://unpkg.com/maplibre-gl@1/dist/maplibre-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+      }
+
+      #map {
+        height: 100vh;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map" />
+    <script src="https://unpkg.com/maplibre-gl@1"></script>
+    <script src="https://unpkg.com/amazon-location-helpers@1.1"></script>
+    <script>
+      async function initializeMap() {
+        // actually initialize the map
+        const map = await AmazonLocation.createMap(
+          {
+            // Cognito Identity Pool ID
+            identityPoolId: "<Identity Pool ID>",
+          },
+          {
+            container: "map",
+            center: [-123.1187, 49.2819], // initial map center point
+            zoom: 10, // initial map zoom
+            // Amazon Location Service Map Name
+            style: "<Map name>",
+            hash: true,
+          }
+        );
+
+        map.addControl(new maplibregl.NavigationControl(), "top-left");
+      }
+
+      initializeMap();
+    </script>
+  </body>
+</html>
