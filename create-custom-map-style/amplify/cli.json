@@ -2,9 +2,10 @@
   "features": {
     "graphqltransformer": {
       "addmissingownerfields": true,
+      "improvepluralization": true,
       "validatetypenamereservedwords": true,
       "useexperimentalpipelinedtransformer": false,
-      "enableiterativegsiupdates": false,
+      "enableiterativegsiupdates": true,
       "secondarykeyasgsi": true,
       "skipoverridemutationinputtypes": true
     },
@@ -12,14 +13,21 @@
       "enablexcodeintegration": true
     },
     "auth": {
-      "enablecaseinsensitivity": true
+      "enablecaseinsensitivity": true,
+      "useinclusiveterminology": true,
+      "breakcirculardependency": true
     },
     "codegen": {
       "useappsyncmodelgenplugin": true,
       "usedocsgeneratorplugin": true,
       "usetypesgeneratorplugin": true,
       "cleangeneratedmodelsdirectory": true,
-      "retaincasestyle": true
+      "retaincasestyle": true,
+      "addtimestampfields": true,
+      "handlelistnullabilitytransparently": true,
+      "emitauthprovider": true,
+      "generateindexrules": true,
+      "enabledartnullsafety": true
     },
     "appsync": {
       "generategraphqlpermissions": true

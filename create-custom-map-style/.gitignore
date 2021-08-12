@@ -12,7 +12,8 @@
 /build
 
 # misc
-.DS_Store
+**/.DS_Store
+.vscode/
 .env.local
 .env.development.local
 .env.test.local
@@ -22,7 +23,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#amplify
+#amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/logs
@@ -36,7 +37,9 @@ node_modules/
 aws-exports.js
 awsconfiguration.json
 amplifyconfiguration.json
+amplifyconfiguration.dart
 amplify-build-config.json
 amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
+#amplify-do-not-edit-end

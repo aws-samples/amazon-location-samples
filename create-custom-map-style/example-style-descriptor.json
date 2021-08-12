@@ -8,8 +8,8 @@
       "type": "vector"
     }
   },
-  "sprite": "http://localhost:8088/sprites/sprites",
-  "glyphs": "http://localhost:8088/glyphs/{fontstack}/{range}.pbf",
+  "sprite": "https://maputnik.github.io/osm-liberty/sprites/osm-liberty",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}",
   "layers": [{
     "filter": ["==", "_symbol", 0],
     "id": "Land/Not ice",

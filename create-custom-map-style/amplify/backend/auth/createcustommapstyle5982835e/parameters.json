@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "createcustommapstyled09deb85_identitypool_d09deb85",
+    "identityPoolName": "createcustommapstyle5982835e_identitypool_5982835e",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "created09deb85",
-    "userPoolName": "createcustommapstyled09deb85_userpool_d09deb85",
+    "resourceNameTruncated": "create5982835e",
+    "userPoolName": "createcustommapstyle5982835e_userpool_5982835e",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -20,6 +20,9 @@
     "requiredAttributes": [
         "email"
     ],
+    "aliasAttributes": [
+        "email"
+    ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
@@ -28,10 +31,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "created09deb85_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "create5982835e_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "d09deb85",
-    "resourceName": "createcustommapstyled09deb85",
+    "sharedId": "5982835e",
+    "resourceName": "createcustommapstyle5982835e",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -46,9 +49,6 @@
         ]
     },
     "useDefault": "default",
-    "usernameAttributes": [
-        "email"
-    ],
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

@@ -4,17 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"No test specified\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "peerDependencies": {
-    "@mapbox/tilejson": ">= 0.6.4",
-    "@mapbox/tilelive": "*"
-  },
   "dependencies": {
+    "aws4": "^1.11.0",
     "tessera": "^0.14.1",
-    "tilelive-aws": "^3.1.0"
+    "tilelive-aws": "^3.1.1"
   }
 }
