@@ -687,7 +687,7 @@ The following README provides multiple options to learn how to change your map's
 
     ```bash
 
-    npx tessera -r $(pwd)/node_modules/tilelive-aws/tilelive-aws.js aws:///CreateCustomMapStyle-<env>
+    npx tessera -r $(pwd)/node_modules/tilelive-aws/tilelive-aws.js aws:///CreateCustomMapStyle-<YOUR ENVIRONMENT NAME>
     ```
 
 1. You should see some output in sdtout like `Listening at http://0.0.0.0:8080`.
@@ -715,7 +715,7 @@ The following README provides multiple options to learn how to change your map's
 1. If you want to download a copy of the Sprites and Glyphs your map uses we've included a helper script `downloadSpritesGlyphs.sh` :
 
     ```bash
-    ./downloadSpritesGlyphs.sh CreateCustomMapStyle-<env> Amplify-Default
+    ./downloadSpritesGlyphs.sh CreateCustomMapStyle-<YOUR ENVIRONMENT NAME> Amplify-Default
     ```
   
 This should create a folder for `sprites` and a folder for `glyphs` with a number of options for each. [Sprites](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-sprites.html) can be either .json or .png files with an optional @2x version. [Glyphs](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-glyphs.html) are a combination of a font and a Unicode range.
