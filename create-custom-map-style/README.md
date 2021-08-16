@@ -526,12 +526,12 @@ The following README provides multiple options to learn how to change your map's
       useEffect(async () => {
       const  credentials = await  Auth.currentCredentials();
       const { lat, lng, zoom } = coordinates;
-      const  demoMap = new  mapboxgl.Map({
-        container:  map.current,
-        center: { lng, lat },
+      const demoMap = new maplibregl.Map({
+        container: map.current,
+        center: [lng, lat],
         zoom,
-        style:  'http://localhost:3000/example-style-descriptor.json',
-        transformRequest:  transformRequest(credentials),
+        style: `${window.location.href || 'http://localhost:3000/'}example-style-descriptor.json`,
+        transformRequest: transformRequest(credentials),
       });
       demoMap.on('move', () => {
         setCoordinates({
