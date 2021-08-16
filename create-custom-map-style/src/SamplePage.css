@@ -1,6 +1,11 @@
 /* Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 SPDX-License-Identifier: MIT-0 */
 
+h1 {
+  z-index: 10;
+  color: black;
+}
+
 .sample-page {
   display: flex;
   justify-content: center;
@@ -14,6 +19,7 @@ SPDX-License-Identifier: MIT-0 */
   align-items: center;
   border: 0.25px solid black;
   padding: 5px;
+  background-color: #EE84D955;
 }
 
 .demo-map {

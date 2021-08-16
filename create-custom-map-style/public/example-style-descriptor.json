@@ -4,7 +4,7 @@
   "sources": {
     "amazon": {
       "type": "vector",
-      "tiles": ["https://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/CreateCustomMapStyle/tiles/{z}/{x}/{y}"],
+      "tiles": ["https://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/CreateCustomMapStyle-dev/tiles/{z}/{x}/{y}"],
       "minZoom": 0,
       "maxZoom": 14
     }
@@ -21,7 +21,7 @@
       "source": "amazon",
       "source-layer": "Land",
       "filter": ["any", ["==", "_symbol", 0]],
-      "paint": {"fill-color": "#c7f6d5"}
+      "paint": {"fill-color": "#EE84D9"}
     },
     {
       "id": "Land/Ice",

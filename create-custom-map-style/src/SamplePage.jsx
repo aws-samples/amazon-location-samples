@@ -24,7 +24,7 @@ const SamplePage = () => {
       container: map.current,
       center: [lng, lat],
       zoom,
-      style: `${process.env.PUBLIC_URL || 'http://localhost:3000'}/example-style-descriptor.json`,
+      style: `${window.location.href || 'http://localhost:3000/'}example-style-descriptor.json`,
       transformRequest: transformRequest(credentials),
     });
     demoMap.on('move', () => {

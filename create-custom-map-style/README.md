@@ -2,11 +2,11 @@
 
 [Amazon Location Service (ALS)](https://aws.amazon.com/location/) is a managed AWS service for adding location data to applications. It currently has two data providers, [Esri](https://aws.amazon.com/location/data-providers/esri/) and [HERE](https://aws.amazon.com/location/data-providers/here-technologies/), as well as six default map styles. What happens if you want to change the colors of your map to meet your brand or visual design?
 
-This is particularly valuable if a map is a big part of your product flow or when a map is displayed in a location that needs to fit in well to the rest of the page. The following walk through will demonstrate how this is possible.
+This is particularly valuable if a map is a big part of your product flow or when a map is displayed in a location that should fit in well to the rest of the page. The following walk through will demonstrate how this is possible.
 
-There are are various open source options for changing the style of a map, one of which we will demonstrate [Maputnik](https://maputnik.github.io/). In order to style our existing map we will run a local tile proxy that handles AWS [SigV4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) request signing to use Maputnik out of the box.
+There are are various open source options for changing the style of a map, one of which we will demonstrate [Maputnik](https://maputnik.github.io/). In order to style our existing map we will run a local proxy that handles AWS [SigV4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) request signing to serve tiles to Maputnik out of the box.
 
-The following README provides multiple options to learn how to change your map's default style. If you want to learn how to integrate it into a standard React web application you can follow either [Option #1](##option-1-use-this-pre-built-app) to use the pre-built app in this repo or [Option #2](##option-2-start-from-scratch) to start from scratch. If you just want to know how to edit an existing AWS Location Service map style, you can skip to the [Styling a Custom Map section](##styling-a-custom-map).
+The following README provides multiple options to learn how to change your map's default style. To learn how to integrate it into a standard React web application you can follow either [Option #1](##option-1-use-this-pre-built-app) to use the pre-built app in this repo or [Option #2](##option-2-start-from-scratch) to start from scratch. If you just want to know how to edit an existing AWS Location Service map style, you can skip to the [Styling a Custom Map section](##styling-a-custom-map).
   
 ## Prerequisites
 
@@ -21,7 +21,7 @@ The following README provides multiple options to learn how to change your map's
 1. Install [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) (installed per-user, and invoked per-shell) OR Install [Node.js](https://nodejs.org/en/download/) directly
 1. Install the [AWS-CLI V2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 1. Install [Amplify](https://docs.amplify.aws/cli/start/install) (Note: If you have a local environment that uses several AWS accounts be sure to use the correct AWS CLI profile and log in to the correct account in the browser)
-1. We're going to use **"Amplify-Default"** as our AWS CLI profile name and **"us-west-2"** as our AWS Region. Feel free to substitute these values.
+1. This walk-through uses **"Amplify-Default"** as the AWS CLI profile name and **"us-west-2"** as the AWS Region. Feel free to substitute these values.
 
 ## Option 1 Use this Pre Built App
 
@@ -84,7 +84,7 @@ The following README provides multiple options to learn how to change your map's
     ```bash
 
     ? Do you want to use an existing environment? No
-    ? Enter a name for the environment test
+    ? Enter a name for the environment <YOUR ENVIRONMENT NAME>
     Using default provider  awscloudformation
     ? Select the authentication method you want to use: AWS profile
 
@@ -92,43 +92,36 @@ The following README provides multiple options to learn how to change your map's
     https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
     ? Please choose the profile you want to use Amplify-Default
-    Adding backend environment test to AWS Amplify Console app:
+    Adding backend environment <YOUR ENVIRONMENT NAME> to AWS Amplify Console app:
     ....
     ```
 
-1. Run amplify status to see what will be provisioned
+1. Run `$ amplify status` to see what will be provisioned
 
     ```bash
 
-    Current Environment: test
+    Current Environment: <YOUR ENVIRONMENT NAME>
 
     | Category | Resource name                | Operation | Provider plugin   |
     | -------- | ---------------------------- | --------- | ----------------- |
-    | Auth     | createcustommapstyled00xxx00 | Create    | awscloudformation |
-    | Hosting  | S3AndCloudFront              | Create    | awscloudformation |
-    ```
-
-1. Edit `amplify/backend/hosting/S3AndCloudFront/parameters.json` and give the bucket a name you would like:
-
-    ```json
-
-    {
-      "bucketName": "createcustommapstyle-<NAME>-hostingbucket"
-    }
+    | Hosting  | S3AndCloudFront              | No Change | awscloudformation |
+    | Auth     | createcustommapstyle0000000x | No Change | awscloudformation |
+    | Geo      | CreateCustomMapStyle         | No Change | awscloudformation |
     ```
 
 1. Push your backend to the cloud `amplify push` - It will create all the resources in the cloud
 
     ```bash
 
-    ✔ Successfully pulled backend environment test from the cloud.
+    ✔ Successfully pulled backend environment <YOUR ENVIRONMENT NAME> from the cloud.
     
-    Current Environment: test
+    Current Environment: <YOUR ENVIRONMENT NAME>
 
     | Category | Resource name                | Operation | Provider plugin   |
     | -------- | ---------------------------- | --------- | ----------------- |
-    | Auth     | createcustommapstyled00xxx00 | Create    | awscloudformation |
     | Hosting  | S3AndCloudFront              | Create    | awscloudformation |
+    | Auth     | createcustommapstyle0000000x | Create    | awscloudformation |
+    | Geo      | CreateCustomMapStyle         | Create    | awscloudformation |
     
     ? Are you sure you want to continue? Yes
     ⠋ Updating resources in the cloud. This may take a few minutes..
@@ -139,25 +132,9 @@ The following README provides multiple options to learn how to change your map's
     ```bash
 
     ✔ All resources are updated in the cloud
-      
-    https://<UNIQUE ID>.cloudfront.net
     ```
 
-1. You might see an *AccessDenied* error when navigating to this URL. You will have to update the hosting bucket policy and specify your Cloudfront Origin Access Identity (OAI) as the  `Principal`  by using its Amazon S3 canonical ID. For example:
-
-    ```json
-
-    "Principal": {
-        "CanonicalUser": "`00x00xx000x000x00x00x0x000xxxxxxxx0x00x00xxxx0x0x0000x0xx00xx0xx`"
-    }
-    ```
-
- Replace  `00x00xx000x000x00x00x0x000xxxxxxxx0x00x00xxxx0x0x0000x0xx00xx0xx`  with the OAI’s canonical ID. You can find the OAI’s canonical ID in the same ways that you find its ID in the Cloudfront management console.
-
- ![Origin Access Identity](media/OAI.png)
- *Origin Access Identity*
-
-1. TODO: REMOVE THIS The React App can then be run with `npm start` and the deployed app can be updated with `amplify publish` whenever you like. Skip to
+1. The React App can then be run with `npm start` and the deployed app can be updated with `amplify publish` whenever you like. Skip to
 [*Creating Amazon Location Service Resources*](#creating-amazon-location-service-resources) in this README to continue.
 
 ## Option 2 Start from Scratch
@@ -194,7 +171,7 @@ The following README provides multiple options to learn how to change your map's
     
     Note: It is recommended to run this command from the root of your app directory
     ? Enter a name for the project createcustommapstyle
-    ? Enter a name for the environment dev
+    ? Enter a name for the environment <YOUR ENVIRONMENT NAME>
     ? Choose your default editor: Visual Studio Code # (or whatever editor you prefer)
     ? Choose the type of app that you\'re building javascript
     Please tell us about your project
@@ -253,7 +230,7 @@ The following README provides multiple options to learn how to change your map's
 
     CREATE_FAILED UserPoolClientLambda                                  AWS::Lambda::Function
           
-    Wed Apr 07 2021 16:50:55 GMT-0400 (Eastern Daylight Time) The runtime parameter of 
+    Mon Jan 00 2021 00:00:00 GMT-0000 (Eastern Daylight Time) The runtime parameter of 
     nodejs6.10 is no longer supported for creating or updating AWS Lambda functions. 
     We recommend you use the new runtime (nodejs12.x) while creating or updating functions.
     ```
@@ -304,14 +281,14 @@ The following README provides multiple options to learn how to change your map's
 
     $ amplify push
 
-    ✔ Successfully pulled backend environment dev from the cloud.
+    ✔ Successfully pulled backend environment <YOUR ENVIRONMENT NAME> from the cloud.
 
-    Current Environment: dev
+    Current Environment: <YOUR ENVIRONMENT NAME>
 
     | Category | Resource name                | Operation | Provider plugin   |
     | -------- | ---------------------------- | --------- | ----------------- |
     | Geo      | CreateCustomMapStyle         | Create    | awscloudformation |
-    | Auth     | createcustommapstyle5982835e | No Change | awscloudformation |
+    | Auth     | createcustommapstyle0000000x | No Change | awscloudformation |
     ? Are you sure you want to continue? Yes
     ⠹ Updating resources in the cloud. This may take a few minutes...
     ...
@@ -549,12 +526,12 @@ The following README provides multiple options to learn how to change your map's
       useEffect(async () => {
       const  credentials = await  Auth.currentCredentials();
       const { lat, lng, zoom } = coordinates;
-      const  demoMap = new  mapboxgl.Map({
-        container:  map.current,
-        center: { lng, lat },
+      const demoMap = new maplibregl.Map({
+        container: map.current,
+        center: [lng, lat],
         zoom,
-        style:  'http://localhost:3000/example-style-descriptor.json',
-        transformRequest:  transformRequest(credentials),
+        style: `${window.location.href || 'http://localhost:3000/'}example-style-descriptor.json`,
+        transformRequest: transformRequest(credentials),
       });
       demoMap.on('move', () => {
         setCoordinates({
@@ -689,7 +666,7 @@ The following README provides multiple options to learn how to change your map's
         "AccessKeyId": "XXXX0XX0X0XXXXXX0XXX",
         "SecretAccessKey": "x0XXxxXXXxXxXX0xXxxX0XXxX0X0xxxx0XxxxxXX",
         "SessionToken": "XXxXx0XXxX0xxX0XxXXx//////////....=",
-        "Expiration": "2021-01-01T00:00:00+00:00"
+        "Expiration": "2021-00-00T00:00:00+00:00"
       }
     }
     ```
@@ -710,7 +687,7 @@ The following README provides multiple options to learn how to change your map's
 
     ```bash
 
-    npx tessera -r $(pwd)/node_modules/tilelive-aws/tilelive-aws.js aws:///CreateCustomMapStyle-<env>
+    npx tessera -r $(pwd)/node_modules/tilelive-aws/tilelive-aws.js aws:///CreateCustomMapStyle-<YOUR ENVIRONMENT NAME>
     ```
 
 1. You should see some output in sdtout like `Listening at http://0.0.0.0:8080`.
@@ -738,10 +715,10 @@ The following README provides multiple options to learn how to change your map's
 1. If you want to download a copy of the Sprites and Glyphs your map uses we've included a helper script `downloadSpritesGlyphs.sh` :
 
     ```bash
-    $ ./downloadSpritesGlyphs.sh CreateCustomMapStyle-<env> Amplify-Default
+    ./downloadSpritesGlyphs.sh CreateCustomMapStyle-<YOUR ENVIRONMENT NAME> Amplify-Default
     ```
   
-This should create a folder for `sprites` and a folder for `glyphs` with a number of options for each. [Sprites](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-sprites.html) can be either .json or .png files with an optional @2x version. [Glyphs](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-glyphs.html) are a combination of a font family and a Unicode range.
+This should create a folder for `sprites` and a folder for `glyphs` with a number of options for each. [Sprites](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-sprites.html) can be either .json or .png files with an optional @2x version. [Glyphs](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-glyphs.html) are a combination of a font and a Unicode range.
 
 1. If you choose to download the map Glyphs and Sprites you'll have to serve them on a port that is not already occupied. From `tileserver/`:
 
@@ -760,7 +737,7 @@ This should create a folder for `sprites` and a folder for `glyphs` with a numbe
 
  We recommend using a SigV4 request-signing library such as [aws4](https://github.com/mhart/aws4#example).
 
-1. Because we are proxying our map tiles through our local tileserver we'll need to change one line in the descriptor JSON to point to the correct endpoint. (We'll change it back later).
+1. Because we are proxying our map tiles through a local tileserver we'll need to change one line in the descriptor JSON to point to the correct endpoint. (We'll change it back later).
 
 1. Change Line 7
   From
@@ -777,7 +754,7 @@ This should create a folder for `sprites` and a folder for `glyphs` with a numbe
     "tiles": ["http://localhost:8080/{z}/{x}/{y}@2x.png"],
     ```
 
-1. If you see an `AccessDenied` error in the `tessera` terminal you may need to manually update the IAM permissions for your role/user add action `geo:GetMapTile` on resource: `arn:aws:geo:<REGION>:<ACCOUNT>:map/CreateCustomMapStyle-<ENV>`.
+1. If you see an `AccessDenied` error in the `tessera` terminal you may need to manually update the IAM permissions for your role/user add action `geo:GetMapTile` on resource: `arn:aws:geo:<REGION>:<ACCOUNT>:map/CreateCustomMapStyle-<YOUR ENVIRONMENT NAME>`.
 
 1. From the "*View*" dropdown let's select "*Map*"
 
@@ -838,17 +815,58 @@ To help you with your map styling decisions, here are some handy tips:
 
     ```json
 
-    "tiles": ["https://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/CreateCustomMapStyle/tiles/{z}/{x}/{y}"],
+    "tiles": ["https://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/CreateCustomMapStyle-<ENVIRONMENT NAME>/tiles/{z}/{x}/{y}"],
     ```
 
-1. In your browser you can now refresh and see the changes you made in Maputnik show up in your own page.
+1. We can change the background color of the `.map-container` selector to something like `#EE84D955` to see how the map style changes can be used to match the branding of the rest of a page. In your browser you can now refresh and see the changes you made in Maputnik show up in your own page.
   
    ![Changes Appear](media/ChangesAppear.png)
    *Changes Appear*
 
+### Deployment (Optional)
+
+1. Once you are happy with the edits to the page you can add hosting and see these changes live on the web fairly easily with one additional step.
+
+1. From your terminal `cd` to the root directory and run:
+
+    ```bash
+    $ amplify add hosting
+    ? Select the plugin module to execute Amazon CloudFront and S3
+    ? Select the environment setup: DEV (S3 only with HTTP)
+    ? hosting bucket name createcustommapstyle-<YOUR ENVIRONMENT NAME>-hostingbucket
+    ? index doc for the website index.html
+    ? error doc for the website index.html
+
+    $ amplify publish
+    ✔ Successfully pulled backend environment <YOUR ENVIRONMENT> from the cloud.
+
+    Current Environment: <YOUR ENVIRONMENT NAME>
+
+    | Category | Resource name                | Operation | Provider plugin   |
+    | -------- | ---------------------------- | --------- | ----------------- |
+    | Hosting  | S3AndCloudFront              | Create    | awscloudformation |
+    | Auth     | createcustommapstyle5982835e | No Change | awscloudformation |
+    | Geo      | CreateCustomMapStyle         | No Change | awscloudformation |
+    ? Are you sure you want to continue? Yes
+    ⠴ Updating resources in the cloud. This may take a few minutes...
+    ...
+    ✔ All resources are updated in the cloud
+
+    Hosting endpoint: http://createcustommapstyle-<YOUR ENVIRONMENT NAME>-hostingbucket-<YOUR ENVIRONMENT NAME>.s3-website-us-west-2.amazonaws.com
+    ...
+    Creating an optimized production build...
+    Compiled successfully.
+    ...
+    ✔ Uploaded files successfully.
+    Your app is published successfully.
+    http://createcustommapstyle-<YOUR ENVIRONMENT NAME>-hostingbucket-<YOUR ENVIRONMENT NAME>.s3-website-us-west-2.amazonaws.com
+    ```
+
+1. Click on the link provided by Amplify CLI and you can now see and share a URL with the customized page and web map we have built in this walk-through.
+
 ## Teardown
 
-The teardown is relatively easy with the Amplify CLI here's how we can do it within a few short steps
+The teardown is relatively easy with the Amplify CLI here's how we can do it with two short steps
 
 1. From the root directory of your project run `amplify status` to see what stacks exist currently
 
@@ -856,15 +874,14 @@ The teardown is relatively easy with the Amplify CLI here's how we can do it wit
 
     $ amplify status
     
-    Current Environment: <ENV>
+    Current Environment: <YOUR ENVIRONMENT NAME>
 
     | Category | Resource name                | Operation | Provider plugin   |
     | -------- | ---------------------------- | --------- | ----------------- |
-    | Auth     | createcustommapstyle5982835e | No Change | awscloudformation |
-    | Geo      | CreateCustomMapStyle         | No Change | awscloudformation |
     | Hosting  | S3AndCloudFront              | No Change | awscloudformation |
+    | Auth     | createcustommapstyle0000000x | No Change | awscloudformation |
+    | Geo      | CreateCustomMapStyle         | No Change | awscloudformation |
 
-    Hosting endpoint: <https://something.cloudfront.net>
     ```
 
 1. To delete everything simply run `amplify delete`
@@ -877,26 +894,9 @@ The teardown is relatively easy with the Amplify CLI here's how we can do it wit
       all the environments of the project from the cloud and wipe out all the loca
       l files created by Amplify CLI) Yes
       ⠋ Deleting resources from the cloud. This may take a few minutes...
-      Deleting env:test
+      Deleting env:<YOUR ENVIRONMENT NAME>
       ✔ Project deleted in the cloud
       Project deleted locally.
-    ```
-
-1. The Amazon Location Service Map resource can also deleted from the CLI either by running the included script
-
-    ```bash
-    
-    ./deleteMapResource.sh Amplify-Default
-    ```
-  
-    or optionally
-
-    ```bash
-  
-    aws location \
-      delete-map \
-      --map-name "CreateCustomMapStyle" \
-      --profile Amplify-Default
     ```
 
 ## Conclusion
