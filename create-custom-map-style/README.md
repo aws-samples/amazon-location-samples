@@ -845,7 +845,7 @@ To help you with your map styling decisions, here are some handy tips:
     | Category | Resource name                | Operation | Provider plugin   |
     | -------- | ---------------------------- | --------- | ----------------- |
     | Hosting  | S3AndCloudFront              | Create    | awscloudformation |
-    | Auth     | createcustommapstyle5982835e | No Change | awscloudformation |
+    | Auth     | createcustommapstyle0000000x | No Change | awscloudformation |
     | Geo      | CreateCustomMapStyle         | No Change | awscloudformation |
     ? Are you sure you want to continue? Yes
     ⠴ Updating resources in the cloud. This may take a few minutes...
