@@ -4,16 +4,17 @@
   "sources": {
     "amazon": {
       "type": "vector",
-      "tiles": ["https://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/CreateCustomMapStyle-dev/tiles/{z}/{x}/{y}"],
+      "tiles": ["https://maps.geo.us-east-1.amazonaws.com/maps/v0/maps/CreateCustomMapStyle-dev/tiles/{z}/{x}/{y}"],
       "minZoom": 0,
-      "maxZoom": 14
+      "maxZoom": 22
     }
   },
-  "layers": [
-    {
+  "layers": [{
       "id": "background",
       "type": "background",
-      "paint": {"background-color": "rgba(40, 67, 105, 1)"}
+      "paint": {
+        "background-color": "rgba(40, 67, 105, 1)"
+      }
     },
     {
       "id": "Land/Not ice",
@@ -21,7 +22,9 @@
       "source": "amazon",
       "source-layer": "Land",
       "filter": ["any", ["==", "_symbol", 0]],
-      "paint": {"fill-color": "#EE84D9"}
+      "paint": {
+        "fill-color": "#EE84D9"
+      }
     },
     {
       "id": "Land/Ice",
@@ -29,7 +32,9 @@
       "source": "amazon",
       "source-layer": "Land",
       "filter": ["any", ["==", "_symbol", "1"]],
-      "paint": {"fill-color": "#FFFFFF"}
+      "paint": {
+        "fill-color": "#FFFFFF"
+      }
     },
     {
       "id": "Urban area",
@@ -41,7 +46,12 @@
       "layout": {},
       "paint": {
         "fill-antialias": false,
-        "fill-color": {"stops": [[9, "#e3debf"], [12, "#f7f6d4"]]}
+        "fill-color": {
+          "stops": [
+            [9, "#e3debf"],
+            [12, "#f7f6d4"]
+          ]
+        }
       }
     },
     {
@@ -79,7 +89,10 @@
       "source-layer": "Openspace or forest",
       "minzoom": 9,
       "layout": {},
-      "paint": {"fill-antialias": false, "fill-color": "#dee3bc"}
+      "paint": {
+        "fill-antialias": false,
+        "fill-color": "#dee3bc"
+      }
     },
     {
       "id": "Military",
@@ -101,7 +114,10 @@
       "source-layer": "Admin0 forest or park",
       "minzoom": 6,
       "layout": {},
-      "paint": {"fill-antialias": false, "fill-color": "#dee3bc"}
+      "paint": {
+        "fill-antialias": false,
+        "fill-color": "#dee3bc"
+      }
     },
     {
       "id": "Admin1 forest or park",
@@ -110,7 +126,10 @@
       "source-layer": "Admin1 forest or park",
       "minzoom": 6,
       "layout": {},
-      "paint": {"fill-antialias": false, "fill-color": "#dee3bc"}
+      "paint": {
+        "fill-antialias": false,
+        "fill-color": "#dee3bc"
+      }
     },
     {
       "id": "Zoo",
@@ -119,7 +138,9 @@
       "source-layer": "Zoo",
       "minzoom": 11,
       "layout": {},
-      "paint": {"fill-color": "#dee3bc"}
+      "paint": {
+        "fill-color": "#dee3bc"
+      }
     },
     {
       "id": "Port",
@@ -128,7 +149,10 @@
       "source-layer": "Port",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#E3E2CE", "fill-outline-color": "#DAD9C5"}
+      "paint": {
+        "fill-color": "#E3E2CE",
+        "fill-outline-color": "#DAD9C5"
+      }
     },
     {
       "id": "Transportation",
@@ -137,7 +161,10 @@
       "source-layer": "Transportation",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#E3E2CE", "fill-outline-color": "#DAD9C5"}
+      "paint": {
+        "fill-color": "#E3E2CE",
+        "fill-outline-color": "#DAD9C5"
+      }
     },
     {
       "id": "Industry",
@@ -146,7 +173,10 @@
       "source-layer": "Industry",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#E3E2CE", "fill-outline-color": "#DAD9C5"}
+      "paint": {
+        "fill-color": "#E3E2CE",
+        "fill-outline-color": "#DAD9C5"
+      }
     },
     {
       "id": "Indigenous",
@@ -155,7 +185,10 @@
       "source-layer": "Indigenous",
       "minzoom": 7,
       "layout": {},
-      "paint": {"fill-antialias": false, "fill-color": "#ede4c5"}
+      "paint": {
+        "fill-antialias": false,
+        "fill-color": "#ede4c5"
+      }
     },
     {
       "id": "Golf course",
@@ -164,7 +197,10 @@
       "source-layer": "Golf course",
       "minzoom": 11,
       "layout": {},
-      "paint": {"fill-color": "#E3ECBF", "fill-outline-color": "#DBE2B8"}
+      "paint": {
+        "fill-color": "#E3ECBF",
+        "fill-outline-color": "#DBE2B8"
+      }
     },
     {
       "id": "Airport/Airport property",
@@ -174,7 +210,10 @@
       "minzoom": 9,
       "filter": ["==", "_symbol", 1],
       "layout": {},
-      "paint": {"fill-color": "#E3E2CE", "fill-outline-color": "#C5C4B0"}
+      "paint": {
+        "fill-color": "#E3E2CE",
+        "fill-outline-color": "#C5C4B0"
+      }
     },
     {
       "id": "Airport/Airport runway",
@@ -184,7 +223,9 @@
       "minzoom": 11,
       "filter": ["==", "_symbol", 0],
       "layout": {},
-      "paint": {"fill-color": "#D8D7C3"}
+      "paint": {
+        "fill-color": "#D8D7C3"
+      }
     },
     {
       "id": "Retail",
@@ -193,7 +234,9 @@
       "source-layer": "Retail",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#F6E5B7"}
+      "paint": {
+        "fill-color": "#F6E5B7"
+      }
     },
     {
       "id": "Education",
@@ -202,7 +245,9 @@
       "source-layer": "Education",
       "minzoom": 11,
       "layout": {},
-      "paint": {"fill-color": "#E9E9AB"}
+      "paint": {
+        "fill-color": "#E9E9AB"
+      }
     },
     {
       "id": "Medical",
@@ -211,7 +256,10 @@
       "source-layer": "Medical",
       "minzoom": 11,
       "layout": {},
-      "paint": {"fill-color": "#F7DFB9", "fill-outline-color": "#FFFFFF"}
+      "paint": {
+        "fill-color": "#F7DFB9",
+        "fill-outline-color": "#FFFFFF"
+      }
     },
     {
       "id": "Park or farming",
@@ -220,7 +268,9 @@
       "source-layer": "Park or farming",
       "minzoom": 11,
       "layout": {},
-      "paint": {"fill-color": "#dee3bc"}
+      "paint": {
+        "fill-color": "#dee3bc"
+      }
     },
     {
       "id": "Water and wastewater",
@@ -229,7 +279,10 @@
       "source-layer": "Water and wastewater",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#E3E2CE", "fill-outline-color": "#DAD9C5"}
+      "paint": {
+        "fill-color": "#E3E2CE",
+        "fill-outline-color": "#DAD9C5"
+      }
     },
     {
       "id": "Freight",
@@ -238,7 +291,9 @@
       "source-layer": "Freight",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#E8DEBB"}
+      "paint": {
+        "fill-color": "#E8DEBB"
+      }
     },
     {
       "id": "Cemetery",
@@ -247,7 +302,9 @@
       "source-layer": "Cemetery",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#E3ECBF"}
+      "paint": {
+        "fill-color": "#E3ECBF"
+      }
     },
     {
       "id": "Landmark",
@@ -256,7 +313,9 @@
       "source-layer": "Landmark",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#F6E5B7"}
+      "paint": {
+        "fill-color": "#F6E5B7"
+      }
     },
     {
       "id": "Finance",
@@ -265,7 +324,9 @@
       "source-layer": "Finance",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#E8DEBB"}
+      "paint": {
+        "fill-color": "#E8DEBB"
+      }
     },
     {
       "id": "Government",
@@ -274,7 +335,9 @@
       "source-layer": "Government",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#E8DEBB"}
+      "paint": {
+        "fill-color": "#E8DEBB"
+      }
     },
     {
       "id": "Emergency",
@@ -283,7 +346,9 @@
       "source-layer": "Emergency",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#E8DEBB"}
+      "paint": {
+        "fill-color": "#E8DEBB"
+      }
     },
     {
       "id": "Pedestrian",
@@ -292,7 +357,9 @@
       "source-layer": "Pedestrian",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-color": "#E8DEBB"}
+      "paint": {
+        "fill-color": "#E8DEBB"
+      }
     },
     {
       "id": "Beach",
@@ -301,7 +368,9 @@
       "source-layer": "Beach",
       "minzoom": 13,
       "layout": {},
-      "paint": {"fill-pattern": "Water area/Playa"}
+      "paint": {
+        "fill-pattern": "Water area/Playa"
+      }
     },
     {
       "id": "Special area of interest/Green openspace",
@@ -311,7 +380,9 @@
       "minzoom": 14,
       "filter": ["==", "_symbol", 11],
       "layout": {},
-      "paint": {"fill-color": "#DBE0B2"}
+      "paint": {
+        "fill-color": "#DBE0B2"
+      }
     },
     {
       "id": "Special area of interest/Grass",
@@ -321,7 +392,14 @@
       "minzoom": 14,
       "filter": ["==", "_symbol", 8],
       "layout": {},
-      "paint": {"fill-color": {"stops": [[14, "#d1deb8"], [15, "#C2D69C"]]}}
+      "paint": {
+        "fill-color": {
+          "stops": [
+            [14, "#d1deb8"],
+            [15, "#C2D69C"]
+          ]
+        }
+      }
     },
     {
       "id": "Marine area/bathymetry depth 1",
@@ -332,7 +410,12 @@
       "layout": {},
       "paint": {
         "fill-antialias": false,
-        "fill-color": {"stops": [[8, "#DCF3FC"], [11, "#BFD9F2"]]}
+        "fill-color": {
+          "stops": [
+            [8, "#DCF3FC"],
+            [11, "#BFD9F2"]
+          ]
+        }
       }
     },
     {
@@ -345,7 +428,12 @@
       "layout": {},
       "paint": {
         "fill-antialias": false,
-        "fill-color": {"stops": [[8, "#CAECFA"], [11, "#BFD9F2"]]}
+        "fill-color": {
+          "stops": [
+            [8, "#CAECFA"],
+            [11, "#BFD9F2"]
+          ]
+        }
       }
     },
     {
@@ -358,7 +446,12 @@
       "layout": {},
       "paint": {
         "fill-antialias": false,
-        "fill-color": {"stops": [[8, "#BAE6F7"], [11, "#BFD9F2"]]}
+        "fill-color": {
+          "stops": [
+            [8, "#BAE6F7"],
+            [11, "#BFD9F2"]
+          ]
+        }
       }
     },
     {
@@ -371,7 +464,12 @@
       "layout": {},
       "paint": {
         "fill-antialias": false,
-        "fill-color": {"stops": [[8, "#A9DFF5"], [11, "#BFD9F2"]]}
+        "fill-color": {
+          "stops": [
+            [8, "#A9DFF5"],
+            [11, "#BFD9F2"]
+          ]
+        }
       }
     },
     {
@@ -384,7 +482,12 @@
       "layout": {},
       "paint": {
         "fill-antialias": false,
-        "fill-color": {"stops": [[8, "#99D9F2"], [11, "#BFD9F2"]]}
+        "fill-color": {
+          "stops": [
+            [8, "#99D9F2"],
+            [11, "#BFD9F2"]
+          ]
+        }
       }
     },
     {
@@ -397,7 +500,12 @@
       "layout": {},
       "paint": {
         "fill-antialias": false,
-        "fill-color": {"stops": [[8, "#89D2F0"], [11, "#BFD9F2"]]}
+        "fill-color": {
+          "stops": [
+            [8, "#89D2F0"],
+            [11, "#BFD9F2"]
+          ]
+        }
       }
     },
     {
@@ -410,7 +518,12 @@
       "layout": {},
       "paint": {
         "fill-antialias": false,
-        "fill-color": {"stops": [[8, "#78CCF0"], [11, "#BFD9F2"]]}
+        "fill-color": {
+          "stops": [
+            [8, "#78CCF0"],
+            [11, "#BFD9F2"]
+          ]
+        }
       }
     },
     {
@@ -420,10 +533,18 @@
       "source-layer": "Water line small scale",
       "minzoom": 1,
       "maxzoom": 5,
-      "layout": {"line-join": "round"},
+      "layout": {
+        "line-join": "round"
+      },
       "paint": {
         "line-color": "#99D9F2",
-        "line-width": {"base": 1.2, "stops": [[1, 0.5], [5, 1.33]]}
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [1, 0.5],
+            [5, 1.33]
+          ]
+        }
       }
     },
     {
@@ -433,10 +554,18 @@
       "source-layer": "Water line medium scale",
       "minzoom": 5,
       "maxzoom": 7,
-      "layout": {"line-join": "round"},
+      "layout": {
+        "line-join": "round"
+      },
       "paint": {
         "line-color": "#99D9F2",
-        "line-width": {"base": 1.2, "stops": [[5, 0.5], [7, 1.33]]}
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [5, 0.5],
+            [7, 1.33]
+          ]
+        }
       }
     },
     {
@@ -446,10 +575,23 @@
       "source-layer": "Water line large scale",
       "minzoom": 7,
       "maxzoom": 11,
-      "layout": {"line-join": "round"},
+      "layout": {
+        "line-join": "round"
+      },
       "paint": {
-        "line-color": {"stops": [[7, "#99D9F2"], [11, "#BFD9F2"]]},
-        "line-width": {"base": 1.2, "stops": [[7, 1], [11, 1.33]]}
+        "line-color": {
+          "stops": [
+            [7, "#99D9F2"],
+            [11, "#BFD9F2"]
+          ]
+        },
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [7, 1],
+            [11, 1.33]
+          ]
+        }
       }
     },
     {
@@ -459,11 +601,20 @@
       "source-layer": "Water line",
       "minzoom": 11,
       "filter": ["==", "_symbol", 1],
-      "layout": {"line-join": "round"},
+      "layout": {
+        "line-join": "round"
+      },
       "paint": {
         "line-color": "#BFD9F2",
         "line-dasharray": [7.5, 2.5],
-        "line-width": {"base": 1.2, "stops": [[11, 2], [14, 2], [17, 2]]}
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [11, 2],
+            [14, 2],
+            [17, 2]
+          ]
+        }
       }
     },
     {
@@ -473,11 +624,20 @@
       "source-layer": "Water line",
       "minzoom": 11,
       "filter": ["==", "_symbol", 4],
-      "layout": {"line-join": "round"},
+      "layout": {
+        "line-join": "round"
+      },
       "paint": {
         "line-color": "#BFD9F2",
         "line-dasharray": [10.67, 1.78],
-        "line-width": {"base": 1.2, "stops": [[11, 1], [14, 1.33], [17, 2]]}
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [11, 1],
+            [14, 1.33],
+            [17, 2]
+          ]
+        }
       }
     },
     {
@@ -487,10 +647,20 @@
       "source-layer": "Water line",
       "minzoom": 11,
       "filter": ["==", "_symbol", 0],
-      "layout": {"line-cap": "round", "line-join": "round"},
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
       "paint": {
         "line-color": "#BFD9F2",
-        "line-width": {"base": 1.2, "stops": [[11, 1], [14, 1.33], [17, 2.67]]}
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [11, 1],
+            [14, 1.33],
+            [17, 2.67]
+          ]
+        }
       }
     },
     {
@@ -502,8 +672,18 @@
       "maxzoom": 5,
       "layout": {},
       "paint": {
-        "fill-color": {"stops": [[1, "#A9DFF5"], [5, "#BAE6F7"]]},
-        "fill-outline-color": {"stops": [[1, "#A9DFF5"], [5, "#BAE6F7"]]}
+        "fill-color": {
+          "stops": [
+            [1, "#A9DFF5"],
+            [5, "#BAE6F7"]
+          ]
+        },
+        "fill-outline-color": {
+          "stops": [
+            [1, "#A9DFF5"],
+            [5, "#BAE6F7"]
+          ]
+        }
       }
     },
     {
@@ -515,7 +695,9 @@
       "maxzoom": 7,
       "filter": ["==", "_symbol", 1],
       "layout": {},
-      "paint": {"fill-pattern": "Water area medium scale/Lake intermittent"}
+      "paint": {
+        "fill-pattern": "Water area medium scale/Lake intermittent"
+      }
     },
     {
       "id": "Water area medium scale/Lake or river",
@@ -526,7 +708,14 @@
       "maxzoom": 7,
       "filter": ["==", "_symbol", 0],
       "layout": {},
-      "paint": {"fill-color": {"stops": [[5, "#BAE6F7"], [7, "#caecfa"]]}}
+      "paint": {
+        "fill-color": {
+          "stops": [
+            [5, "#BAE6F7"],
+            [7, "#caecfa"]
+          ]
+        }
+      }
     },
     {
       "id": "Coastline",
@@ -534,9 +723,17 @@
       "source": "amazon",
       "source-layer": "Coastline",
       "maxzoom": 9,
-      "layout": {"line-cap": "round", "line-join": "round"},
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
       "paint": {
-        "line-color": {"stops": [[7, "#d6d6bc"], [9, "#DCF3FC"]]},
+        "line-color": {
+          "stops": [
+            [7, "#d6d6bc"],
+            [9, "#DCF3FC"]
+          ]
+        },
         "line-width": 1
       }
     },
@@ -546,58 +743,83 @@
       "source": "amazon",
       "source-layer": "Railroad",
       "minzoom": 11,
-      "layout": {"line-join": "round"},
-      "paint": {"line-color": "#F2F0CF", "line-width": 3.33}
-    },
-    {
-      "id": "Railroad/line",
-      "type": "line",
-      "source": "amazon",
-      "source-layer": "Railroad",
-      "minzoom": 11,
-      "layout": {"line-join": "round"},
-      "paint": {"line-color": "#d2cfc6", "line-width": 1.33}
-    },
-    {
-      "id": "Special area of interest/Sand",
-      "type": "fill",
-      "source": "amazon",
-      "source-layer": "Special area of interest",
-      "minzoom": 15,
-      "filter": ["==", "_symbol", 6],
-      "layout": {},
-      "paint": {"fill-pattern": "Water area/Playa"}
-    },
-    {
-      "id": "Special area of interest/Water",
-      "type": "fill",
-      "source": "amazon",
-      "source-layer": "Special area of interest",
-      "minzoom": 14,
-      "filter": ["==", "_symbol", 7],
-      "layout": {},
-      "paint": {"fill-color": "#BFD9F2"}
-    },
-    {
-      "id": "Special area of interest line/Dock or pier",
-      "type": "line",
-      "source": "amazon",
-      "source-layer": "Special area of interest line",
-      "minzoom": 17,
-      "filter": ["==", "_symbol", 0],
-      "layout": {"line-cap": "round", "line-join": "round"},
-      "paint": {"line-color": "#FFFFFF", "line-width": 0.67}
-    },
-    {
-      "id": "Special area of interest line/Parking lot",
-      "type": "line",
-      "source": "amazon",
-      "source-layer": "Special area of interest line",
-      "minzoom": 16,
-      "filter": ["==", "_symbol", 5],
-      "layout": {"line-cap": "round", "line-join": "round"},
-      "paint": {"line-color": "#FFFFFF", "line-width": 0.67}
-    }
-  ],
-  "id": "amazon"
-}
+      "layout": {
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#F2F0CF",
+        "line-width ": 3.33}
+      },
+      {
+        "id": "Railroad/line",
+        "type": "line",
+        "source": "amazon",
+        "source-layer": "Railroad",
+        "minzoom": 11,
+        "layout": {
+          "line-join": "round"
+        },
+        "paint": {
+          "line-color": "#f7f7f7",
+          "line-width": 1.33
+        }
+      },
+      {
+        "id": "Special area of interest/Sand",
+        "type": "fill",
+        "source": "amazon",
+        "source-layer": "Special area of interest",
+        "minzoom": 15,
+        "filter": ["==", "_symbol", 6],
+        "layout": {},
+        "paint": {
+          "fill-pattern": "Water area/Playa"
+        }
+      },
+      {
+        "id": "Special area of interest/Water",
+        "type": "fill",
+        "source": "amazon",
+        "source-layer": "Special area of interest",
+        "minzoom": 14,
+        "filter": ["==", "_symbol", 7],
+        "layout": {},
+        "paint": {
+          "fill-color": "#BFD9F2"
+        }
+      },
+      {
+        "id": "Special area of interest line/Dock or pier",
+        "type": "line",
+        "source": "amazon",
+        "source-layer": "Special area of interest line",
+        "minzoom": 17,
+        "filter": ["==", "_symbol", 0],
+        "layout": {
+          "line-cap": "round",
+          "line-join": "round"
+        },
+        "paint": {
+          "line-color": "#FFFFFF",
+          "line-width": 0.67
+        }
+      },
+      {
+        "id": "Special area of interest line/Parking lot",
+        "type": "line",
+        "source": "amazon",
+        "source-layer": "Special area of interest line",
+        "minzoom": 16,
+        "filter": ["==", "_symbol", 5],
+        "layout": {
+          "line-cap": "round",
+          "line-join": "round"
+        },
+        "paint": {
+          "line-color": "#FFFFFF",
+          "line-width": 0.67
+        }
+      }
+    ],
+    "id": "amazon"
+  }

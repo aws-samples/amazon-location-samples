@@ -1,12 +1,10 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-
 import React, { useRef, useState, useEffect } from 'react';
-import transformRequest from './transformRequest';
-import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import maplibregl from 'maplibre-gl';
-import './SamplePage.css'
+import { createMap } from "maplibre-gl-js-amplify";
+import style from './example-style-descriptor.json';
+import './SamplePage.css';
 
 const SamplePage = () => {
   const map = useRef();
@@ -18,14 +16,12 @@ const SamplePage = () => {
   });
 
   useEffect(async () => {
-    const credentials = await Auth.currentCredentials();
     const { lat, lng, zoom } = coordinates;
-    const demoMap = new maplibregl.Map({
+    const demoMap = await createMap({
       container: map.current,
       center: [lng, lat],
       zoom,
-      style: `${window.location.href || 'http://localhost:3000/'}example-style-descriptor.json`,
-      transformRequest: transformRequest(credentials),
+      style,
     });
     demoMap.on('move', () => {
       setCoordinates({

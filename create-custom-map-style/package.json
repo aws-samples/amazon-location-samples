@@ -8,14 +8,14 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "aws-amplify": "^3.3.25",
+    "aws-amplify": "^4.2.1-geo.20",
     "aws-sdk": "^2.881.0",
-    "maplibre-gl": "^1.14.0",
+    "maplibre-gl": "^1.15.2",
+    "maplibre-gl-js-amplify": "^1.0.6",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "react-scripts": "4.0.3"
   },
   "scripts": {
     "lint": "eslint src --ext .js,.jsx --fix",
