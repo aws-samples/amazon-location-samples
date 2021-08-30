@@ -12,13 +12,48 @@ Metadata:
           - RedshiftCluster
     ParameterLabels:
       RedshiftCluster:
-        default: RedshiftCluster
+        default: Redshift cluster
 Parameters:
   RedshiftCluster:
-    Default: geocode-redshift
-    Description: Redshift Cluster Identifier
+    Description: Redshift cluster identifier
     Type: String
-    ConstraintDescription: Cluster identifier for Aurora Redshift
+    ConstraintDescription: Cluster identifier for Amazon Redshift
+Mappings:
+  RegionBucketMap:
+    us-east-1:
+      S3Bucket: amazon-location-service-lambda-udf
+    us-east-2:
+      S3Bucket: amazon-location-service-lambda-udf.us-east-2
+    us-west-1:
+      S3Bucket: amazon-location-service-lambda-udf.us-west-1
+    us-west-2:
+      S3Bucket: amazon-location-service-lambda-udf.us-west-2
+    ca-central-1:
+      S3Bucket: amazon-location-service-lambda-udf.ca-central-1
+    eu-central-1:
+      S3Bucket: amazon-location-service-lambda-udf.eu-central-1
+    eu-north-1:
+      S3Bucket: amazon-location-service-lambda-udf.eu-north-1
+    eu-west-1:
+      S3Bucket: amazon-location-service-lambda-udf.eu-west-1
+    eu-west-2:
+      S3Bucket: amazon-location-service-lambda-udf.eu-west-2
+    eu-west-3:
+      S3Bucket: amazon-location-service-lambda-udf.eu-west-3
+    sa-east-1:
+      S3Bucket: amazon-location-service-lambda-udf.sa-east-1
+    ap-northeast-1:
+      S3Bucket: amazon-location-service-lambda-udf.ap-northeast-1
+    ap-northeast-2:
+      S3Bucket: amazon-location-service-lambda-udf.ap-northeast-2
+    ap-northeast-3:
+      S3Bucket: amazon-location-service-lambda-udf.ap-northeast-3
+    ap-south-1:
+      S3Bucket: amazon-location-service-lambda-udf.ap-south-1
+    ap-southeast-1:
+      S3Bucket: amazon-location-service-lambda-udf.ap-southeast-1
+    ap-southeast-2:
+      S3Bucket: amazon-location-service-lambda-udf.ap-southeast-2
 Resources:
   PlaceIndex:
     Type: AWS::Location::PlaceIndex
@@ -34,7 +69,11 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       Code:
-        S3Bucket: amazon-location-service-lambda-udf
+        S3Bucket:
+          Fn::FindInMap:
+            - RegionBucketMap
+            - Ref: AWS::Region
+            - S3Bucket
         S3Key: geocode-lambda-redshift.zip
       Description: Function to geocode addresses for Amazon Redshift requests
       FunctionName:
