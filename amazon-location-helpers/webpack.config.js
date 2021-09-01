@@ -7,18 +7,6 @@ module.exports = {
   },
   externals: [
     {
-      "@aws-amplify/core": {
-        commonjs: "@aws-amplify/core",
-        commonjs2: "@aws-amplify/core",
-        root: "aws_amplify_core",
-        amd: "@aws-amplify/core/dist/aws-amplify-core.min.js",
-      },
-      "aws-sdk": {
-        commonjs: "aws-sdk",
-        commonjs2: "aws-sdk",
-        root: "AWS",
-        amd: "aws-sdk",
-      },
       "mapbox-gl": {
         commonjs: "mapbox-gl",
         commonjs2: "mapbox-gl",
