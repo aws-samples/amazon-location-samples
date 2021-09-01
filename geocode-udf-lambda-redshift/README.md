@@ -1,7 +1,5 @@
 # Access Amazon Location Service from Amazon Redshift
 
-[![Launch Stack](../images/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://amazon-location-service-lambda-udf.s3.amazonaws.com/geocode-lambda-redshift.yml)
-
 This sample code is part of AWS Big Data Blog [Access Amazon Location Service from Amazon Redshift](https://aws.amazon.com/blogs/big-data/access-amazon-location-service-from-amazon-redshift/). It creates and configures a Lambda function to geocode address data stored in Amazon Redshift using Amazon Location Service. Please refer to the blog for solution details.
 
 1. Run the CloudFormation template `geocode-lambda-redshift.yml` to create the solution stack. The template requires Amazon Redshift cluster identifier.

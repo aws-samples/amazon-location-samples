@@ -1,7 +1,5 @@
 # Access Amazon Location Service from Amazon Aurora
 
-[![Launch Stack](../images/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/quickcreate?templateUrl=https://amazon-location-service-lambda-udf.s3.amazonaws.com/geocode-lambda-aurora.yml)
-
 This sample code is part of AWS Database Blog [Access Amazon Location Service from Amazon Aurora](https://aws.amazon.com/blogs/database/access-amazon-location-service-from-amazon-aurora/). It creates and configures a Lambda function to geocode address data stored in Amazon Aurora using Amazon Location Service. Please refer to the blog for solution details.
 
 1. Run the CloudFormation template `geocode-lambda-aurora.yml` to create the solution stack. The template requires Amazon Aurora cluster identifier.
