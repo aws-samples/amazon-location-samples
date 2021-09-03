@@ -29,6 +29,7 @@ with Amazon Location Service.
 * [Asset tracking with Amazon Location, Amplify, and IoT Core](maplibre-js-react-iot-asset-tracking/)
 * [Geocode address data in Amazon Aurora](geocode-udf-lambda-aurora)
 * [Geocode address data in Amazon Redshift](geocode-udf-lambda-redshift)
+* [React Native Mobile Tracking App](https://github.com/aws-samples/amazon-location-service-mobile-tracker-react)
 
 ## Security
 
