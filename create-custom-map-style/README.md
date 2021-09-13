@@ -6,7 +6,11 @@ This is particularly valuable if a map is a big part of your product flow or whe
 
 There are are various open source options for changing the style of a map, one of which we will demonstrate [Maputnik](https://maputnik.github.io/). In order to style our existing map we will run a local proxy that handles AWS [SigV4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) request signing to serve tiles to Maputnik out of the box.
 
-The following README provides multiple options to learn how to change your map's default style. To learn how to integrate it into a standard React web application you can follow either [Option #1](##option-1-use-this-pre-built-app) to use the pre-built app in this repo or [Option #2](##option-2-start-from-scratch) to start from scratch. If you just want to know how to edit an existing AWS Location Service map style, you can skip to the [Styling a Custom Map section](##styling-a-custom-map).
+The following README provides multiple options to learn how to change your map's default style. To learn how to integrate it into a standard React web application you can follow either [Option #1](##option-1-use-this-pre-built-app) to use the pre-built app in this repo or [Option #2](##option-2-start-from-scratch) to start from scratch. If you are familiar with creating an aws-exports config file from existing resource you can save some time by using the "Deploy to Amplify Console" button below:
+
+[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/create-custom-map-style)
+
+If you just want to know how to edit an existing AWS Location Service map style, you can skip to the [Styling a Custom Map section](##styling-a-custom-map).
   
 ## Prerequisites
 
@@ -534,11 +538,12 @@ The following README provides multiple options to learn how to change your map's
 ## Styling a Custom Map
 
 1. Maputnik is an open source visual editor for the [Mapbox Style Specification](https://www.mapbox.com/mapbox-gl-js/style-spec). At the time of writing this editor can be either used in the browser or downloaded as a binary and can run locally. We are going to use the latter option.
+
 1. Go to <https://github.com/maputnik/editor/wiki/Maputnik-CLI> and follow the instructions for installation or optionally from your terminal:
 
     ```bash
 
-    wget <https://github.com/maputnik/editor/releases/download/latest/maputnik-darwin.zip>
+    wget <https://github.com/maputnik/editor/releases/download/v1.7.0/maputnik-darwin.zip>
     unzip maputnik-darwin.zip
     chmod 755 maputnik
     ```
@@ -596,42 +601,14 @@ The following README provides multiple options to learn how to change your map's
     ```bash
 
     nvm use 12
-    npm i tessera tilelive-aws aws4
+    npm i tessera tilelive-aws
     ```
 
-1. The module makes use of several environment variables to be able to sign calls to the AWS API. You can run the following to generate the required AWS credentials:
+1. Presuming you have the standard AWS environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`) set correctly, this should be enough to get started using `tessera`. You'll need to provide the full file path to your module, so from your terminal run:
 
     ```bash
 
-    $ aws sts get-session-token --duration-seconds 36000 --profile Amplify-Default
-
-    {
-      "Credentials": {
-        "AccessKeyId": "XXXX0XX0X0XXXXXX0XXX",
-        "SecretAccessKey": "x0XXxxXXXxXxXX0xXxxX0XXxX0X0xxxx0XxxxxXX",
-        "SessionToken": "XXxXx0XXxX0xxX0XxXXx//////////....=",
-        "Expiration": "2021-00-00T00:00:00+00:00"
-      }
-    }
-    ```
-
-    Set these environment variables in your terminal like so:
-
-    ```bash
-
-    export AWS_ACCESS_KEY_ID=<Access Key from Previous Step>
-    export AWS_SECRET_ACCESS_KEY=<Secret Key from Previous Step>
-    export AWS_SESSION_TOKEN=<Session Token from Previous Step>
-    ```
-
-    or optionally run the helper script we've included (be sure to have jq installed first, `brew install jq` on Mac, or follow instructions for other platforms here: <https://stedolan.github.io/jq/download/>):
-    `./setAwsEnvVariables.sh Amplify-Default`
-
-1. This should be enough to get started using `tessera`. You'll need to provide the full file path to your module, so from your terminal run:
-
-    ```bash
-
-    npx tessera -r $(pwd)/node_modules/tilelive-aws/tilelive-aws.js aws:///CreateCustomMapStyle-<YOUR ENVIRONMENT NAME>
+    node_modules/.bin/tessera -r $(pwd)/node_modules/tilelive-aws/tilelive-aws.js aws:///CreateCustomMapStyle-<YOUR ENVIRONMENT NAME>
     ```
 
 1. You should see some output in sdtout like `Listening at http://0.0.0.0:8080`.
