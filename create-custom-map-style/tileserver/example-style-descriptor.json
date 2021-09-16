@@ -4,12 +4,12 @@
     "esri": {
       "attribution": "Esri, HERE, Garmin, FAO, NOAA, USGS, © OpenStreetMap contributors, and the GIS User Community",
       "maxzoom": 15,
-      "tiles": ["http://localhost:8080/{z}/{x}/{y}@2x.png"],
+      "tiles": ["http://localhost:8080/{z}/{x}/{y}.pbf"],
       "type": "vector"
     }
   },
-  "sprite": "http://localhost:8088/sprites/sprites",
-  "glyphs": "http://localhost:8088/glyphs/{fontstack}/{range}.pbf",
+  "sprite": "https://maputnik.github.io/osm-liberty/sprites/osm-liberty",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}",
   "layers": [{
     "filter": ["==", "_symbol", 0],
     "id": "Land/Not ice",
