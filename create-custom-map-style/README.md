@@ -17,6 +17,10 @@ The following walk through is split into 2 parts:
 
 1. Install the [AWS-CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 
+1. Install [Amplify](https://docs.amplify.aws/cli/start/install) (Note: If you have a local environment that uses several AWS accounts be sure to use the correct AWS CLI profile and log in to the correct account in the browser)
+
+1. This walk-through uses **"Amplify-Default"** as the AWS CLI profile name and **"us-west-2"** as the AWS Region. Feel free to substitute these values.
+
 ## How to style an existing Map from Amazon Location Service
 
 1. Maputnik is an open source visual editor for the [Mapbox Style Specification](https://www.mapbox.com/mapbox-gl-js/style-spec). At the time of writing this editor can be either used in the browser or downloaded as a binary and can run locally. We are going to use the latter option.
@@ -224,11 +228,92 @@ To help you with your map styling decisions, here are some handy tips:
     npm install
     ```
 
-1. Use the "Deploy to Amplify Console" button below to create the application dependencies:
+1. Configure Amplify environment `amplify configure`
+ You will be prompted with the following:
 
-  [![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/create-custom-map-style)
+    ```bash
+ 
+    Follow these steps to set up access to your AWS account:
 
-  Then be sure to create the aws-exports.json file with the correct values.
+    Sign in to your AWS administrator account:
+    https://console.aws.amazon.com/
+    Press Enter to continue
+
+    Specify the AWS Region
+    ? region:  us-west-2
+    Specify the username of the new IAM user:
+    ? user name:  amplify-xxXXx
+    Complete the user creation using the AWS console
+    https://console.aws.amazon.com/iam/home?region=us-west-2#/users$new?step=final&accessKey&userNames=amplify-xxXXx&permissionType=policies&policies=arn:aws:iam::aws:policy%2FAdministratorAccess
+    Press Enter to continue
+
+    Enter the access key of the newly created user:
+    ? accessKeyId:  ********************
+    ? secretAccessKey:  ****************************************
+    This would update/create the AWS Profile in your local machine
+    ? Profile Name:  Amplify-Default
+
+    Successfully set up the new user.
+    ```
+
+ NOTE: If you give the Profile Name as `Amplify-Default` as shown above you can substitute it for `<YOUR AWS CLI PROFILE>` in the following steps.
+
+1. Initialize your application `amplify init`
+
+    ```bash
+
+    ? Do you want to use an existing environment? No
+    ? Enter a name for the environment <YOUR ENVIRONMENT NAME>
+    Using default provider  awscloudformation
+    ? Select the authentication method you want to use: AWS profile
+
+    For more information on AWS Profiles, see:
+    https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+
+    ? Please choose the profile you want to use Amplify-Default
+    Adding backend environment <YOUR ENVIRONMENT NAME> to AWS Amplify Console app:
+    ....
+    ```
+
+1. Run `$ amplify status` to see what will be provisioned
+
+    ```bash
+
+    Current Environment: <YOUR ENVIRONMENT NAME>
+
+    | Category | Resource name                | Operation | Provider plugin   |
+    | -------- | ---------------------------- | --------- | ----------------- |
+    | Hosting  | S3AndCloudFront              | No Change | awscloudformation |
+    | Auth     | createcustommapstyle0000000x | No Change | awscloudformation |
+    | Geo      | CreateCustomMapStyle         | No Change | awscloudformation |
+    ```
+
+1. Push your backend to the cloud `amplify push` - It will create all the resources in the cloud
+
+    ```bash
+
+    ✔ Successfully pulled backend environment <YOUR ENVIRONMENT NAME> from the cloud.
+    
+    Current Environment: <YOUR ENVIRONMENT NAME>
+
+    | Category | Resource name                | Operation | Provider plugin   |
+    | -------- | ---------------------------- | --------- | ----------------- |
+    | Hosting  | S3AndCloudFront              | Create    | awscloudformation |
+    | Auth     | createcustommapstyle0000000x | Create    | awscloudformation |
+    | Geo      | CreateCustomMapStyle         | Create    | awscloudformation |
+    
+    ? Are you sure you want to continue? Yes
+    ⠋ Updating resources in the cloud. This may take a few minutes..
+    ```
+
+1. Wait for Cloudformation to provision the necessary resources. Once it's done you should get a message like this:
+
+    ```bash
+
+    ✔ All resources are updated in the cloud
+    ```
+
+1. The React App can then be run with `npm start` and the deployed app can be updated with `amplify publish` whenever you like.
 
 1. You can follow the steps in [How to style an existing Map from Amazon Location Service section](##how-to-style-an-existing-map-from-amazon-location-service) to style the map created through Amplify. Once you are satisfied with your edits continue to the [Publishing and Using Your Custom Maputnik Map](###publishing-and-using-your-custom-maputnik-map) section below.
 
@@ -328,10 +413,11 @@ To help you with your map styling decisions, here are some handy tips:
  ![Esri Streets Base Map](media/BaseMap.png)
  *Esri Streets Base Map*
 
-## Teardown
+## Clean Up
 
-The teardown is relatively easy with the Amplify Console
-TODO: ADD THIS PART
+To avoid incurring future charges, delete the resources used in this tutorial. Here is a checklist to help:
+
+
 
 ## Conclusion
 
