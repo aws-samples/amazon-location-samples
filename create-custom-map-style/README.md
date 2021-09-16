@@ -1,18 +1,196 @@
 # Create a Custom Map Style with Amazon Location Service
 
-[Amazon Location Service](https://aws.amazon.com/location/) is a managed AWS service for adding location data to applications. It currently has two data providers, [Esri](https://aws.amazon.com/location/data-providers/esri/) and [HERE](https://aws.amazon.com/location/data-providers/here-technologies/), as well as six default map styles. What happens if you want to change the colors of your map to meet your brand or visual design?
+UX designers and web developers alike wish to have each component of a website meet the company’s branding requirements while providing a visual impact on its own. Web maps are no exception to this. They provide important visualizations for geographical data. The ability to customize is invaluable when a map is a big part of the user flow and needs to fit in with the rest of the site.
 
-This is particularly valuable if a map is a big part of your product flow or when a map is displayed in a location that should fit in well to the rest of the page. The following walk through will demonstrate how this is possible.
+With [Amazon Location Service](https://aws.amazon.com/location/), a managed AWS service for adding location data to applications, you can create a customized web map that will grab the interest of your end users and increase user engagement. At this time Location Service has two data providers, [Esri](https://aws.amazon.com/location/data-providers/esri/) and [HERE](https://aws.amazon.com/location/data-providers/here-technologies/), as well as six default map styles. So, how do you customize these map styles to meet your brand or visual design?
 
-There are are various open source options for changing the style of a map, one of which we will demonstrate [Maputnik](https://maputnik.github.io/). In order to style our existing map we will run a local proxy that handles AWS [SigV4](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) request signing to serve tiles to Maputnik out of the box.
+This README will walk you through the process of styling an existing map using [Maputnik](https://maputnik.github.io/) to help visualize the changes in real-time. Others may prefer to use another open source tool called [Fresco](https://fresco.go-spatial.org/), however they are not required to make edits to the style descriptor. In order to style our existing map from Amazon Location Service using these tools we will also demonstrate how to run a local proxy that handles [Signature Version 4 / AWS Authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 
-The following README provides multiple options to learn how to change your map's default style. To learn how to integrate it into a standard React web application you can follow either [Option #1](##option-1-use-this-pre-built-app) to use the pre-built app in this repo or [Option #2](##option-2-start-from-scratch) to start from scratch. If you are familiar with creating an aws-exports config file from existing resource you can save some time by using the "Deploy to Amplify Console" button below:
+The following walk through is split into 2 parts:
 
-[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/create-custom-map-style)
+1) [How to style an existing Map from Amazon Location Service section](##how-to-style-an-existing-map-from-amazon-location-service).
+2) [How to integrate a custom map style in a React app](##how-to-integrate-a-custom-map-style-in-a-react-app)
 
-If you just want to know how to edit an existing AWS Location Service map style, you can skip to the [Styling a Custom Map section](##styling-a-custom-map).
-  
 ## Prerequisites
+
+1. Install [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) (installed per-user, and invoked per-shell) OR Install [Node.js](https://nodejs.org/en/download/) directly
+
+1. Install the [AWS-CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+
+## How to style an existing Map from Amazon Location Service
+
+1. Maputnik is an open source visual editor for the [Mapbox Style Specification](https://www.mapbox.com/mapbox-gl-js/style-spec). At the time of writing this editor can be either used in the browser or downloaded as a binary and can run locally. We are going to use the latter option.
+
+1. Go to <https://github.com/maputnik/editor/wiki/Maputnik-CLI> and follow the instructions for installation or optionally from your terminal you can run:
+
+    ```bash
+
+    wget https://github.com/maputnik/editor/releases/download/v1.7.0/maputnik-darwin.zip
+    unzip maputnik-darwin.zip
+    chmod 755 maputnik
+    ```
+
+1. Start up Maputnik
+
+    ```bash
+
+    ./maputnik
+    ```
+
+ And open your browser to <http://localhost:8000/#12.44/40.7356/-74.0541>
+
+1. It would be best to start with a clean canvas. Click "Open" in the top navigation bar, then scroll down to the bottom of "Gallery Styles" and selected "Empty Style".
+
+ ![Open](media/MaputnikOpen.png)
+ *Open A Style*
+
+ ![Empty](media/MaputnikEmpty.png)
+ *Empty Canvas*
+
+1. Tessera is a pluggable [map tile](https://en.wikipedia.org/wiki/Tiled_web_map) server. Using the power of the [tilelive](https://github.com/mapbox/tilelive) ecosystem, it is capable of serving and rendering map tiles from many sources. To stream data from most sources you can install the tilelive providers as npm packages. For an Amazon Location Service source we use tilelive-aws.
+1. From your terminal run
+
+    ```bash
+
+    mkdir tileserver
+    cd tileserver
+    ```
+
+1. We'll need to init a new node project in the current directory
+
+    ```bash
+
+    $ npm init --yes
+
+    Wrote to ... /create-custom-map-style/tileserver/package.json:
+
+    {
+      "name": "tileserver",
+      "version": "1.0.0",
+      "description": "",
+      "main": "index.js",
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "keywords": [],
+      "author": "",
+      "license": "ISC"
+    }
+    ```
+
+1. Next we need to add the Amazon Location Service API as a data source. However, in order to do this we need to use a local proxy that can handle SigV4 (TL;DR a way to provide your AWS credentials with http requests). For this we will use [tessera](https://github.com/mojodna/tessera) and [tilelive-aws](https://github.com/beatleboy501/tilelive-aws). From a new terminal (the `maputnik` process will be occupying the other terminal) run the following:
+
+    ```bash
+
+    nvm use 12
+    npm i tessera tilelive-aws
+    ```
+
+1. Presuming you have the standard AWS environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`) set correctly, this should be enough to get started using `tessera`. You'll need to provide the full file path to your module, so from your terminal run:
+
+    ```bash
+
+    node_modules/tessera/bin/tessera.js -r $(pwd)/node_modules/tilelive-aws/tilelive-aws.js aws:///<YOUR AMAZON LOCATION SERVICE MAP NAME>
+    ```
+
+1. You should see some output in sdtout like `Listening at http://0.0.0.0:8080`.
+
+1. Now go back to Maputnik in your browser and click "Data Sources" in the top navigation bar. There should not be any active data sources. If you see any be sure to delete them.
+
+ ![Data Sources](media/MaputnikDataSources.png)
+ *Data Sources*
+
+1. We're going to add a new data source as shown below.
+
+- `Source ID`: `amazon`
+- `Source Type`: `Vector (XYZ URLs)`
+- `1st Tile URL`: `http://localhost:8080/{z}/{x}/{y}`
+- `Min Zoom`: `0`
+- `Max Zoom`: `22`
+
+ ![New Data Source](media/MaputnikNewSource.png)
+ *New Data Source*
+
+1. In addition to Tiles, the type of web map we will be styling also makes use of **Glyphs** and **Sprites**. We can't use Tessera to proxy the endpoints for these, but we can however use some out of the box endpoints built in to Maputnik. Sprites: `https://maputnik.github.io/osm-liberty/sprites/osm-liberty` and Glyphs: `https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}`)
+
+1. If you want to download a copy of the Sprites and Glyphs your Amazon Location Service Map uses we've included a helper script `downloadSpritesGlyphs.sh` :
+
+    ```bash
+    ./downloadSpritesGlyphs.sh <YOUR AMAZON LOCATION SERVICE MAP NAME> <YOUR AWS CLI PROFILE NAME>
+    ```
+  
+This should create a folder for `sprites` and a folder for `glyphs` with a number of options for each. [Sprites](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-sprites.html) can be either `.json` or `.png` files with an optional `@2x` version (Retina quality tile images). [Glyphs](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-glyphs.html) are a combination of a font-family and a Unicode range.
+
+1. We can start with a ready-made style template. Click "Open" in the top navigation bar and under "Upload Style" click "Upload" and select the `example-style-descriptor.json` file included in this repo.
+
+1. This is the style descriptor that is provided by Amazon Location Service as part of your Esri Map. You can download this JSON file by making a signed request to the API endpoint, i.e.
+
+    ```bash
+
+    aws location get-map-style-descriptor --map-name <YOUR AMAZON LOCATION SERVICE MAP NAME> example-style-descriptor.json --profile <YOUR AWS PROFILE NAME>
+    ```
+
+1. Because we are proxying our map tiles through a local tileserver we'll need to change one line in the descriptor JSON to point to the correct endpoint. (We'll change it back later).
+
+1. Change Line 7
+  From
+
+    ```json
+
+    "tiles": ["https://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/<YOUR AMAZON LOCATION SERVICE MAP NAME>/tiles/{z}/{x}/{y}"],
+    ```
+
+    To
+
+    ```json
+
+    "tiles": ["http://localhost:8080/{z}/{x}/{y}"],
+    ```
+
+1. If you see an `AccessDenied` error in the `tessera` terminal you may need to manually update the IAM permissions for your role/user add action `geo:GetMapTile` on resource: `arn:aws:geo:<REGION>:<ACCOUNT>:map/<YOUR AMAZON LOCATION SERVICE MAP NAME>`.
+
+1. From the "*View*" dropdown let's select "*Map*"
+
+1. Now we should see a list of layers appear on the left side of the screen
+
+ ![List of Layers](media/MaputnikLayers.png)
+ *List of Layers*
+
+1. Let's select the `Building/fill` Layer
+
+ ![Land Not ice](media/MaputnikLandNotIce.png)
+ *The Land/Not ice Layer*
+
+1. Scroll down to the JSON Editor section on the left navigation panel
+
+ ![JSON Editor](media/MaputnikJSONEditor.png)
+ *The JSON Editor*
+
+1. Note that its fill color is `#f7f6d5`, let's change it to something funky like `#EE84D9`
+
+  ![Layer Before](media/LayerBefore.png)
+  *Layer Before*
+
+  ![Layer After](media/LayerAfter.png)
+  *Layer After*
+
+1. Now you can see how the map's style has changed a little, you play around some more by clicking on certain areas of the map and seeing which layer it corresponds. Feel free to change colors or outlines
+
+### Map Styling Tips
+
+To help you with your map styling decisions, here are some handy tips:
+
+- Learn the MapLibre style document specification <https://maplibre.org/maplibre-gl-js-docs/style-spec/>
+- Learn hexadecimal color values and pick a palette of colors
+- Add map accessibility when needed (i.e. color-blind awareness)
+- Plan for map markers and choose colors that will contrast
+- Use gradients and color transparency for greater detail
+- Reserve blue for water layers only
+- Ensure legible text values by choosing the best label background and text halo
+  
+## How to integrate a custom map style in a React app
+
+### Set Up
 
 1. In your terminal create a workspace
 
@@ -21,13 +199,6 @@ If you just want to know how to edit an existing AWS Location Service map style,
     mkdir blog
     cd blog
     ```
-
-1. Install [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) (installed per-user, and invoked per-shell) OR Install [Node.js](https://nodejs.org/en/download/) directly
-1. Install the [AWS-CLI V2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-1. Install [Amplify](https://docs.amplify.aws/cli/start/install) (Note: If you have a local environment that uses several AWS accounts be sure to use the correct AWS CLI profile and log in to the correct account in the browser)
-1. This walk-through uses **"Amplify-Default"** as the AWS CLI profile name and **"us-west-2"** as the AWS Region. Feel free to substitute these values.
-
-## Option 1 Use this Pre Built App
 
 1. Clone this repo:
 
@@ -53,417 +224,39 @@ If you just want to know how to edit an existing AWS Location Service map style,
     npm install
     ```
 
-1. Configure Amplify environment `amplify configure`
- You will be prompted with the following:
+1. Use the "Deploy to Amplify Console" button below to create the application dependencies:
 
-    ```bash
- 
-    Follow these steps to set up access to your AWS account:
+  [![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/create-custom-map-style)
 
-    Sign in to your AWS administrator account:
-    https://console.aws.amazon.com/
-    Press Enter to continue
+  Then be sure to create the aws-exports.json file with the correct values.
 
-    Specify the AWS Region
-    ? region:  us-west-2
-    Specify the username of the new IAM user:
-    ? user name:  amplify-xxXXx
-    Complete the user creation using the AWS console
-    https://console.aws.amazon.com/iam/home?region=us-west-2#/users$new?step=final&accessKey&userNames=amplify-xxXXx&permissionType=policies&policies=arn:aws:iam::aws:policy%2FAdministratorAccess
-    Press Enter to continue
+1. You can follow the steps in [How to style an existing Map from Amazon Location Service section](##how-to-style-an-existing-map-from-amazon-location-service) to style the map created through Amplify. Once you are satisfied with your edits continue to the [Publishing and Using Your Custom Maputnik Map](###publishing-and-using-your-custom-maputnik-map) section below.
 
-    Enter the access key of the newly created user:
-    ? accessKeyId:  ********************
-    ? secretAccessKey:  ****************************************
-    This would update/create the AWS Profile in your local machine
-    ? Profile Name:  Amplify-Default
+### Publishing and Using Your Custom Maputnik Map
 
-    Successfully set up the new user.
+1. On your Maputnik tab in the browser, click "Export" in the top navigation bar
+  
+1. You should save the file as `example-file-descriptor.json` and place it in your React project's `public/` directory
+  
+1. Remember to change back Line 7
+ From
+
+    ```json
+
+    "tiles": ["http://localhost:8080/{z}/{x}/{y}"],
     ```
 
- NOTE: If you give the Profile Name as `Amplify-Default` as shown above you can substitute it for `<YOUR AWS CLI PROFILE>` in the following steps.
+    To
 
-1. Initialize your application `amplify init`
+    ```json
 
-    ```bash
-
-    ? Do you want to use an existing environment? No
-    ? Enter a name for the environment <YOUR ENVIRONMENT NAME>
-    Using default provider  awscloudformation
-    ? Select the authentication method you want to use: AWS profile
-
-    For more information on AWS Profiles, see:
-    https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
-
-    ? Please choose the profile you want to use Amplify-Default
-    Adding backend environment <YOUR ENVIRONMENT NAME> to AWS Amplify Console app:
-    ....
+    "tiles": ["https://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/<YOUR AMAZON LOCATION SERVICE MAP NAME>/tiles/{z}/{x}/{y}"],
     ```
 
-1. Run `$ amplify status` to see what will be provisioned
-
-    ```bash
-
-    Current Environment: <YOUR ENVIRONMENT NAME>
-
-    | Category | Resource name                | Operation | Provider plugin   |
-    | -------- | ---------------------------- | --------- | ----------------- |
-    | Hosting  | S3AndCloudFront              | No Change | awscloudformation |
-    | Auth     | createcustommapstyle0000000x | No Change | awscloudformation |
-    | Geo      | CreateCustomMapStyle         | No Change | awscloudformation |
-    ```
-
-1. Push your backend to the cloud `amplify push` - It will create all the resources in the cloud
-
-    ```bash
-
-    ✔ Successfully pulled backend environment <YOUR ENVIRONMENT NAME> from the cloud.
-    
-    Current Environment: <YOUR ENVIRONMENT NAME>
-
-    | Category | Resource name                | Operation | Provider plugin   |
-    | -------- | ---------------------------- | --------- | ----------------- |
-    | Hosting  | S3AndCloudFront              | Create    | awscloudformation |
-    | Auth     | createcustommapstyle0000000x | Create    | awscloudformation |
-    | Geo      | CreateCustomMapStyle         | Create    | awscloudformation |
-    
-    ? Are you sure you want to continue? Yes
-    ⠋ Updating resources in the cloud. This may take a few minutes..
-    ```
-
-1. Wait for Cloudformation to provision the necessary resources. Once it's done you should get a message like this:
-
-    ```bash
-
-    ✔ All resources are updated in the cloud
-    ```
-
-1. The React App can then be run with `npm start` and the deployed app can be updated with `amplify publish` whenever you like. Skip to
-[*Creating Amazon Location Service Resources*](#creating-amazon-location-service-resources) in this README to continue.
-
-## Option 2 Start from Scratch
-
-### Create a new React app
-
-1. Install and use Node v12
-
-    ```bash
-
-    nvm install 12 
-    nvm use 12
-    ```
-
-1. From your workspace run
-
-    ```bash
-
-    npx create-react-app create-custom-map-style 
-    cd create-custom-map-style
-    ```
-
- This will create a new React desktop application for you
-
-### Amplify Setup
-
-1. Follow the instructions to initialize a new Amplify project [as outlined here](https://docs.amplify.aws/cli/start/workflows#initialize-new-project)
-
-1. For the prompts enter the following:
-
-  ```bash
-
-    $ amplify init
-    
-    Note: It is recommended to run this command from the root of your app directory
-    ? Enter a name for the project createcustommapstyle
-    ? Enter a name for the environment <YOUR ENVIRONMENT NAME>
-    ? Choose your default editor: Visual Studio Code # (or whatever editor you prefer)
-    ? Choose the type of app that you\'re building javascript
-    Please tell us about your project
-    ? What javascript framework are you using react
-    ? Source Directory Path:  src
-    ? Distribution Directory Path: build
-    ? Build Command:  npm run-script build
-    ? Start Command: npm run-script start
-    Using default provider awscloudformation
-
-    For more information on AWS Profiles, see:
-    https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html
-
-    ? Do you want to use an AWS profile? Yes
-    ? Please choose the profile you want to use  Amplify-Default
-  ```
-
-1. That leaves us with a root stack for our Amplify project in CloudFormation, now let's add the `Auth` category:
-
-    ```bash
-
-    $ amplify add auth
-    Using service: Cognito, provided by: awscloudformation
-
-    The current configured provider is Amazon Cognito.
-
-    Do you want to use the default authentication and security configuration? Default configuration
-    Warning: you will not be able to edit these selections.
-    How do you want users to be able to sign in? Email
-    Do you want to configure advanced settings? No, I am done.
-    Successfully added auth resource createcustommapstyle0000000x locally
-
-    Some next steps:
-    "amplify push" will build all your local backend resources and provision it in the cloud
-    "amplify publish" will build all your local backend and frontend resources (if you have 
-    hosting category added) and provision it in the cloud
-    ```
-
- (Note: `createcustommapstyle0000000x` will always include a UUID generated by Amplify so substitute it for yours in the following steps)
-
-1. The new resources have only been configured in our local environment so let's publish them to our AWS Account:
-
-    ```bash
-
-    $ amplify push
-    
-    | Category | Resource name                | Operation | Provider plugin   |
-    | -------- | ---------------------------- | --------- | ----------------- |
-    | Auth     | createcustommapstyle0000000x | Create    | awscloudformation |
-    ? Are you sure you want to continue? Yes
-    ```
-
-1. After the Auth resource are created you should notice an auto-generated `aws-exports.js` in your project's `src` directory
-
-1. Next we're going to install and add the Geo category through the Amplify CLI
-
-    ```bash
-    $ npm i -g @aws-amplify/cli@geo
-    $ amplify add geo
-
-    Amplify Geo category is in developer preview and not intended for production use at this time.
-    ? Select which capability you want to add: Map (visualize the geospatial data)
-    ? Provide a name for the Map: CreateCustomMapStyle 
-    # or whatever name you prefer, just substitute in the following steps
-    ? Who can access this Map? Authorized users only
-    The following choices determine the pricing plan for Geo resources. Learn more at https://aws.amazon.com/location/pricing/
-    ? Are you tracking commercial assets for your business in your app? No, I only need to track consumer
-    s personal mobile devices
-    Successfully set RequestBasedUsage pricing plan for your Geo resources.
-    Available advanced settings:
-    - Map style & Map data provider (default: Streets provided by Esri)
-
-    ? Do you want to configure advanced settings? Yes
-    ? Specify the map style. Refer https://docs.aws.amazon.com/location-maps/latest/APIReference/API_MapConfiguration.html Streets (data provided by Esri)
-    Successfully added resource CreateCustomMapStyle locally.
-
-    Next steps:
-    "amplify push" builds all of your local backend resources and provisions them in the cloud
-    "amplify publish" builds all of your local backend and front-end resources (if you added hosting category) and provisions them in the cloud
-    ```
-
-1. We have more resources to publish to our AWS Account, so again we'll run the following:
-
-    ```bash
-
-    $ amplify push
-
-    ✔ Successfully pulled backend environment <YOUR ENVIRONMENT NAME> from the cloud.
-
-    Current Environment: <YOUR ENVIRONMENT NAME>
-
-    | Category | Resource name                | Operation | Provider plugin   |
-    | -------- | ---------------------------- | --------- | ----------------- |
-    | Geo      | CreateCustomMapStyle         | Create    | awscloudformation |
-    | Auth     | createcustommapstyle0000000x | No Change | awscloudformation |
-    ? Are you sure you want to continue? Yes
-    ⠹ Updating resources in the cloud. This may take a few minutes...
-    ...
-    ✔ All resources are updated in the cloud
-    ```
-
-    1. This step created our Map Resource through Amplify. We will use this map to create our new style.
-
-    1. If you would like to check out how it looks currently, navigate to [AWS Location Services Console](https://console.aws.amazon.com/location/home) and check under "Maps".
-
-    1. We are using Esri Street Map as our base map style. This comprehensive street map includes highways, major roads, minor roads, railways, water features, cities, parks, landmarks, building footprints, and administrative boundaries.
-
-### React-Amplify Integration
-
-1. Now that we've set up all the Authorization infrastructure needed for our application, we can test it out with our frontend React application. To start we need to add the `aws-amplify` package to our dependencies
-
-    ```bash
-
-    npm i aws-amplify
-    ```
-
-1. Open `src/index.js` in your IDE
-
-1. Under your existing list of import statements create a new line and add the following:
-
-    ```js
-
-    ...
-    import  Amplify  from  "aws-amplify";
-    import  awsExports  from  "./aws-exports";
-    ```
-
-1. Next we'll need to configure our Amplify so above the `ReactDOM.render` line let's add the following:
-
-    ```js
-
-    ...
-    Amplify.configure(awsExports);
-    ...
-    ```
-
- The `configure()` method is just setting the AWS resources that we want to use for our backend. It might look intimidating, but just remember this isn’t doing anything special here beside configuration.
-
-1. At this point your `src/index.js` file should something like this:
-
-    ```js
-    import  React  from  'react';
-    import  ReactDOM  from  'react-dom';
-    import  SamplePage from './SamplePage';
-    import  Amplify  from  'aws-amplify';
-    import  awsExports  from  './aws-exports';
-    import  './index.css';
-
-    Amplify.configure(awsExports);
-
-    ReactDOM.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-      document.getElementById('map')
-    );
-    ```
-
-1. After configuring Amplify at the React application's top-level module it can be used in child components. In our particular case this is only `App.js`
-
-1. Before we proceed we will need to bring in a few more dependencies, in your terminal run the following commands:
-
-    ```bash
-    npm i @aws-amplify/ui-react
-    ```
-
-1. Open `src/App.js` in your IDE. Under your existing list of existing import statements create a new line and add the following:
-
-    ```js
-    ...
-    import { withAuthenticator } from  '@aws-amplify/ui-react';
-    ```
-
-1. Replace your module export line - `export default App;` - with the following:
-
-    ```js
-    export default withAuthenticator(App);
-    ```
-
-1. Amplify's React library provides an extremely useful higher order component to provide authentication for your app. By simply wrapping your application's existing code in this one component you now have a complete authentication flow (login/logout)
-
-1. To test out your app's new login screen open your terminal and start the react app:
-
-    ```bash
-    npm start
-    ```
-
- You should see a login screen as shown below. Being that this is the first time you are running the app with authentication you will need to create a new account to login
-
- ![Cognito Hosted UI Login Screen](media/Login.png)
- *The Cognito Hosted UI Login Screen*
-
-1. Once you've created a new account and logged in you should be presented with the default React app UI
-
- ![Create React App Screen](media/CRA.png)
- *The create react app default screen*
-
-### Creating a Map UI view
-
- 1. To create this view we'll start with the HTML / CSS skeleton before adding the business logic with JS. I've renamed my `App` component (`src/App.js` and `src/App.css`) to `SamplePage`, but you can feel free to keep the name `App.js`. Open this file in your IDE.
-
- 1. Inside the `return` statement we're going to erase everything and start from scratch. At the root we're going to start with a simple `div` element with a `class` attribute of `sample-page`. Your functional component should look something like this:
-
-    ```js
-    function SamplePage() {
-      return (
-        <div className="sample-page">
-          
-        </div>
-      );
-    }
-    ```
-
- 1. Next we'll add in some sample content, a level one header with the title of the page:
-
-    ```html
-    <div className="sample-page">
-      <h1>Amazon Location Service - Create Your Own Custom Map Style</h1>
-    </div>
-    ```
-
- 1. Then we'll add a container for the kind of map we're going to demo
-
-    ```js
-    // Below h1
-    ...
-      <div className="map-container">
-    
-      </div>
-    ...
-    ```
-
- 1. Inside the container we'll give it a `sidebar` and a `map` div
-
-    ```js
-    ...
-    <div className="map-container">
-      <div className="demo-sidebar">
-      <div>
-        Longitude: 
-        <br />
-        Latitude:
-        <br />
-        Zoom:
-        <br />
-      </div>  
-      </div>
-      <div className="demo-map" />
-    </div>
-    ...
-    ```
-
- 1. The page now needs some styling so in `src/SamplePage.css` remove the existing styling and add the following:
-
-    ```css
-    .sample-page {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    
-    .map-container {
-      display: flex;
-          justify-content: center;
-      align-items: center;
-      border: 0.25px  solid  black;
-      padding: 5px;
-    }
-    
-    .demo-map {
-      height: 500px;
-      width: 500px;
-      border: 0.25px  solid  black;
-      margin: 5px;
-    }
-    ```
-
- 1. Be sure to import your CSS in the `SamplePage` component:
-
-    ```js
-    import  './SamplePage.css'
-    ```
-
- 1. Your page should look like this now:
-
- ![App Skeleton](media/AppSkeleton.png)
- *App Skeleton*
+1. We can change the background color of the `.map-container` selector to something like `#EE84D955` to see how the map style changes can be used to match the branding of the rest of a page. In your browser you can now refresh and see the changes you made in Maputnik show up in your own page.
+  
+   ![Changes Appear](media/ChangesAppear.png)
+   *Changes Appear*
 
 ### React - Amazon Location Service Integration
 
@@ -535,288 +328,10 @@ If you just want to know how to edit an existing AWS Location Service map style,
  ![Esri Streets Base Map](media/BaseMap.png)
  *Esri Streets Base Map*
 
-## Styling a Custom Map
-
-1. Maputnik is an open source visual editor for the [Mapbox Style Specification](https://www.mapbox.com/mapbox-gl-js/style-spec). At the time of writing this editor can be either used in the browser or downloaded as a binary and can run locally. We are going to use the latter option.
-
-1. Go to <https://github.com/maputnik/editor/wiki/Maputnik-CLI> and follow the instructions for installation or optionally from your terminal:
-
-    ```bash
-
-    wget <https://github.com/maputnik/editor/releases/download/v1.7.0/maputnik-darwin.zip>
-    unzip maputnik-darwin.zip
-    chmod 755 maputnik
-    ```
-
-1. Start up Maputnik
-
-    ```bash
-
-    ./maputnik
-    ```
-
- And open your browser to <http://localhost:8000/#12.44/40.7356/-74.0541>
-
-1. It would be best to start with a clean canvas. Click "Open" in the top navigation bar, then scroll down to the bottom of "Gallery Styles" and selected "Empty Style".
-
- ![Open](media/MaputnikOpen.png)
- *Open A Style*
-
- ![Empty](media/MaputnikEmpty.png)
- *Empty Canvas*
-
-1. Tessera is a pluggable [map tile](https://en.wikipedia.org/wiki/Tiled_web_map) server. Using the power of the [tilelive](https://github.com/mapbox/tilelive) ecosystem, it is capable of serving and rendering map tiles from many sources. To stream data from most sources you can install the tilelive providers as npm packages. For an Amazon Location Service source we use tilelive-aws.
-1. From your terminal run
-
-    ```bash
-
-    mkdir tileserver
-    cd tileserver
-    ```
-
-1. We'll need to init a new node project in the current directory
-
-    ```bash
-
-    $ npm init --yes
-
-    Wrote to ... /create-custom-map-style/tileserver/package.json:
-
-    {
-      "name": "tileserver",
-      "version": "1.0.0",
-      "description": "",
-      "main": "index.js",
-      "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-      },
-      "keywords": [],
-      "author": "",
-      "license": "ISC"
-    }
-    ```
-
-1. Next we need to add the Amazon Location Service API as a data source. However, in order to do this we need to use a local proxy that can handle SigV4 (TL;DR a way to provide your AWS credentials with http requests). For this we will use [tessera](https://github.com/mojodna/tessera) and [tilelive-aws](https://github.com/beatleboy501/tilelive-aws). From a new terminal (the `maputnik` process will be occupying the other terminal) run the following:
-
-    ```bash
-
-    nvm use 12
-    npm i tessera tilelive-aws
-    ```
-
-1. Presuming you have the standard AWS environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`) set correctly, this should be enough to get started using `tessera`. You'll need to provide the full file path to your module, so from your terminal run:
-
-    ```bash
-
-    node_modules/.bin/tessera -r $(pwd)/node_modules/tilelive-aws/tilelive-aws.js aws:///CreateCustomMapStyle-<YOUR ENVIRONMENT NAME>
-    ```
-
-1. You should see some output in sdtout like `Listening at http://0.0.0.0:8080`.
-
-1. Now go back to Maputnik in your browser and click "Data Sources" in the top navigation bar. There should not be any active data sources. If you see any be sure to delete them.
-
- ![Data Sources](media/MaputnikDataSources.png)
- *Data Sources*
-
-1. We're going to add a new data source as shown below.
-
-- `Source ID`: `amazon`
-- `Source Type`: `Vector (XYZ URLs)`
-- `1st Tile URL`: `http://localhost:8080/{z}/{x}/{y}@2x.png`
-- `Min Zoom`: `0`
-- `Max Zoom`: `22`
-
- ![New Data Source](media/MaputnikNewSource.png)
- *New Data Source*
-
-1. In addition to Tiles, the type of web map we will be styling also makes use of Glyphs and Sprites. We can't use Tessera to proxy the endpoints for these, but we can however generate a signed URL for each endpoint to stick in our style descriptor JSON file.
-
-  (Optionally, we can choose to cheat and skip this step by providing some out of the box endpoints built in to Maputnik. Sprites: `https://maputnik.github.io/osm-liberty/sprites/osm-liberty` and Glyphs: `https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}`)
-
-1. If you want to download a copy of the Sprites and Glyphs your map uses we've included a helper script `downloadSpritesGlyphs.sh` :
-
-    ```bash
-    ./downloadSpritesGlyphs.sh CreateCustomMapStyle-<YOUR ENVIRONMENT NAME> Amplify-Default
-    ```
-  
-This should create a folder for `sprites` and a folder for `glyphs` with a number of options for each. [Sprites](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-sprites.html) can be either .json or .png files with an optional @2x version. [Glyphs](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-glyphs.html) are a combination of a font and a Unicode range.
-
-1. If you choose to download the map Glyphs and Sprites you'll have to serve them on a port that is not already occupied. From `tileserver/`:
-
-    ```bash
-    npx http-server . -p 8088
-    ```
-
-1. While we could start from scratch to style the map it is easier to demonstrate with a starter template taken from our map style. Click "Open" in the top navigation bar and under "Upload Style" click "Upload" and select the `example-style-descriptor.json` file included in this repo.
-
-1. This is the style descriptor that is provided by Amazon Location Service as part of your Esri Map. You can download this JSON file by making a signed request to the API endpoint, i.e.
-
-    ```bash
-
-    aws location get-map-style-descriptor --map-name CreateCustomMapStyle style-descriptor.json --profile <YOUR AWS PROFILE NAME>
-    ```
-
-1. Because we are proxying our map tiles through a local tileserver we'll need to change one line in the descriptor JSON to point to the correct endpoint. (We'll change it back later).
-
-1. Change Line 7
-  From
-
-    ```json
-
-    "tiles": ["https://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/CreateCustomMapStyle/tiles/{z}/{x}/{y}"],
-    ```
-
-    To
-
-    ```json
-
-    "tiles": ["http://localhost:8080/{z}/{x}/{y}@2x.png"],
-    ```
-
-1. If you see an `AccessDenied` error in the `tessera` terminal you may need to manually update the IAM permissions for your role/user add action `geo:GetMapTile` on resource: `arn:aws:geo:<REGION>:<ACCOUNT>:map/CreateCustomMapStyle-<YOUR ENVIRONMENT NAME>`.
-
-1. From the "*View*" dropdown let's select "*Map*"
-
-1. Now we should see a list of layers appear on the left side of the screen
-
- ![List of Layers](media/MaputnikLayers.png)
- *List of Layers*
-
-1. Let's select the `Building/fill` Layer
-
- ![Land Not ice](media/MaputnikLandNotIce.png)
- *The Land/Not ice Layer*
-
-1. Scroll down to the JSON Editor section on the left navigation panel
-
- ![JSON Editor](media/MaputnikJSONEditor.png)
- *The JSON Editor*
-
-1. Note that its fill color is `#f7f6d5`, let's change it to something funky like `#EE84D9`
-
-  ![Layer Before](media/LayerBefore.png)
-  *Layer Before*
-
-  ![Layer After](media/LayerAfter.png)
-  *Layer After*
-
-1. Now you can see how the map's style has changed a little, you play around some more by clicking on certain areas of the map and seeing which layer it corresponds. Feel free to change colors or outlines
-
-## Map Styling Tips
-
-To help you with your map styling decisions, here are some handy tips:
-
-- Learn the MapLibre style document specification <https://maplibre.org/maplibre-gl-js-docs/style-spec/>
-- Learn hexadecimal color values and pick a palette of colors
-- Add map accessibility when needed (i.e. color-blind awareness)
-- Plan for map markers and choose colors that will contrast
-- Use gradients and color transparency for greater detail
-- Reserve blue for water layers only
-- Ensure legible text values by choosing the best label background and text halo
-
-## Publishing and Using Your Custom Maputnik Map
-
-1. Once you're satisfied with the changes you've made to the map style, the next step is to export and bundle the style JSON with your frontend assets
-  
-1. On your Maputnik tab in the browser, click "Export" in the top navigation bar
-  
-1. You should save the file as `example-file-descriptor.json` and place it back in your project's `public/` directory
-  
-1. Remember to change back Line 7
- From
-
-    ```json
-
-    "tiles": ["http://localhost:8080/{z}/{x}/{y}@2x.png"],
-    ```
-
-    To
-
-    ```json
-
-    "tiles": ["https://maps.geo.us-west-2.amazonaws.com/maps/v0/maps/CreateCustomMapStyle-<ENVIRONMENT NAME>/tiles/{z}/{x}/{y}"],
-    ```
-
-1. We can change the background color of the `.map-container` selector to something like `#EE84D955` to see how the map style changes can be used to match the branding of the rest of a page. In your browser you can now refresh and see the changes you made in Maputnik show up in your own page.
-  
-   ![Changes Appear](media/ChangesAppear.png)
-   *Changes Appear*
-
-### Deployment (Optional)
-
-1. Once you are happy with the edits to the page you can add hosting and see these changes live on the web fairly easily with one additional step.
-
-1. From your terminal `cd` to the root directory and run:
-
-    ```bash
-    $ amplify add hosting
-    ? Select the plugin module to execute Amazon CloudFront and S3
-    ? Select the environment setup: DEV (S3 only with HTTP)
-    ? hosting bucket name createcustommapstyle-<YOUR ENVIRONMENT NAME>-hostingbucket
-    ? index doc for the website index.html
-    ? error doc for the website index.html
-
-    $ amplify publish
-    ✔ Successfully pulled backend environment <YOUR ENVIRONMENT> from the cloud.
-
-    Current Environment: <YOUR ENVIRONMENT NAME>
-
-    | Category | Resource name                | Operation | Provider plugin   |
-    | -------- | ---------------------------- | --------- | ----------------- |
-    | Hosting  | S3AndCloudFront              | Create    | awscloudformation |
-    | Auth     | createcustommapstyle0000000x | No Change | awscloudformation |
-    | Geo      | CreateCustomMapStyle         | No Change | awscloudformation |
-    ? Are you sure you want to continue? Yes
-    ⠴ Updating resources in the cloud. This may take a few minutes...
-    ...
-    ✔ All resources are updated in the cloud
-
-    Hosting endpoint: http://createcustommapstyle-<YOUR ENVIRONMENT NAME>-hostingbucket-<YOUR ENVIRONMENT NAME>.s3-website-us-west-2.amazonaws.com
-    ...
-    Creating an optimized production build...
-    Compiled successfully.
-    ...
-    ✔ Uploaded files successfully.
-    Your app is published successfully.
-    http://createcustommapstyle-<YOUR ENVIRONMENT NAME>-hostingbucket-<YOUR ENVIRONMENT NAME>.s3-website-us-west-2.amazonaws.com
-    ```
-
-1. Click on the link provided by Amplify CLI and you can now see and share a URL with the customized page and web map we have built in this walk-through.
-
 ## Teardown
 
-The teardown is relatively easy with the Amplify CLI here's how we can do it with two short steps
-
-1. From the root directory of your project run `amplify status` to see what stacks exist currently
-
-    ```bash
-
-    $ amplify status
-    
-    Current Environment: <YOUR ENVIRONMENT NAME>
-
-    | Category | Resource name                | Operation | Provider plugin   |
-    | -------- | ---------------------------- | --------- | ----------------- |
-    | Hosting  | S3AndCloudFront              | No Change | awscloudformation |
-    | Auth     | createcustommapstyle0000000x | No Change | awscloudformation |
-    | Geo      | CreateCustomMapStyle         | No Change | awscloudformation |
-
-    ```
-
-1. To delete everything simply run `amplify delete`
-
-    ```bash
-
-      $ amplify delete
-
-      ? Are you sure you want to continue? This CANNOT be undone. (This will delete
-      all the environments of the project from the cloud and wipe out all the loca
-      l files created by Amplify CLI) Yes
-      ⠋ Deleting resources from the cloud. This may take a few minutes...
-      Deleting env:<YOUR ENVIRONMENT NAME>
-      ✔ Project deleted in the cloud
-      Project deleted locally.
-    ```
+The teardown is relatively easy with the Amplify Console
+TODO: ADD THIS PART
 
 ## Conclusion
 
