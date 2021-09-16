@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { createMap } from "maplibre-gl-js-amplify";
 import style from './example-style-descriptor.json';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import './SamplePage.css';
 
 const SamplePage = () => {

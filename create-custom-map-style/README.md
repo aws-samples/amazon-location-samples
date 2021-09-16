@@ -33,7 +33,7 @@ The following walk through is split into 2 parts:
 
     wget https://github.com/maputnik/editor/releases/download/v1.7.0/maputnik-darwin.zip
     unzip maputnik-darwin.zip
-    chmod 755 maputnik
+    chmod +x maputnik
     ```
 
 1. Start up Maputnik
