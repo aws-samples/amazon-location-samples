@@ -2,14 +2,16 @@
 
 UX designers and web developers alike wish to have each component of a website meet the company’s branding requirements while providing a visual impact on its own. Web maps are no exception to this. They provide important visualizations for geographical data. The ability to customize is invaluable when a map is a big part of the user flow and needs to fit in with the rest of the site.
 
-With [Amazon Location Service](https://aws.amazon.com/location/), a managed AWS service for adding location data to applications, you can create a customized web map that will grab the interest of your end users and increase user engagement. At this time Location Service has two data providers, [Esri](https://aws.amazon.com/location/data-providers/esri/) and [HERE](https://aws.amazon.com/location/data-providers/here-technologies/), as well as six default map styles. So, how do you customize these map styles to meet your brand or visual design?
+With [Amazon Location Service](https://aws.amazon.com/location/), a managed AWS service for adding location data to applications, you can create a customized web map that will grab the interest of your users and increase engagement. At this time Location Service has two data providers, [Esri](https://aws.amazon.com/location/data-providers/esri/) and [HERE](https://aws.amazon.com/location/data-providers/here-technologies/), as well as six default map styles. So, how do you customize these map styles to meet your brand or visual design?
 
 This README will walk you through the process of styling an existing map using [Maputnik](https://maputnik.github.io/) to help visualize the changes in real-time. Others may prefer to use another open source tool called [Fresco](https://fresco.go-spatial.org/), however they are not required to make edits to the style descriptor. In order to style our existing map from Amazon Location Service using these tools we will also demonstrate how to run a local proxy that handles [Signature Version 4 / AWS Authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 
 The following walk through is split into 2 parts:
 
-1) [How to style an existing Map from Amazon Location Service section](#how-to-style-an-existing-map-from-amazon-location-service).
+1) [How to style an existing Map from Amazon Location Service](#how-to-style-an-existing-map-from-amazon-location-service).
 2) [How to integrate a custom map style in a React app](#how-to-integrate-a-custom-map-style-in-a-react-app)
+
+Note that the terminal commands will be Mac/Linux specific.
 
 ## Prerequisites
 
@@ -17,9 +19,9 @@ The following walk through is split into 2 parts:
 
 1. [NVM](https://github.com/nvm-sh/nvm#installing-and-updating) (installed per-user, and invoked per-shell) OR [Node.js](https://nodejs.org/en/download/)
 
-1. [AWS-CLI](https://docs.amplify.aws/lib/geo/getting-started/q/platform/js/#provisioning-resources-through-cli)
+1. [AWS-CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 
-1. [Amplify CLI](https://docs.amplify.aws/cli/start/install) (Note: If you have a local environment that uses several AWS accounts be sure to use the correct AWS CLI profile and log in to the correct account in the browser)
+1. [Amplify CLI](https://docs.amplify.aws/lib/geo/getting-started/q/platform/js/#provisioning-resources-through-cli) (Note: If you have a local environment that uses several AWS accounts be sure to use the correct AWS CLI profile and log in to the correct account in the browser)
 
 1. This walk-through uses **"Amplify-Default"** as the AWS CLI profile name and **"us-west-2"** as the AWS Region. Feel free to substitute these values.
 
@@ -35,6 +37,8 @@ The following walk through is split into 2 parts:
     unzip maputnik-darwin.zip
     chmod +x maputnik
     ```
+
+    Again this is Mac/Linux specific and while there is a `wget` command for windows, there is no `unzip` or concept of file modes.
 
 1. Start up Maputnik
 
@@ -94,7 +98,7 @@ The following walk through is split into 2 parts:
     npm i tessera tilelive-aws
     ```
 
-1. Presuming you have the standard AWS environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`) set correctly, this should be enough to get started using `tessera`. You'll need to provide the full file path to your module, so from your terminal run:
+1. Presuming you have the standard AWS environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, or `AWS_PROFILE`) set correctly, this should be enough to get started using `tessera`. You'll need to provide the full file path to your module, so from your terminal run:
 
     ```bash
 
@@ -131,7 +135,7 @@ The following walk through is split into 2 parts:
     ./downloadSpritesGlyphs.sh <YOUR AMAZON LOCATION SERVICE MAP NAME> <YOUR AWS CLI PROFILE NAME>
     ```
   
-This should create a folder for `sprites` and a folder for `glyphs` with a number of options for each. [Sprites](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-sprites.html) can be either `.json` or `.png` files with an optional `@2x` version (Retina-quality images). [Glyphs](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-glyphs.html) are a combination of a font-family and a Unicode range.
+This should create a folder for `sprites` and a folder for `glyphs` with a number of options for each. The [Sprites](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-sprites.html) endpoint can serve "Spritesheets" which consist of a paired set of `.png` and `.json` files. The `.png` file will contain all of the images and the `.json` file provides the offsets of each image within the `.png` file. These images can be used on the map for things like points of interests, highways, etc. [Glyphs](https://docs.aws.amazon.com/cli/latest/reference/location/get-map-glyphs.html) are a combination of a font-family and a Unicode range. These can be used to display place names as text on the map.
 
 1. We can start with a ready-made style template. Click "Open" in the top navigation bar and under "Upload Style" click "Upload" and select the `example-style-descriptor.json` file included in this repo.
 
@@ -468,4 +472,4 @@ To avoid incurring future charges, delete the resources used in this tutorial. I
 
 ## Conclusion
 
-Using Amazon Location Service with other AWS Services and open source tools such as Maputnik and MapLibre, you can create a fully customizable Map style specially when maps is an integral part of your application and you want to give your map a personalized touch. Now, if you have an idea about how you can achieve the map customization, you can also try it with [Fresco](https://fresco.gospatial.org/), MapBox Studio, and other open source tools for editing.
+Using Amazon Location Service with other AWS Services and open source tools such as Maputnik and MapLibre, you can create a fully customizable Map style specially when maps is an integral part of your application and you want to give your map a personalized touch. Now, if you have an idea about how you can achieve the map customization, you can also try it with [Fresco](https://fresco.gospatial.org/), Mapbox Studio, or other open source tools for editing.
