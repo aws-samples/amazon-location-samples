@@ -38,7 +38,7 @@ Note that the terminal commands will be Mac/Linux specific.
     chmod +x maputnik
     ```
 
-    Again this is Mac/Linux specific and while there is a `wget` command for windows, there is no `unzip` or concept of file modes.
+    The "Darwin" binary is Mac-specific; be sure to download the correct one for your OS.
 
 1. Start up Maputnik
 
