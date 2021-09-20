@@ -1,0 +1,87 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+Transform: AWS::Serverless-2016-10-31
+Metadata:
+  'AWS::ServerlessRepo::Application':
+    Name: AmazonLocationUDFs
+    Description: This connector enables Amazon Athena to call Amazon Location APIs with user-defined functions.
+    Author: Seth Fitzsimmons
+    SpdxLicenseId: MIT-0
+    LicenseUrl: LICENSE
+    ReadmeUrl: README.md
+    Labels:
+      - athena-federation
+      - amazon-location
+    HomePageUrl: https://github.com/aws-samples/amazon-location-samples/tree/main/athena-udfs
+    SemanticVersion: 0.1.0
+    SourceCodeUrl: https://github.com/aws-samples/amazon-location-samples/tree/main/athena-udfs
+Parameters:
+  # Until SAR supports the creation of Amazon Location resources, this resource needs to exist ahead of time
+  PlaceIndex:
+    Description: The name of an existing Amazon Location Place Index resource, configured with IntendedUse=Storage.
+    Type: String
+    AllowedPattern: ^[-._\w]{1,100}$
+  # DataSource:
+  #   Description: The data source to use when geocoding
+  #   Type: String
+  #   Default: Esri
+  #   AllowedValues:
+  #     - Esri
+  #     - Here
+  ReservedConcurrentExecutions:
+    Description: Lambda concurrency. More is not necessarily better, as functions may be rate-limited by Amazon Location.
+    Type: Number
+    Default: 10
+  LambdaFunctionName:
+    Description: The name you will give to Lambda function which executes your UDFs.
+    Default: amazon_location
+    Type: String
+    AllowedPattern: ^[a-z0-9-_]{1,64}$
+  LambdaTimeout:
+    Description: Maximum Lambda invocation runtime in seconds (1 - 900); UDF calls are handled sequentially by a shared set of invocations.
+    Default: 900
+    Type: Number
+  LambdaMemory:
+    Description: Lambda memory in MB (128 - 10240).
+    Default: 512
+    Type: Number
+Resources:
+  # PlaceIndex:
+  #   Type: AWS::Location::PlaceIndex
+  #   Properties:
+  #     DataSource: !Ref DataSource
+  #     DataSourceConfiguration:
+  #       IntendedUse: Storage
+  #     Description: Place index for use by Amazon Athena
+  #     IndexName:
+  #       Fn::Sub: ${AWS::StackName}
+  #     PricingPlan: RequestBasedUsage
+  ConnectorConfig:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Ref LambdaFunctionName
+      Handler: aws.samples.amazonlocation.AmazonLocationUDFHandler
+      ReservedConcurrentExecutions: !Ref ReservedConcurrentExecutions
+      CodeUri: ./target/athena-udfs-1.0-SNAPSHOT.jar
+      Description: This connector enables Amazon Athena to call Amazon Location APIs as UDFs.
+      Runtime: java11
+      Timeout: !Ref LambdaTimeout
+      MemorySize: !Ref LambdaMemory
+      Environment:
+        Variables:
+          PLACE_INDEX_NAME:
+            Ref: PlaceIndex
+      Policies:
+        - Statement:
+            - Action:
+                - geo:SearchPlaceIndex*
+              Effect: Allow
+              Resource:
+                - !Sub "arn:${AWS::Partition}:geo:${AWS::Region}:${AWS::AccountId}:place-index/${PlaceIndex}"
+      # Policies:
+      #   - Statement:
+      #       - Action:
+      #           - geo:SearchPlaceIndex*
+      #         Effect: Allow
+      #         Resource:
+      #           - Fn::GetAtt: [PlaceIndex, Arn]
