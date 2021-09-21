@@ -1,0 +1,26 @@
+{
+  "auth": {
+    "createcustommapstyle5982835e": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "geo": {
+    "CreateCustomMapStyle": {
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Map",
+      "mapStyle": "VectorEsriStreets",
+      "pricingPlan": "RequestBasedUsage",
+      "accessType": "AuthorizedUsers"
+    }
+  },
+  "hosting": {
+    "S3AndCloudFront": {
+      "service": "S3AndCloudFront",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}

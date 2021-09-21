@@ -1,0 +1,16 @@
+{
+  "name": "tileserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tessera": "^0.14.1",
+    "tilelive-aws": "^3.1.1"
+  }
+}
