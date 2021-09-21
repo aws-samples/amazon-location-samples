@@ -1,6 +1,14 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
-#!/bin/bash
+#!/usr/bin/env bash
+if [ -z "$1" ]; then
+  echo "Map Name not provided";
+  exit 1;
+fi
+if [ -z "$2" ]; then
+  echo "AWS Profile not provided";
+  exit 1;
+fi
 
 mkdir sprites
 mkdir glyphs

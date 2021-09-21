@@ -60,6 +60,7 @@ Note that the terminal commands will be Mac/Linux specific.
     *Empty Canvas*
 
 1. Tessera is a pluggable [map tile](https://en.wikipedia.org/wiki/Tiled_web_map) server. Using the power of the [tilelive](https://github.com/mapbox/tilelive) ecosystem, it is capable of serving and rendering map tiles from many sources. To stream data from most sources you can install the tilelive providers as npm packages. For an Amazon Location Service source we use tilelive-aws.
+
 1. From your terminal run
 
     ```bash
@@ -107,7 +108,7 @@ Note that the terminal commands will be Mac/Linux specific.
 
     You can also add this as a script to your `package.json` file to save time on subsequent invocations.
 
-1. You should see some output in sdtout like `Listening at http://0.0.0.0:8080`.
+1. You should see some output in stdout like `Listening at http://0.0.0.0:8080`.
 
 1. Now go back to Maputnik in your browser and click "Data Sources" in the top navigation bar. There should not be any active data sources. If you see any be sure to delete them.
 
@@ -129,7 +130,7 @@ Note that the terminal commands will be Mac/Linux specific.
 
 1. In addition to Tiles, the type of web map we will be styling also makes use of **Glyphs** and **Sprites**. We can't use Tessera to proxy the endpoints for these, but we can however use some out of the box endpoints built in to Maputnik. Sprites: `https://maputnik.github.io/osm-liberty/sprites/osm-liberty` and Glyphs: `https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}`)
 
-1. If you want to download a copy of the Sprites and Glyphs your Amazon Location Service Map uses we've included a helper script `downloadSpritesGlyphs.sh` :
+1. If you want to download a copy of the Sprites and Glyphs for your Amazon Location Service Map, we've included a helper script `downloadSpritesGlyphs.sh` :
 
     ```bash
     ./downloadSpritesGlyphs.sh <YOUR AMAZON LOCATION SERVICE MAP NAME> <YOUR AWS CLI PROFILE NAME>
@@ -249,7 +250,6 @@ To help you with your map styling decisions, here are some handy tips:
 
     ```bash
 
-    nvm install 15
     nvm use 15
     ```
 
@@ -472,4 +472,4 @@ To avoid incurring future charges, delete the resources used in this tutorial. I
 
 ## Conclusion
 
-Using Amazon Location Service with other AWS Services and open source tools such as Maputnik and MapLibre, you can create a fully customizable Map style specially when maps is an integral part of your application and you want to give your map a personalized touch. Now, if you have an idea about how you can achieve the map customization, you can also try it with [Fresco](https://fresco.gospatial.org/), Mapbox Studio, or other open source tools for editing.
+Using Amazon Location Service with other AWS Services and open source tools such as Maputnik and MapLibre, you can create a fully customizable Map style especially when maps are an integral part of your application and you want to give your maps a personalized touch. Now, if you have an idea about how you can achieve the map customization, you can also try it with [Fresco](https://fresco.go-spatial.org/), Mapbox Studio, or other open source tools for editing.
