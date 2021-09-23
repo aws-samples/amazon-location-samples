@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "tessera": "^0.14.1",
+    "tessera": "^0.15.0",
     "tilelive-aws": "^3.2.0"
   }
 }
