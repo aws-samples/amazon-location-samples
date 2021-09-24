@@ -5,25 +5,27 @@ import AWSCore
 import Mapbox
 import SwiftUI
 
+func configureMapbox() {
+    // Workaround for https://github.com/aws-samples/amazon-location-samples/issues/31
+    var protocolClasses = [AnyClass]()
+    protocolClasses.append(MapboxSigV4RequestInterceptor.self)
+
+    let configuration = URLSessionConfiguration.default
+    configuration.protocolClasses = protocolClasses
+    
+    MGLNetworkConfiguration.sharedManager.sessionConfiguration = configuration
+}
+
 struct MapView: UIViewRepresentable {
     @Binding var attribution: String
 
     private let mapView: MGLMapView
-    private let signingDelegate: MGLOfflineStorageDelegate
 
     init(attribution: Binding<String>) {
         let regionName = Bundle.main.object(forInfoDictionaryKey: "AWSRegion") as! String
-        let identityPoolId = Bundle.main.object(forInfoDictionaryKey: "IdentityPoolId") as! String
         let mapName = Bundle.main.object(forInfoDictionaryKey: "MapName") as! String
-
-        let region = (regionName as NSString).aws_regionTypeValue()
-
-        // MGLOfflineStorage doesn't take ownership, so this needs to be a member here
-        signingDelegate = AWSSignatureV4Delegate(region: region, identityPoolId: identityPoolId)
-
-        // register a delegate that will handle SigV4 signing
-        MGLOfflineStorage.shared.delegate = signingDelegate
-
+        configureMapbox()
+        
         mapView = MGLMapView(
             frame: .zero,
             styleURL: URL(string: "https://maps.geo.\(regionName).amazonaws.com/maps/v0/maps/\(mapName)/style-descriptor"))

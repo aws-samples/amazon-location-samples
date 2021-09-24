@@ -4,67 +4,138 @@
 import AWSCore
 import Mapbox
 
-class AWSSignatureV4Delegate : NSObject, MGLOfflineStorageDelegate {
-    private let region: AWSRegionType
-    private let identityPoolId: String
-    private let credentialsProvider: AWSCredentialsProvider
-
-    init(region: AWSRegionType, identityPoolId: String) {
-        self.region = region
-        self.identityPoolId = identityPoolId
-        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: identityPoolId)
-        super.init()
+struct MapboxConfig {
+    var identityPoolId: String {
+        Bundle.main.object(forInfoDictionaryKey: "IdentityPoolId") as! String
+    }
+    
+    var regionName: String {
+        Bundle.main.object(forInfoDictionaryKey: "AWSRegion") as! String
+    }
+    
+    var region: AWSRegionType {
+        return (regionName as NSString).aws_regionTypeValue()
+    }
+    
+    var credentialsProvider: AWSCredentialsProvider {
+        AWSCognitoCredentialsProvider(regionType: region, identityPoolId: identityPoolId)
     }
 
-    class func doubleEncode(path: String) -> String? {
-        return path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)?
-            .addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
-    }
+}
 
-    func offlineStorage(_ storage: MGLOfflineStorage, urlForResourceOf kind: MGLResourceKind, with url: URL) -> URL {
-        if url.host?.contains("amazonaws.com") != true {
-            // not an AWS URL
-            return url
+/// `MapboxSigV4RequestInterceptor` allows us to intercept and sigV4 sign network requests made by the `MapboxSDK`
+///  The interceptor is added as a protocol to the `URLSessionConfiguration` by calling `configureMapbox`
+///
+/// - note: This is a workaround for [https://github.com/aws-samples/amazon-location-samples/issues/31](https://github.com/aws-samples/amazon-location-samples/issues/31).
+/// - seealso: https://github.com/mapbox/mapbox-gl-native/issues/12026 for an explanation of `NSURLProtocol`
+/// - seealso: https://github.com/mapbox/mapbox-gl-native/pull/13886/files for usage in the Mapbox library.
+class MapboxSigV4RequestInterceptor: URLProtocol {
+    lazy var session: URLSession = {
+        let config = URLSession.shared.configuration
+        return .init(configuration: config, delegate: self, delegateQueue: nil)
+    }()
+    
+    var dataTask: URLSessionDataTask?
+    private static var mapboxConfig = MapboxConfig()
+    private static var urlPrefix: String {
+        "https://maps.geo.\(Self.mapboxConfig.regionName).amazonaws.com"
+    }
+    
+    override class func canInit(with request: URLRequest) -> Bool {
+        return canInit(with: request.url)
+    }
+    
+    override class func canInit(with task: URLSessionTask) -> Bool {
+        return canInit(with: task.currentRequest?.url)
+    }
+    
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+    
+    override func startLoading() {
+        guard let unsignedURL = request.url else {
+            return
         }
-
+        
         // URL-encode spaces, etc.
-        let keyPath = String(url.path.dropFirst())
+        let keyPath = String(unsignedURL.path.dropFirst())
         guard let percentEncodedKeyPath = keyPath.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            print("Invalid characters in path '\(keyPath)'; unsafe to sign")
-            return url
+            return assertionFailure("Invalid characters in path '\(keyPath)'; unsafe to sign")
         }
-
-        let endpoint = AWSEndpoint(region: region, serviceName: "geo", url: url)
-        let requestHeaders: [String: String] = ["host": endpoint!.hostName]
-
+        
+        guard let endpoint = AWSEndpoint(region: Self.mapboxConfig.region, serviceName: "geo", url: unsignedURL) else {
+            return assertionFailure("AWSEndpoint is nil")
+        }
+        let requestHeaders: [String: String] = ["host": endpoint.hostName]
+        
         // sign the URL
         let task = AWSSignatureV4Signer
             .generateQueryStringForSignatureV4(
-                withCredentialProvider: credentialsProvider,
+                withCredentialProvider: Self.mapboxConfig.credentialsProvider,
                 httpMethod: .GET,
                 expireDuration: 60,
-                endpoint: endpoint!,
+                endpoint: endpoint,
                 // workaround for https://github.com/aws-amplify/aws-sdk-ios/issues/3215
-                keyPath: AWSSignatureV4Delegate.doubleEncode(path: percentEncodedKeyPath),
+                keyPath: Self.doubleEncode(path: percentEncodedKeyPath),
                 requestHeaders: requestHeaders,
                 requestParameters: .none,
                 signBody: true)
         task.waitUntilFinished()
-
-        if let error = task.error as NSError? {
-            print("Error occurred: \(error)")
+        
+        guard task.error == nil else {
+            return assertionFailure("Signing error occurred: \(task.error?.localizedDescription ?? "undefined")")
         }
-
-        if let result = task.result {
-            var urlComponents = URLComponents(url: (result as URL), resolvingAgainstBaseURL: false)!
-            // re-use the original path; workaround for https://github.com/aws-amplify/aws-sdk-ios/issues/3215
-            urlComponents.path = url.path
-
-            // have Mapbox GL fetch the signed URL
-            return (urlComponents.url)!
+        
+        guard let signedURL = task.result,
+              var urlComponents = URLComponents(url: signedURL as URL, resolvingAgainstBaseURL: false) else {
+            return assertionFailure("URL unsigned, URLComponents initialization failed")
         }
+        
+        /// NB: re-use the original path; workaround for https://github.com/aws-amplify/aws-sdk-ios/issues/3215
+        urlComponents.path = unsignedURL.path
+        
+        guard let transformedUrl = urlComponents.url else {
+            return assertionFailure("URL unsigned, URLComponents.url was nil")
+        }
+        
+        let signedRequest = URLRequest(url: transformedUrl)
+        self.dataTask = self.session.dataTask(with: signedRequest)
+        self.dataTask?.resume()
+        /// NB: Prevents a retain cycle as `URLSession` strongly references `self` as a delegate
+        self.session.finishTasksAndInvalidate()
+    }
+    
+    override func stopLoading() {
+        self.dataTask?.cancel()
+        self.dataTask = nil
+    }
+    
+    static func doubleEncode(path: String) -> String? {
+        return path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)?
+            .addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
+    }
+    
+    private static func canInit(with url: URL?) -> Bool {
+        url?.absoluteString.contains(Self.urlPrefix) == true
+    }
+}
 
-        // fall back to an unsigned URL
-        return url
+extension MapboxSigV4RequestInterceptor: URLSessionDataDelegate {
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        completionHandler(.allow)
+        self.client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .allowed)
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        self.client?.urlProtocol(self, didLoad: data)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        if let error = error {
+            self.client?.urlProtocol(self, didFailWithError: error)
+        } else {
+            self.client?.urlProtocolDidFinishLoading(self)
+        }
     }
 }
