@@ -11,7 +11,7 @@
 		117741CD255A216600D4866F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117741CC255A216600D4866F /* ContentView.swift */; };
 		117741CF255A216900D4866F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 117741CE255A216900D4866F /* Assets.xcassets */; };
 		117741D2255A216900D4866F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 117741D1255A216900D4866F /* Preview Assets.xcassets */; };
-		117741E0255A2B9200D4866F /* AWSSignatureV4Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117741DF255A2B9200D4866F /* AWSSignatureV4Delegate.swift */; };
+		117741E0255A2B9200D4866F /* MapLibreSigV4RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117741DF255A2B9200D4866F /* MapLibreSigV4RequestInterceptor.swift */; };
 		117741E3255A2D5200D4866F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117741E2255A2D5200D4866F /* MapView.swift */; };
 		B1BDC68445B18AD800482856 /* Pods_Amazon_Location_Service_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5270A22DC16E59A33EA1537 /* Pods_Amazon_Location_Service_Demo.framework */; };
 		D7CB7CF625C3412500F63D73 /* Mapbox in Frameworks */ = {isa = PBXBuildFile; productRef = D7CB7CF525C3412500F63D73 /* Mapbox */; };
@@ -24,7 +24,7 @@
 		117741CE255A216900D4866F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		117741D1255A216900D4866F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		117741D3255A216900D4866F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		117741DF255A2B9200D4866F /* AWSSignatureV4Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSSignatureV4Delegate.swift; sourceTree = "<group>"; };
+		117741DF255A2B9200D4866F /* MapLibreSigV4RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLibreSigV4RequestInterceptor.swift; sourceTree = "<group>"; };
 		117741E2255A2D5200D4866F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		178826E8B8440B0C579C1E6D /* Pods-Amazon Location Service Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amazon Location Service Demo.debug.xcconfig"; path = "Target Support Files/Pods-Amazon Location Service Demo/Pods-Amazon Location Service Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		A5270A22DC16E59A33EA1537 /* Pods_Amazon_Location_Service_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Amazon_Location_Service_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,7 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				117741CA255A216600D4866F /* Amazon_Location_Service_DemoApp.swift */,
-				117741DF255A2B9200D4866F /* AWSSignatureV4Delegate.swift */,
+				117741DF255A2B9200D4866F /* MapLibreSigV4RequestInterceptor.swift */,
 				117741CC255A216600D4866F /* ContentView.swift */,
 				117741E2255A2D5200D4866F /* MapView.swift */,
 				117741CE255A216900D4866F /* Assets.xcassets */,
@@ -220,7 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				117741E0255A2B9200D4866F /* AWSSignatureV4Delegate.swift in Sources */,
+				117741E0255A2B9200D4866F /* MapLibreSigV4RequestInterceptor.swift in Sources */,
 				117741E3255A2D5200D4866F /* MapView.swift in Sources */,
 				117741CD255A216600D4866F /* ContentView.swift in Sources */,
 				117741CB255A216600D4866F /* Amazon_Location_Service_DemoApp.swift in Sources */,

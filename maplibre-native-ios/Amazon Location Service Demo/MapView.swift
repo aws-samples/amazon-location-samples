@@ -5,10 +5,11 @@ import AWSCore
 import Mapbox
 import SwiftUI
 
-func configureMapbox() {
-    // Workaround for https://github.com/aws-samples/amazon-location-samples/issues/31
+
+func configureMapLibre() {
+    // Fix for https://github.com/aws-samples/amazon-location-samples/issues/31
     var protocolClasses = [AnyClass]()
-    protocolClasses.append(MapboxSigV4RequestInterceptor.self)
+    protocolClasses.append(MapLibreSigV4RequestInterceptor.self)
 
     let configuration = URLSessionConfiguration.default
     configuration.protocolClasses = protocolClasses
@@ -24,7 +25,7 @@ struct MapView: UIViewRepresentable {
     init(attribution: Binding<String>) {
         let regionName = Bundle.main.object(forInfoDictionaryKey: "AWSRegion") as! String
         let mapName = Bundle.main.object(forInfoDictionaryKey: "MapName") as! String
-        configureMapbox()
+        configureMapLibre()
         
         mapView = MGLMapView(
             frame: .zero,
