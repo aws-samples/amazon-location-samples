@@ -31,6 +31,7 @@ with Amazon Location Service.
 * [Geocode address data in Amazon Redshift](geocode-udf-lambda-redshift)
 * [React Native Mobile Tracking App](https://github.com/aws-samples/amazon-location-service-mobile-tracker-react)
 * [Create a custom map style with Amazon Location Service](create-custom-map-style/)
+* [Amazon Redshift User Defined Functions to call Amazon Location Service APIs](https://github.com/aws-samples/amazon-redshift-location-user-defined-functions)
 
 ## Security
 
