@@ -28,7 +28,7 @@ EXTERNAL FUNCTION search_place_index_for_text(input VARCHAR)
     region VARCHAR,
     country VARCHAR,
     geom VARCHAR)
-  LAMBDA 'amazon_location' -- change this if neccessary to reflect LambdaFunctionName
+  LAMBDA 'amazon_location' -- change this if necessary to reflect LambdaFunctionName
 WITH addresses AS (
   -- substitute data from an Athena table here
   SELECT * FROM (VALUES '410 Terry Ave N, Seattle, WA') AS addresses(address)
@@ -75,7 +75,7 @@ EXTERNAL FUNCTION search_place_index_for_position(x DOUBLE, y DOUBLE)
     region VARCHAR,
     country VARCHAR,
     geom VARCHAR)
-  LAMBDA 'amazon_location' -- change this if neccessary to reflect LambdaFunctionName
+  LAMBDA 'amazon_location' -- change this if necessary to reflect LambdaFunctionName
 WITH positions AS (
   -- substitute data from an Athena table here
   SELECT * FROM (VALUES ROW(-122.46729, 37.80575)) AS positions(x, y)
