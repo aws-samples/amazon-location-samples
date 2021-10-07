@@ -4,9 +4,17 @@ This is a set of _Federated Scalar Batch Functions_ for [Amazon Location Service
 
 ## Deploying
 
-These UDFs can be [deployed into your account using the AWS Serverless Application Repository](https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-west-2:104110588769:applications~AmazonLocationUDFs) (this is a temporary link, available in `us-west-2` only).
+These UDFs can be deployed into your account using the AWS Serverless Application Repository in the following regions:
 
-At present, this application requires an existing Amazon Location [Place Index](https://docs.aws.amazon.com/location-places/latest/APIReference/API_CreatePlaceIndex.html) resource, configured with `IntendedUse: "Storage"` to comply with [AWS Service Terms](https://aws.amazon.com/service-terms/) for Amazon Location. The name of this resource is provided to UDF implementation via the `PLACE_INDEX_NAME` environment variable.
+- [US East (N. Virginia) (`us-east-1`)](https://console.aws.amazon.com/serverlessrepo/home?region=us-east-1#/published-applications/arn:aws:serverlessrepo:us-east-1:003883091127:applications~AmazonLocationUDFs)
+- [US East (Ohio) (`us-east-2`)](https://us-east-2.console.aws.amazon.com/serverlessrepo/home?region=us-east-2#/published-applications/arn:aws:serverlessrepo:us-east-2:003883091127:applications~AmazonLocationUDFs)
+- [US West (Oregon) (`us-west-2`)](https://us-west-2.console.aws.amazon.com/serverlessrepo/home?region=us-west-2#/published-applications/arn:aws:serverlessrepo:us-west-2:003883091127:applications~AmazonLocationUDFs)
+- [Asia Pacific (Singapore) (`ap-southeast-1`)](https://ap-southeast-1.console.aws.amazon.com/serverlessrepo/home?region=ap-southeast-1#/published-applications/arn:aws:serverlessrepo:ap-southeast-1:003883091127:applications~AmazonLocationUDFs)
+- [Asia Pacific (Sydney) (`ap-southeast-2`)](https://ap-southeast-2.console.aws.amazon.com/serverlessrepo/home?region=ap-southeast-2#/published-applications/arn:aws:serverlessrepo:ap-southeast-2:003883091127:applications~AmazonLocationUDFs)
+- [Asia Pacific (Tokyo) (`ap-northeast-1`)](https://ap-northeast-1.console.aws.amazon.com/serverlessrepo/home?region=ap-northeast-1#/published-applications/arn:aws:serverlessrepo:ap-northeast-1:003883091127:applications~AmazonLocationUDFs)
+- [Europe (Frankfurt) (`eu-central-1`)](https://eu-central-1.console.aws.amazon.com/serverlessrepo/home?region=eu-central-1#/published-applications/arn:aws:serverlessrepo:eu-central-1:003883091127:applications~AmazonLocationUDFs)
+- [Europe (Ireland) (`eu-west-1`)](https://eu-west-1.console.aws.amazon.com/serverlessrepo/home?region=eu-west-1#/published-applications/arn:aws:serverlessrepo:eu-west-1:003883091127:applications~AmazonLocationUDFs)
+- [Europe (Stockholm) (`eu-north-1`)](https://eu-north-1.console.aws.amazon.com/serverlessrepo/home?region=eu-north-1#/published-applications/arn:aws:serverlessrepo:eu-north-1:003883091127:applications~AmazonLocationUDFs)
 
 ## Querying
 
