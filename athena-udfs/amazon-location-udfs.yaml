@@ -17,7 +17,7 @@ Metadata:
     SourceCodeUrl: https://github.com/aws-samples/amazon-location-samples/tree/main/athena-udfs
 Parameters:
   DataSource:
-    Description: The data source to use when geocoding
+    Description: The data source to use when geocoding ("Esri" or "Here")
     Type: String
     Default: Esri
     AllowedValues:
