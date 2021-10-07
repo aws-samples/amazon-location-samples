@@ -98,11 +98,30 @@ FROM rsp
 
 ## Development / Publishing
 
-To publish your own adaptions to the Serverless Application Repository as a private application, run [`publish.sh`](https://github.com/awslabs/aws-athena-query-federation/blob/master/tools/publish.sh) (part of the [`aws-athena-query-federation`](https://github.com/awslabs/aws-athena-query-federation) repository):
+To publish your own adaptions to the Serverless Application Repository as a private application, run the following:
 
 ```bash
-aws s3 mb s3://<bucket> --region <region> # create a bucket if necessary
-/path/to/aws-athena-query-federation/tools/publish.sh <bucket> amazon-location-udfs <region>
+# create a bucket if necessary and ensure that it has an appropriate bucket policy, similar to the one below
+aws s3 mb s3://<bucket> --region <region>
+AWS_REGION=<region> S3_BUCKET=<bucket> make publish
+```
+
+`<bucket>` must be readable by the Serverless Application Repository. This can be achieved by applying the following policy to the bucket:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "serverlessrepo.amazonaws.com"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::<bucket>/*"
+    }
+  ]
+}
 ```
 
 Once this runs successfully, you'll be able to view the (private) Serverless Application Repository entry for this application and deploy it.
