@@ -1,6 +1,6 @@
 # Amazon Location Athena UDFs
 
-This is a set of _Federated Scalar Batch Functions_ for [Amazon Location Service](https://aws.amazon.com/location/) [Amazon Athena](https://aws.amazon.com/athena/) using the [Athena Query Federation SDK](https://github.com/awslabs/aws-athena-query-federation). These User-Defined Functions (UDFs) allow you to geocode and reverse geocode data accessible to Athena from the comfort of SQL.
+This is a set of _Federated Scalar Batch Functions_ for [Amazon Location Service](https://aws.amazon.com/location/) [Amazon Athena](https://aws.amazon.com/athena/) using the [Athena Query Federation SDK](https://github.com/awslabs/aws-athena-query-federation). These user-defined functions (UDFs) allow you to geocode and reverse geocode data accessible to Athena from the comfort of SQL.
 
 ## Deploying
 
@@ -15,7 +15,7 @@ At present, this application requires an existing Amazon Location [Place Index](
 The following SQL statement demonstrates how to convert textual addresses into coordinates using [`SearchPlaceIndexForText`](https://docs.aws.amazon.com/location-places/latest/APIReference/API_SearchPlaceIndexForText.html). In addition to returning a position, it will decompose the resulting address into components.
 
 ```sql
-USING 
+USING
 -- use alternate function signatures shown below to provide additional parameters
 EXTERNAL FUNCTION search_place_index_for_text(input VARCHAR)
   RETURNS ROW(
@@ -63,7 +63,7 @@ EXTERNAL FUNCTION search_place_index_for_text(input VARCHAR, filter_min_x DOUBLE
 The following SQL statement demonstrates how to convert coordinates into addresses using [`SearchPlaceIndexForPosition`](https://docs.aws.amazon.com/location-places/latest/APIReference/API_SearchPlaceIndexForText.html).
 
 ```sql
-USING 
+USING
 EXTERNAL FUNCTION search_place_index_for_position(x DOUBLE, y DOUBLE)
   RETURNS ROW(
     label VARCHAR,
