@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-package aws.location.demo.mapboxgl
+package aws.location.demo.maplibre
 
 import android.os.Bundle
 import android.widget.TextView
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             Regions.fromName(identityPoolId.split(":").first())
         )
 
-        // initialize Mapbox GL
+        // initialize MapLibre
         Mapbox.getInstance(this, null)
         HttpRequestUtil.setOkHttpClient(
             OkHttpClient.Builder()
