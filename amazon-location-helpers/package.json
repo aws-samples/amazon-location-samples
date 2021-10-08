@@ -19,6 +19,7 @@
     "@aws-amplify/core": "^4.0.3",
     "@aws-sdk/client-cognito-identity": "^3.6.1",
     "@aws-sdk/credential-provider-cognito-identity": "^3.6.1",
+    "@aws-sdk/types": "^3.36.0",
     "@types/maplibre-gl": "^1.13.1"
   },
   "devDependencies": {
