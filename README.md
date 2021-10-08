@@ -27,11 +27,12 @@ with Amazon Location Service.
 * [Location Tracking with AWS Amplify on Android](tracking-android/)
 * [Location Tracking with AWS Amplify on iOS](tracking-ios/)
 * [Asset tracking with Amazon Location, Amplify, and IoT Core](maplibre-js-react-iot-asset-tracking/)
-* [Geocode address data in Amazon Aurora](geocode-udf-lambda-aurora)
-* [Geocode address data in Amazon Redshift](geocode-udf-lambda-redshift)
+* [Geocode address data in Amazon Aurora](geocode-udf-lambda-aurora/)
+* [Geocode address data in Amazon Redshift](geocode-udf-lambda-redshift/)
 * [React Native Mobile Tracking App](https://github.com/aws-samples/amazon-location-service-mobile-tracker-react)
 * [Create a custom map style with Amazon Location Service](create-custom-map-style/)
 * [Amazon Redshift User Defined Functions to call Amazon Location Service APIs](https://github.com/aws-samples/amazon-redshift-location-user-defined-functions)
+* [Amazon Location UDFs for Athena](athena-udfs/)
 
 ## Security
 
