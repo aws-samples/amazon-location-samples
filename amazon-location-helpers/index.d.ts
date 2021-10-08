@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { Credentials } from "@aws-sdk/client-cognito-identity";
+import { Credentials } from "@aws-sdk/types";
 import mapboxgl from "maplibre-gl";
 
 interface Config {
