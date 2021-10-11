@@ -20,6 +20,7 @@ with Amazon Location Service.
 * [Using MapLibre GL JS with Amazon Location Service](maplibre-gl-js/)
 * [Using MapLibre GL JS with Amazon Location Service and AWS Amplify](maplibre-gl-js-amplify/)
 * [Using MapLibre GL JS and React with Amazon Location Service](maplibre-gl-js-react/)
+* [Using `react-map-gl` with Amazon Location Service and AWS Amplify](react-map-gl-amplify/)
 * [Using Tangram with Amazon Location Service](tangram-js/)
 * [Using MapLibre Native for Android with Amazon Location Service](maplibre-native-android/)
 * [Using MapLibre Native for iOS with Amazon Location Service](maplibre-native-ios/)
