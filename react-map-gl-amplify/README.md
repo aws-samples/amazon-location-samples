@@ -14,7 +14,7 @@ See [`package.json`](package.json#L6-L14).
 
 ## Getting started
 
-1. Install the Amplify CLI: `npm i -g @aws-amplify/cli`
+1. Install the Amplify CLI: `npm install -g @aws-amplify/cli`
 1. Install project dependencies: `npm install`
 1. Create a new Amplify project environment: `amplify init`
 1. Create Auth and Geo resources: `amplify push`
