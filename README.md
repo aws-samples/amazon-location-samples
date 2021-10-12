@@ -13,13 +13,19 @@ Guide](https://docs.aws.amazon.com/location/latest/developerguide).
 library that streamlines the use of [MapLibre GL JS](https://maplibre.org/maplibre-gl-js-docs/api/)
 with Amazon Location Service.
 
-[Amazon Aurora UDFs for Amazon Location Service](aurora-udfs/) is a set of [AWS Lambda and user-defined functions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/PostgreSQL-Lambda.html) for [Amazon Aurora PostgreSQL](https://aws.amazon.com/rds/aurora/postgresql-features/) that enable querying [Amazon Location Service](https://aws.amazon.com/location/) using SQL. These facilitate cleaning, validating, and enriching data in place.
+[Amazon Aurora UDFs for Amazon Location Service](aurora-udfs/) is a set of [AWS Lambda and
+user-defined
+functions](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/PostgreSQL-Lambda.html) for
+[Amazon Aurora PostgreSQL](https://aws.amazon.com/rds/aurora/postgresql-features/) that enable
+querying [Amazon Location Service](https://aws.amazon.com/location/) using SQL. These facilitate
+cleaning, validating, and enriching data in place.
 
 ## Sample Applications
 
 * [Using MapLibre GL JS with Amazon Location Service](maplibre-gl-js/)
 * [Using MapLibre GL JS with Amazon Location Service and AWS Amplify](maplibre-gl-js-amplify/)
-* [Using MapLibre GL JS and React with Amazon Location Service](maplibre-gl-js-react/)
+* [Using MapLibre GL JS with Amazon Location Service in a React application](maplibre-gl-js-react/)
+* [Using MapLibre GL JS with Amazon Location Service and AWS Amplify in a React application](maplibre-gl-js-react-amplify/)
 * [Using `react-map-gl` with Amazon Location Service and AWS Amplify](react-map-gl-amplify/)
 * [Using Tangram with Amazon Location Service](tangram-js/)
 * [Using MapLibre Native for Android with Amazon Location Service](maplibre-native-android/)

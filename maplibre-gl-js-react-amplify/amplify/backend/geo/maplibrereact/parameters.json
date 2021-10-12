@@ -1,0 +1,12 @@
+{
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "mapName": "maplibrereact",
+  "mapStyle": "VectorEsriStreets",
+  "pricingPlan": "RequestBasedUsage",
+  "isDefault": true
+}
