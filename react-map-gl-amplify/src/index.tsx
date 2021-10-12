@@ -21,8 +21,6 @@ import { TransformRequestFunction } from "maplibre-gl";
 
 // initialize Amplify (auth, etc.)
 Amplify.configure(awsconfig);
-// initialize Amplify Geo
-Geo.configure(awsconfig);
 
 const App = () => {
   const [credentials, setCredentials] = useState<ICredentials>();
