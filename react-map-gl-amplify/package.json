@@ -4,8 +4,7 @@
   "private": true,
   "license": "MIT-0",
   "dependencies": {
-    "@aws-amplify/geo": "^1.1.2",
-    "aws-amplify": "^3.4.3",
+    "aws-amplify": "^4.3.2",
     "maplibre-gl": "^1.15.2",
     "maplibre-gl-js-amplify": "^1.1.0",
     "react": "^17.0.1",
