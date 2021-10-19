@@ -50,12 +50,8 @@ class AWSSignatureV4Delegate : NSObject, MGLOfflineStorageDelegate {
         }
 
         if let result = task.result {
-            var urlComponents = URLComponents(url: (result as URL), resolvingAgainstBaseURL: false)!
-            // re-use the original path; workaround for https://github.com/aws-amplify/aws-sdk-ios/issues/3215
-            urlComponents.path = url.path
-
-            // have Mapbox GL fetch the signed URL
-            return (urlComponents.url)!
+            // have MapLibre fetch the signed URL
+            return result as URL
         }
 
         // fall back to an unsigned URL
