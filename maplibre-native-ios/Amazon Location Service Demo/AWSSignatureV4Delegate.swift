@@ -16,11 +16,6 @@ class AWSSignatureV4Delegate : NSObject, MGLOfflineStorageDelegate {
         super.init()
     }
 
-    class func doubleEncode(path: String) -> String? {
-        return path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)?
-            .addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
-    }
-
     func offlineStorage(_ storage: MGLOfflineStorage, urlForResourceOf kind: MGLResourceKind, with url: URL) -> URL {
         if url.host?.contains("amazonaws.com") != true {
             // not an AWS URL
@@ -44,8 +39,7 @@ class AWSSignatureV4Delegate : NSObject, MGLOfflineStorageDelegate {
                 httpMethod: .GET,
                 expireDuration: 60,
                 endpoint: endpoint!,
-                // workaround for https://github.com/aws-amplify/aws-sdk-ios/issues/3215
-                keyPath: AWSSignatureV4Delegate.doubleEncode(path: percentEncodedKeyPath),
+                keyPath: percentEncodedKeyPath,
                 requestHeaders: requestHeaders,
                 requestParameters: .none,
                 signBody: true)
