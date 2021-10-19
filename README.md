@@ -22,25 +22,37 @@ cleaning, validating, and enriching data in place.
 
 ## Sample Applications
 
-* [Using MapLibre GL JS with Amazon Location Service](maplibre-gl-js/)
-* [Using MapLibre GL JS with Amazon Location Service and AWS Amplify](maplibre-gl-js-amplify/)
-* [Using MapLibre GL JS with Amazon Location Service in a React application](maplibre-gl-js-react/)
-* [Using MapLibre GL JS with Amazon Location Service and AWS Amplify in a React application](maplibre-gl-js-react-amplify/)
-* [Using `react-map-gl` with Amazon Location Service and AWS Amplify](react-map-gl-amplify/)
-* [Using Tangram with Amazon Location Service](tangram-js/)
-* [Using MapLibre Native for Android with Amazon Location Service](maplibre-native-android/)
-* [Using MapLibre Native for iOS with Amazon Location Service](maplibre-native-ios/)
-* [Using Tangram ES for Android with Amazon Location Service](tangram-es-android/)
-* [Using Tangram ES for iOS with Amazon Location Service](tangram-es-ios/)
-* [Location Tracking with AWS Amplify on Android](tracking-android/)
-* [Location Tracking with AWS Amplify on iOS](tracking-ios/)
-* [Asset tracking with Amazon Location, Amplify, and IoT Core](maplibre-js-react-iot-asset-tracking/)
-* [Geocode address data in Amazon Aurora](geocode-udf-lambda-aurora/)
-* [Geocode address data in Amazon Redshift](geocode-udf-lambda-redshift/)
-* [React Native Mobile Tracking App](https://github.com/aws-samples/amazon-location-service-mobile-tracker-react)
+### Maps / MapLibre
+
+* [Using MapLibre GL JS with Amazon Location Service](maplibre-gl-js/) `#javascript`
+* [Using MapLibre GL JS with Amazon Location Service and AWS Amplify](maplibre-gl-js-amplify/) `#javascript` `#amplify`
+* [Using MapLibre GL JS with Amazon Location Service in a React application](maplibre-gl-js-react/) `#javascript` `#react`
+* [Using MapLibre GL JS with Amazon Location Service and AWS Amplify in a React application](maplibre-gl-js-react-amplify/) `#javascript` `#react` `#amplify`
+* [Using `react-map-gl` with Amazon Location Service and AWS Amplify](react-map-gl-amplify/) `#javascript` `#react` `#amplify`
+* [Using MapLibre Native for Android with Amazon Location Service](maplibre-native-android/) `#android`
+* [Using MapLibre Native for iOS with Amazon Location Service](maplibre-native-ios/) `#ios`
 * [Create a custom map style with Amazon Location Service](create-custom-map-style/)
-* [Amazon Redshift User Defined Functions to call Amazon Location Service APIs](https://github.com/aws-samples/amazon-redshift-location-user-defined-functions)
-* [Amazon Location UDFs for Athena](athena-udfs/)
+
+### Maps / Tangram
+
+* [Using Tangram with Amazon Location Service](tangram-js/) `#javascript`
+* [Using Tangram ES for Android with Amazon Location Service](tangram-es-android/) `#android`
+* [Using Tangram ES for iOS with Amazon Location Service](tangram-es-ios/) `#ios`
+
+### Places
+
+* [Geocode address data in Amazon Aurora](geocode-udf-lambda-aurora/) `#aurora`
+* [Geocode address data in Amazon Redshift](geocode-udf-lambda-redshift/) `#redshift`
+* [Amazon Redshift User Defined Functions to call Amazon Location Service APIs](https://github.com/aws-samples/amazon-redshift-location-user-defined-functions) `#redshift`
+* [Amazon Location UDFs for Athena](athena-udfs/) `#athena`
+
+### Tracking
+
+* [Location Tracking with AWS Amplify on Android](tracking-android/) `#android` `#amplify`
+* [Location Tracking with AWS Amplify on iOS](tracking-ios/) `#ios` `#amplify`
+* [Asset tracking with Amazon Location, Amplify, and IoT Core](maplibre-js-react-iot-asset-tracking/) `#javascript` `#react` `#amplify` `#iot`
+* [React Native Mobile Tracking App](https://github.com/aws-samples/amazon-location-service-mobile-tracker-react) `#javascript` `#react-native`
+* [Amazon Location Service GeoTrack Vue.js](https://github.com/aws-samples/amazon-location-service-geotrack-vuejs) `#javascript` `#vue.js`
 
 ## Security
 
