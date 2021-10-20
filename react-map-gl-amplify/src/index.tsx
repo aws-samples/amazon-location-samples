@@ -44,20 +44,16 @@ const App = () => {
 
   // create a new transformRequest function whenever the credentials change
   useEffect(() => {
-    const makeRequestTransformer = async () => {
-      if (credentials != null) {
-        const { transformRequest } = new AmplifyMapLibreRequest(
-          credentials,
-          (Geo.getDefaultMap() as AmazonLocationServiceMapStyle).region
-        );
+    if (credentials != null) {
+      const { transformRequest } = new AmplifyMapLibreRequest(
+        credentials,
+        (Geo.getDefaultMap() as AmazonLocationServiceMapStyle).region
+      );
 
-        // wrap the new value in an anonymous function to prevent React from recognizing it as a
-        // function and immediately calling it
-        setRequestTransformer(() => transformRequest);
-      }
-    };
-
-    makeRequestTransformer();
+      // wrap the new value in an anonymous function to prevent React from recognizing it as a
+      // function and immediately calling it
+      setRequestTransformer(() => transformRequest);
+    }
   }, [credentials]);
 
   return (
