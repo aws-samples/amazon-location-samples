@@ -28,6 +28,7 @@ cleaning, validating, and enriching data in place.
 * [Using MapLibre GL JS with Amazon Location Service and AWS Amplify](maplibre-gl-js-amplify/) `#javascript` `#amplify`
 * [Using MapLibre GL JS with Amazon Location Service in a React application](maplibre-gl-js-react/) `#javascript` `#react`
 * [Using MapLibre GL JS with Amazon Location Service and AWS Amplify in a React application](maplibre-gl-js-react-amplify/) `#javascript` `#react` `#amplify`
+* [Using MapLibre GL JS with Amazon Location Service and AWS Amplify in a Create React App application](https://github.com/aws-amplify/amplify-js-samples/tree/main/samples/react/geo/display-map) `#javascript` `#react` `#amplify`
 * [Using `react-map-gl` with Amazon Location Service and AWS Amplify](react-map-gl-amplify/) `#javascript` `#react` `#amplify`
 * [Using MapLibre Native for Android with Amazon Location Service](maplibre-native-android/) `#android`
 * [Using MapLibre Native for iOS with Amazon Location Service](maplibre-native-ios/) `#ios`
