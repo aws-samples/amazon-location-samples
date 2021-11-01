@@ -9,6 +9,12 @@
   <version>1.0-SNAPSHOT</version>
   <name>athena-udfs</name>
 
+  <licenses>
+    <license>
+      <name>MIT-0</name>
+    </license>
+  </licenses>
+
   <properties>
     <aws-athena-federation-sdk.version>2021.37.1</aws-athena-federation-sdk.version>
     <maven.compiler.source>11</maven.compiler.source>
