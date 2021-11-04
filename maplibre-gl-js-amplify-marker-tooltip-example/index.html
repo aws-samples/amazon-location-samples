@@ -1,0 +1,125 @@
+<!-- Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved. -->
+<!-- SPDX-License-Identifier: MIT-0 -->
+<html>
+
+<head>
+  <link href="https://cdn.amplify.aws/packages/maplibre-gl/1.15.2/maplibre-gl.css" rel="stylesheet"
+    integrity="sha384-DrPVD9GufrxGb7kWwRv0CywpXTmfvbKOZ5i5pN7urmIThew0zXKTME+gutUgtpeD" crossorigin="anonymous"
+    referrerpolicy="no-referrer">
+  </link>
+  <script src="https://cdn.amplify.aws/packages/maplibre-gl/1.15.2/maplibre-gl.js"
+    integrity="sha384-rwYfkmAOpciZS2bDuwZ/Xa/Gog6jXem8D/whm3wnsZSVFemDDlprcUXHnDDUcrNU" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.amplify.aws/packages/core/4.3.0/aws-amplify-core.min.js"
+    integrity="sha384-7Oh+5w0l7XGyYvSqbKi2Q7SA5K640V5nyW2/LEbevDQEV1HMJqJLA1A00z2hu8fJ" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.amplify.aws/packages/auth/4.3.8/aws-amplify-auth.min.js"
+    integrity="sha384-jfkXCEfYyVmDXYKlgWNwv54xRaZgk14m7sjeb2jLVBtUXCD2p+WU8YZ2mPZ9Xbdw" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.amplify.aws/packages/geo/1.1.0/aws-amplify-geo.min.js"
+    integrity="sha384-TFMTyWuCbiptXTzvOgzJbV8TPUupG1rA1AVrznAhCSpXTIdGw82bGd8RTk5rr3nP" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.amplify.aws/packages/maplibre-gl-js-amplify/1.1.0/maplibre-gl-js-amplify.umd.min.js"
+    integrity="sha384-7/RxWonKW1nM9zCKiwU9x6bkQTjldosg0D1vZYm0Zj+K/vUSnA3sOMhlRRWAtHPi" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    #map {
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map" />
+  <script type="module">
+    const { Amplify } = aws_amplify_core;
+    const { Geo } = aws_amplify_geo;
+    const { createMap } = AmplifyMapLibre;
+
+    const identityPoolId = "<identity pool ID>";
+    const region = "<region>";
+    const mapName = "<map name>";
+    const placeIndexName = "<place index name";
+
+    Amplify.configure({
+      Auth: {
+        identityPoolId,
+        region, // may differ from the region containing your Map resource
+      },
+      geo: {
+        AmazonLocationService: {
+          maps: {
+            items: {
+              [mapName]: {
+                style: "Default style"
+              },
+            },
+            default: mapName,
+          },
+          search_indices: {
+            items: [
+              placeIndexName
+            ],
+            default: placeIndexName
+          },
+          region,
+        },
+      }
+    });
+
+    async function initializeMap() {
+      const map = await createMap(
+        {
+          container: "map",
+          center: [-123.1187, 49.2819], // initial map center point
+          zoom: 10, // initial map zoom
+          hash: true,
+        }
+      );
+
+      map.addControl(new maplibregl.NavigationControl(), "top-left");
+
+      // Initialize one marker and one popup
+      const marker = new maplibregl.Marker();
+      const popup = new maplibregl.Popup({ offset: 35 });
+
+      // Set popup event handler
+      popup.on('close', () => {
+        marker.remove();
+      });
+
+      // Set map event handler
+      map.on('click', async (event) => {
+        const { lngLat } = event;
+
+        // Remove existing marker & popup if any
+        if (marker) marker.remove();
+        if (popup) popup.remove();
+
+        try {
+          // Get place details
+          const point = await Geo.searchByCoordinates([lngLat.lng, lngLat.lat]);
+
+          // set popup position and text & add it to the map
+          popup.setLngLat([point.geometry?.point[0], point.geometry?.point[1]])
+            .setText(point.label)
+            .addTo(map);
+
+          // set marker coords & add it to the map
+          marker.setLngLat([point.geometry?.point[0], point.geometry?.point[1]])
+            .addTo(map);
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    }
+
+    initializeMap();
+  </script>
+</body>
+
+</html>
