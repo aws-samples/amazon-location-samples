@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#loading-overlay {
+  width: 100vw;
+  height: calc(100vh - theme(height.12));
+}
+
+#marker-toast {
+  left: calc(50vw - calc(theme(width.80) / 2));
+}
+
+#routing-menu {
+  top: calc(theme(height.12) + 10px);
+}

@@ -1,0 +1,82 @@
+{
+  "Parameters": {
+    "env": {
+      "Type": "String"
+    },
+    "unauthRoleName": {
+      "Type": "String"
+    },
+    "geomap040482c1Name": {
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "RouteCalculator": {
+      "Type": "AWS::Location::RouteCalculator",
+      "Properties": {
+        "CalculatorName": {
+          "Fn::Sub": [
+            "RouteCalculator-${suffix}",
+            {
+              "suffix": {
+                "Ref": "geomap040482c1Name"
+              }
+            }
+          ]
+        },
+        "DataSource": "Here",
+        "Description": {
+          "Fn::Sub": [
+            "Route Calculator created as part of Stack ${StackName}",
+            {
+              "StackName": {
+                "Ref": "AWS::StackName"
+              }
+            }
+          ]
+        },
+        "PricingPlan": "RequestBasedUsage"
+      }
+    },
+    "RoleCalculatorIAMPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "geo:CalculateRoute"
+              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "RouteCalculator",
+                  "CalculatorArn"
+                ]
+              }
+            }
+          ]
+        },
+        "PolicyName": {
+          "Fn::Sub": [
+            "RouteCalculator-${StackName}-${Env}-Policy",
+            {
+              "Env": {
+                "Ref": "env"
+              },
+              "StackName": {
+                "Ref": "AWS::StackName"
+              }
+            }
+          ]
+        },
+        "Roles": [
+          {
+            "Ref": "unauthRoleName"
+          }
+        ]
+      }
+    }
+  }
+}

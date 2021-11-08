@@ -1,0 +1,12 @@
+{
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "mapName": "map040482c1",
+  "mapStyle": "VectorHereBerlin",
+  "pricingPlan": "RequestBasedUsage",
+  "isDefault": true
+}
