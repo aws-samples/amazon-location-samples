@@ -13,6 +13,7 @@ const Icon = memo(() => {
       height={32}
       viewBox="0 0 24 24"
       className={`fill-current text-red-600`}
+      style={{ stroke: "#000", strokeWidth: 1.5 }}
     >
       <path d={ICON} />
     </svg>
