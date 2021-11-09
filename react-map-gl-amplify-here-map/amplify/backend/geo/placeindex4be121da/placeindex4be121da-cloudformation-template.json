@@ -1,0 +1,111 @@
+{
+  "Parameters": {
+    "authRoleName": {
+      "Type": "String"
+    },
+    "unauthRoleName": {
+      "Type": "String"
+    },
+    "indexName": {
+      "Type": "String"
+    },
+    "dataProvider": {
+      "Type": "String"
+    },
+    "dataSourceIntendedUse": {
+      "Type": "String"
+    },
+    "pricingPlan": {
+      "Type": "String"
+    },
+    "env": {
+      "Type": "String"
+    },
+    "isDefault": {
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "PlaceIndex": {
+      "Type": "AWS::Location::PlaceIndex",
+      "Properties": {
+        "DataSource": {
+          "Ref": "dataProvider"
+        },
+        "IndexName": {
+          "Fn::Join": [
+            "-",
+            [
+              {
+                "Ref": "indexName"
+              },
+              {
+                "Ref": "env"
+              }
+            ]
+          ]
+        },
+        "PricingPlan": {
+          "Ref": "pricingPlan"
+        },
+        "DataSourceConfiguration": {
+          "IntendedUse": {
+            "Ref": "dataSourceIntendedUse"
+          }
+        }
+      }
+    },
+    "PlaceIndexPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "geo:SearchPlaceIndexForPosition",
+                "geo:SearchPlaceIndexForText"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PlaceIndex",
+                  "IndexArn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": {
+          "Fn::Join": [
+            "-",
+            [
+              {
+                "Ref": "indexName"
+              },
+              {
+                "Ref": "env"
+              },
+              "Policy"
+            ]
+          ]
+        },
+        "Roles": [
+          {
+            "Ref": "authRoleName"
+          },
+          {
+            "Ref": "unauthRoleName"
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "Name": {
+      "Value": {
+        "Ref": "PlaceIndex"
+      }
+    }
+  }
+}
