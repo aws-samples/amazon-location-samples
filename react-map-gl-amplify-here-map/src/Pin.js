@@ -10,9 +10,9 @@ const ICON = `M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7
 const Icon = memo(() => {
   return (
     <svg
-      height={20}
+      height={32}
       viewBox="0 0 24 24"
-      className={`fill-current text-yellow-500`}
+      className={`fill-current text-red-600`}
     >
       <path d={ICON} />
     </svg>

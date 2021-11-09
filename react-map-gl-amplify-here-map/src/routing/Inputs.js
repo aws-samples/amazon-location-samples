@@ -10,7 +10,17 @@ import Button from "../primitives/Button";
 import NavigationIcon from "../primitives/NavigateIcon";
 
 // Helper function to format address
-const formatAddress = ({ street, addressNumber, postalCode, municipality }) => {
+const formatAddress = ({
+  label,
+  street,
+  addressNumber,
+  postalCode,
+  municipality,
+  country,
+}) => {
+  if (label) {
+    return label;
+  }
   const address = [];
   if (street !== undefined) address.push(street);
   if (addressNumber !== undefined) address.push(addressNumber);
@@ -33,7 +43,7 @@ const RoutingMenuInput = ({
 
   useEffect(() => {
     if (debouncedValue !== defaultValue && handleValueChangeRef.current) {
-      console.debug(debouncedValue);
+      console.debug(debouncedValue, "debounced value");
       handleValueChangeRef.current(debouncedValue.trim(), idx);
     }
   }, [debouncedValue, defaultValue, handleValueChangeRef, idx]);
@@ -64,7 +74,6 @@ const Inputs = ({ setHasSuggestions }) => {
   const inputs = [...context.markers];
   const [suggestions, setSuggestions] = useState([]);
   const [focusedInputIdx, setFocusedInputIdx] = useState(-1);
-  // const [isDirty, setDirty] = useState(false);
   const isDirtyRef = useRef(false);
 
   // Geocode value (address) to retrieve suggestions
@@ -75,8 +84,9 @@ const Inputs = ({ setHasSuggestions }) => {
     try {
       const res = await Geo.searchByText(value, {
         biasPosition: context.viewportCenter,
+        maxResults: 10,
       });
-      console.debug(res);
+      console.debug(res, "results from searchByText");
       if (res.length > 0) {
         setSuggestions(res);
       } else {
@@ -155,10 +165,10 @@ const Inputs = ({ setHasSuggestions }) => {
         : suggestions.map((result, idx) => (
             <div
               key={idx}
-              className="cursor-pointer"
+              className="cursor-pointer border-b-2 border-gray-500"
               onClick={() => handleResultClick(result)}
             >
-              <span>{formatAddress(result)}</span>
+              <span className="text-sm">{formatAddress(result)}</span>
             </div>
           ))}
     </>
