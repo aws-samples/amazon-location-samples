@@ -3,11 +3,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>aws.samples.amazon-location</groupId>
+  <groupId>software.amazon.samples.amazon-location</groupId>
   <artifactId>athena-udfs</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>athena-udfs</name>
+
+  <licenses>
+    <license>
+      <name>MIT-0</name>
+    </license>
+  </licenses>
 
   <properties>
     <aws-athena-federation-sdk.version>2021.37.1</aws-athena-federation-sdk.version>
