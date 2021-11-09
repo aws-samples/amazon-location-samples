@@ -1,3 +1,6 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 import { useContext } from "react";
 import { Source, Layer } from "react-map-gl";
 import { AppContext, RoutingModesEnum } from "./AppContext";

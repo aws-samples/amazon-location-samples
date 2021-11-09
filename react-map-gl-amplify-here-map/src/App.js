@@ -1,3 +1,6 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 import { useState, useRef, useEffect, useCallback } from "react";
 import ReactMapGL, {
   FlyToInterpolator,

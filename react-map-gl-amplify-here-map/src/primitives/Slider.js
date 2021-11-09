@@ -1,3 +1,6 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 import { useRef } from "react";
 import { useSliderState } from "@react-stately/slider";
 import { useFocusRing } from "@react-aria/focus";
