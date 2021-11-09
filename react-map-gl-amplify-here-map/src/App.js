@@ -27,8 +27,6 @@ function App() {
   const [viewport, setViewport] = useState({
     latitude: 36.12185075270952,
     longitude: -115.17130273723231,
-    /* latitude: 41.3883,
-    longitude: 2.1652, */
     zoom: 13,
   });
   const [markers, setMarkers] = useState(defaultState.markers);
@@ -46,6 +44,7 @@ function App() {
   // Setting refs
   const mapRef = useRef();
   const isRouteZoomedRef = useRef(false);
+  const isPointZoomed = useRef(false);
   // Setting hooks
   const windowSize = useWindowSize();
   const debouncedViewport = useDebounce(viewport, 500);
@@ -92,6 +91,19 @@ function App() {
     });
   }, []);
 
+  const zoomToPoint = useCallback((lngLat, viewport) => {
+    console.debug("Fitting point to viewport", lngLat);
+    const [longitude, latitude] = lngLat;
+    setViewport({
+      ...viewport,
+      longitude,
+      latitude,
+      zoom: 15,
+      transitionInterpolator: new FlyToInterpolator({ speed: 0.8 }),
+      transitionDuration: "auto",
+    });
+  }, []);
+
   // Reset the view to default values
   const resetView = () => {
     setRouting(defaultState.isRouting);
@@ -102,6 +114,8 @@ function App() {
     setTruckOptions(defaultState.truckOptions);
     setCarOptions(defaultState.carOptions);
     setDepartureTime(defaultState.departureTime);
+    isRouteZoomedRef.current = false;
+    isPointZoomed.current = false;
   };
 
   // Side effect that runs every time there is a new route and it hasn't yet been zoomed to
@@ -111,6 +125,13 @@ function App() {
       zoomToRoute(route.Summary.RouteBBox, debouncedViewport);
     }
   }, [route, debouncedViewport, zoomToRoute]);
+
+  useEffect(() => {
+    if (markers.length === 1 && !isPointZoomed.current) {
+      isPointZoomed.current = true;
+      zoomToPoint(markers[0].geometry.point, debouncedViewport);
+    }
+  }, [markers, debouncedViewport, zoomToPoint]);
 
   // Side effect that calculates a new route every time one of the options changes
   useEffect(() => {
@@ -167,12 +188,6 @@ function App() {
     const { event, data } = message.payload;
     // Enter routing mode
     if (event === "startRouting") {
-      if (markers.length < 2) {
-        Hub.dispatch("Markers", {
-          event: "prependMarker",
-          data: { marker: {}, geocode: false },
-        });
-      }
       setRouting(true);
       // Exit routing mode
     } else if (event === "endRouting") {
@@ -246,6 +261,7 @@ function App() {
     } else if (payload.event === "setMarkers") {
       const newMarkers = [...markers];
       for (const el of payload.data) {
+        if (el.idx === 0) isPointZoomed.current = false;
         try {
           const res = await Geo.searchByCoordinates(el.lngLat);
           newMarkers[el.idx] = {
@@ -267,24 +283,8 @@ function App() {
         ...payload.data.marker,
         source: data.source,
       };
+      if (payload.data.idx === 0) isPointZoomed.current = false;
       console.debug(newMarkers);
-      setMarkers(newMarkers);
-      // Set a marker at first place in the markers state list
-    } else if (payload.event === "prependMarker") {
-      const hasGeocode = payload.data.geocode;
-      console.debug(`Prepend marker${hasGeocode ? " with geocode" : ""}`);
-      let marker;
-      if (hasGeocode) {
-        try {
-          marker = await Geo.searchByCoordinates(payload.data.lngLat);
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        marker = payload.data.marker;
-      }
-      const newMarkers = [...markers].slice();
-      newMarkers.unshift(marker);
       setMarkers(newMarkers);
     }
   };
@@ -340,7 +340,7 @@ function App() {
     const { lngLat } = e;
 
     let data;
-    // If there's no marker, then we set one in the second position (destination)
+    // If there's no marker, then we set one
     if (markers.length === 0) {
       data = [{ idx: 0, lngLat: lngLat }];
       // If there's already a marker (plus a placehoder), then we set one in the first position (origin)

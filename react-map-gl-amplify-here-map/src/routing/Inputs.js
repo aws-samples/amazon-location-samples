@@ -82,7 +82,7 @@ const RoutingMenuInput = ({
 // Component: Inputs - Routing inputs
 const Inputs = ({ setHasSuggestions }) => {
   const context = useContext(AppContext);
-  const inputs = [...context.markers];
+  let inputs = [...context.markers];
   const [suggestions, setSuggestions] = useState([]);
   const [focusedInputIdx, setFocusedInputIdx] = useState(-1);
   const isDirtyRef = useRef(false);
@@ -141,8 +141,15 @@ const Inputs = ({ setHasSuggestions }) => {
     );
   };
 
-  // Inputs are mapped to the markers, if there's no marker show at least one input
-  if (inputs[0] === undefined && !context.isRouting) inputs[0] = {};
+  if (inputs[0] === undefined && !context.isRouting) {
+    // Inputs are mapped to the markers, if there's no marker show at least one input
+    inputs[0] = {};
+  } else if (context.isRouting && inputs.length < 2) {
+    // Else, if we are in routing mode and there's only one marker, let's assume it's a destination and prepend an empty field
+    const newInputs = [...inputs].slice();
+    newInputs.unshift({});
+    inputs = newInputs;
+  }
 
   return (
     <>
