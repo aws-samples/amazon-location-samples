@@ -37,6 +37,7 @@ const RoutingMenuInput = ({
   handleValueChangeRef,
   handleExitInputBubble,
 }) => {
+  const context = useContext(AppContext);
   const defaultValue = formatAddress(marker);
   const [value, setValue] = useState(defaultValue);
   const debouncedValue = useDebounce(value, 1000);
@@ -44,9 +45,19 @@ const RoutingMenuInput = ({
   useEffect(() => {
     if (debouncedValue !== defaultValue && handleValueChangeRef.current) {
       console.debug(debouncedValue, "debounced value");
-      handleValueChangeRef.current(debouncedValue.trim(), idx);
+      handleValueChangeRef.current(
+        debouncedValue.trim(),
+        context.viewportCenter,
+        idx
+      );
     }
-  }, [debouncedValue, defaultValue, handleValueChangeRef, idx]);
+  }, [
+    debouncedValue,
+    defaultValue,
+    handleValueChangeRef,
+    context.viewportCenter,
+    idx,
+  ]);
 
   const handleExitInput = (e) => {
     const { key } = e;
@@ -77,14 +88,19 @@ const Inputs = ({ setHasSuggestions }) => {
   const isDirtyRef = useRef(false);
 
   // Geocode value (address) to retrieve suggestions
-  const searchByText = async (value) => {
+  const searchByText = async (value, biasPosition) => {
     if (value.trim() === "") {
       return;
     }
+    console.debug(
+      "SearchByText: %s w/ bias %s",
+      value,
+      JSON.stringify(biasPosition)
+    );
     try {
       const res = await Geo.searchByText(value, {
-        biasPosition: context.viewportCenter,
-        maxResults: 10,
+        biasPosition: biasPosition,
+        maxResults: 5,
       });
       console.debug(res, "results from searchByText");
       if (res.length > 0) {
@@ -99,9 +115,8 @@ const Inputs = ({ setHasSuggestions }) => {
   };
 
   // Handler to updates of the input
-  const handleValueChange = (value, idx) => {
-    console.debug("Searching position by value", value);
-    searchByText(value);
+  const handleValueChange = (value, biasPosition, idx) => {
+    searchByText(value, biasPosition);
     setFocusedInputIdx(idx);
     if (isDirtyRef.current === false) {
       isDirtyRef.current = true;
