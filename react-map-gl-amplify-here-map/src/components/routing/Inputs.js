@@ -131,6 +131,14 @@ const Inputs = ({ setHasSuggestions }) => {
     console.debug("Should update input w index", focusedInputIdx);
     setSuggestions([]);
     setHasSuggestions(false);
+    let force;
+    if (!context.isRouting && context.markers.length === 0) {
+      force = true;
+    } else if (!context.isRouting && context.markers.length === 1) {
+      force = true;
+    } else if (context.markers.length === 2) {
+      force = true;
+    }
     Hub.dispatch(
       "Markers",
       {
@@ -139,7 +147,7 @@ const Inputs = ({ setHasSuggestions }) => {
           idx: focusedInputIdx,
           marker: result,
           geocode: false,
-          force: false,
+          force: force,
         },
       },
       "routingMenu"
