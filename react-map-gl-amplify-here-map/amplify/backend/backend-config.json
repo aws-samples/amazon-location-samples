@@ -1,6 +1,6 @@
 {
   "auth": {
-    "awsheredemo46df0435": {
+    "awsheredemo4fc859b5": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -27,7 +27,7 @@
     }
   },
   "geo": {
-    "map040482c1": {
+    "map2bf94dcb": {
       "isDefault": true,
       "providerPlugin": "awscloudformation",
       "service": "Map",
@@ -35,7 +35,7 @@
       "pricingPlan": "RequestBasedUsage",
       "accessType": "AuthorizedAndGuestUsers"
     },
-    "placeindex4be121da": {
+    "placeindex0e5572f7": {
       "isDefault": true,
       "providerPlugin": "awscloudformation",
       "service": "PlaceIndex",
@@ -50,7 +50,7 @@
       "dependsOn": [
         {
           "category": "geo",
-          "resourceName": "map040482c1",
+          "resourceName": "map2bf94dcb",
           "attributes": [
             "Name"
           ]

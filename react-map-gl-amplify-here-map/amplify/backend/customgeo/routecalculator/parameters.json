@@ -2,9 +2,9 @@
   "unauthRoleName": {
     "Ref": "UnauthRoleName"
   },
-  "geomap040482c1Name": {
+  "geomap2bf94dcbName": {
     "Fn::GetAtt": [
-      "geomap040482c1",
+      "geomap2bf94dcb",
       "Outputs.Name"
     ]
   }

@@ -5,8 +5,9 @@
   "unauthRoleName": {
     "Ref": "UnauthRoleName"
   },
-  "mapName": "map040482c1",
-  "mapStyle": "VectorHereBerlin",
+  "indexName": "placeindex0e5572f7",
+  "dataProvider": "Here",
+  "dataSourceIntendedUse": "SingleUse",
   "pricingPlan": "RequestBasedUsage",
   "isDefault": true
 }

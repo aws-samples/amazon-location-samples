@@ -6,7 +6,7 @@
     "unauthRoleName": {
       "Type": "String"
     },
-    "geomap040482c1Name": {
+    "geomap2bf94dcbName": {
       "Type": "String"
     }
   },
@@ -19,7 +19,7 @@
             "RouteCalculator-${suffix}",
             {
               "suffix": {
-                "Ref": "geomap040482c1Name"
+                "Ref": "geomap2bf94dcbName"
               }
             }
           ]
