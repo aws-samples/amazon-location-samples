@@ -16,7 +16,7 @@ See [`package.json`](package.json#L6-L22).
 
 ## Getting started
 
-[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/)
+[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/react-map-gl-amplify-here-map)
 
 Or alternatively, to deploy manually, clone this repo and run:
 

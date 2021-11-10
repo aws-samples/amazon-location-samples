@@ -409,7 +409,7 @@ function App() {
               Source Code
             </a>
             <a
-              href="https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/"
+              href="https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/react-map-gl-amplify-here-map"
               className="ml-4 hidden md:block"
             >
               <img
