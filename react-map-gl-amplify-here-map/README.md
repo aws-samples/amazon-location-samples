@@ -1,6 +1,6 @@
 # Amazon Location Service and HERE Technologies
 
-Demo created for demonstrations purposes for re:Invent 2021.
+Demo created for demonstrations purposes for [re:Invent 2021](https://reinvent.awsevents.com/).
 
 Within this solution, you will learn how to leverage the capabilities provided by [HERE Technologies](https://aws.amazon.com/location/data-providers/here-technologies/) via [Amazon Location Service](https://aws.amazon.com/location) to build your own location-based solutions. The features covered are:
 
