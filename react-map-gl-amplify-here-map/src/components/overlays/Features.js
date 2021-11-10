@@ -3,7 +3,7 @@
 
 import { useContext } from "react";
 import { Source, Layer } from "react-map-gl";
-import { AppContext, RoutingModesEnum } from "./AppContext";
+import { AppContext, RoutingModesEnum } from "../../AppContext";
 import Pin from "./Pin";
 
 const layerStyleWalking = {

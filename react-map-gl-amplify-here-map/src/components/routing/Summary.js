@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 
 import { useContext } from "react";
-import { AppContext, RoutingModesEnum } from "../AppContext";
+import { AppContext, RoutingModesEnum } from "../../AppContext";
 
 // Helper function to format time
 const formatTime = (seconds) => {

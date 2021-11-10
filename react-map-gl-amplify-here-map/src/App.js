@@ -6,20 +6,20 @@ import ReactMapGL, {
   FlyToInterpolator,
   WebMercatorViewport,
 } from "react-map-gl";
-import Controls from "./Controls";
+import Controls from "./components/overlays/Controls";
 import { Hub } from "@aws-amplify/core";
-import useAmazonLocationService from "./useAmazonLocationService";
-import useDebounce from "./useDebounce";
+import useAmazonLocationService from "./hooks/useAmazonLocationService";
+import useDebounce from "./hooks/useDebounce";
 import {
   AppContext,
   defaultState,
   RoutingModesEnum,
   UnitsEnum,
 } from "./AppContext";
-import useWindowSize from "./useWindowSize";
-import Features from "./Features";
-import MarkerToast from "./MarkerToast";
-import RoutingMenu from "./routing/RoutingMenu";
+import useWindowSize from "./hooks/useWindowSize";
+import Features from "./components/overlays/Features";
+import MarkerToast from "./components/overlays/MarkerToast";
+import RoutingMenu from "./components/routing/RoutingMenu";
 import { Geo } from "@aws-amplify/geo";
 
 function App() {

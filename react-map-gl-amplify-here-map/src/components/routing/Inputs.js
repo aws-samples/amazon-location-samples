@@ -3,8 +3,8 @@
 
 import { useContext, useEffect, useState, useRef } from "react";
 import { Hub } from "@aws-amplify/core";
-import { AppContext } from "../AppContext";
-import useDebounce from "../useDebounce";
+import { AppContext } from "../../AppContext";
+import useDebounce from "../../hooks/useDebounce";
 import { Geo } from "@aws-amplify/geo";
 import Button from "../primitives/Button";
 import NavigationIcon from "../primitives/NavigateIcon";

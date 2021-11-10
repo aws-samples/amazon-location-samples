@@ -3,9 +3,9 @@
 
 import { useContext } from "react";
 import { Hub } from "@aws-amplify/core";
-import { AppContext } from "./AppContext";
-import Button from "./primitives/Button";
-import NavigationIcon from "./primitives/NavigateIcon";
+import { AppContext } from "../../AppContext";
+import Button from "../primitives/Button";
+import NavigationIcon from "../primitives/NavigateIcon";
 
 // Component: MarkerToast - A toast that appears when a marker is created and we are not routing
 function MarkerToast() {

@@ -10,7 +10,7 @@ import {
   MapContext,
 } from "react-map-gl";
 import { Hub } from "@aws-amplify/core";
-import { AppContext } from "./AppContext";
+import { AppContext } from "../../AppContext";
 import { usePress } from "@react-aria/interactions";
 
 // Component: Controls - Show the map controls

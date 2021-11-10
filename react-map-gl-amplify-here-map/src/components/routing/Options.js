@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: MIT-0
 
 import { useContext, useState } from "react";
-import { AppContext } from "../AppContext";
 import DepartureTimeSelector from "./DepartureTimeSelector";
 import ModeOptions from "./ModeOptions";
+import { AppContext } from "../../AppContext";
 
 // Component: Options - Renders the options for the user to select
 const Options = () => {

@@ -7,14 +7,14 @@ import { useRadioGroupState } from "@react-stately/radio";
 import { useRadio, useRadioGroup } from "@react-aria/radio";
 import { VisuallyHidden } from "@react-aria/visually-hidden";
 import { useFocusRing } from "@react-aria/focus";
-import { AppContext, defaultState, UnitsEnum } from "../AppContext";
+import { AppContext, RoutingModesEnum, defaultState } from "../../AppContext";
 
-let MeasurementsContext = createContext(null);
+let ModeContext = createContext(null);
 
-// Component: Unit - Renders a single unit option
-function Unit(props) {
+// Component: Mode - Routing Mode Button
+function Mode(props) {
   let { children, value } = props;
-  let state = useContext(MeasurementsContext);
+  let state = useContext(ModeContext);
   let ref = useRef(null);
   let { inputProps } = useRadio(props, state, ref);
   let { isFocusVisible, focusProps } = useFocusRing();
@@ -28,7 +28,7 @@ function Unit(props) {
 
   return (
     <label
-      className={`w-1/2 text-white text-center border cursor-pointer text-sm ${backgroundColor} ${borderColor} ${borderRadius}`}
+      className={`w-1/3 text-white text-center border cursor-pointer ${backgroundColor} ${borderColor} ${borderRadius}`}
       title={value}
     >
       <VisuallyHidden>
@@ -39,53 +39,53 @@ function Unit(props) {
   );
 }
 
-// Component: MeasurementsOptions - Renders the measurement options
-const MeasurementsOptions = () => {
+// Component: ModeSelector - Routing Mode Selector (Radio buttons: Walking, Car, Truck)
+const ModeSelector = ({ className }) => {
   const context = useContext(AppContext);
   let state = useRadioGroupState({});
   let { radioGroupProps, labelProps } = useRadioGroup({}, state);
 
-  // Side effect that runs when the selected unit value changes
+  // Side effect that runs when routing mode changes
   useEffect(() => {
     if (state.selectedValue === undefined) {
-      state.setSelectedValue(defaultState.units);
+      state.setSelectedValue(defaultState.routingMode);
     } else if (state.selectedValue !== undefined) {
       Hub.dispatch("Routing", {
-        event: "changeUnits",
+        event: "changeRoutingMode",
         data: state.selectedValue,
       });
     }
   }, [state, context.routingMode]);
 
   return (
-    <div {...radioGroupProps}>
-      <p {...labelProps} className="text-sm">
-        Measurement System
-      </p>
-      <div className="flex w-2/3">
-        <MeasurementsContext.Provider value={state}>
-          {Object.values(UnitsEnum).map((unit, idx) => {
-            let nth;
-            if (idx === 0) {
-              nth = "first";
-            } else if (idx === Object.values(UnitsEnum).length - 1) {
-              nth = "last";
-            }
-            return (
-              <Unit
-                key={unit.value}
-                value={unit.value}
-                title={unit.label}
-                nth={nth}
-              >
-                {unit.label}
-              </Unit>
-            );
-          })}
-        </MeasurementsContext.Provider>
-      </div>
+    <div {...radioGroupProps} className={`flex ${className}`}>
+      <VisuallyHidden>
+        <span {...labelProps}>Routing Mode</span>
+      </VisuallyHidden>
+      <ModeContext.Provider value={state}>
+        {/* Show routing mode buttons */}
+        {Object.values(RoutingModesEnum).map((routingMode, idx) => {
+          let nth;
+          // If first or last set props to round corners
+          if (idx === 0) {
+            nth = "first";
+          } else if (idx === Object.values(RoutingModesEnum).length - 1) {
+            nth = "last";
+          }
+          return (
+            <Mode
+              key={routingMode}
+              value={routingMode}
+              title={routingMode}
+              nth={nth}
+            >
+              {routingMode}
+            </Mode>
+          );
+        })}
+      </ModeContext.Provider>
     </div>
   );
 };
 
-export default MeasurementsOptions;
+export default ModeSelector;

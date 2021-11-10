@@ -3,8 +3,8 @@
 
 import { useContext, useEffect, useState } from "react";
 import { Hub } from "@aws-amplify/core";
-import useDebounce from "../useDebounce";
-import { AppContext, UnitsEnum } from "../AppContext";
+import useDebounce from "../../hooks/useDebounce";
+import { AppContext, UnitsEnum } from "../../AppContext";
 import NumberField from "../primitives/NumberField";
 import Slider from "../primitives/Slider";
 
