@@ -250,8 +250,15 @@ function App() {
     } else if (payload.event === "swapMarkers") {
       console.debug("Swapping markers", payload.data);
       const newMarkers = [];
-      newMarkers[0] = markers[1];
-      newMarkers[1] = markers[0];
+      // If there's only one marker, we know it was a destination, so we put it in first place
+      if (markers.length === 1) {
+        newMarkers[0] = markers[0];
+        newMarkers[1] = {};
+        // If there are two markers we just swap them
+      } else if (markers.length === 2) {
+        newMarkers[0] = markers[1];
+        newMarkers[1] = markers[0];
+      }
       setMarkers(newMarkers);
     } else if (payload.event === "setMarker") {
       const { force, geocode } = payload.data;
