@@ -1,16 +1,13 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useContext, useState } from "react";
-import { AppContext } from "../AppContext";
+import { useState } from "react";
 import DepartureTimeSelector from "./DepartureTimeSelector";
 import ModeOptions from "./ModeOptions";
 
 // Component: Options - Renders the options for the user to select
 const Options = () => {
-  const context = useContext(AppContext);
   const [isOptionOpen, setIsOptionOpen] = useState(false);
-  const [isTimeOpen, setIsTimeOpen] = useState(false);
 
   // TODO: complete this function for time
   return (

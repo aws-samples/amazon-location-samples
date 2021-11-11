@@ -3,8 +3,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Hub } from "@aws-amplify/core";
-import useDebounce from "../useDebounce";
-import { defaultState } from "../AppContext";
+import useDebounce from "../../hooks/useDebounce";
+import { defaultState } from "../../AppContext";
 import Button from "../primitives/Button";
 
 const DepartureTimeHoursOption = ({ date }) => {

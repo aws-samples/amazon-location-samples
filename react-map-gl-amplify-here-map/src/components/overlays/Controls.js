@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import {
   NavigationControl,
   GeolocateControl,
@@ -10,24 +10,12 @@ import {
   MapContext,
 } from "react-map-gl";
 import { Hub } from "@aws-amplify/core";
-import { AppContext } from "./AppContext";
-import { usePress } from "@react-aria/interactions";
+import { AppContext } from "../../AppContext";
 
 // Component: Controls - Show the map controls
 function Controls() {
   const mapContext = useContext(MapContext);
   const context = useContext(AppContext);
-  let [is3D, set3D] = useState(false);
-  // TODO: fix propagation on this button
-  let { pressProps, isPressed } = usePress({
-    onPress: (e) => {
-      console.log(e);
-      let newState = !is3D;
-      console.debug("Setting 3D view to", newState);
-      set3D(newState);
-      Hub.dispatch("Viewport", { event: "toggle3D", data: newState });
-    },
-  });
 
   return (
     <>
@@ -41,14 +29,6 @@ function Controls() {
             style={{ position: "static" }}
           />
         ) : null}
-        {context.windowSize.width > 768 ? null : (
-          <div
-            {...pressProps}
-            className="mapboxgl-ctrl mapboxgl-ctrl-group flex items-center justify-center font-bold static mb-2 h-7"
-          >
-            <span>3D</span>
-          </div>
-        )}
         <GeolocateControl
           style={{ position: "static" }}
           className="static"

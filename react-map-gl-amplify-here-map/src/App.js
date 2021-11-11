@@ -6,20 +6,20 @@ import ReactMapGL, {
   FlyToInterpolator,
   WebMercatorViewport,
 } from "react-map-gl";
-import Controls from "./Controls";
+import Controls from "./components/overlays/Controls";
 import { Hub } from "@aws-amplify/core";
-import useAmazonLocationService from "./useAmazonLocationService";
-import useDebounce from "./useDebounce";
+import useAmazonLocationService from "./hooks/useAmazonLocationService";
+import useDebounce from "./hooks/useDebounce";
 import {
   AppContext,
   defaultState,
   RoutingModesEnum,
   UnitsEnum,
 } from "./AppContext";
-import useWindowSize from "./useWindowSize";
-import Features from "./Features";
-import MarkerToast from "./MarkerToast";
-import RoutingMenu from "./routing/RoutingMenu";
+import useWindowSize from "./hooks/useWindowSize";
+import Features from "./components/overlays/Features";
+import MarkerToast from "./components/overlays/MarkerToast";
+import RoutingMenu from "./components/routing/RoutingMenu";
 import { Geo } from "@aws-amplify/geo";
 
 function App() {
@@ -40,7 +40,6 @@ function App() {
   );
   const [distanceUnit, setDistanceUnit] = useState(defaultState.distanceUnit);
   const [units, setUnits] = useState(defaultState.units);
-  const [isSettingAdditionalMarkers, setAdditionalMarkers] = useState(false);
   // Setting refs
   const mapRef = useRef();
   const isRouteZoomedRef = useRef(false);
@@ -50,15 +49,6 @@ function App() {
   const debouncedViewport = useDebounce(viewport, 500);
   const [transformRequest, mapName, calculateRoute] =
     useAmazonLocationService();
-
-  // TODO: check if this is needed
-  /* useEffect(() => {
-    if (mapRef.current) {
-      console.log(debouncedViewport);
-      console.log(mapRef.current.getMap().getBounds());
-      // Cache.setItem('viewport', )
-    }
-  }, [debouncedViewport]); */
 
   // Functions that moves the viewport so that it fits a route once it is calculated
   const zoomToRoute = useCallback((routeBBox, viewport) => {
@@ -110,7 +100,6 @@ function App() {
     setMarkers(defaultState.markers);
     setRoute(defaultState.route);
     setRoutingMode(defaultState.routingMode);
-    setAdditionalMarkers(false);
     setTruckOptions(defaultState.truckOptions);
     setCarOptions(defaultState.carOptions);
     setDepartureTime(defaultState.departureTime);
@@ -257,34 +246,40 @@ function App() {
     // Reset the markers, and so also the view
     if (payload.event === "closeToast" || payload.event === "cleanUp") {
       resetView();
-      // Set a marker and reverse geocode
-    } else if (payload.event === "setMarkers") {
-      const newMarkers = [...markers];
-      for (const el of payload.data) {
-        if (el.idx === 0) isPointZoomed.current = false;
+      // Swaps the position of the markers
+    } else if (payload.event === "swapMarkers") {
+      console.debug("Swapping markers", payload.data);
+      const newMarkers = [];
+      newMarkers[0] = markers[1];
+      newMarkers[1] = markers[0];
+      setMarkers(newMarkers);
+    } else if (payload.event === "setMarker") {
+      const { force, geocode } = payload.data;
+      console.debug("Set marker %s", geocode ? "with geocode" : "");
+      let marker;
+      if (geocode) {
         try {
-          const res = await Geo.searchByCoordinates(el.lngLat);
-          newMarkers[el.idx] = {
-            ...res,
-            source: data.source,
-          };
+          marker = await Geo.searchByCoordinates(payload.data.lngLat);
         } catch (error) {
           console.log(error);
         }
+      } else {
+        marker = payload.data.marker;
       }
-
-      console.debug(newMarkers);
-      setMarkers(newMarkers);
-      // Set a marker without reverse geocoding
-    } else if (payload.event === "setMarkerNoGeocode") {
-      console.debug("Setting marker without geocode", payload.data);
-      const newMarkers = [...markers];
-      newMarkers[payload.data.idx] = {
-        ...payload.data.marker,
-        source: data.source,
-      };
-      if (payload.data.idx === 0) isPointZoomed.current = false;
-      console.debug(newMarkers);
+      let newMarkers = [...markers];
+      if (newMarkers[payload.data.idx] !== undefined && !force) {
+        newMarkers = [...newMarkers].slice();
+        newMarkers.unshift({
+          ...marker,
+          source: data.source,
+        });
+      } else {
+        newMarkers[payload.data.idx] = {
+          ...marker,
+          source: data.source,
+        };
+        if (payload.data.idx === 0) isPointZoomed.current = false;
+      }
       setMarkers(newMarkers);
     }
   };
@@ -294,22 +289,7 @@ function App() {
     // Update viewport
     if (data.payload.event === "update") {
       setViewport(data.payload.data);
-      // Toggle 3D mode for the map on mobile
-    } else if (data.payload.event === "toggle3D") {
-      console.debug("Toggling 3D Mode", viewport);
-      const newViewport = {
-        ...viewport,
-        pitch: 45,
-        zoom: 15,
-        transitionInterpolator: new FlyToInterpolator({ speed: 0.8 }),
-        transitionDuration: "auto",
-      };
-      setViewport(newViewport);
     }
-  };
-
-  const handleUserLocation = (data) => {
-    // if (data.payload.event === '')
   };
 
   // Side effects that runs when the component mounts and subscribes to the Hub
@@ -317,14 +297,12 @@ function App() {
     Hub.listen("Viewport", handleViewport);
     Hub.listen("Markers", handleMarkers);
     Hub.listen("Routing", handleRouting);
-    Hub.listen("UserLocation", handleUserLocation);
 
     // Clean up subscriptions when the component unmounts
     return () => {
       Hub.remove("Viewport", handleViewport);
       Hub.remove("Markers", handleMarkers);
       Hub.remove("Routing", handleRouting);
-      Hub.remove("UserLocation", handleUserLocation);
     };
   });
 
@@ -340,22 +318,19 @@ function App() {
     const { lngLat } = e;
 
     let data;
-    // If there's no marker, then we set one
-    if (markers.length === 0) {
-      data = [{ idx: 0, lngLat: lngLat }];
-      // If there's already a marker (plus a placehoder), then we set one in the first position (origin)
-    } else if (markers.length === 2 && !isSettingAdditionalMarkers) {
-      data = [{ idx: 0, lngLat: lngLat }];
-      // If there are already two markers, then we just append a new one
-    } else if (markers.length >= 2 && isSettingAdditionalMarkers) {
-      data = [{ idx: markers.length, lngLat: lngLat }];
+    if (markers.length === 0 || markers.length === 2) {
+      // If there are no markers or there are already two (one might be a placeholder) then we set it as first marker (origin)
+      data = { idx: 0, lngLat: lngLat, geocode: true, force: true };
+    } else if (markers.length === 1) {
+      // Else if there is one marker we set the new one as first but shift the second to destination
+      data = { idx: 0, lngLat: lngLat, geocode: true, force: false };
     }
 
     // Dispatch event with constructed payload
     Hub.dispatch(
       "Markers",
       {
-        event: "setMarkers",
+        event: "setMarker",
         data: data,
       },
       "map"
@@ -409,7 +384,7 @@ function App() {
               Source Code
             </a>
             <a
-              href="https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/"
+              href="https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/react-map-gl-amplify-here-map"
               className="ml-4 hidden md:block"
             >
               <img

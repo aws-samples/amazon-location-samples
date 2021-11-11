@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 
 import { useContext, useState } from "react";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../../AppContext";
 import ModeSelector from "./ModeSelector";
 import Options from "./Options";
 import Summary from "./Summary";

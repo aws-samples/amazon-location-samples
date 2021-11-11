@@ -3,7 +3,7 @@
 
 import { useContext } from "react";
 import { Hub } from "@aws-amplify/core";
-import { AppContext, RoutingModesEnum } from "../AppContext";
+import { AppContext, RoutingModesEnum } from "../../AppContext";
 import Switch from "../primitives/Switch";
 
 // Component: AvoidanceOptions - Renders the options for the avoidance routing mode

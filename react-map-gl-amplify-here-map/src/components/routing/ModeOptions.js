@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 
 import { useContext } from "react";
-import { AppContext, RoutingModesEnum } from "../AppContext";
+import { AppContext, RoutingModesEnum } from "../../AppContext";
 import TruckOptions from "./TruckOptions";
 import Button from "../primitives/Button";
 import AvoidanceOptions from "./AvoidanceOptions";
