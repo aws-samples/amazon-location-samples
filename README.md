@@ -33,6 +33,7 @@ cleaning, validating, and enriching data in place.
 * [Using MapLibre Native for Android with Amazon Location Service](maplibre-native-android/) `#android`
 * [Using MapLibre Native for iOS with Amazon Location Service](maplibre-native-ios/) `#ios`
 * [Create a custom map style with Amazon Location Service](create-custom-map-style/)
+* [Realtime IoT Dashboard with AWS AppSync and Amazon Location Service](https://github.com/aws-samples/aws-appsync-iot-core-realtime-dashboard) `#javascript` `#react` `#iot` `#amplify`
 
 ### Maps / Tangram
 
