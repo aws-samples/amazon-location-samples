@@ -250,8 +250,15 @@ function App() {
     } else if (payload.event === "swapMarkers") {
       console.debug("Swapping markers", payload.data);
       const newMarkers = [];
-      newMarkers[0] = markers[1];
-      newMarkers[1] = markers[0];
+      // If there's only one marker, we know it was a destination, so we put it in first place
+      if (markers.length === 1) {
+        newMarkers[0] = markers[0];
+        newMarkers[1] = {};
+        // If there are two markers we just swap them
+      } else if (markers.length === 2) {
+        newMarkers[0] = markers[1];
+        newMarkers[1] = markers[0];
+      }
       setMarkers(newMarkers);
     } else if (payload.event === "setMarker") {
       const { force, geocode } = payload.data;
@@ -370,20 +377,20 @@ function App() {
           </div>
           <div className="w-2/3 flex justify-end items-center">
             <a
-              href="https://developer.here.com/blog"
+              href="https://developer.here.com/blog/build-and-deploy-location-apps-with-aws-location-services-and-here"
               alt="Blog Post on Here Developer Blog"
               className="ml-4"
             >
               Learn More
             </a>
             <a
-              href="https://github.com/aws-samples/amazon-location-samples/tree/main/"
+              href="https://github.com/aws-samples/amazon-location-samples/tree/main/react-map-gl-amplify-here-map"
               alt="Source Code on GitHub"
               className="ml-4"
             >
               Source Code
             </a>
-            <a
+            {/* <a
               href="https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/react-map-gl-amplify-here-map"
               className="ml-4 hidden md:block"
             >
@@ -391,7 +398,7 @@ function App() {
                 src="https://oneclick.amplifyapp.com/button.svg"
                 alt="Deploy to Amplify Console"
               />
-            </a>
+            </a> */}
           </div>
         </header>
         {/* Display map only when transformRequest exists, meaning also credentials have been obtained */}

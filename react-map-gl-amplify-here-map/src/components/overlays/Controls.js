@@ -47,7 +47,7 @@ function Controls() {
       ) : null}
       <AttributionControl
         compact={false}
-        className="absolute bottom-1 md:bottom-5 right-1 md:right-5 bg-gray-300 opacity-90 text-sm "
+        className="absolute bottom-5 right-1 md:right-5 bg-gray-300 opacity-90 text-sm"
       />
     </>
   );
