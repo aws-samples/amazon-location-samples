@@ -1,0 +1,17 @@
+{
+  "projectName": "maplibre-gl-js-vue-amplify",
+  "version": "3.1",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "vue",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "dist",
+      "BuildCommand": "npm run build",
+      "StartCommand": "npm run serve"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "mapName": "AmplifyGeoMapVue",
+  "mapStyle": "VectorHereBerlin",
+  "pricingPlan": "RequestBasedUsage",
+  "isDefault": true
+}
