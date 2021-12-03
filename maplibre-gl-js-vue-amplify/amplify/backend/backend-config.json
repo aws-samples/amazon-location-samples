@@ -1,14 +1,13 @@
 {
   "auth": {
-    "amplifygeob7c7e6a7": {
+    "amplifygeod3677763": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "loginMechanisms": [
-          "PREFERRED_USERNAME"
-        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
         "signupAttributes": [
           "EMAIL"
         ],
@@ -33,7 +32,7 @@
       "service": "Map",
       "mapStyle": "VectorHereBerlin",
       "pricingPlan": "RequestBasedUsage",
-      "accessType": "AuthorizedUsers"
-    },
+      "accessType": "AuthorizedAndGuestUsers"
+    }
   }
 }

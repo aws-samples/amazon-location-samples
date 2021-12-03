@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
     "auth": {
-        "amplifygeob7c7e6a7": {
+        "amplifygeod3677763": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
