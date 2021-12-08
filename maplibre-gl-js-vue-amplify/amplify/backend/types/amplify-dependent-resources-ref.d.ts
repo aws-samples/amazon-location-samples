@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
     "auth": {
-        "amplifygeod3677763": {
+        "maplibrereact022beae3": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -11,11 +11,9 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "geo": {
-        "AmplifyGeoMapVue": {
+        "maplibrereact": {
             "Name": "string",
-            "Style": "string",
-            "Region": "string",
-            "Arn": "string"
+            "Style": "string"
         }
     }
 }

@@ -1,14 +1,14 @@
 {
-  "projectName": "amplifygeo",
+  "projectName": "maplibrereact",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {
-    "framework": "vue",
+    "framework": "react",
     "config": {
       "SourceDir": "src",
-      "DistributionDir": "dist",
-      "BuildCommand": "npm run build",
-      "StartCommand": "npm run serve"
+      "DistributionDir": "build",
+      "BuildCommand": "npm run-script build",
+      "StartCommand": "npm run-script start"
     }
   },
   "providers": [

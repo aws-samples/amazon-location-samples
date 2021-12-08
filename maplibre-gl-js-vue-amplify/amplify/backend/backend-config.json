@@ -1,13 +1,14 @@
 {
   "auth": {
-    "amplifygeod3677763": {
+    "maplibrereact022beae3": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [],
+        "loginMechanisms": [
+          "PREFERRED_USERNAME"
+        ],
         "signupAttributes": [
           "EMAIL"
         ],
@@ -26,11 +27,11 @@
     }
   },
   "geo": {
-    "AmplifyGeoMapVue": {
+    "maplibrereact": {
       "isDefault": true,
       "providerPlugin": "awscloudformation",
       "service": "Map",
-      "mapStyle": "VectorHereBerlin",
+      "mapStyle": "VectorEsriNavigation",
       "pricingPlan": "RequestBasedUsage",
       "accessType": "AuthorizedAndGuestUsers"
     }

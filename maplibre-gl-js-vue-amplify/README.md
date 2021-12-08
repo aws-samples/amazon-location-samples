@@ -1,6 +1,6 @@
 # maplibre-gl-js-vue-amplify
 
-![try-068_01.png](./img/README.png)
+![img](./img/README.png)
 
 This example demonstrates how to use MapLibre GL JS with Amazon Location Service and AWS Amplify within a Vue.js application.
 
