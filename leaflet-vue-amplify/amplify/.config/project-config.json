@@ -1,0 +1,17 @@
+{
+  "projectName": "leafletvue",
+  "version": "3.1",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "vue",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "build",
+      "BuildCommand": "npm run build",
+      "StartCommand": "npm run serve"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}

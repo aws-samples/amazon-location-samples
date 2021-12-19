@@ -36,6 +36,10 @@ cleaning, validating, and enriching data in place.
 * [Create a custom map style with Amazon Location Service](create-custom-map-style/)
 * [Realtime IoT Dashboard with AWS AppSync and Amazon Location Service](https://github.com/aws-samples/aws-appsync-iot-core-realtime-dashboard) `#javascript` `#react` `#iot` `#amplify`
 
+### Maps / Leaflet
+
+* [Using Leaflet with Amazon Location Service and AWS Amplify in a Vue.js application](leaflet-vue-amplify/) `#javascript` `#vue` `#amplify`
+
 ### Maps / Tangram
 
 * [Using Tangram with Amazon Location Service](tangram-js/) `#javascript`
