@@ -14,6 +14,7 @@
     "core-js": "^3.6.5",
     "leaflet": "^1.7.1",
     "maplibre-gl": "^1.15.2",
+    "maplibre-gl-js-amplify": "^1.2.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
