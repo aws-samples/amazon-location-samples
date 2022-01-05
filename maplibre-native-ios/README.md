@@ -1,4 +1,4 @@
-# MapboxGL Native iOS
+# MapLibre Native for iOS
 
 ## Adding authentication to your App using Amplify CLI
 
@@ -131,4 +131,4 @@ You have now successfully added authentication to your iOS app.
 - MGLMapboxMetricsEnabled - NO (Boolean)
 - MGLMapboxMetricsEnabledSettingShownInApp - NO (Boolean)
 
-5. Build (CMD+B) and Run (CMR+R) your app. You should see a map view 
+5. Build (CMD+B) and Run (CMR+R) your app. You should see a map view
