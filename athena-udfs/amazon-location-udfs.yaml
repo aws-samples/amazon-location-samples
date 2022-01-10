@@ -13,7 +13,7 @@ Metadata:
       - athena-federation
       - amazon-location
     HomePageUrl: https://github.com/aws-samples/amazon-location-samples/tree/main/athena-udfs
-    SemanticVersion: 1.0.0
+    SemanticVersion: 1.0.1
     SourceCodeUrl: https://github.com/aws-samples/amazon-location-samples/tree/main/athena-udfs
 Parameters:
   DataSource:
