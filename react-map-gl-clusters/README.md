@@ -11,15 +11,13 @@ See [`src/index.js`](src/index.js).
 ## Dependencies
 [`react-map-gl`](https://visgl.github.io/react-map-gl/): React components used to display maps.
 
-[`CRACO`](https://github.com/gsoft-inc/craco): Used to alias react-map-gl’s dependency  [`mapbox-gl`](https://github.com/mapbox/mapbox-gl-js) to [`maplibre-gl`](https://github.com/maplibre/maplibre-gl-js) so it can be compatible with Amazon Location Service.
-
 [`maplibre-gl-js`](https://github.com/maplibre/maplibre-gl-js): Used to draw Amazon Location Service provided maps.
 
 [`aws-amplify`](https://github.com/aws-amplify/amplify-js): Helps with authentication to get map resources from Amazon Location Service.
 
 [`maplibre-gl-js-amplify`](https://github.com/aws-amplify/maplibre-gl-js-amplify): Used to get map resources from Amazon Location Service using aws-amplify.
 
-See more in [`package.json`](package.json#L6-L14)
+See more in [`package.json`](package.json)
 
 App has been tested on Node.js v16.13.2 and NPM v8.1.2
 
@@ -36,10 +34,7 @@ App has been tested on Node.js v16.13.2 and NPM v8.1.2
 
 ## Important notes
 
-This project uses [CRACO](https://github.com/gsoft-inc/craco) to alias `react-map-gl`'s Mapbox GL
-dependency to [MapLibre GL JS](https://maplibre.org/), as `react-map-gl` depends on `mapbox-gl@^2`
-by default, which is **NOT** compatible with Amazon Location Service, as it requires a Mapbox API
-key. See [`craco.config.js`](craco.config.js) to see how the aliasing works.
+This project uses [aliasing in webpack](https://webpack.js.org/configuration/resolve/#resolvealias) to alias `react-map-gl`'s Mapbox GL dependency to [MapLibre GL JS](https://maplibre.org/), as `react-map-gl` depends on `mapbox-gl@^2` by default, which is **NOT** compatible with Amazon Location Service, as it requires a Mapbox API key. See the [`react-map-gl guide`](https://visgl.github.io/react-map-gl/docs/get-started/get-started#using-with-a-mapbox-gl-fork) and [`webpack.config.js`](webpack.config.js#L21-L24) to see how the aliasing works.
 
 ## Security
 

@@ -18,6 +18,7 @@ module.exports = {
   },
   resolve: {
     extensions: ["*", ".js", ".jsx"],
+    // Aliasing to allow react-map-gl to use maplibre-gl instead of the default mapbox-gl
     alias: {
       "mapbox-gl": "maplibre-gl"
     }
