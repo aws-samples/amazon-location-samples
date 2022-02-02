@@ -35,6 +35,10 @@ cleaning, validating, and enriching data in place.
 * [Using MapLibre Native for iOS with Amazon Location Service](maplibre-native-ios/) `#ios`
 * [Create a custom map style with Amazon Location Service](create-custom-map-style/)
 * [Realtime IoT Dashboard with AWS AppSync and Amazon Location Service](https://github.com/aws-samples/aws-appsync-iot-core-realtime-dashboard) `#javascript` `#react` `#iot` `#amplify`
+* [Switching between map styles using `react-map-gl`](react-map-gl-map-styles/) `#javascript` `#react`
+* [Visualizing static data with clusters using `react-map-gl`](react-map-gl-clusters/) `#javascript` `#react`
+* [Visualizing static data with markers using `react-map-gl`](react-map-gl-markers/) `#javascript` `#react`
+* [Visualizing static data with polygons using `react-map-gl`](react-map-gl-polygons/) `#javascript` `#react`
 
 ### Maps / Leaflet
 

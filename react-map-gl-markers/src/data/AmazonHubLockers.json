@@ -1,0 +1,225 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.13271027785173, 49.29010391706197]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Robson",
+        "address": "1675 Robson St, Vancouver, BC V6G 1C8, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.13428304815704, 49.280705277227625]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Bobtail",
+        "address": "1176 Burnaby St, Vancouver, BC V6E 1P1, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.12419611767818, 49.28169238955873]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Voltmeter",
+        "address": "900 Burrard St, Vancouver, BC V6Z 3G5, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.12858995194533, 49.27838833253954]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Asif",
+        "address": "904 Davie St, Vancouver, BC V6Z 1B8, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.13102581887678, 49.27491020868351]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Mahogany",
+        "address": "1480 Howe St, Vancouver, BC V6Z 1C4, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.09451103698422, 49.27211667582941]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Workgroup",
+        "address": "369 Terminal Ave, Vancouver, BC V6A 4C4, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.11528093202048, 49.2640241637882]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Cambie",
+        "address": "510 W 8th Ave, Vancouver, BC V5Z 1C5, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.0583274910539, 49.28095021967962]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Estolano",
+        "address": "2280 E Hastings St #101, Vancouver, BC V5L 1V4, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.04436338513234, 49.281306793003516]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Mon",
+        "address": "2891 E Hastings St Unit 150, Vancouver, BC V5K 5J8, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.02774430972318, 49.28092878602841]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Portal",
+        "address": "3502 E Hastings St, Vancouver, BC V5K 2A7, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.12693276216062, 49.260312891488056]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Enah",
+        "address": "1002 W 12th Ave, Vancouver, BC V5T 2J6, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.0570429799245, 49.26200414499119]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Benjamin",
+        "address": "2396 E Broadway, Vancouver, BC V5N 1X1, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.04381692269232, 49.257994821464884]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Front",
+        "address": "2902 South Grandview Highway, Vancouver, BC V5M 2E3, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.0281035402356, 49.258569567246944]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Wriggler",
+        "address": "3505 Grandview Hwy, Vancouver, BC V5M 2G7, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.12511966117357, 49.24867467752266]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Reef",
+        "address": "900 W King Edward Ave W, Vancouver, BC V5Z 2E2, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.07564305844444, 49.2495426784137]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Niknak",
+        "address": "1435 Cedar Cottage Mews, Vancouver, BC V5N 5Z2, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.06084759995541, 49.24287546780617]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Signpost",
+        "address": "2220 Kingsway, Vancouver, BC V5N 0G4, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.15402230475001, 49.244941757101586]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Sieve",
+        "address": "4615 Arbutus St, Vancouver, BC V6J 4A3, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.07754775538668, 49.21777889714614]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Popular",
+        "address": "7309 Knight St, Vancouver, BC V5P 2X1, Canada"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-123.06533264169266, 49.221121504516454]
+      },
+      "properties": {
+        "title": "Amazon Hub Locker - Darcy",
+        "address": "6904 Victoria Dr, Vancouver, BC V5P 3Y8, Canada"
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+/* 
+Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+SPDX-License-Identifier: MIT-0
+*/
+
+.position {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  z-index: 10;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 2px rgb(0 0 0 / 10%);
+  border-radius: 4px;
+  background: white;
+  padding: 0.5rem 1rem;
+  color: #333333;
+}
+
+.heading {
+  margin: 0.5rem 0;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+input {
+  margin-right: 0.5rem;
+}
