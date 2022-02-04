@@ -7,7 +7,6 @@
     "preview": "vite preview --port 5050"
   },
   "dependencies": {
-    "@aws-amplify/ui-components": "^1.9.6",
     "@maplibre/maplibre-gl-leaflet": "^0.0.15",
     "aws-amplify": "^4.3.14",
     "leaflet": "^1.7.1",
