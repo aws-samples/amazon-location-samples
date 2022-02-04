@@ -4,9 +4,9 @@
   "private": true,
   "license": "MIT-0",
   "dependencies": {
-    "amazon-location-helpers": "^1.0.4",
-    "aws-amplify": "^3.3.16",
-    "maplibre-gl": "^1.14.0",
+    "amazon-location-helpers": "^1.1.1",
+    "aws-amplify": "^4.3.14",
+    "maplibre-gl": "^1.15.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-map-gl": "^5.3.16"
@@ -35,13 +35,28 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^6.1.2",
+    "@craco/craco": "^7.0.0-alpha.0",
     "@types/mapbox-gl": "^1.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@types/react-map-gl": "^5.2.9",
-    "react-scripts": "^4.0.1",
+    "react-scripts": "^5.0.0",
     "typescript": "^4.0.3"
+  },
+  "overrides": {
+    "react-scripts": {
+      "resolve-url-loader": "5.0.0"
+    },
+    "css-select": {
+      "nth-check": "2.0.1"
+    },
+    "react-native": {
+      "@react-native-community/cli": {
+        "strip-ansi": {
+          "ansi-regex": "5.0.1"
+        }
+      }
+    }
   }
 }
