@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useNumberFieldState } from "@react-stately/numberfield";
 import { useLocale } from "@react-aria/i18n";
 import { useButton } from "@react-aria/button";

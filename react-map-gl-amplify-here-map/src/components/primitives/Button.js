@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useButton } from "@react-aria/button";
 
 const Button = (props) => {

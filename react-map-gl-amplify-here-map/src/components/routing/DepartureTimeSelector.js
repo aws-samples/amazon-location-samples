@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Hub } from "@aws-amplify/core";
 import useDebounce from "../../hooks/useDebounce";
 import { defaultState } from "../../AppContext";
@@ -215,7 +215,7 @@ const DepartureTimeSelector = ({ isOptionOpen, setIsOptionOpen }) => {
             {/* TODO: disable buttons when limits reached */}
             <button
               className="w-1/5 text-sm text-white bg-gray-500 rounded-tl-md rounded-bl-md border border-gray-500"
-              title={`Decrease date`}
+              title={"Decrease date"}
               onClick={handleDateClick}
               id="departureTimeBackDateBtn"
             >

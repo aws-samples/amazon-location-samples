@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useContext, useEffect, createContext, useRef } from "react";
+import React, { useContext, useEffect, createContext, useRef } from "react";
 import { Hub } from "@aws-amplify/core";
 import { useRadioGroupState } from "@react-stately/radio";
 import { useRadio, useRadioGroup } from "@react-aria/radio";

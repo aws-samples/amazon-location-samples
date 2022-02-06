@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useState } from "react";
+import React, { useState } from "react";
 import DepartureTimeSelector from "./DepartureTimeSelector";
 import ModeOptions from "./ModeOptions";
 

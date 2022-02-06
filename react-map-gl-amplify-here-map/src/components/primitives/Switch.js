@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { VisuallyHidden } from "@react-aria/visually-hidden";
 import { useToggleState } from "@react-stately/toggle";
 import { useFocusRing } from "@react-aria/focus";
@@ -32,9 +32,7 @@ const Switch = (props) => {
           x={4}
           y={4}
           rx={8}
-          className={`w-8 h-4 fill-current text-${
-            state.isSelected ? "yellow" : "gray"
-          }-500`}
+          className={`w-8 h-4 fill-current text-${state.isSelected ? "yellow" : "gray"}-500`}
         />
         <circle cx={state.isSelected ? 28 : 12} cy={12} r={5} fill="white" />
         {isFocusVisible && (
