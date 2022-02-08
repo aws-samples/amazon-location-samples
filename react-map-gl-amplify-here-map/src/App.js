@@ -1,11 +1,10 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useState, useRef, useEffect, useCallback } from "react";
-import ReactMapGL, {
-  FlyToInterpolator,
-  WebMercatorViewport,
-} from "react-map-gl";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import Map from "react-map-gl";
+import maplibregl from "maplibre-gl";
+import { Flex, Text } from "@aws-amplify/ui-react";
 import Controls from "./components/overlays/Controls";
 import { Hub } from "@aws-amplify/core";
 import useAmazonLocationService from "./hooks/useAmazonLocationService";
@@ -17,14 +16,15 @@ import {
   UnitsEnum,
 } from "./AppContext";
 import useWindowSize from "./hooks/useWindowSize";
+import { Header } from "./components/Header";
 import Features from "./components/overlays/Features";
-import MarkerToast from "./components/overlays/MarkerToast";
-import RoutingMenu from "./components/routing/RoutingMenu";
+import MarkerControl from "./components/overlays/MarkerToast";
+import RoutingControl from "./components/overlays/RoutingMenu";
 import { Geo } from "@aws-amplify/geo";
 
 function App() {
   // Setting state variables
-  const [viewport, setViewport] = useState({
+  const [viewState, setViewState] = useState({
     latitude: 36.12185075270952,
     longitude: -115.17130273723231,
     zoom: 13,
@@ -46,17 +46,14 @@ function App() {
   const isPointZoomed = useRef(false);
   // Setting hooks
   const windowSize = useWindowSize();
-  const debouncedViewport = useDebounce(viewport, 500);
+  const debouncedViewState = useDebounce(viewState, 500);
   const [transformRequest, mapName, calculateRoute] =
     useAmazonLocationService();
 
   // Functions that moves the viewport so that it fits a route once it is calculated
-  const zoomToRoute = useCallback((routeBBox, viewport) => {
+  const zoomToRoute = useCallback((routeBBox, windowSize) => {
     console.debug("Fitting route bbox to viewport", routeBBox);
-    // Creating a new viewport object http://visgl.github.io/react-map-gl/docs/api-reference/web-mercator-viewport
-    const vp = new WebMercatorViewport(viewport);
-    // Fit the route to the viewport
-    const { longitude, latitude, zoom } = vp.fitBounds(
+    mapRef.current.fitBounds(
       [
         [routeBBox[0], routeBBox[1]],
         [routeBBox[2], routeBBox[3]],
@@ -66,31 +63,20 @@ function App() {
           top: 50,
           bottom: 50,
           left: 50,
-          right: viewport.width > 768 ? 450 : 50,
+          right: windowSize.width > 768 ? 450 : 50, // TODO: see if we can get rid of this
         },
+        speed: 0.8,
+        linear: false
       }
     );
-    // Set the new viewport with interpolator http://visgl.github.io/react-map-gl/docs/api-reference/fly-to-interpolator
-    setViewport({
-      ...viewport,
-      longitude,
-      latitude,
-      zoom,
-      transitionInterpolator: new FlyToInterpolator({ speed: 0.8 }),
-      transitionDuration: "auto",
-    });
   }, []);
 
-  const zoomToPoint = useCallback((lngLat, viewport) => {
+  const zoomToPoint = useCallback((lngLat) => {
     console.debug("Fitting point to viewport", lngLat);
-    const [longitude, latitude] = lngLat;
-    setViewport({
-      ...viewport,
-      longitude,
-      latitude,
+    mapRef.current.flyTo({
+      center: lngLat,
       zoom: 15,
-      transitionInterpolator: new FlyToInterpolator({ speed: 0.8 }),
-      transitionDuration: "auto",
+      speed: 0.8,
     });
   }, []);
 
@@ -111,16 +97,16 @@ function App() {
   useEffect(() => {
     if (route !== defaultState.route && !isRouteZoomedRef.current) {
       isRouteZoomedRef.current = true;
-      zoomToRoute(route.Summary.RouteBBox, debouncedViewport);
+      zoomToRoute(route.Summary.RouteBBox, windowSize);
     }
-  }, [route, debouncedViewport, zoomToRoute]);
+  }, [route, windowSize, zoomToRoute]);
 
   useEffect(() => {
     if (markers.length === 1 && !isPointZoomed.current) {
       isPointZoomed.current = true;
-      zoomToPoint(markers[0].geometry.point, debouncedViewport);
+      zoomToPoint(markers[0].geometry.point);
     }
-  }, [markers, debouncedViewport, zoomToPoint]);
+  }, [markers, zoomToPoint]);
 
   // Side effect that calculates a new route every time one of the options changes
   useEffect(() => {
@@ -291,23 +277,13 @@ function App() {
     }
   };
 
-  // Action router that handles Viewport events from the Hub
-  const handleViewport = (data) => {
-    // Update viewport
-    if (data.payload.event === "update") {
-      setViewport(data.payload.data);
-    }
-  };
-
   // Side effects that runs when the component mounts and subscribes to the Hub
   useEffect(() => {
-    Hub.listen("Viewport", handleViewport);
     Hub.listen("Markers", handleMarkers);
     Hub.listen("Routing", handleRouting);
 
     // Clean up subscriptions when the component unmounts
     return () => {
-      Hub.remove("Viewport", handleViewport);
       Hub.remove("Markers", handleMarkers);
       Hub.remove("Routing", handleRouting);
     };
@@ -327,10 +303,10 @@ function App() {
     let data;
     if (markers.length === 0 || markers.length === 2) {
       // If there are no markers or there are already two (one might be a placeholder) then we set it as first marker (origin)
-      data = { idx: 0, lngLat: lngLat, geocode: true, force: true };
+      data = { idx: 0, lngLat: lngLat.toArray(), geocode: true, force: true };
     } else if (markers.length === 1) {
       // Else if there is one marker we set the new one as first but shift the second to destination
-      data = { idx: 0, lngLat: lngLat, geocode: true, force: false };
+      data = { idx: 0, lngLat: lngLat.toArray(), geocode: true, force: false };
     }
 
     // Dispatch event with constructed payload
@@ -350,8 +326,8 @@ function App() {
       <AppContext.Provider
         value={{
           viewportCenter: [
-            debouncedViewport.longitude,
-            debouncedViewport.latitude,
+            debouncedViewState.longitude,
+            debouncedViewState.latitude,
           ],
           windowSize: windowSize,
           markers: markers,
@@ -365,51 +341,16 @@ function App() {
           isRouting: isRouting,
         }}
       >
-        <header className="w-full h-12 py-1 px-4 flex">
-          <div className="w-1/3 block">
-            <a href={window.location.href}>
-              <img
-                className="h-10"
-                src="/aws_logo.svg"
-                alt="Amazon Web Services"
-              />
-            </a>
-          </div>
-          <div className="w-2/3 flex justify-end items-center">
-            <a
-              href="https://developer.here.com/blog/build-and-deploy-location-apps-with-aws-location-services-and-here"
-              alt="Blog Post on Here Developer Blog"
-              className="ml-4"
-            >
-              Learn More
-            </a>
-            <a
-              href="https://github.com/aws-samples/amazon-location-samples/tree/main/react-map-gl-amplify-here-map"
-              alt="Source Code on GitHub"
-              className="ml-4"
-            >
-              Source Code
-            </a>
-            {/* <a
-              href="https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/amazon-location-samples/tree/main/react-map-gl-amplify-here-map"
-              className="ml-4 hidden md:block"
-            >
-              <img
-                src="https://oneclick.amplifyapp.com/button.svg"
-                alt="Deploy to Amplify Console"
-              />
-            </a> */}
-          </div>
-        </header>
+        <Header />
         {/* Display map only when transformRequest exists, meaning also credentials have been obtained */}
         {transformRequest ? (
-          <ReactMapGL
-            {...viewport}
-            width="100vw"
-            height="calc(100vh - 48px)"
+          <Map
+            {...viewState}
+            mapLib={maplibregl}
+            style={{ width: "100vw", height: "calc(100vh - 48px)" }}
             transformRequest={transformRequest}
             mapStyle={mapName}
-            onViewportChange={setViewport}
+            onMove={(e) => setViewState(e.viewState)}
             onClick={(e) => handleMapClick(e)}
             ref={mapRef}
             attributionControl={false}
@@ -419,20 +360,22 @@ function App() {
           >
             <Controls />
             <Features />
-          </ReactMapGL>
+            {/* Marker toast at the bottom of the screen */}
+            <MarkerControl />
+            {/* Main routing menu */}
+            <RoutingControl />
+          </Map>
         ) : (
           // Otherwise just show a loading indicator
-          <div
-            className="flex justify-center items-center"
-            id="loading-overlay"
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            width="100vw"
+            height="calc(100vh - var(--amplify-space-xxl))"
           >
-            <h1 className="text-xl">Loading...</h1>
-          </div>
+            <Text size="large">Loading...</Text>
+          </Flex>
         )}
-        {/* Marker toast at the bottom of the screen */}
-        <MarkerToast />
-        {/* Main routing menu */}
-        <RoutingMenu />
       </AppContext.Provider>
     </>
   );

@@ -1,8 +1,12 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { createPortal } from "react-dom";
+import { useControl } from "react-map-gl";
 import { Hub } from "@aws-amplify/core";
+import CustomControl from "./CustomControl";
+import { Flex, View, Text } from "@aws-amplify/ui-react";
 import { AppContext } from "../../AppContext";
 import Button from "../primitives/Button";
 import NavigationIcon from "../primitives/NavigateIcon";
@@ -27,56 +31,103 @@ function MarkerToast() {
   }
 
   return (
-    <div
-      className="z-50 w-80 h-18 absolute bottom-2 flex justify-center"
-      id="marker-toast"
+    <Flex
+      style={{
+        zIndex: 50,
+        right: "calc(50vw - calc(20rem / 2))",
+        pointerEvents: "all"
+      }}
+      position="relative"
+      height="4rem"
+      justifyContent="center"
     >
-      <div className=" w-80 bg-gray-100 p-2 rounded-md drop-shadow-xl filter">
-        <div className="flex">
+      <View
+        width="20rem"
+        height="100%"
+        backgroundColor="var(--amplify-colors-neutral-10)"
+        borderRadius="var(--amplify-radii-medium)"
+        boxShadow="var(--amplify-shadows-medium)"
+        padding="var(--amplify-space-xs)"
+      >
+        <Flex height="100%">
           {/* Place Info */}
-          <div className="text-left text-sm w-9/12">
-            <p>
+          <View width="70%">
+            <Text textAlign="left" fontSize="small" fontWeight="bold" lineHeight="normal">
               {marker.street}
               {marker.addressNumber && `, ${marker.addressNumber}`}
-            </p>
-            <p>
+            </Text>
+            <Text textAlign="left" fontSize="small" fontWeight="bold" lineHeight="normal">
               {marker.postalCode}
               {marker.municipality && ` ${marker.municipality}`}
               {marker.country && ", "}
               {marker.country}
-            </p>
-            <p className="text-xs text-gray-500">
+            </Text>
+            <Text textAlign="left" color="var(--amplify-colors-font-tertiary)" fontSize="small" lineHeight="normal">
               {marker.geometry.point[1]}, {marker.geometry.point[0]}
-            </p>
-          </div>
+            </Text>
+          </View>
           {/* Routing button */}
-          <div className="w-2/12 flex justify-center items-center">
+          <Flex width="15%" height="100%" justifyContent="center" alignItems="center">
             <Button
               title="Start Routing"
-              className="transform rotate-45 cursor-pointer border bg-yellow-500 border-yellow-500 h-8 w-8 flex justify-center items-center drop-shadow-md filter"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transform: "rotate(45deg)",
+                cursor: "pointer",
+                height: "2rem",
+                width: "2rem",
+                boxShadow: "var(--amplify-shadows-medium)",
+                backgroundColor: "var(--amplify-colors-brand-primary)",
+                border: "1px solid var(--amplify-colors-brand-primary)"
+              }}
               onPress={() => Hub.dispatch("Routing", { event: "startRouting" })}
             >
               <NavigationIcon
                 width="24"
                 height="24"
-                className="transform -rotate-45 text-white"
+                style={{
+                  transform: "rotate(-45deg)",
+                  fill: "white"
+                }}
               />
             </Button>
-          </div>
+          </Flex>
           {/* Close toast button */}
-          <div className="w-1/12 flex items-start justify-end">
+          <Flex width="15%" justifyContent="flex-end" alignItems="flex-start">
             <Button
               title="Close"
-              className="text-xs cursor-pointer"
+              style={{
+                cursor: "pointer",
+                border: "none",
+                backgroundColor: "transparent",
+                fontSize: "var(--amplify-font-size-small)",
+              }}
               onPress={() => Hub.dispatch("Markers", { event: "closeToast" })}
             >
               ✖️
             </Button>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Flex>
+        </Flex>
+      </View>
+    </Flex>
   );
 }
 
-export default MarkerToast;
+const MarkerControl = () => {
+  const [, setVersion] = useState(0);
+
+  const ctrl = useControl(() => {
+    const forceUpdate = () => setVersion((v) => v + 1);
+    return new CustomControl(forceUpdate, "marker-toast");
+  }, { position: "bottom-right" });
+
+  if (!ctrl.getElement() || !ctrl.getMap()) {
+    return null;
+  } else {
+    return createPortal(<MarkerToast />, ctrl.getElement());
+  }
+};
+
+export default React.memo(MarkerControl);

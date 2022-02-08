@@ -1,12 +1,12 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Hub } from "@aws-amplify/core";
+import { TextField, Button, Text, Flex, View } from "@aws-amplify/ui-react";
 import { AppContext } from "../../AppContext";
 import useDebounce from "../../hooks/useDebounce";
 import { Geo } from "@aws-amplify/geo";
-import Button from "../primitives/Button";
 import NavigationIcon from "../primitives/NavigateIcon";
 
 // Helper function to format address
@@ -16,7 +16,6 @@ const formatAddress = ({
   addressNumber,
   postalCode,
   municipality,
-  country,
 }) => {
   if (label) {
     return label;
@@ -69,13 +68,71 @@ const RoutingMenuInput = ({
   };
 
   return (
-    <input
-      className="w-full p-1 mb-1 border border-gray-500 rounded-md"
+    <TextField
+      size="small"
+      backgroundColor="white"
       placeholder="Start typing, or click on the map"
       onChange={(e) => setValue(e.target.value)}
       onKeyUp={handleExitInput}
       value={value}
     />
+  );
+};
+
+const NavigateNow = ({ inputs, suggestionsAmount, isDirty }) => {
+  const context = useContext(AppContext);
+
+  if (
+    inputs.length === 0 ||
+    suggestionsAmount > 0 ||
+    Object.keys(inputs[0]).length === 0 ||
+    context.isRouting ||
+    !isDirty
+  ) {
+    return null;
+  }
+
+  return (
+    <Flex justifyContent="center" margin="10px 0 0 0">
+      <Button
+        boxShadow="var(--amplify-shadows-medium)"
+        backgroundColor="var(--amplify-colors-brand-primary)"
+        border="1px solid var(--amplify-colors-brand-primary)"
+        title="Start Routing"
+        color="white"
+        size="small"
+        onClick={() => Hub.dispatch("Routing", { event: "startRouting" })}
+      >
+        <Text color="white" padding="0 10px 0 0">Directions</Text>
+        <NavigationIcon
+          width="24"
+          height="24"
+          style={{ fill: "white" }}
+        />
+      </Button>
+    </Flex>
+  );
+};
+
+const Suggestions = ({ suggestions, handleResultClick }) => {
+  if (suggestions.length === 0) return null;
+
+  return (
+    suggestions.map((result, idx) => (
+      <View
+        key={idx}
+        style={{
+          cursor: "pointer",
+          borderColor: "var(--amplify-colors-text-normal)",
+          borderStyle: "solid",
+          borderWidth: "0 0 1px 0",
+        }}
+        margin="5px 0"
+        onClick={() => handleResultClick(result)}
+      >
+        <Text fontSize="small">{formatAddress(result)}</Text>
+      </View>
+    ))
   );
 };
 
@@ -166,8 +223,12 @@ const Inputs = ({ setHasSuggestions }) => {
 
   return (
     <>
-      <div className="flex justify-start flex-row items-center">
-        <div className={inputs.length === 1 ? "w-full" : "w-11/12"}>
+      <Flex
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="center"
+      >
+        <View width={inputs.length === 1 ? "100%" : "90%"}>
           {inputs.map((marker, idx) => (
             <div
               key={JSON.stringify(marker?.geometry) + isDirtyRef.current || 0}
@@ -183,10 +244,13 @@ const Inputs = ({ setHasSuggestions }) => {
               />
             </div>
           ))}
-        </div>
+        </View>
         {inputs.length === 2 ? (
-          <div
-            className="w-1/12 flex justify-center items-center cursor-pointer"
+          <Flex
+            width="10%"
+            justifyContent="center"
+            alignItems="center"
+            style={{ cursor: "pointer" }}
             onClick={() => {
               Hub.dispatch("Markers", { event: "swapMarkers" });
             }}
@@ -195,40 +259,15 @@ const Inputs = ({ setHasSuggestions }) => {
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              className={`fill-current text-black`}
+              fill="black"
             >
               <path d="M18 9v-3c-1 0-3.308-.188-4.506 2.216l-4.218 8.461c-1.015 2.036-3.094 3.323-5.37 3.323h-3.906v-2h3.906c1.517 0 2.903-.858 3.58-2.216l4.218-8.461c1.356-2.721 3.674-3.323 6.296-3.323v-3l6 4-6 4zm-9.463 1.324l1.117-2.242c-1.235-2.479-2.899-4.082-5.748-4.082h-3.906v2h3.906c2.872 0 3.644 2.343 4.631 4.324zm15.463 8.676l-6-4v3c-3.78 0-4.019-1.238-5.556-4.322l-1.118 2.241c1.021 2.049 2.1 4.081 6.674 4.081v3l6-4z" />
             </svg>
-          </div>
+          </Flex>
         ) : null}
-      </div>
-      {inputs.length === 1 &&
-      Object.keys(inputs[0]).length > 0 &&
-      suggestions.length === 0 &&
-      !context.isRouting &&
-      isDirtyRef.current ? (
-        <div className="flex justify-center">
-          <Button
-            title="Start Routing"
-            className="p-1 flex items-center cursor-pointer border border-yellow-500 bg-yellow-500 rounded-md hover:bg-yellow-600 drop-shadow-md filter"
-            onPress={() => Hub.dispatch("Routing", { event: "startRouting" })}
-          >
-            <span className="text-white">Directions</span>
-            <NavigationIcon width="24" height="24" className="text-white" />
-          </Button>
-        </div>
-      ) : null}
-      {suggestions.length === 0
-        ? null
-        : suggestions.map((result, idx) => (
-            <div
-              key={idx}
-              className="cursor-pointer border-b-2 border-gray-500"
-              onClick={() => handleResultClick(result)}
-            >
-              <span className="text-sm">{formatAddress(result)}</span>
-            </div>
-          ))}
+      </Flex>
+      <NavigateNow isDirty={isDirtyRef.current} suggestionsAmount={suggestions.length} inputs={inputs} />
+      <Suggestions suggestions={suggestions} handleResultClick={handleResultClick} />
     </>
   );
 };

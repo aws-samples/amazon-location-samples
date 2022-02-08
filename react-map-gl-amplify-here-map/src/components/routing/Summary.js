@@ -1,7 +1,8 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useContext } from "react";
+import React, { useContext } from "react";
+import { View, Flex, Text } from "@aws-amplify/ui-react";
 import { AppContext, RoutingModesEnum } from "../../AppContext";
 
 // Helper function to format time
@@ -48,17 +49,17 @@ const Summary = ({ data }) => {
     context.routingMode === RoutingModesEnum.WALKING ? "Walk" : "Drive";
 
   return (
-    <div className="py-1">
-      <p className="text-md font-semibold">Your Itinerary:</p>
-      <div className="flex py-1">
-        <p className="text-md w-1/2">
+    <View padding="5px 0">
+      <Text fontWeight="bold" fontSize="medium">Your Itinerary:</Text>
+      <Flex padding="5px 0">
+        <Text fontSize="medium" width="50%" className="text-md w-1/2">
           {action} for {formatTime(duration)}
-        </p>
-        <p className="text-sm w-1/2 text-gray-500 flex items-end justify-end">
-          {formattedDistance} {formattedUnit}
-        </p>
-      </div>
-    </div>
+        </Text>
+        <Flex width="50%" alignItems="end" justifyContent="flex-end">
+          <Text fontSize="small" color="var(--amplify-colors-font-tertiary)">{formattedDistance} {formattedUnit}</Text>
+        </Flex>
+      </Flex>
+    </View>
   );
 };
 

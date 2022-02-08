@@ -1,7 +1,8 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useState } from "react";
+import React, { useState } from "react";
+import { View } from "@aws-amplify/ui-react";
 import DepartureTimeSelector from "./DepartureTimeSelector";
 import ModeOptions from "./ModeOptions";
 
@@ -9,10 +10,8 @@ import ModeOptions from "./ModeOptions";
 const Options = () => {
   const [isOptionOpen, setIsOptionOpen] = useState(false);
 
-  // TODO: complete this function for time
   return (
-    // <div className="w-full border border-red-400">
-    <div className="w-full">
+    <View width="100%" margin="10px 0 5px 0">
       {isOptionOpen ? (
         <ModeOptions
           isOptionOpen={isOptionOpen}
@@ -24,7 +23,7 @@ const Options = () => {
           setIsOptionOpen={setIsOptionOpen}
         />
       )}
-    </div>
+    </View>
   );
 };
 

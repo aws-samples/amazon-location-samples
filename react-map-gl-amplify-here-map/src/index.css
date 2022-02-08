@@ -1,19 +1,29 @@
 /* Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0 */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-#loading-overlay {
-  width: 100vw;
-  height: calc(100vh - theme(height.12));
+.routing-mode-selector .amplify-flex.amplify-radiogroup {
+  width: 100%;
+  gap: 0;
 }
 
-#marker-toast {
-  left: calc(50vw - calc(theme(width.80) / 2));
+.custom-radio .amplify-radio__input + .amplify-radio__button {
+  display: none;
 }
 
-#routing-menu {
-  top: calc(theme(height.12) + 10px);
+.routing-mode-selector .amplify-flex.amplify-radiogroup > div > label {
+  align-items: center;
+  justify-content: center;
+}
+
+.routing-mode-selector
+  .amplify-flex.amplify-radiogroup
+  > div
+  > label
+  .amplify-radio__label {
+  color: white;
+}
+
+.amplify-sliderfield > .amplify-sliderfield__label > span {
+  font-size: var(--amplify-font-sizes-small);
+  color: var(--amplify-colors-font-primary);
 }

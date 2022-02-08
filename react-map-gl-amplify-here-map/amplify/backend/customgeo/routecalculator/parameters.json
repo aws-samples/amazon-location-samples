@@ -2,6 +2,9 @@
   "unauthRoleName": {
     "Ref": "UnauthRoleName"
   },
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
   "geomap2bf94dcbName": {
     "Fn::GetAtt": [
       "geomap2bf94dcb",

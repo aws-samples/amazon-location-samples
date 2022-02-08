@@ -1,10 +1,10 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useContext } from "react";
+import React, { useContext } from "react";
+import { Button, View, Flex, Text } from "@aws-amplify/ui-react";
 import { AppContext, RoutingModesEnum } from "../../AppContext";
 import TruckOptions from "./TruckOptions";
-import Button from "../primitives/Button";
 import AvoidanceOptions from "./AvoidanceOptions";
 import MeasurementsOptions from "./MeasurementsOptions";
 
@@ -22,34 +22,41 @@ const ModeOptions = ({ isOptionOpen, setIsOptionOpen }) => {
   }
 
   return (
-    <div className="w-full">
-      <div className="w-full flex">
-        <div className="w-3/4">
-          <p className="text-sm">Routing Options</p>
-        </div>
+    <View width="100%">
+      <Flex width="100%">
+        <Flex width="75%" justifyContent="flex-start" alignItems="center">
+          <Text fontSize="small">Routing Options</Text>
+        </Flex>
         <Button
-          className="w-1/4 text-center text-sm uppercase"
-          onPress={() => setIsOptionOpen(!isOptionOpen)}
+          size="small"
+          border="0"
+          backgroundColor="transparent"
+          onClick={() => setIsOptionOpen(!isOptionOpen)}
         >
-          {isOptionOpen ? "Close" : "Options"}
+          <Text
+            textTransform="uppercase"
+            fontWeight="lighter"
+          >
+            {isOptionOpen ? "Close" : "Options"}
+          </Text>
         </Button>
-      </div>
-      <div className="w-full flex flex-wrap py-2">
+      </Flex>
+      <Flex width="100%" wrap="wrap" padding="5px 0">
         {context.routingMode === RoutingModesEnum.WALKING ? null : (
-          <div className="w-1/2">
+          <View width="45%">
             <AvoidanceOptions key={`${context.routingMode}-AvoidanceOptions`} />
-          </div>
+          </View>
         )}
         {context.routingMode !== RoutingModesEnum.TRUCK ? null : (
-          <div className="w-1/2">
+          <View width="45%">
             <TruckOptions key={`${context.routingMode}-TruckOptions`} />
-          </div>
+          </View>
         )}
-        <div className="w-full mt-2">
+        <View width="100%">
           <MeasurementsOptions />
-        </div>
-      </div>
-    </div>
+        </View>
+      </Flex>
+    </View>
   );
 };
 
