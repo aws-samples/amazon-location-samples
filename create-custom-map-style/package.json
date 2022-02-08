@@ -60,10 +60,10 @@
       }
     },
     "react-scripts": {
-      "resolve-url-loader": "5.0.0"
-    },
-    "css-select": {
-      "nth-check": "2.0.1"
+      "resolve-url-loader": "5.0.0",
+      "css-select": {
+        "nth-check": "2.0.1"
+      }
     }
   }
 }
