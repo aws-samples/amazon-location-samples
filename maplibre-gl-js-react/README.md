@@ -12,6 +12,4 @@
 
 ## Important notes
 
-- This uses [CRACO](https://github.com/gsoft-inc/craco) to alias `react-map-gl`'s Mapbox GL dependency to use [MapLibre GL JS](https://maplibre.org/) instead. See [`craco.config.js`](craco.config.js)
-
-- `mapbox-gl@^2` and `react-map-gl@^6` are **NOT** compatible with Amazon Location Service, as they require a Mapbox API key. This project pins these package versions to ^1.0.0 and ^5.0.0, respectively.
+- `mapbox-gl@^2` and `react-map-gl@6.x` are **NOT** compatible with Amazon Location Service, as they require a Mapbox API key. This project uses `maplibre-gl^1.0.0` and `react-map-gl@^7.0.x`, the latter is a new version that is library agnostic and allows to specify which map library to use.
