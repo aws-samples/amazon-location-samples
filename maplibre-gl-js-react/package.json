@@ -50,12 +50,10 @@
         "nth-check": "2.0.1"
       }
     },
-    "@aws-amplify/core": {
-      "react-native": {
-        "@react-native-community/cli": {
-          "strip-ansi": {
-            "ansi-regex": "5.0.1"
-          }
+    "react-native": {
+      "@react-native-community/cli": {
+        "strip-ansi": {
+          "ansi-regex": "5.0.1"
         }
       }
     }
