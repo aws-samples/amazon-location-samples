@@ -1,52 +1,36 @@
 {
   "name": "leaflet-vue-amplify",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 5050"
   },
   "dependencies": {
-    "@aws-amplify/ui-components": "^1.9.2",
     "@maplibre/maplibre-gl-leaflet": "^0.0.15",
-    "aws-amplify": "^4.3.4",
-    "core-js": "^3.6.5",
+    "aws-amplify": "^4.3.14",
     "leaflet": "^1.7.1",
     "maplibre-gl": "^1.15.2",
-    "maplibre-gl-js-amplify": "^1.2.1",
-    "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "maplibre-gl-js-amplify": "^1.2.3",
+    "vue": "^3.2.29",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0"
+    "@vitejs/plugin-vue": "^2.1.0",
+    "vite": "^2.7.13"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
+  "overrides": {
+    "react-native": {
+      "@react-native-community/cli": {
+        "strip-ansi": {
+          "ansi-regex": "5.0.1"
+        }
+      }
     },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "maplibre-gl-js-amplify": {
+      "@maplibre/maplibre-gl-geocoder": {
+        "nanoid": "3.1.31"
+      }
+    }
+  }
 }

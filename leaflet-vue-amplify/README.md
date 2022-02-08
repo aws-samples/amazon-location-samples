@@ -5,8 +5,8 @@
 This example demonstrates how to use Leaflet with Amazon Location Service and AWS Amplify within a Vue.js application.
 
 ## Execution environment
-- node v16.10.0
-- npm v7.24.0
+- node v16.x
+- npm v8.x
 
 ## Getting started
 1. Install the Amplify CLI: `npm install -g @aws-amplify/cli`
@@ -16,7 +16,7 @@ This example demonstrates how to use Leaflet with Amazon Location Service and AW
 
 ## Compiles and hot-reloads for development
 ```bash
-npm run serve
+npm run dev
 ```
 
 ## Compiles and minifies for production
@@ -34,7 +34,7 @@ amplify delete
 
 ## Security
 
-See [CONTRIBUTING](../CONTRIBUTING.md#security-issue-notifications) for more information.
+See [CONTRIBUTING](../CONTRIBUTING.md) for more information.
 
 ## License
 
