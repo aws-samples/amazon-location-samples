@@ -77,49 +77,12 @@
         "Roles": [
           {
             "Ref": "unauthRoleName"
+          },
+          {
+            "Ref": "authRoleName"
           }
         ]
       }
-    }
-  },
-  "RoleCalculatorIAMPolicyAuth": {
-    "Type": "AWS::IAM::Policy",
-    "Properties": {
-      "PolicyDocument": {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Effect": "Allow",
-            "Action": [
-              "geo:CalculateRoute"
-            ],
-            "Resource": {
-              "Fn::GetAtt": [
-                "RouteCalculator",
-                "CalculatorArn"
-              ]
-            }
-          }
-        ]
-      },
-      "PolicyName": {
-        "Fn::Sub": [
-          "RouteCalculator-${StackName}-${Env}-Policy",
-          {
-            "Env": {
-              "Ref": "env"
-            },
-            "StackName": {
-              "Ref": "AWS::StackName"
-            }
-          }
-        ]
-      },
-      "Roles": [
-        {
-          "Ref": "authRoleName"
-        }
-      ]
     }
   }
 }

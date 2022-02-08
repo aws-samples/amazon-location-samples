@@ -79,7 +79,6 @@ const useAmazonLocationService = () => {
   useEffect(() => {
     async function getCredentials() {
       const credentials = await Auth.currentCredentials();
-      console.log(credentials);
       setCredentials(credentials);
     }
 

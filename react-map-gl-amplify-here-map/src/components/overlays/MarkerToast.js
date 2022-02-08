@@ -62,7 +62,7 @@ function MarkerToast() {
               {marker.country && ", "}
               {marker.country}
             </Text>
-            <Text textAlign="left" color="var(--amplify-colors-font-tertiary)" fontSize="small" lineHeight="normal"> {/* //TODO: fix color */}
+            <Text textAlign="left" color="var(--amplify-colors-font-tertiary)" fontSize="small" lineHeight="normal">
               {marker.geometry.point[1]}, {marker.geometry.point[0]}
             </Text>
           </View>

@@ -53,6 +53,12 @@ function App() {
   // Functions that moves the viewport so that it fits a route once it is calculated
   const zoomToRoute = useCallback((routeBBox, viewport) => {
     console.debug("Fitting route bbox to viewport", routeBBox);
+    console.log({
+      top: 50,
+      bottom: 50,
+      left: 50,
+      right: viewport.width > 768 ? 450 : 50,
+    });
     mapRef.current.fitBounds(
       [
         [routeBBox[0], routeBBox[1]],
@@ -66,6 +72,7 @@ function App() {
           right: viewport.width > 768 ? 450 : 50, // TODO: see if we can get rid of this
         },
         speed: 0.8,
+        linear: false
       }
     );
   }, []);
