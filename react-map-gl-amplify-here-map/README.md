@@ -30,7 +30,7 @@ The demo uses [MapLibre GL JS](https://maplibre.org/maplibre-gl-js-docs/api/) an
 
 [`react-map-gl`](https://visgl.github.io/react-map-gl/) is a set of React components that can be
 used to display maps. [`react-map-gl-amplify`](../react-map-gl-amplify/) demonstrates how to use
-`react-map-gl` with Amazon Location and AWS Amplify. The demo also uses [react-aria](https://react-spectrum.adobe.com/react-aria/index.html) to build part of the UI and [tailwindcss](https://github.com/tailwindlabs/tailwindcss) for styling.
+`react-map-gl` with Amazon Location and AWS Amplify. The demo also uses [@aws-amplify/ui-react](https://ui.docs.amplify.aws/getting-started/installation) to build part of the UI.
 
 See [`src/index.js`](src/index.js).
 

@@ -1,71 +1,70 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import React, { useContext, useEffect, createContext, useRef } from "react";
+import React, { useState } from "react";
 import { Hub } from "@aws-amplify/core";
-import { useRadioGroupState } from "@react-stately/radio";
-import { useRadio, useRadioGroup } from "@react-aria/radio";
-import { VisuallyHidden } from "@react-aria/visually-hidden";
-import { useFocusRing } from "@react-aria/focus";
-import { AppContext, defaultState, UnitsEnum } from "../../AppContext";
+import { Flex, View, Radio, RadioGroupField, Text } from "@aws-amplify/ui-react";
+import { UnitsEnum } from "../../AppContext";
 
-let MeasurementsContext = createContext(null);
 
 // Component: Unit - Renders a single unit option
-function Unit(props) {
-  let { children, value } = props;
-  let state = useContext(MeasurementsContext);
-  let ref = useRef(null);
-  let { inputProps } = useRadio(props, state, ref);
-  let { isFocusVisible, focusProps } = useFocusRing();
-
-  let isSelected = state.selectedValue === props.value;
-  let backgroundColor = isSelected ? "bg-yellow-500" : "bg-gray-500";
-  let borderColor = isFocusVisible ? "border-yellow-500" : "border-gray-500";
+function Unit({ label, value, isSelected, nth }) {
   let borderRadius = "";
-  if (props.nth === "first") borderRadius = "rounded-tl-md rounded-bl-md";
-  if (props.nth === "last") borderRadius = "rounded-tr-md rounded-br-md";
+  if (nth === "first") borderRadius = "var(--amplify-radii-small) 0 0 var(--amplify-radii-small)";
+  if (nth === "last") borderRadius = "0 var(--amplify-radii-small) var(--amplify-radii-small) 0";
 
   return (
-    <label
-      className={`w-1/2 text-white text-center border cursor-pointer text-sm ${backgroundColor} ${borderColor} ${borderRadius}`}
-      title={value}
+    <View
+      width="calc(100% / 3)"
+      backgroundColor={isSelected ? "var(--amplify-colors-brand-primary)" : "var(--amplify-colors-background-secondary)"}
+      style={{
+        cursor: "pointer",
+        borderRadius: borderRadius,
+        border: "1px solid",
+        borderColor: "var(--amplify-colors-background-secondary)"
+      }}
+      padding="var(--amplify-space-xxxs) 0"
+      title={label}
     >
-      <VisuallyHidden>
-        <input {...inputProps} {...focusProps} ref={ref} />
-      </VisuallyHidden>
-      {children}
-    </label>
+      <Radio className="custom-radio" value={value}>
+        {label}
+      </Radio>
+    </View>
   );
 }
 
 // Component: MeasurementsOptions - Renders the measurement options
 const MeasurementsOptions = () => {
-  const context = useContext(AppContext);
-  let state = useRadioGroupState({});
-  let { radioGroupProps, labelProps } = useRadioGroup({}, state);
+  const [value, setValue] = useState(Object.values(UnitsEnum)[0].value);
 
-  // Side effect that runs when the selected unit value changes
-  useEffect(() => {
-    if (state.selectedValue === undefined) {
-      state.setSelectedValue(defaultState.units);
-    } else if (state.selectedValue !== undefined) {
-      Hub.dispatch("Routing", {
-        event: "changeUnits",
-        data: state.selectedValue,
-      });
-    }
-  }, [state, context.routingMode]);
+  const handleStateChange = (e) => {
+    setValue(e.target.value);
+
+    Hub.dispatch("Routing", {
+      event: "changeUnits",
+      data: e.target.value,
+    });
+  };
 
   return (
-    <div {...radioGroupProps}>
-      <p {...labelProps} className="text-sm">
-        Measurement System
-      </p>
-      <div className="flex w-2/3">
-        <MeasurementsContext.Provider value={state}>
+    <>
+      <Text fontSize="small">Measurements Options</Text>
+      <Flex width="100%" justifyContent="center" alignItems="center" gap="0">
+        <RadioGroupField
+          label="Routing Mode"
+          labelHidden={true}
+          direction="row"
+          value={value}
+          onChange={handleStateChange}
+          width="100%"
+          display="flex"
+          alignContent="center"
+          className="routing-mode-selector"
+        >
+          {/* Show routing mode buttons */}
           {Object.values(UnitsEnum).map((unit, idx) => {
             let nth;
+            // If first or last set props to round corners
             if (idx === 0) {
               nth = "first";
             } else if (idx === Object.values(UnitsEnum).length - 1) {
@@ -73,18 +72,17 @@ const MeasurementsOptions = () => {
             }
             return (
               <Unit
-                key={unit.value}
                 value={unit.value}
-                title={unit.label}
+                label={unit.label}
+                isSelected={value === unit.value}
+                key={unit.value}
                 nth={nth}
-              >
-                {unit.label}
-              </Unit>
+              />
             );
           })}
-        </MeasurementsContext.Provider>
-      </div>
-    </div>
+        </RadioGroupField>
+      </Flex>
+    </>
   );
 };
 

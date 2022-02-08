@@ -1,68 +1,62 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import React, { useContext, useEffect, createContext, useRef } from "react";
+import React, { useState } from "react";
 import { Hub } from "@aws-amplify/core";
-import { useRadioGroupState } from "@react-stately/radio";
-import { useRadio, useRadioGroup } from "@react-aria/radio";
-import { VisuallyHidden } from "@react-aria/visually-hidden";
-import { useFocusRing } from "@react-aria/focus";
-import { AppContext, RoutingModesEnum, defaultState } from "../../AppContext";
+import { Flex, View, Radio, RadioGroupField } from "@aws-amplify/ui-react";
+import { RoutingModesEnum } from "../../AppContext";
 
-let ModeContext = createContext(null);
-
-// Component: Mode - Routing Mode Button
-function Mode(props) {
-  let { children, value } = props;
-  let state = useContext(ModeContext);
-  let ref = useRef(null);
-  let { inputProps } = useRadio(props, state, ref);
-  let { isFocusVisible, focusProps } = useFocusRing();
-
-  let isSelected = state.selectedValue === props.value;
-  let backgroundColor = isSelected ? "bg-yellow-500" : "bg-gray-500";
-  let borderColor = isFocusVisible ? "border-yellow-500" : "border-gray-500";
+const Mode = ({ value, isSelected, nth }) => {
   let borderRadius = "";
-  if (props.nth === "first") borderRadius = "rounded-tl-md rounded-bl-md";
-  if (props.nth === "last") borderRadius = "rounded-tr-md rounded-br-md";
+  if (nth === "first") borderRadius = "var(--amplify-radii-small) 0 0 var(--amplify-radii-small)";
+  if (nth === "last") borderRadius = "0 var(--amplify-radii-small) var(--amplify-radii-small) 0";
 
   return (
-    <label
-      className={`w-1/3 text-white text-center border cursor-pointer ${backgroundColor} ${borderColor} ${borderRadius}`}
+    <View
+      width="calc(100% / 3)"
+      backgroundColor={isSelected ? "var(--amplify-colors-brand-primary)" : "var(--amplify-colors-background-secondary)"}
+      style={{
+        cursor: "pointer",
+        borderRadius: borderRadius,
+        border: "1px solid",
+        borderColor: "var(--amplify-colors-background-secondary)"
+      }}
+      padding="var(--amplify-space-xxxs) 0"
       title={value}
     >
-      <VisuallyHidden>
-        <input {...inputProps} {...focusProps} ref={ref} />
-      </VisuallyHidden>
-      {children}
-    </label>
+      <Radio className="custom-radio" value={value}>
+        {value}
+      </Radio>
+    </View>
   );
-}
+};
 
 // Component: ModeSelector - Routing Mode Selector (Radio buttons: Walking, Car, Truck)
-const ModeSelector = ({ className }) => {
-  const context = useContext(AppContext);
-  let state = useRadioGroupState({});
-  let { radioGroupProps, labelProps } = useRadioGroup({}, state);
+const ModeSelector = () => {
+  const [value, setValue] = useState(Object.values(RoutingModesEnum)[0]);
 
-  // Side effect that runs when routing mode changes
-  useEffect(() => {
-    if (state.selectedValue === undefined) {
-      state.setSelectedValue(defaultState.routingMode);
-    } else if (state.selectedValue !== undefined) {
-      Hub.dispatch("Routing", {
-        event: "changeRoutingMode",
-        data: state.selectedValue,
-      });
-    }
-  }, [state, context.routingMode]);
+  const handleStateChange = (e) => {
+    setValue(e.target.value);
+
+    Hub.dispatch("Routing", {
+      event: "changeRoutingMode",
+      data: e.target.value,
+    });
+  };
 
   return (
-    <div {...radioGroupProps} className={`flex ${className}`}>
-      <VisuallyHidden>
-        <span {...labelProps}>Routing Mode</span>
-      </VisuallyHidden>
-      <ModeContext.Provider value={state}>
+    <Flex width="100%" justifyContent="center" alignItems="center" gap="0" margin="10px 0 0 0">
+      <RadioGroupField
+        label="Routing Mode"
+        labelHidden={true}
+        direction="row"
+        value={value}
+        onChange={handleStateChange}
+        width="100%"
+        display="flex"
+        alignContent="center"
+        className="routing-mode-selector"
+      >
         {/* Show routing mode buttons */}
         {Object.values(RoutingModesEnum).map((routingMode, idx) => {
           let nth;
@@ -74,17 +68,15 @@ const ModeSelector = ({ className }) => {
           }
           return (
             <Mode
-              key={routingMode}
               value={routingMode}
-              title={routingMode}
+              isSelected={value === routingMode}
+              key={routingMode}
               nth={nth}
-            >
-              {routingMode}
-            </Mode>
+            />
           );
         })}
-      </ModeContext.Provider>
-    </div>
+      </RadioGroupField>
+    </Flex>
   );
 };
 

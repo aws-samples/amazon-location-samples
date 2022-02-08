@@ -3,10 +3,10 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { Hub } from "@aws-amplify/core";
+import { Text, View, SliderField, useTheme } from "@aws-amplify/ui-react";
 import useDebounce from "../../hooks/useDebounce";
 import { AppContext, UnitsEnum } from "../../AppContext";
 import NumberField from "../primitives/NumberField";
-import Slider from "../primitives/Slider";
 
 // Component: TruckOptions - Renders the truck options form
 function TruckOptions() {
@@ -16,7 +16,8 @@ function TruckOptions() {
   // Debounce the options objects to avoid unnecessary updates
   const debouncedDimensions = useDebounce(dimensions, 500);
   const debouncedWeight = useDebounce(weight, 500);
-
+  const { tokens } = useTheme();
+  console.log(tokens.colors.font.primary);
   // Side effect that dispatches the updates to the global app state
   useEffect(() => {
     if (Object.keys(debouncedDimensions).length > 0) {
@@ -68,23 +69,22 @@ function TruckOptions() {
 
   return (
     <>
-      <p className="text-sm">Truck Specs</p>
-      <div>
-        <Slider
-          label="Weight"
-          formatOptions={{
-            style: "unit",
-            unit:
-              context.units === UnitsEnum.METRIC.value ? "kilogram" : "pound",
-            unitDisplay: "short",
-          }}
-          minValue={0}
-          maxValue={3500}
+      <Text fontSize="small">Truck Specs</Text>
+      <View width="80%">
+        <SliderField
+          label={`Weight (${context.units === UnitsEnum.METRIC.value ? "kg" : "lbs"})`}
+          fontSize="small"
+          min={0}
+          max={3500}
+          defaultValue={0}
+          emptyTrackColor="var(--amplify-colors-background-secondary)"
+          filledTrackColor="var(--amplify-colors-brand-primary)"
           step={0.5}
           onChange={(value) => handleWeightChange("Total", value)}
+          className="weight-slider"
         />
-      </div>
-      <div className="w-full">
+      </View>
+      <View width="100%">
         <NumberField
           label="Height"
           value={dimensions.Height || 0}
@@ -100,8 +100,8 @@ function TruckOptions() {
           }}
           onChange={(value) => handleDimensionChange("Height", value)}
         />
-      </div>
-      <div className="w-full">
+      </View>
+      <View width="100%">
         <NumberField
           label="Length"
           value={dimensions.Length || 0}
@@ -117,8 +117,8 @@ function TruckOptions() {
           }}
           onChange={(value) => handleDimensionChange("Length", value)}
         />
-      </div>
-      <div className="w-full">
+      </View>
+      <View width="100%">
         <NumberField
           label="Width"
           value={dimensions.Width || 0}
@@ -134,7 +134,7 @@ function TruckOptions() {
           }}
           onChange={(value) => handleDimensionChange("Width", value)}
         />
-      </div>
+      </View>
     </>
   );
 }

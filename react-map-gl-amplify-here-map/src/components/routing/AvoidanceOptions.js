@@ -3,8 +3,8 @@
 
 import React, { useContext } from "react";
 import { Hub } from "@aws-amplify/core";
+import { Text, View, SwitchField } from "@aws-amplify/ui-react";
 import { AppContext, RoutingModesEnum } from "../../AppContext";
-import Switch from "../primitives/Switch";
 
 // Component: AvoidanceOptions - Renders the options for the avoidance routing mode
 const AvoidanceOptions = () => {
@@ -38,32 +38,38 @@ const AvoidanceOptions = () => {
 
   return (
     <>
-      <p className="text-sm">Avoid</p>
-      <div key={`${context.routingMode}AvoidFerries`}>
-        <Switch
-          defaultChecked={defaultChecked.AvoidFerries}
-          onChange={(checked) =>
-            handleAvoidanceChanges("AvoidFerries", checked)
+      <Text fontSize="small">Avoid</Text>
+      <View key={`${context.routingMode}AvoidFerries`}>
+        <SwitchField
+          isDisabled={false}
+          label="Ferries"
+          isLabelHidden={false}
+          labelPosition="end"
+          trackColor="var(--amplify-colors-background-secondary)"
+          trackCheckedColor="var(--amplify-colors-brand-primary)"
+          onChange={(e) =>
+            handleAvoidanceChanges("AvoidFerries", e.target.checked)
           }
-          enabledTitle="Avoid ferries when calculating routes"
-          disabledTitle="Don't avoid ferries when calculating routes"
-        >
-          Ferries
-        </Switch>
-      </div>
-      <div
+          defaultChecked={defaultChecked.AvoidFerries}
+        />
+      </View>
+      <View
         key={`${context.routingMode}AvoidTolls`}
         title="Avoid tolls when calculating routes"
       >
-        <Switch
+        <SwitchField
+          isDisabled={false}
+          label="Tolls"
+          isLabelHidden={false}
+          labelPosition="end"
+          trackColor="var(--amplify-colors-background-secondary)"
+          trackCheckedColor="var(--amplify-colors-brand-primary)"
+          onChange={(e) =>
+            handleAvoidanceChanges("AvoidTolls", e.target.checked)
+          }
           defaultChecked={defaultChecked.AvoidTolls}
-          onChange={(checked) => handleAvoidanceChanges("AvoidTolls", checked)}
-          enabledTitle="Avoid tolls when calculating routes"
-          disabledTitle="Don't avoid tolls when calculating routes"
-        >
-          Tolls
-        </Switch>
-      </div>
+        />
+      </View>
     </>
   );
 };

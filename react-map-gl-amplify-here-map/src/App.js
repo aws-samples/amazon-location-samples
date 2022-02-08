@@ -4,6 +4,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import Map from "react-map-gl";
 import maplibregl from "maplibre-gl";
+import { Flex, Text } from "@aws-amplify/ui-react";
 import Controls from "./components/overlays/Controls";
 import { Hub } from "@aws-amplify/core";
 import useAmazonLocationService from "./hooks/useAmazonLocationService";
@@ -17,8 +18,8 @@ import {
 import useWindowSize from "./hooks/useWindowSize";
 import { Header } from "./components/Header";
 import Features from "./components/overlays/Features";
-import MarkerToast from "./components/overlays/MarkerToast";
-import RoutingMenu from "./components/routing/RoutingMenu";
+import MarkerControl from "./components/overlays/MarkerToast";
+import RoutingControl from "./components/overlays/RoutingMenu";
 import { Geo } from "@aws-amplify/geo";
 
 function App() {
@@ -355,7 +356,6 @@ function App() {
           <Map
             {...viewport}
             mapLib={maplibregl}
-            maxPitch={60} // TODO: remove once react-map-gl 7.0.2 is released
             style={{ width: "100vw", height: "calc(100vh - 48px)" }}
             transformRequest={transformRequest}
             mapStyle={mapName}
@@ -369,20 +369,22 @@ function App() {
           >
             <Controls />
             <Features />
+            {/* Marker toast at the bottom of the screen */}
+            <MarkerControl />
+            {/* Main routing menu */}
+            <RoutingControl />
           </Map>
         ) : (
           // Otherwise just show a loading indicator
-          <div
-            className="flex justify-center items-center"
-            id="loading-overlay"
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            width="100vw"
+            height="calc(100vh - var(--amplify-space-xxl))"
           >
-            <h1 className="text-xl">Loading...</h1>
-          </div>
+            <Text size="large">Loading...</Text>
+          </Flex>
         )}
-        {/* Marker toast at the bottom of the screen */}
-        <MarkerToast />
-        {/* Main routing menu */}
-        <RoutingMenu />
       </AppContext.Provider>
     </>
   );

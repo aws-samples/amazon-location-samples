@@ -3,9 +3,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Hub } from "@aws-amplify/core";
+import { Flex, View, Button, Text, SelectField } from "@aws-amplify/ui-react";
 import useDebounce from "../../hooks/useDebounce";
 import { defaultState } from "../../AppContext";
-import Button from "../primitives/Button";
 
 const DepartureTimeHoursOption = ({ date }) => {
   const humanFriendly = new Intl.DateTimeFormat("en-US", {
@@ -85,14 +85,14 @@ const DepartureTimeHoursSelect = ({ departureTime, setDepartureTime }) => {
   }
 
   return (
-    <select onChange={handleSelectChange}>
+    <SelectField onChange={handleSelectChange} size="small">
       {options.map((tick, idx) => {
         if (idx === 0 && localDepartureTime === undefined) {
           setLocalDepartureTime(tick);
         }
         return <DepartureTimeHoursOption key={tick.getTime()} date={tick} />;
       })}
-    </select>
+    </SelectField>
   );
 };
 
@@ -187,40 +187,59 @@ const DepartureTimeSelector = ({ isOptionOpen, setIsOptionOpen }) => {
 
   return (
     <>
-      <div className="w-full flex">
-        <div className="w-3/4">
-          <select onChange={handleDepartureChange}>
+      <Flex width="100%">
+        <View width="50%">
+          <SelectField
+            label="Time of departure"
+            labelHidden={true}
+            size="small"
+            onChange={handleDepartureChange}
+            defaultValue={1}
+          >
             <option value={1}>Leave Now</option>
             <option value={0}>Depart At</option>
-          </select>
-        </div>
-        <Button
-          className="w-1/4 text-center text-sm uppercase"
-          onPress={() => setIsOptionOpen(!isOptionOpen)}
-        >
-          {isOptionOpen ? "Close" : "Options"}
-        </Button>
-      </div>
+          </SelectField>
+        </View>
+        <Flex justifyContent="flex-end" width="50%">
+          <Button
+            size="small"
+            border="0"
+            backgroundColor="transparent"
+            onClick={() => setIsOptionOpen(!isOptionOpen)}
+          >
+            <Text
+              textTransform="uppercase"
+              fontWeight="lighter"
+            >
+              {isOptionOpen ? "Close" : "Options"}
+            </Text>
+          </Button>
+        </Flex>
+      </Flex>
       {isLeaveNow === false && (
-        <div className="flex pt-3">
-          <div className="w-1/2">
+        <Flex width="100%" gap="0">
+          <View width="50%">
             <DepartureTimeHoursSelect
               departureTime={
                 departureTime !== null ? departureTime : new Date()
               }
               setDepartureTime={setDepartureTime}
             />
-          </div>
-          <div className="w-1/2">
+          </View>
+          <Flex width="50%" gap="0" justifyContent="flex-end" padding="5px 0 5px 0">
             {/* TODO: disable buttons when limits reached */}
-            <button
-              className="w-1/5 text-sm text-white bg-gray-500 rounded-tl-md rounded-bl-md border border-gray-500"
+            <Button
+              size="small"
+              backgroundColor="var(--amplify-colors-background-secondary)"
+              color="white"
+              borderRadius="var(--amplify-radii-small) 0 0 var(--amplify-radii-small)"
+              border="1px solid var(--amplify-colors-background-secondary)"
               title={"Decrease date"}
               onClick={handleDateClick}
               id="departureTimeBackDateBtn"
             >
               &lt;
-            </button>
+            </Button>
             <input
               type="date"
               value={departureTime.toISOString().split("T")[0]}
@@ -233,15 +252,19 @@ const DepartureTimeSelector = ({ isOptionOpen, setIsOptionOpen }) => {
               ref={dateInputRef}
               onChange={handleCalendarChange}
             />
-            <button
-              className="w-1/5 text-sm text-white bg-gray-500 rounded-tr-md rounded-br-md border border-gray-500"
+            <Button
+              size="small"
+              backgroundColor="var(--amplify-colors-background-secondary)"
+              color="white"
+              borderRadius="0 var(--amplify-radii-small) var(--amplify-radii-small) 0"
+              border="1px solid var(--amplify-colors-background-secondary)"
               onClick={handleDateClick}
               id="departureTimeNextDateBtn"
             >
               &gt;
-            </button>
-          </div>
-        </div>
+            </Button>
+          </Flex>
+        </Flex>
       )}
     </>
   );

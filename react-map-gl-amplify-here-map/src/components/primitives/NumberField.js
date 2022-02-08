@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 
 import React, { useRef } from "react";
+import { Text, Flex, Button } from "@aws-amplify/ui-react";
 import { useNumberFieldState } from "@react-stately/numberfield";
 import { useLocale } from "@react-aria/i18n";
 import { useButton } from "@react-aria/button";
@@ -31,28 +32,38 @@ const NumberField = (props) => {
 
   return (
     <>
-      <label {...labelProps} className="w-full text-sm">
+      <Text {...labelProps} width="100%" size="small">
         {props.label}
-      </label>
-      <div {...groupProps} className="w-full max-w-xs flex">
-        <button
-          className="w-1/5 text-sm text-white bg-gray-500 rounded-tl-md rounded-bl-md border border-gray-500"
+      </Text>
+      <Flex {...groupProps} width="100%" gap="0" justifyContent="flex-start">
+        <Button
+          size="small"
+          backgroundColor="var(--amplify-colors-background-secondary)"
+          color="white"
+          borderRadius="var(--amplify-radii-small) 0 0 var(--amplify-radii-small)"
+          border="1px solid var(--amplify-colors-background-secondary)"
           title={`Decrease truck ${props.label.toLowerCase()}`}
           {...decrementProps}
           ref={incrRef}
         >
           -
-        </button>
-        <input className="w-2/5 text-center" {...inputProps} ref={inputRef} />
-        <button
-          className="w-1/5 text-sm text-white bg-gray-500 rounded-tr-md rounded-br-md border border-gray-500"
+        </Button>
+        <input style={{
+          width: "40%",
+        }} {...inputProps} ref={inputRef} />
+        <Button
+          size="small"
+          backgroundColor="var(--amplify-colors-background-secondary)"
+          color="white"
+          borderRadius="0 var(--amplify-radii-small) var(--amplify-radii-small) 0"
+          border="1px solid var(--amplify-colors-background-secondary)"
           title={`Increase truck ${props.label.toLowerCase()}`}
           {...incrementProps}
           ref={decRef}
         >
           +
-        </button>
-      </div>
+        </Button>
+      </Flex>
     </>
   );
 };
