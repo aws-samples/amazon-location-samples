@@ -4,12 +4,12 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/ui-react": "^1.2.1",
-    "aws-amplify": "^3.3.18",
-    "aws-sdk": "^2.843.0",
-    "mapbox-gl": "^1.13.0",
+    "aws-amplify": "^4.3.14",
+    "aws-sdk": "^2.1071.0",
     "maplibre-gl": "^1.14.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "maplibre-gl-js-amplify": "^1.2.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-map-gl": "^5.3.11"
   },
   "scripts": {
