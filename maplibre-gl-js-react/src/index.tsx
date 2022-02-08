@@ -5,11 +5,15 @@ import React, { StrictMode, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { createRequestTransformer } from "amazon-location-helpers";
 import { ICredentials } from "@aws-amplify/core";
-import Map, { TransformRequestFunction, NavigationControl, ViewState } from "react-map-gl";
+import Map, {
+  TransformRequestFunction,
+  NavigationControl,
+  ViewState,
+} from "react-map-gl";
 import maplibregl from "maplibre-gl";
 import Amplify, { Auth } from "aws-amplify";
 import amplifyConfig from "./aws-exports";
-import 'maplibre-gl/dist/maplibre-gl.css';
+import "maplibre-gl/dist/maplibre-gl.css";
 import "./index.css";
 
 Amplify.configure(amplifyConfig);
@@ -19,7 +23,8 @@ const mapName = "<MAP_NAME>";
 
 const App = () => {
   const [credentials, setCredentials] = useState<ICredentials>();
-  const [transformRequest, setRequestTransformer] = useState<TransformRequestFunction>();
+  const [transformRequest, setRequestTransformer] =
+    useState<TransformRequestFunction>();
 
   const [viewState, setViewState] = React.useState<Partial<ViewState>>({
     longitude: -123.1187,
@@ -57,12 +62,13 @@ const App = () => {
       {transformRequest ? (
         <Map
           {...viewState}
-          onMove={(e) => {setViewState(e.viewState)}}
-          style={{ width: '100%', height: '100vh' }}
+          onMove={(e) => {
+            setViewState(e.viewState);
+          }}
+          style={{ width: "100%", height: "100vh" }}
           mapStyle={mapName}
           transformRequest={transformRequest}
           mapLib={maplibregl}
-          maxPitch={60}
         >
           <NavigationControl showCompass={false} />
         </Map>
