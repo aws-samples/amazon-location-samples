@@ -1,81 +1,62 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { ICredentials } from "@aws-amplify/core";
-import { Geo, AmazonLocationServiceMapStyle } from "@aws-amplify/geo";
-import Amplify, { Auth } from "aws-amplify";
+import { StrictMode, useEffect, useState, useRef } from "react";
+import Amplify, { Auth, Geo } from "aws-amplify";
+import { AmazonLocationServiceMapStyle } from "@aws-amplify/geo";
 import { AmplifyMapLibreRequest } from "maplibre-gl-js-amplify";
-import { StrictMode, useEffect, useState } from "react";
+import Map, { NavigationControl, ViewState } from "react-map-gl";
 import ReactDOM from "react-dom";
-import ReactMapGL, {
-  MapRequest,
-  NavigationControl,
-  ViewportProps,
-} from "react-map-gl";
 
 import awsconfig from "./aws-exports";
 
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./index.css";
-import { TransformRequestFunction } from "maplibre-gl";
 
 // initialize Amplify (auth, etc.)
 Amplify.configure(awsconfig);
 
 const App = () => {
-  const [credentials, setCredentials] = useState<ICredentials>();
-  const [transformRequest, setRequestTransformer] =
-    useState<TransformRequestFunction>();
+  const [transformerReady, setTransformerReady] = useState<boolean>(false);
+  const amplifyMaplibre = useRef<AmplifyMapLibreRequest>();
 
-  const [viewport, setViewport] = useState<Partial<ViewportProps>>({
+  const [viewState, setViewState] = useState<Partial<ViewState>>({
     longitude: -123.1187,
     latitude: 49.2819,
     zoom: 10,
   });
 
   useEffect(() => {
-    // fetch AWS credentials from Amazon Cognito using Amplify Auth
-    const fetchCredentials = async () => {
-      setCredentials(await Auth.currentUserCredentials());
+    const createTransformer = async () => {
+      if (!transformerReady) {
+        // fetch AWS credentials from Amazon Cognito using Amplify Auth
+        const credentials = await Auth.currentCredentials();
+        // create a new AmplifyMapLibreRequest instance and save it in a ref
+        // so it persists re-renders and takes care of renewing the AWS credentials
+        amplifyMaplibre.current = new AmplifyMapLibreRequest(
+          credentials,
+          (Geo.getDefaultMap() as AmazonLocationServiceMapStyle).region
+        );
+        // Set the transformerReady state to true to re-render the component
+        setTransformerReady(true);
+      }
     };
 
-    fetchCredentials();
-  }, []);
-
-  // create a new transformRequest function whenever the credentials change
-  useEffect(() => {
-    if (credentials != null) {
-      const { transformRequest } = new AmplifyMapLibreRequest(
-        credentials,
-        (Geo.getDefaultMap() as AmazonLocationServiceMapStyle).region
-      );
-
-      // wrap the new value in an anonymous function to prevent React from recognizing it as a
-      // function and immediately calling it
-      setRequestTransformer(() => transformRequest);
-    }
-  }, [credentials]);
+    createTransformer();
+  }, [transformerReady]);
 
   return (
     <div>
-      {transformRequest ? (
-        <ReactMapGL
-          {...viewport}
-          width="100%"
-          height="100vh"
-          transformRequest={
-            transformRequest as (
-              url?: string,
-              resourceType?: string
-            ) => MapRequest
-          }
+      {amplifyMaplibre.current && transformerReady ? (
+        <Map
+          {...viewState}
+          style={{ width: "100%", height: "100vh" }}
+          transformRequest={amplifyMaplibre.current.transformRequest}
           mapStyle={Geo.getDefaultMap().mapName}
-          onViewportChange={setViewport}
+          onMove={(e) => setViewState(e.viewState)}
         >
-          <div style={{ position: "absolute", left: 20, top: 20 }}>
-            <NavigationControl showCompass={false} />
-          </div>
-        </ReactMapGL>
+          <NavigationControl showCompass={false} />
+        </Map>
       ) : (
         <h1>Loading...</h1>
       )}
