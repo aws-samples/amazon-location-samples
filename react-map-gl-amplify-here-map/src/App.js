@@ -24,7 +24,7 @@ import { Geo } from "@aws-amplify/geo";
 
 function App() {
   // Setting state variables
-  const [viewport, setViewport] = useState({
+  const [viewState, setViewState] = useState({
     latitude: 36.12185075270952,
     longitude: -115.17130273723231,
     zoom: 13,
@@ -46,19 +46,13 @@ function App() {
   const isPointZoomed = useRef(false);
   // Setting hooks
   const windowSize = useWindowSize();
-  const debouncedViewport = useDebounce(viewport, 500);
+  const debouncedViewState = useDebounce(viewState, 500);
   const [transformRequest, mapName, calculateRoute] =
     useAmazonLocationService();
 
   // Functions that moves the viewport so that it fits a route once it is calculated
-  const zoomToRoute = useCallback((routeBBox, viewport) => {
+  const zoomToRoute = useCallback((routeBBox, windowSize) => {
     console.debug("Fitting route bbox to viewport", routeBBox);
-    console.log({
-      top: 50,
-      bottom: 50,
-      left: 50,
-      right: viewport.width > 768 ? 450 : 50,
-    });
     mapRef.current.fitBounds(
       [
         [routeBBox[0], routeBBox[1]],
@@ -69,7 +63,7 @@ function App() {
           top: 50,
           bottom: 50,
           left: 50,
-          right: viewport.width > 768 ? 450 : 50, // TODO: see if we can get rid of this
+          right: windowSize.width > 768 ? 450 : 50, // TODO: see if we can get rid of this
         },
         speed: 0.8,
         linear: false
@@ -103,9 +97,9 @@ function App() {
   useEffect(() => {
     if (route !== defaultState.route && !isRouteZoomedRef.current) {
       isRouteZoomedRef.current = true;
-      zoomToRoute(route.Summary.RouteBBox, debouncedViewport);
+      zoomToRoute(route.Summary.RouteBBox, windowSize);
     }
-  }, [route, debouncedViewport, zoomToRoute]);
+  }, [route, windowSize, zoomToRoute]);
 
   useEffect(() => {
     if (markers.length === 1 && !isPointZoomed.current) {
@@ -283,23 +277,13 @@ function App() {
     }
   };
 
-  // Action router that handles Viewport events from the Hub
-  const handleViewport = (data) => {
-    // Update viewport
-    if (data.payload.event === "update") {
-      setViewport(data.payload.data);
-    }
-  };
-
   // Side effects that runs when the component mounts and subscribes to the Hub
   useEffect(() => {
-    Hub.listen("Viewport", handleViewport);
     Hub.listen("Markers", handleMarkers);
     Hub.listen("Routing", handleRouting);
 
     // Clean up subscriptions when the component unmounts
     return () => {
-      Hub.remove("Viewport", handleViewport);
       Hub.remove("Markers", handleMarkers);
       Hub.remove("Routing", handleRouting);
     };
@@ -342,8 +326,8 @@ function App() {
       <AppContext.Provider
         value={{
           viewportCenter: [
-            debouncedViewport.longitude,
-            debouncedViewport.latitude,
+            debouncedViewState.longitude,
+            debouncedViewState.latitude,
           ],
           windowSize: windowSize,
           markers: markers,
@@ -361,12 +345,12 @@ function App() {
         {/* Display map only when transformRequest exists, meaning also credentials have been obtained */}
         {transformRequest ? (
           <Map
-            {...viewport}
+            {...viewState}
             mapLib={maplibregl}
             style={{ width: "100vw", height: "calc(100vh - 48px)" }}
             transformRequest={transformRequest}
             mapStyle={mapName}
-            onMove={(e) => setViewport(e.viewState)}
+            onMove={(e) => setViewState(e.viewState)}
             onClick={(e) => handleMapClick(e)}
             ref={mapRef}
             attributionControl={false}

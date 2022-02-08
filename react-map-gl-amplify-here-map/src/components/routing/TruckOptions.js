@@ -3,7 +3,7 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { Hub } from "@aws-amplify/core";
-import { Text, View, SliderField, useTheme } from "@aws-amplify/ui-react";
+import { Text, View, SliderField } from "@aws-amplify/ui-react";
 import useDebounce from "../../hooks/useDebounce";
 import { AppContext, UnitsEnum } from "../../AppContext";
 import NumberField from "../primitives/NumberField";
@@ -16,8 +16,7 @@ function TruckOptions() {
   // Debounce the options objects to avoid unnecessary updates
   const debouncedDimensions = useDebounce(dimensions, 500);
   const debouncedWeight = useDebounce(weight, 500);
-  const { tokens } = useTheme();
-  console.log(tokens.colors.font.primary);
+
   // Side effect that dispatches the updates to the global app state
   useEffect(() => {
     if (Object.keys(debouncedDimensions).length > 0) {
@@ -55,7 +54,7 @@ function TruckOptions() {
   const handleWeightChange = (key, value) => {
     console.debug(`${key} changed to ${value}`);
     const newWeight = { ...weight };
-    newWeight[key] = value[0];
+    newWeight[key] = value;
     setWeight(newWeight);
   };
 
@@ -70,13 +69,13 @@ function TruckOptions() {
   return (
     <>
       <Text fontSize="small">Truck Specs</Text>
-      <View width="80%">
+      <View width="100%">
         <SliderField
           label={`Weight (${context.units === UnitsEnum.METRIC.value ? "kg" : "lbs"})`}
           fontSize="small"
           min={0}
           max={3500}
-          defaultValue={0}
+          value={Object.keys(weight).length > 0 ? weight.Total : 0}
           emptyTrackColor="var(--amplify-colors-background-secondary)"
           filledTrackColor="var(--amplify-colors-brand-primary)"
           step={0.5}
@@ -139,4 +138,4 @@ function TruckOptions() {
   );
 }
 
-export default TruckOptions;
+export default React.memo(TruckOptions);
