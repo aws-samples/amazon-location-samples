@@ -65,6 +65,7 @@ cleaning, validating, and enriching data in place.
 * [Asset tracking with Amazon Location, Amplify, and IoT Core](maplibre-js-react-iot-asset-tracking/) `#javascript` `#react` `#amplify` `#iot`
 * [React Native Mobile Tracking App](https://github.com/aws-samples/amazon-location-service-mobile-tracker-react) `#javascript` `#react-native`
 * [Amazon Location Service GeoTrack Vue.js](https://github.com/aws-samples/amazon-location-service-geotrack-vuejs) `#javascript` `#vue.js`
+* [Pizza Delivery Tracker using Amplify and App Runner with Location Service route calculator, tracker, maps, place index](https://github.com/aws-samples/pizza-delivery-tracker) `#amplify` `#iot` `#typescript`
 
 ## Security
 
