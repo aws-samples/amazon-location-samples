@@ -8,11 +8,7 @@ AWS Amplify will help us create our backend in order to authenticate users and g
 
 ## Overview of solution
 
-![](Images/ReadmeImage1.png)
-
-##
-
-##
+![](assets/architecture-diagram.png)
 
 ### Prerequisites
 
@@ -20,155 +16,300 @@ For this project, you should have the following prerequisites:
 
 - An AWS account with access to create and edit resources in the architecture
 - AWS CLI installed and configured credentials
-- `npm` installed
+- Node.js and `npm` installed on your machine
 - AWS Amplify CLI installed (`npm install -g @aws-amplify/cli`)
 
 ## Walkthrough
 
-The solution uses data gathered from Amazon Location trackers, to display markers over a map that is also provided by Amazon Location and its map providers. Later we will use the [MapLibre GL JS library](https://github.com/maplibre/maplibre-gl-js) to render our map. A user must authenticate using Amazon Cognito in order to get the information that will be rendered. After receiving an authentication TOKEN, the user signs the request with AWS Signature Version 4 display the map.
+The solution uses data gathered from Amazon Location trackers, to display markers over a map that is also provided by Amazon Location and its map providers. Later we will use the [MapLibre GL JS library](https://github.com/maplibre/maplibre-gl-js) to render our map. A user must authenticate into the app using Amazon Cognito to be able to see the map and the tracker location.
 
 Overview of the steps:
 
-1. `npm install`
-2. Install and Initialize Amplify Application
-   1. Add Authentication with Amplify Authenticator helper
-3. Create a Map in Amazon Location
-4. Create an Tracker into Amazon Location
-5. Creating an AWS Core Rule to send data to a Amazon Location
-6. Create the Lambda function with provided zip code and send data to Amazon Location
-7. Create the Thing and publish data to the topic
-8. Create a Rule and add the action to send data to a Lambda function
-9. Integrating all resources to the web application
-   1. Add Roles to Cognito Authenticated users
-10. Run the Application
+1. Clone the repository and move into the folder that contains this sample (`maplibre-js-react-iot-asset-tracking`)
+2. Install the application's dependencies by running `npm install`
+3. Create resources with AWS Amplify CLI:
+4. Initialize a new Amplify application by running `amplify init`
+5. Add a Map and Authentication to your application by running `amplify add geo` (this will automatically prompt you to also add the required authentication resources)
+6. Create a custom Amplify resource for the Amazon Location Service Tracker (`amplify add custom`)
+7. Create an AWS Lambda function with Amplify using the code provided (`amplify add function`), this function will be used to update the tracker position in Amazon Location service
+8. Using the AWS Console:
+9. Create an AWS IoT Core Rule to send data to your Lambda function
+10. Create an AWS IoT Thing and publish data to the topic
 
-### 1. `npm install`
+11. Integrating all resources to the web application
+    1. Add Roles to Cognito Authenticated users
+12. Run the Application
 
-Install all required packages described in package.json.
+### 1. Install application dependencies
+
+To install all the required packages run `npm install` in the root directory of the project.
 
 ### 2. Install and Initialize Amplify application
 
-Install AWS Amplify library (aws-amplify) and also Amplify React specific UI components library to help us build components used in the application, especially the ones related to Authentication through Cognito.
+If this is the first time you're using Amplify, run `amplify configure` before continuing to configure the AWS Region and other info, refer to the Amplify [documentation](https://docs.amplify.aws/cli/start/install#option-2-follow-the-instructions) for more instructions.
 
-In the root of the project run:
+In the root of the project run the following command and the following options to start an Amplify application project and create it’s environment on AWS:
 
-```bash
-npm install aws-amplify @aws-amplify/ui-react
-```
-
-Run the following command and the following options to start an Amplify application project and create it’s environment on AWS cloud:
-
-<sub><sup>Amplify creates resources to AWS us-east-1 region. in order to change that run `amplify configure` before `amplify init`, refer to the [documentation](https://docs.amplify.aws/cli/start/install#option-2-follow-the-instructions) for more instructions. </sup></sub>
-
-```
+```sh
 amplify init
+Note: It is recommended to run this command from the root of your app directory
+? Enter a name for the project maplibrejsreactiot
+The following configuration will be applied:
 
-? Enter a name for the project amznlctassettrack
-? Enter a name for the environment dev
-? Choose your default editor: Visual Studio Code
-? Choose the type of app that you're building javascript
-Please tell us about your project
-? What javascript framework are you using react
-? Source Directory Path:  src
-? Distribution Directory Path: build
-? Build Command:  npm run-script build
-? Start Command: npm run-script start
+Project information
+| Name: maplibrejsreactiot
+| Environment: dev
+| Default editor: Visual Studio Code
+| App type: javascript
+| Javascript framework: react
+| Source Directory Path: src
+| Distribution Directory Path: build
+| Build Command: npm run-script build
+| Start Command: npm run-script start
+
+? Initialize the project with the above configuration? Yes
 Using default provider  awscloudformation
 ? Select the authentication method you want to use: AWS profile
 
 For more information on AWS Profiles, see:
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
-? Please choose the profile you want to use default
+? Please choose the profile you want to use: default
 ```
 
-#### Adding Authentication with Amplify authenticator helper
+### 3. Adding Authentication and Map resources with Amplify
 
-Amplify uses Amazon Cognito to for authentication provider. Cognito will let us handle user registration, authentication, account recovery and some more operations. To add it to our current project we will use Amplify CLI, using the following command and options:
+Amplify uses Amazon Cognito as an authentication provider and Amazon Location Service to create maps. Cognito will help us handle user registration, authentication, account recovery and some more operations.
 
-```
-$amplify add auth
+When you run `amplify add geo` in a empty project Amplify will ask you if you want to add the required Authentication resources to your project, follow the prompts to add an Amazon Location Service Map and Amazon Cognito resources to your project:
+
+```sh
+ amplify add geo
+? Select which capability you want to add: Map (visualize the geospatial data)
+✔ geo category resources require auth (Amazon Cognito). Do you want to add auth now? (Y/n) · yes
 
 Using service: Cognito, provided by: awscloudformation
-The current configured provider is Amazon Cognito.
-Do you want to use the default authentication and security configuration? Default configuration
-Warning: you will not be able to edit these selections.
-How do you want users to be able to sign in? Username
-Do you want to configure advanced settings? No, I am done.
-Successfully added auth resource amznlctassettrack[...]]locally
+
+ The current configured provider is Amazon Cognito.
+
+ Do you want to use the default authentication and security configuration? Defau
+lt configuration
+ Warning: you will not be able to edit these selections.
+ How do you want users to be able to sign in? Username
+ Do you want to configure advanced settings? No, I am done.
+✅ Successfully added auth resource maplibrejsreactiotas09d74126 locally
+
+✅ Some next steps:
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+
+✔ Provide a name for the Map: · mapiottracker
+✔ Who can access this Map? · Authorized users only
+Available advanced settings:
+- Map style & Map data provider (default: Streets provided by Esri)
+
+✔ Do you want to configure advanced settings? (y/N) · no
+✅ Successfully added resource mapiottracker locally.
 ```
 
-Now that we added the resource locally, we need to deploy it to the cloud with command:
+### 4. Create an Amazon Location Tracker resource with Amplify
 
+At the moment the Amplify Geo category doesn't support creating Trackers directly, but we can create a custom resource that will be used to create trackers using an [Amazon CDK](https://aws.amazon.com/cdk/) template.
+
+```sh
+amplify add custom
+✔ How do you want to define this custom resource? · AWS CDK
+✔ Provide a name for your custom resource · trackerAsset
+✅ Created skeleton CDK stack in amplify/backend/custom/trackerAsset directory
+✔ Do you want to edit the CDK stack now? (Y/n) · no
 ```
-amplify push
-✔ Successfully pulled backend environment dev from the cloud.
-Current Environment: dev
-| Category | Resource name             | Operation | Provider plugin
-| -------- | ------------------------- | --------- | -----------------
-| Auth     | amznlctassettrack[...]    | Create    | awscloudformation
-? Are you sure you want to continue? Yes
-```
 
-Now you can use Amplify CLI to change backend resources and their specification in saved in `aws-exports.js`.
-
-### 3. Create a Map in Amazon Location
-
-Create a map named “assetTracker”, following the steps [here](https://docs.aws.amazon.com/location/latest/developerguide/create-map-resource.html) provided by Amazon Location team. Use CLI or the AWS Console with the default map style. If you decide to use another name, write it down so it can be used in further steps with Maplibre GL JS api.
-
-### 4. Create an Tracker into Amazon Location
-
-Create aa Tracker using the Amazon Location console and name it “trackedAsset01” following the steps described in “Create a Tracker” section of the [documentation](https://docs.aws.amazon.com/location/latest/developerguide/start-tracking.html).
-
-### 5. Creating an AWS IoT Core Rule to send data to a Amazon Location
-
-We will receive messages about assets' positions through IoT Core, using secure TLS messages between devices and topics. In IoT Core, the topic responsible for getting the devices' positions will be monitored by an IoT Rule which is responsible for passing this data to a Lambda function for further processing. This Lambda function can transform the received data and pass it to Amazon Location using the AWS SDK.
-
-### 6. Create the Lambda function to send data to Amazon Location
-
-Follow these steps to setup your Lambda function:
-
-1. Download `track_function1.zip` Lambda package for Amazon Location in the [lambdaPackage folder]().
-2. Open the [Lambda Console](https://console.aws.amazon.com/lambda/home) in the left navigation bar choose **Functions**.
-3. Then choose **Create function** and select **Author from scratch**
-4. Enter the **Function name** “trackFunction1” and **Runtime** “Python 3.8”
-5. Scroll down and choose **Create function** to create the Lambda function
-6. In the **Configuration** tab scroll down to **Function code** and click on **Actions** to select **Upload a .zip file**
-7. Click on **Upload** and select the .zip file download on Step 1.
-   1. If you changed the name of your tracker when creating it, enter it in the **TRACKER_NAME** variable in the lambda_function.py code from environment menu on the left.
-8. Choose **Deploy** to deploy the code.
-9. Scroll up to the top of the page and choose the **Permission** tab
-10. Click on the hyperlink under the **Role name** to open the role assigned to the Lambda function.
-11. On the summary page under **Permission Policies** choose **Add inline policy** and the **JSON** tab, replace the region you are using and your account number in the following code and paste it in the text field:
+With the command above Amplify has created a skeleton CDK stack in the `amplify/backend/custom/trackerAsset` directory of your project. Before creating the Tracker we need to add an additional dependency to the CDK stack, to do so open the `amplify/backend/custom/trackerAsset/package.json` file with your favorite text editor (i.e. VS Code) and replace its content with the following:
 
 ```json
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": "geo:BatchUpdateDevicePosition",
-      "Resource": "arn:aws:geo:[enter_current_region]:[Enter_Account_Number]:tracker/trackedAsset01"
-    }
-  ]
+  "name": "custom-resource",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@aws-amplify/cli-extensibility-helper": "^2.0.0",
+    "@aws-cdk/core": "~1.144.0",
+    "@aws-cdk/aws-iam": "~1.144.0",
+    "@aws-cdk/aws-location": "~1.144.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
 }
 ```
 
-<sub><sup>if you changed the name of the tracker, you should change it in the following ARN too.</sup></sub>
+Next, open the `amplify/backend/custom/trackerAsset/cdk-stack.ts` file in your text editor and add a Tracker resource. After editing your file should look like this:
 
-12. Click on Review Policy
-13. Give a name to the policy such as “BatchUpdateLocationWriteOnly”
-14. Choose **Create policy**
+```ts
+import * as cdk from "@aws-cdk/core";
+import * as AmplifyHelpers from "@aws-amplify/cli-extensibility-helper";
+import { AmplifyDependentResourcesAttributes } from "../../types/amplify-dependent-resources-ref";
+import * as location from "@aws-cdk/aws-location";
 
-### 7. Create a Thing and publish data to the IoT Topic
+export class cdkStack extends cdk.Stack {
+  constructor(
+    scope: cdk.Construct,
+    id: string,
+    props?: cdk.StackProps,
+    amplifyResourceProps?: AmplifyHelpers.AmplifyResourceProps
+  ) {
+    super(scope, id, props);
+    /* Do not remove - Amplify CLI automatically injects the current deployment environment in this input parameter */
+    new cdk.CfnParameter(this, "env", {
+      type: "String",
+      description: "Current Amplify CLI env name",
+    });
+    /* AWS CDK code goes here - learn more: https://docs.aws.amazon.com/cdk/latest/guide/home.html */
 
-Before creating the IoT Thing we should create a Policy ofr it to be associated with. These are the steps to create the IoT policy:
+    new location.CfnTracker(this, "Tracker", {
+      trackerName: "trackerAsset01",
+    });
+  }
+}
+```
+
+Now, with your terminal, navigate to the `amplify/backend/custom/trackerAsset` directory and run `npm install` to update the CDK dependencies we added in the previous step.
+
+Finally, while in the main directory of your project, run `amplify override project`, this will generate a `amplify/backend/awscloudformation/override.ts` file that we can use to add policies to the Amplify IAM roles. Open the file and replace it with the following:
+
+```ts
+import { AmplifyRootStackTemplate } from "@aws-amplify/cli-extensibility-helper";
+
+export function override(resources: AmplifyRootStackTemplate) {
+  resources.authRole.addOverride("Properties.Policies", [
+    {
+      PolicyName: "trackerPolicy",
+      PolicyDocument: {
+        Version: "2012-10-17",
+        Statement: [
+          {
+            Effect: "Allow",
+            Action: ["geo:GetDevicePositionHistory"],
+            Resource:
+              "arn:aws:geo:eu-west-1:536254204126:tracker/trackerAsset01",
+          },
+        ],
+      },
+    },
+  ]);
+}
+```
+
+### 5. Create an AWS Lambda function to update your Tracker
+
+To update the Tracker position we need to create an AWS Lambda function that will be executed when a new event comes in from the IoT device. To create one using Amplify run the following command:
+
+```sh
+amplify add function
+? Select which capability you want to add: Lambda function (serverless function)
+
+
+? Provide an AWS Lambda function name: trackFunction1
+? Choose the runtime that you want to use: NodeJS
+? Choose the function template that you want to use: Hello World
+
+Available advanced settings:
+- Resource access permissions
+- Scheduled recurring invocation
+- Lambda layers configuration
+- Environment variables configuration
+- Secret values configuration
+
+? Do you want to configure advanced settings? No
+? Do you want to edit the local lambda function now? No
+Successfully added resource trackFunction1 locally.
+```
+
+The command above will create a new AWS Lambda function in the `amplify/backend/function/trackfunction1` directory of your project. To update the code of the function open the `amplify/backend/function/trackfunction1/src/index.js` and replace its content with the following:
+
+```js
+const AWS = require("aws-sdk");
+
+// Update this to match the name of your Tracker resource
+const TRACKER_NAME = "trackerAsset01";
+const location = new AWS.Location();
+
+exports.handler = async (event) => {
+  const updates = [
+    {
+      DeviceId: event.payload.deviceId,
+      SampleTime: new Date(event.payload.timestamp).toISOString(),
+      Position: [event.payload.location.long, event.payload.location.lat],
+    },
+  ];
+
+  console.log(updates);
+
+  let res;
+  try {
+    res = await location
+      .batchUpdateDevicePosition({
+        TrackerName: TRACKER_NAME,
+        Updates: updates,
+      })
+      .promise();
+
+    console.log(res);
+  } catch (err) {
+    console.log(err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify(err),
+    };
+  }
+
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify(res),
+  };
+  return response;
+};
+```
+
+Finally we need to update the `amplify/backend/function/trackfunction1/custom-policies.json` file to allow our function to access the Tracker resource:
+
+```json
+[
+  {
+    "Action": ["geo:BatchUpdateDevicePosition"],
+    "Resource": [
+      "arn:aws:geo:[region-name]:[account-id]:tracker/trackerAsset01"
+    ]
+  }
+]
+```
+
+**Note:** Make sure to update the arn to include the AWS Region and [account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html) of your Amplify project.
+
+### 6. Deploy Amplify resources
+
+Now that we have added the resource locally, we need to deploy them to the cloud by running:
+
+```sh
+amplify push -y
+```
+
+While Amplify deployes the resources in your AWS account you can continue with the next steps.
+
+### 7. Create an AWS IoT Policy
+
+Before creating the AWS IoT Thing we need to create an AWS IoT Policy for it to be associated with. Since Amplify CLI and CDK don't support AWS IoT resources yet, we need to create the policy manually using the AWS Console:
 
 1. Open the [AWS IoT Core console](https://console.aws.amazon.com/iot/)
 2. In the left navigation pane, choose **Secure** and then **Policies.**
 3. Choose **Create** to create a new policy or **Create a policy**, if you don't have one yet.
 4. Enter a **Name** for your policy such as “trackPolicy”
-5. Choose **Advanced Mode**, and enter the following code in **Add statements** section. Substitute your region and account number below:
+5. Choose **JSON**, under **Policy document** and enter the following code:
 
 ```json
 {
@@ -177,167 +318,116 @@ Before creating the IoT Thing we should create a Policy ofr it to be associated 
     {
       "Effect": "Allow",
       "Action": "iot:Connect",
-      "Resource": "arn:aws:iot:[enter_current_region]:[Enter_Account_Number]:client/trackThing01"
+      "Resource": "arn:aws:iot:[region-name]:[account-id]:client/trackThing01"
     },
     {
       "Effect": "Allow",
       "Action": "iot:Publish",
-      "Resource": "arn:aws:iot:[enter_current_region]:[Enter_Account_Number]:topic/iot/trackedAssets"
+      "Resource": "arn:aws:iot:[region-name]:[account-id]:topic/iot/trackedAssets"
     }
   ]
 }
 ```
 
+**Note:** Make sure to update the arn to include the AWS Region and [account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html) of your Amplify project.
+
 6. Choose **Create.**
 
 Check out [Create an AWS IoT Core policy](https://docs.aws.amazon.com/iot/latest/developerguide/create-iot-policy.html) and [AWS IoT Core policies](https://docs.aws.amazon.com/iot/latest/developerguide/iot-policies.html) for more information.
 
-**Create the IoT Thing:**
+### 8. Create an AWS IoT Thing
 
 1. Open the [AWS IoT Core console](https://console.aws.amazon.com/iot/)
 2. On the left menu bar choose **Manage,** then click on **Things.**
-3. Choose **Create** to create a new thing.
+3. Choose **Create things** to create a new thing.
 4. Then choose **Create a single thing**
-5. Enter the name “trackThing01” and **Next** at the end of the Page. (if choose another name for your thing, make sure to change it in the policy code above after **client/[your thing name]**)
-6. On the **Add a certificate for your thing** page, choose **Create certificate**.
-7. On the **Certificate created!** page, follow these steps:
-   1. Create a folder to host your certificates, in this case the `certs` folder
-   2. Download the certificates and the keys for your thing to the `certs` folder, and rename the files accordingly:
-      1. Device Certificate name as `trackThing01-certificate.pem.crt`
-      2. Public key name as `trackThing01-public.pem.key`
-      3. Private key name as `trackThing01-private.pem.key`
-   3. Under **You also need to download a root CA for AWS IoT**, click **Download** and click on the hyperlink for **Amazon Root CA 1**, it will open the certificate in your browser. Save it or Copy and paste it in a text file. Name the downloaded file as root-CA.crt and copy it to the `certs` folder.
-   4. On the thing creation page choose **Activate**
-8. Choose **Attach a policy**, select the “trackPolicy” created previously.
-9. Select **Register Thing**
+5. Enter the name "trackThing01" and **Next** at the end of the Page. (if choose another name for your thing, make sure to change it in the policy code above after **client/[your thing name]**)
+6. On the **Configure device certificate** page, choose **Auto-generate a new certificate**.
+7. On the **Attach policies to certificate** page, select the policy you created above.
+8. When the **Download certificates and keys** modal opesn, download all the items and move them in a folder named `certs` under the `generate_thing_events` folder of your project, while downloading the files, rename them accordingly:
+9. Device Certificate name as `certificate.pem.crt`
+10. Public key name as `public.pem.key`
+11. Private key name as `private.pem.key`
+12. After downloading all the files, choose **Done**.
+13. Choose **Attach a policy**, select the “trackPolicy” created previously.
+14. Select **Register Thing**
 
-**Run local Python code to simulate an IoT Thing**
-
-_Follow the steps described [here](https://realpython.com/installing-python/) if you do not have python installed._
-
-1. Install the AWS IoT Device SDK for Python, run:
-
-```bash
-python3 -m pip install awsiotsdk
-```
-
-2. Copy the certificates in `certs/` to `connect_device_package/certs`:
-
-   `cp certs/*.crt connect_device_package/certs`
-
-3. Go to the [AWS IoT Core console](https://console.aws.amazon.com/iot/), and select **Manage** on the left menu
-4. Choose **Things** and then select the **trackThing01**
-5. Choose **Interact**, and copy the HTTPS endpoint. It should in the following format:
-
-   `<code>-ats.iot.<region>.amazonaws.com`
-
-6. Paste this code in **[Insert your Endpoint Here]** inside `asset_code.py` file.
-7. In the terminal, **cd** into the `connect_device_package` folder and run `python asset_code.py` to publish locations:
-
-   `cd connect_device_package && python3 asset_code.py`
-
-### 8. Create a Rule and add the action to send data to a Lambda function
+### 9. Create an AWS IoT Rule to trigger the Lambda function
 
 The AWS IoT Core Rule will forward device position information to the AWS Lambda function to transform it and send to Amazon Location.
 
-1. Go to the AWS IoT Core Console
+1. Open the [AWS IoT Core console](https://console.aws.amazon.com/iot/)
 2. On the left menu select **Act** and then choose **Rules.**
 3. Choose **Create a rule**
 4. Give your rule a name, such as “assetTrackingRule”
 5. Under **Rule query statement** substitute the code starting with `SELECT * FROM..` for:
    `SELECT * FROM 'iot/trackedAssets'`
 6. Under **Set one or more actions** choose **Add action**
-7. Choose **Send a message to a Lambda function,** scroll down and select **Configure action**
-8. Select the Lambda function create above from the dropdown list.
+7. Choose **Send a message to a Lambda function** scroll down and select **Configure action**
+8. Select the Lambda function created above from the dropdown list, if you have used the same name used in the guide it should be called something similar to `trackFunction1-dev`.
 9. Choose **Add action**
 10. Choose **Create Rule**
 
-### Integrating all resources to the web application
+### 10. Send dummy data to the AWS IoT Core device
 
-#### _Add Roles to Cognito Authenticated users_
+In order to update the Tracker position you need to send data to the AWS IoT Core device. To do this you can use the script that we have created for you in the `generate_thing_events` folder.
 
-The following steps will enable the base cloudformation script and modify the authenticated users permissions. The following instructions are compatible with Visual Studio Code (VSCode), but similar configurations exists depending on the IDE selected on the **amplify init** options:
+If you have followed the instructions at the step #8, the `generate_thing_events` folder should now have the following structure:
 
-1. On the project **amplify** folder, expand **.vscode** folder (This may very from each IDE, this works for Visual Studio Code) and open **settings.json**
-2. Change the line "amplify/\*\*/\*-parameters.json": true to "amplify/\*\*/\*-parameters.json": false.
-3. On the explorer tab navigate to **amplify/backend/auth/amznlctassettrack[…]** and open the file **parameters.json**
-4. After **“dependsOn[]”** insert the following code:
-
-```json
-   ,
-   "authRoleName":{
-      "Ref": "AuthRole"
-   },
+```sh
+generate_thing_events
+├── certs
+├ ├── certificate.pem.crt
+├ ├── public.pem.key
+├ └── private.pem.key
+├── index.js
+├── package-lock.json
+├── package.json
+└── LICENSE
 ```
 
-5. Open the file in the folder “**auth/amznlctassettrack..”,** its name should start with **amznlctassettrack[…]** and it describes the template for the creation of the authentication resources.
-6. Under parameters enter the code to the role name parameter:
+Before executing the script, run `npm install` in the `generate_thing_events` folder. Then open the `index.js` file and replace the following values with your own:
 
-```yaml
-authRoleName:
-  Type: String
+```js
+const THING_ENDPOINT = "<code>-ats.iot.<region>.amazonaws.com";
+const CLIENT_ID = "trackThing01";
+const IOT_TOPIC = "iot/trackedAssets";
 ```
 
-7. Under the **Resources** part of the cloudformation template, insert the policy that allow authenticated users to read Amazon Location resources:
+**Note:** You can retrieve the value for `THING_ENDPOINT` and `CLIENT_ID` from the AWS IoT Core console:
 
-<sub>Replace the region and your account number in the resource ARN.</sub>
+1. Go to the [AWS IoT Core console](https://console.aws.amazon.com/iot/), and select **Manage** on the left menu
+2. Choose **Things** and then select the **trackThing01**
+3. Choose **Interact**, and copy the HTTPS endpoint. It should in the following format:
 
-```yaml
-MapsReadOnlyPolicy:
-  #Policy to be attached to authenticated users role.
-  #Policy give Authenticated users rights to read information from Amazon Location.
-  Type: AWS::IAM::Policy
-  Properties:
-    PolicyName: "mapsReadOnly"
-    PolicyDocument:
-      Version: "2012-10-17"
-      Statement:
-        - Effect: Allow
-          Action:
-            - geo:DescribeMap
-            - geo:BatchGetDevicePosition
-            - geo:GetMapGlyphs
-            - geo:GetDevicePositionHistory
-            - geo:DescribeTracker
-            - geo:GetMapSprites
-            - geo:GetMapStyleDescriptor
-            - geo:GetDevicePosition
-            - geo:GetMapTileJson
-            - geo:GetMapTile
-          Resource:
-            - arn:aws:geo:[enter_current_region]:[Enter_Account_Number]:map/assetTracker
-            - arn:aws:geo:[enter_current_region]:[Enter_Account_Number]:tracker/trackedAsset01
-        - Effect: Allow
-          Action:
-            - geo:ListMaps
-            - geo:ListTrackers
-          Resource: "*"
-    Roles:
-      - !Ref authRoleName
+   `<code>-ats.iot.<region>.amazonaws.com`
+
+Once all the values are filled in, run the script with `node index.js`. The script will send four messages to the AWS IoT Core device with an interval of 30 seconds in between. The logs should look like the following:
+
+```sh
+Connecting to <code>-ats.iot.<region>.amazonaws.com with client ID trackThing01
+Connected to device trackThing01
+Publishing message to topic iot/trackedAssets: {"payload":{"deviceid":"thing123","timestamp":1644517720009,"location":{"lat":49.282301,"long":-123.118408}}}
+Publishing message to topic iot/trackedAssets: {"payload":{"deviceid":"thing123","timestamp":1644517750010,"location":{"lat":49.282144,"long":-123.117574}}}
+Publishing message to topic iot/trackedAssets: {"payload":{"deviceid":"thing123","timestamp":1644517780012,"location":{"lat":49.282254,"long":-123.116522}}}
+Publishing message to topic iot/trackedAssets: {"payload":{"deviceid":"thing123","timestamp":1644517810014,"location":{"lat":49.282732,"long":-123.115799}}}
 ```
-
-8. Save both the parameters.json file and the current template file.
-9. In the terminal for the project, run **amplify push** to deploy the resources to the cloud.
-
-Creating resources updating the CloudFormation templates of Amplify ensures best practices in deploying infrastructure. All infrastructure is ready to be redeployed. And when we push resources to the cloud, an s3 project of the resources stores the files.
 
 ### 10. Run the application
 
-With resources in place you are able to run the application and get a result.
+With resources in place you are able to run the application and see the markers position on the rendered map.
 
-Run `npm start` and navigate in your WebBrowser to [http://localhost:3000](http://localhost:3000) (This should happen automatically after `npm start`). **Sign Up** in the applicaiton and **Sign In**, if not Logged In already.
+Run `npm start` and navigate in your browser to [http://localhost:3000](http://localhost:3000). **Create a new account** in the applicaiton and then **login**.
 You should be able to get an application such as:
 
-![](Images/ReadmeImage26.png)
+![](assets/application-image.png)
 
 ### Cleaning up
 
 To avoid incurring future charges, delete the resources used in this tutorial. Here is a checklist to help:
 
-- IoT Thing trackThing01 and its certificates and policies
-- IoT Rule assetTrackingRule
-- Lambda function trackFunction1 and its role
-- Amplify Project and the bucket it creates with the code (make sure the CloudFormation stack is deleted with all its resources)
+- AWS IoT Thing, its certificates and policies, and IoT Rule
+- Amplify Project by running `amplify delete` in the project's root directory
 
 ## Troubleshooting
 
