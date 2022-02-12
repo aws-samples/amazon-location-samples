@@ -196,7 +196,7 @@ export function override(resources: AmplifyRootStackTemplate) {
             Effect: "Allow",
             Action: ["geo:GetDevicePositionHistory"],
             Resource:
-              "arn:aws:geo:eu-west-1:536254204126:tracker/trackerAsset01",
+              "arn:aws:geo:[region-name]:[account-id]:tracker/trackerAsset01",
           },
         ],
       },
@@ -204,6 +204,8 @@ export function override(resources: AmplifyRootStackTemplate) {
   ]);
 }
 ```
+
+**Note:** Make sure to update the arn to include the AWS Region and [account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html) of your Amplify project.
 
 ### 5. Create an AWS Lambda function to update your Tracker
 
@@ -333,6 +335,8 @@ Before creating the AWS IoT Thing we need to create an AWS IoT Policy for it to 
 
 6. Choose **Create.**
 
+Check [this comment](https://github.com/aws-samples/amazon-location-samples/issues/105#issuecomment-1037331082) for a video tutorial of the step above.
+
 Check out [Create an AWS IoT Core policy](https://docs.aws.amazon.com/iot/latest/developerguide/create-iot-policy.html) and [AWS IoT Core policies](https://docs.aws.amazon.com/iot/latest/developerguide/iot-policies.html) for more information.
 
 ### 8. Create an AWS IoT Thing
@@ -348,9 +352,10 @@ Check out [Create an AWS IoT Core policy](https://docs.aws.amazon.com/iot/latest
 9. Device Certificate name as `certificate.pem.crt`
 10. Public key name as `public.pem.key`
 11. Private key name as `private.pem.key`
-12. After downloading all the files, choose **Done**.
-13. Choose **Attach a policy**, select the “trackPolicy” created previously.
-14. Select **Register Thing**
+12. Root CA name as `root-CA.crt`
+13. After downloading all the files, choose **Done**.
+
+Check [this comment](https://github.com/aws-samples/amazon-location-samples/issues/105#issuecomment-1037331599) for a video tutorial of the step above.
 
 ### 9. Create an AWS IoT Rule to trigger the Lambda function
 
@@ -379,7 +384,8 @@ generate_thing_events
 ├── certs
 ├ ├── certificate.pem.crt
 ├ ├── public.pem.key
-├ └── private.pem.key
+├ ├── public.pem.key
+├ └── root-CA.pem
 ├── index.js
 ├── package-lock.json
 ├── package.json
@@ -436,3 +442,9 @@ To avoid incurring future charges, delete the resources used in this tutorial. H
 All Amplify resources are created by default in the `us-east-1` Region. If you are planning with interface with existing resources or might be looking to launch the application in other regions, you will need to configure it before running `amplify init`.
 To change the project default and region after installing the amplify CLI run `amplify configure`, you will be able to set a region and the username for the IAM user.
 For more information refer to [Amplify Documentation](https://docs.amplify.aws/cli/start/install#option-2-follow-the-instructions)
+
+### 2. Warnings in the logs while running the web application
+
+When running the web application, you might see a lot of warnings in the logs similar to the ones in the image below. These can be ignored and they are due to the fact that the sample is using a newly released version of webpack which while some of the other dependencies are not bundling their files correctly. **As long as webpack says something like `webpack 5.68.0 compiled with 13 warnings in 1243 ms` the build is successful, you can ignore the warnings.**
+
+![](assets/webpack-warnings.png)
