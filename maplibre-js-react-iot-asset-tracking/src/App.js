@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Geo } from 'aws-amplify';
-import { Text } from '@aws-amplify/ui-react';
+import { Text, withAuthenticator } from '@aws-amplify/ui-react';
 import Map, { NavigationControl } from "react-map-gl";
 import maplibregl from 'maplibre-gl';
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -49,4 +49,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
