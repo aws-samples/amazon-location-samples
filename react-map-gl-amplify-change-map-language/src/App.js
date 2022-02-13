@@ -19,7 +19,10 @@ function App() {
   const [marker, setMarker] = useState();
 
   const amplifyMapLibre = useAmplifyMapLibre();
-  const [mapStyle, languagesList] = useLocalizedStyleDescriptor(amplifyMapLibre, language);
+  const [mapStyle, languagesList] = useLocalizedStyleDescriptor(
+    amplifyMapLibre, // Pass the AmplifyMapLibreRequest instance to the hook, this holds the AWS credentials
+    language // Pass the selected language, if none is selected, the default language is used
+  );
 
   return (
     <>
@@ -30,7 +33,7 @@ function App() {
             mapLib={maplibregl}
             style={{ width: "100%", height: "100%" }}
             transformRequest={amplifyMapLibre.transformRequest}
-            mapStyle={mapStyle}
+            mapStyle={mapStyle} // Pass the localize style descriptor to the map
             onClick={(e) => setMarker(e.lngLat)}
           >
             <LanguagesControl languagesList={languagesList} setLanguage={setLanguage} />
