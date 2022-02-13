@@ -48,30 +48,6 @@ const esriLangs = new Map([
   ['Ukranian', '_name_uk'],
 ]);
 
-// Transformer for ESRI style maps
-const esriLanguageTransformer = (styleDescriptorJson, language) =>
-  styleDescriptorJson.layers.map((layer) => {
-    if (
-      layer.layout &&
-      layer.layout["text-field"] &&
-      ["{_name_global}", "{_name}"].includes(layer.layout["text-field"])
-    ) {
-      return {
-        ...layer,
-        layout: {
-          ...layer.layout,
-          "text-field": [
-            "coalesce",
-            ["get", language],
-            ["get", layer.layout["text-field"].replace(/[{}]/g, "")]
-          ]
-        }
-      };
-    }
-
-    return layer;
-  });
-
 // List of available languages for HERE style
 const hereLangs = new Map([
   ['Default', 'name'],
@@ -126,22 +102,6 @@ const hereLangs = new Map([
   ['Chinese (Hant)', 'name:zh-Hant']
 ]);
 
-// Transformer for HERE style map
-const hereLanguageTransformer = (styleDescriptorJson, language) =>
-  styleDescriptorJson.layers.map((layer) => {
-    if (layer.layout && layer.layout["text-field"]) {
-      return {
-        ...layer,
-        layout: {
-          ...layer.layout,
-          "text-field": ["coalesce", ["get", language], ["get", "name"]]
-        }
-      };
-    }
-
-    return layer;
-  });
-
 // React hook for getting the style descriptor and applying the language using the appropriate transformer based on style
 const useLocalizedStyleDescriptor = (amplifyMapLibre, language) => {
   const locationClient = useRef();
@@ -172,12 +132,31 @@ const useLocalizedStyleDescriptor = (amplifyMapLibre, language) => {
             }
             const styleDescriptorJson = JSON.parse(textEncoder.current.decode(res.Blob));
             if (Geo.getDefaultMap().style.toUpperCase().indexOf('ESRI') > -1) {
-              styleDescriptorJson.layers = esriLanguageTransformer(styleDescriptorJson, language);
               languagesList.current = esriLangs;
             } else {
-              styleDescriptorJson.layers = hereLanguageTransformer(styleDescriptorJson, language);
               languagesList.current = hereLangs;
             }
+            styleDescriptorJson.layers = styleDescriptorJson.layers.map((layer) => {
+              if (
+                layer.layout &&
+                layer.layout["text-field"] &&
+                ["{_name_global}", "{_name}"].includes(layer.layout["text-field"])
+              ) {
+                return {
+                  ...layer,
+                  layout: {
+                    ...layer.layout,
+                    "text-field": [
+                      "coalesce",
+                      ["get", language],
+                      ["get", layer.layout["text-field"].replace(/[{}]/g, "")]
+                    ]
+                  }
+                };
+              }
+
+              return layer;
+            });
             languageSelected.current = language;
             setstyleDescriptor(styleDescriptorJson);
           } catch (error) {

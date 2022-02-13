@@ -21,8 +21,14 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#IoT Thing Certs
-connect_device_package/certs/*
+.vscode
+
+# environment-specific Amplify files (useful when co-developing; irrelevant
+# when distributing)
+amplify/README.md
+amplify/cli.json
+amplify/hooks/
+amplify/team-provider-info.json
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
