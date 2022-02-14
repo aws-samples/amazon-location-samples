@@ -48,6 +48,28 @@ const esriLangs = new Map([
   ['Ukranian', '_name_uk'],
 ]);
 
+const esriLocalization = (language, layer) => {
+  if (
+    layer.layout &&
+    layer.layout["text-field"] &&
+    ["{_name_global}", "{_name}"].includes(layer.layout["text-field"])
+  ) {
+    return {
+      ...layer,
+      layout: {
+        ...layer.layout,
+        "text-field": [
+          "coalesce",
+          ["get", language],
+          ["get", layer.layout["text-field"].replace(/[{}]/g, "")]
+        ]
+      }
+    };
+  }
+
+  return layer;
+};
+
 // List of available languages for HERE style
 const hereLangs = new Map([
   ['Default', 'name'],
@@ -102,6 +124,24 @@ const hereLangs = new Map([
   ['Chinese (Hant)', 'name:zh-Hant']
 ]);
 
+const hereLocalization = (language, layer) => {
+  if (layer.layout && layer.layout["text-field"]) {
+    return {
+      ...layer,
+      layout: {
+        ...layer.layout,
+        "text-field": [
+          "coalesce",
+          ["get", language],
+          ["get", "name"]
+        ]
+      }
+    };
+  }
+
+  return layer;
+};
+
 // React hook for getting the style descriptor and applying the language using the appropriate transformer based on style
 const useLocalizedStyleDescriptor = (amplifyMapLibre, language) => {
   const locationClient = useRef();
@@ -131,32 +171,17 @@ const useLocalizedStyleDescriptor = (amplifyMapLibre, language) => {
               throw new Error("No style descriptor found");
             }
             const styleDescriptorJson = JSON.parse(textEncoder.current.decode(res.Blob));
-            if (Geo.getDefaultMap().style.toUpperCase().indexOf('ESRI') > -1) {
+            const isEsriStyle = Geo.getDefaultMap().style.toUpperCase().indexOf('ESRI') > -1;
+            if (isEsriStyle) {
               languagesList.current = esriLangs;
             } else {
               languagesList.current = hereLangs;
             }
-            styleDescriptorJson.layers = styleDescriptorJson.layers.map((layer) => {
-              if (
-                layer.layout &&
-                layer.layout["text-field"] &&
-                ["{_name_global}", "{_name}"].includes(layer.layout["text-field"])
-              ) {
-                return {
-                  ...layer,
-                  layout: {
-                    ...layer.layout,
-                    "text-field": [
-                      "coalesce",
-                      ["get", language],
-                      ["get", layer.layout["text-field"].replace(/[{}]/g, "")]
-                    ]
-                  }
-                };
-              }
-
-              return layer;
-            });
+            styleDescriptorJson.layers = styleDescriptorJson.layers.map(
+              (layer) => isEsriStyle ?
+                esriLocalization(language, layer) :
+                hereLocalization(language, layer)
+            );
             languageSelected.current = language;
             setstyleDescriptor(styleDescriptorJson);
           } catch (error) {
