@@ -6,7 +6,7 @@ def create_geofence(longitude, latitude, radius, identifier):
     geofence = []
 
     #creates inverted polygon
-    geofence = create_polygon(longitude, latitude, radius)
+    coordinates = create_polygon(longitude, latitude, radius)
     geofence.append(create_coordinate_structure(coordinates, identifier))     
 
     return geofence
