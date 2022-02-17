@@ -2,14 +2,14 @@ import json
 import boto3
 import math
 
-location_coordinates = []
-
 def create_geofence(longitude, latitude, radius, identifier):  
-    #creates inverted polygon
-    coordinates = create_polygon(longitude, latitude, radius)
-    location_coordinates.append(create_coordinate_structure(coordinates, identifier))     
+    geofence = []
 
-    return location_coordinates
+    #creates inverted polygon
+    geofence = create_polygon(longitude, latitude, radius)
+    geofence.append(create_coordinate_structure(coordinates, identifier))     
+
+    return geofence
     
 #creates polygon
 def create_polygon(longitude, latitude, radius, vertices=20):
