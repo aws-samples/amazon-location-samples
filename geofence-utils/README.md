@@ -4,7 +4,7 @@ This repository contains helpers files to facilitate common geofence practices u
 
 ## create-geofence.py
 
-`create-circular-geofence.py` is a Python file that helps customers create circular geofences in a Collection, a feature currnelty unsupported by the service.
+`create-circular-geofence.py` is a Python file that helps customers create circular geofences in a Collection, a feature currently unsupported by the service.
 
 To create a geofence, call the `batch_put_geofence` function passing the a longitude/latitude pair (representing a center point), a radius in meters, a collection name, and the geofence identifier.
 
