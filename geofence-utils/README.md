@@ -11,7 +11,7 @@ To create a geofence, call the `batch_put_geofence` function passing the a longi
 For example:
 
 ```python
-batch_put_geofence(-47.72117614746094, -17.14341496307439, 200, 'TestGeofesadasnces', 'test')```
+batch_put_geofence(-47.72117614746094, -17.14341496307439, 200, 'MyGeofenceCollection', 'MyGeofence')
 ```
 
 ### AWS Lambda example
@@ -59,8 +59,8 @@ The example below showcases a test event that you can use to validate the funcio
   "longitude": -47.72117614746094,
   "latitude": -17.14341496307439,
   "radius": 200,
-  "collection": "TestGeofences",
-  "identifier": "test"
+  "collection": "MyGeofenceCollection",
+  "identifier": "MyGeofence"
 }
 ```
 ## Security
