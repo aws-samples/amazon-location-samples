@@ -260,3 +260,11 @@ And here is an example of a GeoJSON file containing 3 geofences:
   ]
 }
 ```
+
+## Security
+
+See [CONTRIBUTING](https://github.com/aws-samples/amazon-location-samples/blog/main/CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## License
+
+This library is licensed under the MIT-0 License. See the LICENSE file.
