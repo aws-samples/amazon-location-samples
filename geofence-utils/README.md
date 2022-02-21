@@ -1,4 +1,4 @@
-# Geofence utils
+# Geofence Utils
 
 This repository contains helpers files to facilitate common practices using Amazon Location Service.
 
