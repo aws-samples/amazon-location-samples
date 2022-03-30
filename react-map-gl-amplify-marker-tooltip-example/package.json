@@ -4,9 +4,9 @@
   "private": true,
   "license": "MIT-0",
   "dependencies": {
-    "aws-amplify": "^4.3.13",
+    "aws-amplify": "^4.3.18",
     "maplibre-gl": "^1.15.2",
-    "maplibre-gl-js-amplify": "^1.2.3",
+    "maplibre-gl-js-amplify": "^1.2.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-map-gl": "^7.0.2"
@@ -44,20 +44,7 @@
     "typescript": "^4.0.3"
   },
   "overrides": {
-    "react-native": {
-      "@react-native-community/cli": {
-        "strip-ansi": {
-          "ansi-regex": "5.0.1"
-        }
-      }
-    },
-    "maplibre-gl-js-amplify": {
-      "@maplibre/maplibre-gl-geocoder": {
-        "nanoid": "3.1.31"
-      }
-    },
     "react-scripts": {
-      "resolve-url-loader": "5.0.0",
       "css-select": {
         "nth-check": "2.0.1"
       }
