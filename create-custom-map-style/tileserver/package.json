@@ -9,9 +9,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
   "devDependencies": {
-    "tessera": "^0.15.0",
+    "tessera": "^0.15.3",
     "tilelive-aws": "^3.2.0"
+  },
+  "overrides": {
+    "@mapbox/tilelive": {
+      "minimist": "1.2.6"
+    }
   }
 }
