@@ -7,6 +7,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "aws-iot-device-sdk": "^2.2.11"
+    "aws-iot-device-sdk": "^2.2.12"
   }
 }
