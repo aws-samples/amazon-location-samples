@@ -32,12 +32,10 @@ Overview of the steps:
 5. Add a Map and Authentication to your application by running `amplify add geo` (this will automatically prompt you to also add the required authentication resources)
 6. Create a custom Amplify resource for the Amazon Location Service Tracker (`amplify add custom`)
 7. Create an AWS Lambda function with Amplify using the code provided (`amplify add function`), this function will be used to update the tracker position in Amazon Location service
-8. Using the AWS Console:
-9. Create an AWS IoT Core Rule to send data to your Lambda function
-10. Create an AWS IoT Thing and publish data to the topic
-
-11. Integrating all resources to the web application
-    1. Add Roles to Cognito Authenticated users
+9. Using the console, create an AWS IoT Core Certificate to allow the IoT Thing to connect to the AWS IoT Core
+8. Create a custom Amplify resource for the AWS IoT Core resources (`amplify add custom`)
+10. Allow the IoT Rule to trigger the Lambda function
+11. Simulate the IoT Thing sending location updates to AWS IoT Core
 12. Run the Application
 
 ### 1. Install application dependencies
@@ -112,7 +110,7 @@ Available advanced settings:
 ✅ Successfully added resource mapiottracker locally.
 ```
 
-### 4. Create an Amazon Location Tracker resource with Amplify
+### 4. Create an Amazon Location Tracker custom resource with Amplify
 
 At the moment the Amplify Geo category doesn't support creating Trackers directly, but we can create a custom resource that will be used to create trackers using an [Amazon CDK](https://aws.amazon.com/cdk/) template.
 
@@ -138,9 +136,9 @@ With the command above Amplify has created a skeleton CDK stack in the `amplify/
   },
   "dependencies": {
     "@aws-amplify/cli-extensibility-helper": "^2.0.0",
-    "@aws-cdk/core": "~1.144.0",
-    "@aws-cdk/aws-iam": "~1.144.0",
-    "@aws-cdk/aws-location": "~1.144.0"
+    "@aws-cdk/core": "~1.151.0",
+    "@aws-cdk/aws-iam": "~1.151.0",
+    "@aws-cdk/aws-location": "~1.151.0"
   },
   "devDependencies": {
     "typescript": "^4.2.4"
@@ -293,7 +291,181 @@ Finally we need to update the `amplify/backend/function/trackfunction1/custom-po
 
 **Note:** Make sure to update the arn to include the AWS Region and [account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html) of your Amplify project.
 
-### 6. Deploy Amplify resources
+
+### 6. Create an AWS IoT Certificate
+
+Before creating the AWS IoT resources with the Amplify CLI you need to create an AWS IoT certificate that is needed for the IoT Thing to authenticate and communicate with IoT Core. 
+
+To do this run the following command **while in the project root directory**, if you are in a different directory you will need to change the path of the output files accordingly:
+
+```sh
+aws iot create-keys-and-certificate \
+    --set-as-active \
+    --certificate-pem-outfile generate_thing_events/certs/certificate.pem.crt \
+    --public-key-outfile generate_thing_events/certs/public.pem.key \
+    --private-key-outfile generate_thing_events/certs/public.pem.key
+```
+
+Now run `aws iot list-certificates` to see the certificate you just created and take note of the `certificateId` that you will need to use when creating the other IoT resources.
+
+```sh
+certificates:
+- certificateArn: arn:aws:iot:[region-name]:[account-id]:cert/18b7ac8eb628e210d3d56b145a2fb02696294015478ec2584910102b46473279
+  certificateId: 18b7ac8eb628e210d3d56b145a2fb02696294015478ec2584910102b46473279 <- Take note of this
+  creationDate: '2022-04-03T12:25:48.348000+00:00'
+  status: ACTIVE
+```
+
+If you prefer, you can also create the certificate in the AWS IoT console and then download the certificate and private key files.
+
+1. Open the [AWS IoT Core console](https://console.aws.amazon.com/iot/)
+2. In the left navigation pane, choose **Secure** and then **Certificates.**
+3. Click on **Add certificate** and then choose **Create certificate** to create a new certificate.
+4. Select **Auto-generate new certificate (recommended)**, set the **Certificate Status** to **Active** and then click **Create**.
+5. Download certificate and private key files from the **Download certificate** and **Download private key** buttons.
+6. Take note of the **Certificate ID**, this is the ID that you will need to use when creating the other AWS IoT resources.
+7. Move the certificate and private key files to the `generate_thing_events/certs/` directory of your project.
+
+After creating the certificate and obtaining the private key files, you should have the following files in the `generate_thing_events/` directory:
+```sh
+generate_thing_events
+├── certs
+├ ├── certificate.pem.crt
+├ ├── public.pem.key
+├ ├── public.pem.key
+├ └── root-CA.pem
+├── index.js
+├── package-lock.json
+├── package.json
+└── LICENSE
+```
+
+Check out [Create AWS IoT client certificates](https://docs.aws.amazon.com/iot/latest/developerguide/device-certs-create.html) for more information.
+
+### 7. Create a AWS IoT resources using an Amplify custom resource
+
+Similarly to the Tracker resource, we can create a custom resource to create the rest of the IoT resources. To create one using Amplify run the following command:
+
+```sh
+amplify add custom
+✔ How do you want to define this custom resource? · AWS CDK
+✔ Provide a name for your custom resource · iotResources
+✅ Created skeleton CDK stack in amplify/backend/custom/iotResources directory
+✔ Do you want to edit the CDK stack now? (Y/n) · no
+```
+
+With the command above Amplify has created a skeleton CDK stack in the `amplify/backend/custom/iotResources` directory of your project. Before starting to configure the stack you need to update the `amplify/backend/custom/iotResources/package.json` file with the following content:
+
+```json
+{
+  "name": "custom-resource",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@aws-amplify/cli-extensibility-helper": "^2.0.0",
+    "@aws-cdk/core": "~1.151.0",
+    "@aws-cdk/aws-iam": "~1.151.0",
+    "@aws-cdk/aws-iot": "~1.151.0",
+    "@aws-cdk/aws-iot-actions": "~1.151.0",
+    "@aws-cdk/aws-lambda": "~1.151.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
+```
+
+Next, open the `amplify/backend/custom/iotResources/cdk-stack.ts` file in your text editor and add a Tracker resource. After editing your file should look like this:
+
+```ts
+import * as cdk from '@aws-cdk/core';
+import * as AmplifyHelpers from '@aws-amplify/cli-extensibility-helper';
+import { AmplifyDependentResourcesAttributes } from '../../types/amplify-dependent-resources-ref';
+import * as iot from '@aws-cdk/aws-iot';
+import * as actions from '@aws-cdk/aws-iot-actions';
+import * as lambda from '@aws-cdk/aws-lambda';
+
+export class cdkStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps, amplifyResourceProps?: AmplifyHelpers.AmplifyResourceProps) {
+    super(scope, id, props);
+    /* Do not remove - Amplify CLI automatically injects the current deployment environment in this input parameter */
+    new cdk.CfnParameter(this, 'env', {
+      type: 'String',
+      description: 'Current Amplify CLI env name',
+    });
+
+    /* AWS CDK code goes here - learn more: https://docs.aws.amazon.com/cdk/latest/guide/home.html */
+    
+    // Identifier for the IoT Core Certificate, REPLACE THIS WITH YOUR CERTIFICATE ID
+    const CERTIFICATE_ID = <AWS IOT CERTIFICATE ID>;
+
+    // Access other Amplify Resources 
+    const retVal:AmplifyDependentResourcesAttributes = AmplifyHelpers.addResourceDependency(this, 
+      amplifyResourceProps.category, 
+      amplifyResourceProps.resourceName, 
+      [
+        {category: 'function', resourceName: 'trackFunction1'},
+      ]
+    );
+    // Get the Lambda Function reference
+    const trackFunction1Arn = cdk.Fn.ref(retVal.function.trackFunction1.Arn);
+    const trackFunction1Ref = lambda.Function.fromFunctionArn(this, 'myFunction', trackFunction1Arn);
+
+    // Create an IoT Core Policy
+    const policy = new iot.CfnPolicy(this, 'Policy', {
+      policyName: 'trackPolicy',
+      policyDocument: {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "iot:Connect",
+            "Resource": `arn:aws:iot:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:client/trackThing01`
+          },
+          {
+            "Effect": "Allow",
+            "Action": "iot:Publish",
+            "Resource": `arn:aws:iot:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:topic/iot/trackedAssets`
+          }
+        ]
+      }
+    });
+
+    // Attach the certificate to the IoT Core Policy
+    const policyPrincipalAttachment = new iot.CfnPolicyPrincipalAttachment(this, 'MyCfnPolicyPrincipalAttachment', {
+      policyName: policy.policyName,
+      principal: `arn:aws:iot:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:cert/${CERTIFICATE_ID}`,
+    });
+    policyPrincipalAttachment.addDependsOn(policy);
+
+    // Create an IoT Core Thing
+    const thing = new iot.CfnThing(this, 'Thing', {
+      thingName: 'trackThing01',
+    });
+
+    // Attach the certificate to the IoT Core Thing
+    const thingPrincipalAttachment = new iot.CfnThingPrincipalAttachment(this, 'MyCfnThingPrincipalAttachment', {
+      principal: `arn:aws:iot:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:cert/${CERTIFICATE_ID}`,
+      thingName: thing.thingName,
+    });
+    thingPrincipalAttachment.addDependsOn(thing);
+
+    // Create an IoT Topic Rule that will trigger the Lambda Function
+    new iot.TopicRule(this, 'TopicRule', {
+      topicRuleName: 'assetTrackingRule',
+      sql: iot.IotSql.fromStringAsVer20160323(`SELECT * FROM 'iot/trackedAssets'`),
+      actions: [new actions.LambdaFunctionAction(trackFunction1Ref)],
+    });
+  }
+}
+```
+
+### 8. Deploy Amplify resources
 
 Now that we have added the resource locally, we need to deploy them to the cloud by running:
 
@@ -301,77 +473,19 @@ Now that we have added the resource locally, we need to deploy them to the cloud
 amplify push -y
 ```
 
-While Amplify deployes the resources in your AWS account you can continue with the next steps.
-
-### 7. Create an AWS IoT Policy
-
-Before creating the AWS IoT Thing we need to create an AWS IoT Policy for it to be associated with. Since Amplify CLI and CDK don't support AWS IoT resources yet, we need to create the policy manually using the AWS Console:
-
-1. Open the [AWS IoT Core console](https://console.aws.amazon.com/iot/)
-2. In the left navigation pane, choose **Secure** and then **Policies.**
-3. Choose **Create** to create a new policy or **Create a policy**, if you don't have one yet.
-4. Enter a **Name** for your policy such as “trackPolicy”
-5. Choose **JSON**, under **Policy document** and enter the following code:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": "iot:Connect",
-      "Resource": "arn:aws:iot:[region-name]:[account-id]:client/trackThing01"
-    },
-    {
-      "Effect": "Allow",
-      "Action": "iot:Publish",
-      "Resource": "arn:aws:iot:[region-name]:[account-id]:topic/iot/trackedAssets"
-    }
-  ]
-}
-```
-
-**Note:** Make sure to update the arn to include the AWS Region and [account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html) of your Amplify project.
-
-6. Choose **Create.**
-
-Check [this comment](https://github.com/aws-samples/amazon-location-samples/issues/105#issuecomment-1037331082) for a video tutorial of the step above.
-
-Check out [Create an AWS IoT Core policy](https://docs.aws.amazon.com/iot/latest/developerguide/create-iot-policy.html) and [AWS IoT Core policies](https://docs.aws.amazon.com/iot/latest/developerguide/iot-policies.html) for more information.
-
-### 8. Create an AWS IoT Thing
-
-1. Open the [AWS IoT Core console](https://console.aws.amazon.com/iot/)
-2. On the left menu bar choose **Manage,** then click on **Things.**
-3. Choose **Create things** to create a new thing.
-4. Then choose **Create a single thing**
-5. Enter the name "trackThing01" and **Next** at the end of the Page. (if choose another name for your thing, make sure to change it in the policy code above after **client/[your thing name]**)
-6. On the **Configure device certificate** page, choose **Auto-generate a new certificate**.
-7. On the **Attach policies to certificate** page, select the policy you created above.
-8. When the **Download certificates and keys** modal opesn, download all the items and move them in a folder named `certs` under the `generate_thing_events` folder of your project, while downloading the files, rename them accordingly:
-9. Device Certificate name as `certificate.pem.crt`
-10. Public key name as `public.pem.key`
-11. Private key name as `private.pem.key`
-12. Root CA name as `root-CA.crt`
-13. After downloading all the files, choose **Done**.
-
-Check [this comment](https://github.com/aws-samples/amazon-location-samples/issues/105#issuecomment-1037331599) for a video tutorial of the step above.
-
 ### 9. Create an AWS IoT Rule to trigger the Lambda function
 
-The AWS IoT Core Rule will forward device position information to the AWS Lambda function to transform it and send to Amazon Location.
+When creating the IoT Rule we have referenced the `trackFunction1` function. This function belongs to a different stack and we were able to reference it by its ARN. Although you can use an imported resource anywhere, you cannot modify the imported resource. For example, you cannot add triggers or new permissions to the imported resource.
 
-1. Open the [AWS IoT Core console](https://console.aws.amazon.com/iot/)
-2. On the left menu select **Act** and then choose **Rules.**
-3. Choose **Create a rule**
-4. Give your rule a name, such as “assetTrackingRule”
-5. Under **Rule query statement** substitute the code starting with `SELECT * FROM..` for:
-   `SELECT * FROM 'iot/trackedAssets'`
-6. Under **Set one or more actions** choose **Add action**
-7. Choose **Send a message to a Lambda function** scroll down and select **Configure action**
-8. Select the Lambda function created above from the dropdown list, if you have used the same name used in the guide it should be called something similar to `trackFunction1-dev`.
-9. Choose **Add action**
-10. Choose **Create Rule**
+To fix this, we need to manually allow IoT Core to invoke the Lambda function. To do this, we need to add a new permission to the Lambda function:
+
+```sh
+aws lambda add-permission --function-name trackFunction1-dev --statement-id iot-events --action "lambda:InvokeFunction" --principal iot.amazonaws.com
+```
+
+If you prefer, you can also add the permission using the AWS Lambda console.
+
+To learn more about how to work with imported resources, see the [AWS CDK documentation](https://docs.aws.amazon.com/cdk/v2/guide/resources.html#resources_importing).
 
 ### 10. Send dummy data to the AWS IoT Core device
 
@@ -400,7 +514,7 @@ const CLIENT_ID = "trackThing01";
 const IOT_TOPIC = "iot/trackedAssets";
 ```
 
-**Note:** You can retrieve the value for `THING_ENDPOINT` and `CLIENT_ID` from the AWS IoT Core console:
+**Note:** You can retrieve the value for `THING_ENDPOINT` by running `aws iot describe-endpoint` or from the AWS IoT Core console:
 
 1. Go to the [AWS IoT Core console](https://console.aws.amazon.com/iot/), and select **Manage** on the left menu
 2. Choose **Things** and then select the **trackThing01**
@@ -432,8 +546,8 @@ You should be able to get an application such as:
 
 To avoid incurring future charges, delete the resources used in this tutorial. Here is a checklist to help:
 
-- AWS IoT Thing, its certificates and policies, and IoT Rule
 - Amplify Project by running `amplify delete` in the project's root directory
+- AWS IoT Certificate and any leftover resources
 
 ## Troubleshooting
 

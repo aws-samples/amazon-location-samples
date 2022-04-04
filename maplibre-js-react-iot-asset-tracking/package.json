@@ -5,9 +5,6 @@
   "dependencies": {
     "@aws-amplify/ui-react": "^2.11.0",
     "@aws-sdk/client-location": "^3.58.0",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
     "aws-amplify": "^4.3.18",
     "maplibre-gl": "^1.15.2",
     "maplibre-gl-js-amplify": "^1.2.5",
