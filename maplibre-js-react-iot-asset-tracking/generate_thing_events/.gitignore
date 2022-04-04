@@ -1,1 +1,2 @@
 certs/*
+!certs/root-CA.pem
