@@ -16,8 +16,8 @@ For this project, you should have the following prerequisites:
 
 - An AWS account with access to create and edit resources in the architecture
 - AWS CLI installed and configured credentials
-- Node.js (>=14.x) and `npm` (>=8.x) installed on your machine
-- AWS Amplify CLI (>=7.6.x) installed (`npm install -g @aws-amplify/cli`)
+- Node.js (`>=v14.x`) and `npm` (`>=v8.x`) installed on your machine
+- AWS Amplify CLI (`>=v7.6.x`) installed (`npm install -g @aws-amplify/cli`)
 
 ## Walkthrough
 
