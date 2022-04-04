@@ -303,7 +303,7 @@ aws iot create-keys-and-certificate \
     --set-as-active \
     --certificate-pem-outfile generate_thing_events/certs/certificate.pem.crt \
     --public-key-outfile generate_thing_events/certs/public.pem.key \
-    --private-key-outfile generate_thing_events/certs/public.pem.key
+    --private-key-outfile generate_thing_events/certs/private.pem.key
 ```
 
 Now run `aws iot list-certificates` to see the certificate you just created and take note of the `certificateId` that you will need to use when creating the other IoT resources.
@@ -514,7 +514,7 @@ const CLIENT_ID = "trackThing01";
 const IOT_TOPIC = "iot/trackedAssets";
 ```
 
-**Note:** You can retrieve the value for `THING_ENDPOINT` by running `aws iot describe-endpoint` or from the AWS IoT Core console:
+**Note:** You can retrieve the value for `THING_ENDPOINT` by running `aws iot describe-endpoint --endpoint-type iot:Data-ATS` or from the AWS IoT Core console:
 
 1. Go to the [AWS IoT Core console](https://console.aws.amazon.com/iot/), and select **Manage** on the left menu
 2. Choose **Things** and then select the **trackThing01**
