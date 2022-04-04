@@ -1,8 +1,9 @@
 const awsIot = require('aws-iot-device-sdk');
 
-const THING_ENDPOINT = 'a1cvae90v4lr6u-ats.iot.eu-west-1.amazonaws.com';
+// Replace with your AWS IoT endpoint
+const THING_ENDPOINT = '<code>-ats.iot.<region>.amazonaws.com';
 const CLIENT_ID = 'trackThing01';
-const IOT_TOPIC = "iot/trackedAssets"
+const IOT_TOPIC = 'iot/trackedAssets';
 
 const POINTS_ON_MAP = [
   { "lat": 49.282301, "long": -123.118408 },
@@ -29,7 +30,7 @@ device
     for (const point of POINTS_ON_MAP) {
       const message = {
         "payload": {
-          "deviceId": "thing123",
+          "deviceId": 'thing123',
           "timestamp": new Date().getTime(),
           "location": point,
         }

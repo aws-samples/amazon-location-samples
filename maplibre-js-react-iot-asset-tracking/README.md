@@ -16,8 +16,8 @@ For this project, you should have the following prerequisites:
 
 - An AWS account with access to create and edit resources in the architecture
 - AWS CLI installed and configured credentials
-- Node.js and `npm` installed on your machine
-- AWS Amplify CLI installed (`npm install -g @aws-amplify/cli`)
+- Node.js (>=14.x) and `npm` (>=8.x) installed on your machine
+- AWS Amplify CLI (>=7.6.x) installed (`npm install -g @aws-amplify/cli`)
 
 ## Walkthrough
 
@@ -491,7 +491,7 @@ To learn more about how to work with imported resources, see the [AWS CDK docume
 
 In order to update the Tracker position you need to send data to the AWS IoT Core device. To do this you can use the script that we have created for you in the `generate_thing_events` folder.
 
-If you have followed the instructions at the step #8, the `generate_thing_events` folder should now have the following structure:
+If you have followed the instructions at the step [#6](#6-create-an-aws-iot-certificate), the `generate_thing_events` folder should now have the following structure:
 
 ```sh
 generate_thing_events
