@@ -2,14 +2,9 @@ package com.amazon.location.android.quickstart
 
 import android.os.Bundle
 import android.util.Log
-import android.view.animation.OvershootInterpolator
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.amplifyframework.AmplifyException
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.core.Amplify
-import com.amplifyframework.geo.location.AWSLocationGeoPlugin
 import com.amplifyframework.geo.location.models.AmazonLocationPlace
 import com.amplifyframework.geo.maplibre.view.MapLibreView
 import com.amplifyframework.geo.maplibre.view.support.fadeIn
@@ -19,7 +14,6 @@ import com.amplifyframework.geo.options.GeoSearchByCoordinatesOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
-import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
     private val mapView by lazy {
@@ -32,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initAmplify()
         setContentView(R.layout.activity_main)
 
         mapView.getMapAsync { map ->
@@ -75,18 +68,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             descriptionView.text = label
             descriptionView.fadeIn()
-        }
-    }
-
-
-    private fun initAmplify() {
-        try {
-            Amplify.addPlugin(AWSCognitoAuthPlugin())
-            Amplify.addPlugin(AWSLocationGeoPlugin())
-            Amplify.configure(applicationContext)
-            Log.i("AndroidQuickStart", "Initialized Amplify")
-        } catch (error: AmplifyException) {
-            Log.e("AndroidQuickStart", "Could not initialize Amplify", error)
         }
     }
 

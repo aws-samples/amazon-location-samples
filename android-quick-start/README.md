@@ -10,23 +10,23 @@ After a successful build the app will look like:
 ![](screenshot.png)
 
 ## Prerequisities
-1. A Amazon Location map resource
-1. A Amazon Location place-index resource
-1. A Cognito identity pool for unauthorized access
+1. An Amazon Location map resource
+1. An Amazon Location place-index resource
+1. A Cognito Identity Pool for unauthorized access
 
 ## How to set up the project
 Before the project can be built we need the following steps to be completed:
-1. Configuring amplify to set map, place-index, and cognito identity-pool id.
+1. Configuring Amplify to set map, place-index, and Cognito Identity Pool id.
 1. Setting up Android SDK path using `local.properties` file or opening the project in Android Studio.
 
 ### Configuring Amplify
-This project uses a JSON configuration following Amplify's configuration schema in `app/res/raw/amplifyconfiguration.json`. To use the quick start, we need to replace the following in the configuration JSON.
+This project uses a JSON configuration following Amplify's configuration schema in `app/src/main/res/raw/amplifyconfiguration.json`. To use the quick start, we need to replace the following in the configuration JSON.
 1. [region]
 1. [map name]
 1. [map style name]
 1. [place index name]
 
-For example, if we are building this application for region `us-west-2`, map resource name `sample-map`, map style name `VectorEsriStreets`, place-index resource name `sample-place-index`, and cognito pool id `us-west-2:cognito-pool-id`, `amplifyconfiguration.json` will look like the following:
+For example, if we are building this application for region `us-west-2`, map resource name `sample-map`, map style name `VectorEsriStreets`, place-index resource name `sample-place-index`, and Identity Pool id `us-west-2:cognito-pool-id`, the `amplifyconfiguration.json` will look like the following:
 
 ```json
 {
