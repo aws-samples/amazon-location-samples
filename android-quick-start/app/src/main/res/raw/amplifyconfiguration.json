@@ -1,0 +1,44 @@
+{
+  "UserAgent": "aws-amplify-cli/2.0",
+  "Version": "1.0",
+  "geo": {
+    "plugins": {
+      "awsLocationGeoPlugin": {
+        "region": "[region]",
+        "maps": {
+          "items": {
+            "[map name]": {
+              "style": "[map style name]"
+            }
+          },
+          "default": "[map name]"
+        },
+        "searchIndices": {
+          "items": [
+            "[place index name]"
+          ],
+          "default": "[place index name]"
+        }
+      }
+    }
+  },
+  "auth": {
+    "plugins": {
+      "awsCognitoAuthPlugin": {
+        "UserAgent": "aws-amplify-cli/0.1.0",
+        "Version": "0.1.0",
+        "IdentityManager": {
+          "Default": {}
+        },
+        "CredentialsProvider": {
+          "CognitoIdentity": {
+            "Default": {
+              "PoolId": "[identity pool id]",
+              "Region": "[region]"
+            }
+          }
+        }
+      }
+    }
+  }
+}
