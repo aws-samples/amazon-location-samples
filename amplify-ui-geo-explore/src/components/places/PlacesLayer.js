@@ -9,12 +9,16 @@ import styles from "./PlacesLayer.module.css";
 //Max search results
 const MAX_RESULT = 9;
 
+// Marker icon size
+const ICON_SIZE = 45;
+
 // Override default popup offset
-const popup = { offset: [0, -25] };
+const popup = { offset: [0, -ICON_SIZE], anchor: "bottom" };
 
 // Override default marker icon
 const icon = document.createElement("div");
-icon.innerHTML = renderToString(<PinIcon size={45} color={"rgb(0, 0, 0)"} />);
+icon.innerHTML = renderToString(<PinIcon size={ICON_SIZE} color={"rgb(0, 0, 0)"} />);
+const markerIcon = { element: icon, offset: [0, -ICON_SIZE/2] };
 
 // Override search box's default style
 const render = (item) => {
@@ -28,7 +32,6 @@ const render = (item) => {
     let afterMatch = suggestionName[0].substring(indexOfMatch + lengthOfMatch);
     return renderToString(
       <div className="mapboxgl-ctrl-geocoder--suggestion maplibregl-ctrl-geocoder--suggestion">
-        <PinIcon size={32} isSelected={false} color={"rgb(0, 0, 0)"} />
         <div className="mapboxgl-ctrl-geocoder--suggestion-info maplibregl-ctrl-geocoder--suggestion-info">
           <div className="mapboxgl-ctrl-geocoder--suggestion-title maplibregl-ctrl-geocoder--suggestion-title">
             {beforeMatch}
@@ -48,7 +51,6 @@ const render = (item) => {
     let placeName = item.place_name.split(",");
     return renderToString(
       <div className="mapboxgl-ctrl-geocoder--result maplibregl-ctrl-geocoder--result">
-        <PinIcon size={32} isSelected={false} color={"rgb(0, 0, 0)"} />
         <div>
           <div className="mapboxgl-ctrl-geocoder--result-title maplibregl-ctrl-geocoder--result-title">
             {placeName[0]}
@@ -70,7 +72,9 @@ const popupRender = (item) => {
       <div className={styles.popup__content}>
         <div className={styles.popup__title}>{placeName[0]}</div>
         {placeName.splice(1, placeName.length).join(",")}
-        <div className={styles.popup__coordinates}>{`${item.center[1]}, ${item.center[0]}`}</div>
+        <div className={styles.popup__coordinates}>
+          {`${item.center[1].toFixed(6)}, ${item.center[0].toFixed(6)}`}
+        </div>
       </div>
     </div>
   );
@@ -83,12 +87,12 @@ const PlacesLayer = () => {
       position="top-left"
       placeholder="Search Places"
       showResultsWhileTyping={false}
-      showResultMarkers={{ element: icon }}
+      showResultMarkers={markerIcon}
       popup={popup}
       limit={MAX_RESULT}
       popupRender={popupRender}
       render={render}
-      marker={{ element: icon }}
+      marker={markerIcon}
     />
   );
 };

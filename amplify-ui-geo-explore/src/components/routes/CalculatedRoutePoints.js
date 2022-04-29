@@ -84,7 +84,7 @@ const CalculatedRoutePoints = ({ route }) => {
               {selectedIndex === 0 ? "Start Position" : "End Position"}
             </div>
             <div className={styles.popup__coordinates}>
-              {`${selectedPoint.coordinates[1]}, ${selectedPoint.coordinates[0]}`}
+              {`${selectedPoint.coordinates[1].toFixed(6)}, ${selectedPoint.coordinates[0].toFixed(6)}`}
             </div>
           </div>
         </Popup>

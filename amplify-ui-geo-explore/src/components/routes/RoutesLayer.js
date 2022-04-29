@@ -90,6 +90,18 @@ const RoutesLayer = ({ client, clickedLngLat, onViewportChangeFromLayer }) => {
           onClose={() => setPanelOpen(false)}
           onCalculate={handleCalculate}
           onReset={handleReset}
+          departurePosition={
+            markers[0]
+              ? `${markers[0]?.latitude.toFixed(6)}, ${markers[0]?.longitude.toFixed(6)}`
+              : undefined
+          }
+          destinationPosition={
+            markers[markers.length - 1] && markers.length > 1
+              ? `${markers[markers.length - 1]?.latitude.toFixed(6)}, ${markers[
+                  markers.length - 1
+                ]?.longitude.toFixed(6)}`
+              : undefined
+          }
         />
       )}
       {markers && <LocationMarkers markers={markers} />}

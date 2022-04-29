@@ -13,7 +13,7 @@ const initialState = {
 };
 
 // Popup panel to calculate route
-const RoutesPanel = ({ onCalculate, onReset, onClose }) => {
+const RoutesPanel = ({ onCalculate, onReset, onClose, departurePosition, destinationPosition }) => {
   const [travelMode, setTravelMode] = useState(initialState.travelMode);
   const [departureTimeMode, setDepartureTimeMode] = useState(initialState.departureTimeMode);
   const [departureDate, setDepartureDate] = useState(initialState.departureDate);
@@ -37,7 +37,7 @@ const RoutesPanel = ({ onCalculate, onReset, onClose }) => {
       onCalculate({
         travelMode,
         departureTimeMode,
-        departureDateTime
+        departureDateTime,
       });
     }
   };
@@ -61,6 +61,14 @@ const RoutesPanel = ({ onCalculate, onReset, onClose }) => {
           <div>Plot route positions on the map to calculate a route.</div>
         </div>
         <div className={styles.content}>
+          <div className={styles.field}>
+            <div className={styles.field__label}>Departure Position</div>
+            <em className={styles.field__coordinates}>{departurePosition ? departurePosition : "Click on the map to set the position"}</em>
+          </div>
+          <div className={styles.field}>
+            <div className={styles.field__label}>Destination Position</div>
+            <em className={styles.field__coordinates}>{destinationPosition ? destinationPosition : "Click on the map to set the position"}</em>
+          </div>
           <RadioGroupField
             label="Travel Mode"
             name="travelMode"

@@ -49,7 +49,7 @@ const LocationMarkers = ({ markers }) => {
                   {selectedMarker.getPopupTitle(markers.length)}
                 </div>
                 <div className={styles.popup__coordinates}>
-                  {`${selectedMarker.latitude}, ${selectedMarker.longitude}`}
+                  {`${selectedMarker.latitude.toFixed(6)}, ${selectedMarker.longitude.toFixed(6)}`}
                 </div>
               </div>
             </Popup>

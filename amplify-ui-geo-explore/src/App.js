@@ -110,6 +110,7 @@ const App = () => {
           mapStyle={MAP.NAME}
           onMove={(e) => setViewport(e.viewState)}
           onClick={handleMapClick}
+          maxZoom={16}
         >
           <NavigationControl position="bottom-right" />
           <PlacesLayer />

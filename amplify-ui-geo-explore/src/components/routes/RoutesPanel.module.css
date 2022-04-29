@@ -37,6 +37,13 @@ SPDX-License-Identifier: MIT-0
   color: #304050;
 }
 
+.field__coordinates {
+  margin: 0.5rem 0 0.15rem 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #606060;
+}
+
 .field__input {
   margin: 0.5rem 0 0.15rem 0;
   max-width: 10rem;
