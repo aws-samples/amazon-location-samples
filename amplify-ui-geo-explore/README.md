@@ -72,7 +72,22 @@ App has been tested on Node.js v16.13.2 and NPM v8.1.2
 
 ## Important notes
 
-This project uses [aliasing in webpack](https://webpack.js.org/configuration/resolve/#resolvealias) to alias `react-map-gl`'s Mapbox GL dependency to [MapLibre GL JS](https://maplibre.org/), as `react-map-gl` depends on `mapbox-gl@^2` by default, which is **NOT** compatible with Amazon Location Service, as it requires a Mapbox API key. See the [`react-map-gl guide`](https://visgl.github.io/react-map-gl/docs/get-started/get-started#using-with-a-mapbox-gl-fork) and [`webpack.config.js`](webpack.config.js#L21-L24) to see how the aliasing works.
+* This project uses [aliasing in webpack](https://webpack.js.org/configuration/resolve/#resolvealias) to alias `react-map-gl`'s Mapbox GL dependency to [MapLibre GL JS](https://maplibre.org/), as `react-map-gl` depends on `mapbox-gl@^2` by default, which is **NOT** compatible with Amazon Location Service, as it requires a Mapbox API key. See the [`react-map-gl guide`](https://visgl.github.io/react-map-gl/docs/get-started/get-started#using-with-a-mapbox-gl-fork) and [`webpack.config.js`](webpack.config.js#L21-L24) to see how the aliasing works.
+
+
+* You may see the following AuthError in your browser's developer console:
+    ```
+    AuthError - 
+    Error: Amplify has not been configured correctly. 
+    The configuration object is missing required auth properties.
+    This error is typically caused by one of the following scenarios:
+
+    1. Did you run `amplify push` after adding auth via `amplify add auth`?
+        See https://aws-amplify.github.io/docs/js/authentication#amplify-project-setup for more information
+
+    2. This could also be caused by multiple conflicting versions of amplify packages, see (https://docs.amplify.aws/lib/troubleshooting/upgrading/q/platform/js) for help upgrading Amplify packages.
+    ```
+    This is currently a [known issue](https://github.com/aws-amplify/amplify-js/issues/9845) in the Amplify Auth library that is requiring an Amazon Cognito user pool to be configured. Since this app is set up to allow unauthenticated identities, no user pool is needed. This does not affect the behaviour of the app other than the error appearing in the console.
 
 ## Security
 

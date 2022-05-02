@@ -12,6 +12,16 @@ const initialState = {
   departureTime: "",
 };
 
+const getDestinationTextColor = (departurePosition, destinationPosition) => {
+  if (!departurePosition && !destinationPosition) {
+    return "#cacaca";
+  } else if (departurePosition && !destinationPosition) {
+    return "#3eb0ce";
+  } else {
+    return "#606060";
+  }
+};
+
 // Popup panel to calculate route
 const RoutesPanel = ({ onCalculate, onReset, onClose, departurePosition, destinationPosition }) => {
   const [travelMode, setTravelMode] = useState(initialState.travelMode);
@@ -63,11 +73,11 @@ const RoutesPanel = ({ onCalculate, onReset, onClose, departurePosition, destina
         <div className={styles.content}>
           <div className={styles.field}>
             <div className={styles.field__label}>Departure Position</div>
-            <em className={styles.field__coordinates}>{departurePosition ? departurePosition : "Click on the map to set the position"}</em>
+            <em className={styles.field__coordinates} style={{ color: !departurePosition ? "#3eb0ce" : "#606060" }}>{departurePosition ? departurePosition : "Click on the map to set the position"}</em>
           </div>
           <div className={styles.field}>
             <div className={styles.field__label}>Destination Position</div>
-            <em className={styles.field__coordinates}>{destinationPosition ? destinationPosition : "Click on the map to set the position"}</em>
+            <em className={styles.field__coordinates} style={{ color: getDestinationTextColor(departurePosition, destinationPosition) }}>{destinationPosition ? destinationPosition : "Click on the map to set the position"}</em>
           </div>
           <RadioGroupField
             label="Travel Mode"

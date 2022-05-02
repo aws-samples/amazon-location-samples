@@ -5,8 +5,8 @@ SPDX-License-Identifier: MIT-0
 
 .wrapper {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 1.5rem;
+  right: 4rem;
   width: 24rem;
   z-index: 3;
   user-select: text;
@@ -41,19 +41,20 @@ SPDX-License-Identifier: MIT-0
   margin: 0.5rem 0 0.15rem 0;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #606060;
 }
 
 .field__input {
   margin: 0.5rem 0 0.15rem 0;
   max-width: 10rem;
   border-style: solid;
+  border-color: #858585;
   padding: 0.25rem 1rem;
   text-align: center;
   font-size: 0.9rem;
 }
 
 .field__input:disabled {
+  border-color: #d1d1d1;
   background: #d1d1d1;
 }
 
