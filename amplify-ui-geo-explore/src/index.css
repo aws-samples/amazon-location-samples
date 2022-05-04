@@ -1,0 +1,13 @@
+/* 
+Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+SPDX-License-Identifier: MIT-0
+*/
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.mapboxgl-ctrl-top-left .mapboxgl-ctrl, .maplibregl-ctrl-top-left .maplibregl-ctrl {
+  min-width: 360px;
+}
