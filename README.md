@@ -57,6 +57,7 @@ cleaning, validating, and enriching data in place.
 * [Amazon Redshift User Defined Functions to call Amazon Location Service APIs](https://github.com/aws-samples/amazon-redshift-location-user-defined-functions) `#redshift`
 * [Amazon Location UDFs for Athena](athena-udfs/) `#athena`
 * [Geocode/Reverse-Geocode csv files in S3](https://github.com/aws-samples/amazon-location-service-serverless-address-validation)
+* [Address Enrichment and Caching using AWS Step Functions](https://github.com/aws-samples/address-enrichment-and-caching-using-stepfunctions) *- alternate approach to the [Geocode/Reverse-Geocode csv files in S3](https://github.com/aws-samples/amazon-location-service-serverless-address-validation) sample* `#stepfunctions` `#caching` `#lambda`
 
 ### Tracking
 
