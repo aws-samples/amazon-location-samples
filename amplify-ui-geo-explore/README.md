@@ -1,5 +1,15 @@
 # Explore Sample
-This sample app demonstrates the different Maps, Places, and Routes functionalities of Amazon Location Service. The sample primarily uses [Amplify UI Geo](https://ui.docs.amplify.aws/components/geo), [react-map-gl](https://visgl.github.io/react-map-gl/) and [Amazon Location Service](https://aws.amazon.com/location).
+This sample app demonstrates the different Maps, Places, Routes, Geofences, and Trackers functionalities of Amazon Location Service. The sample primarily uses [Amplify UI Geo](https://ui.docs.amplify.aws/components/geo), [react-map-gl](https://visgl.github.io/react-map-gl/) and [Amazon Location Service](https://aws.amazon.com/location).
+
+**Maps:** Allows you to visualize location information and is the foundation of the rest of the functionalities of the app.
+
+**Places:** Allows you to search for a location and view the results on the map.
+
+**Routes:** Allows you to calculate a route between two or more points. You will also be able to provide travel mode and departure time information as part of calculating a route. 
+
+**Geofences:** Allows you to view, create, and remove geofences from the map.
+
+**Trackers:** Allows you to simulate device position updates, view tracked device positions, and view device position history on the map. If you want to see your own devices on the map, send position updates to the app's tracker resource by following [this guide](https://docs.aws.amazon.com/location/latest/developerguide/start-tracking.html).
 
 ![](screenshot.png)
 
@@ -17,6 +27,8 @@ See [`src/index.js`](src/index.js).
 [`aws-amplify`](https://github.com/aws-amplify/amplify-js): Helps with authentication to get resources from Amazon Location Service.
 
 [`@aws-sdk`](https://github.com/aws/aws-sdk-js-v3): Used to make requests to Amazon Location Service.
+
+[`@mapbox/mapbox-gl-draw`](https://github.com/mapbox/mapbox-gl-draw): Provides drawing capability to help create geofences.
 
 
 
@@ -60,6 +72,26 @@ App has been tested on Node.js v16.13.2 and NPM v8.1.2
                       "geo:CalculateRoute"
                   ],
                   "Resource": "arn:aws:geo:region:accountID:route-calculator/ExampleRouteCalculator"
+              },
+              {
+                  "Sid": "Geofences",
+                  "Effect": "Allow",
+                  "Action": [
+                      "geo:ListGeofences",
+                      "geo:PutGeofence",
+                      "geo:BatchDeleteGeofence"
+                  ],
+                  "Resource": "arn:aws:geo:region:accountID:geofence-collection/ExampleGeofenceCollection"
+              },
+              {
+                  "Sid": "Trackers",
+                  "Effect": "Allow",
+                  "Action": [
+                      "geo:ListDevicePositions",
+                      "geo:BatchUpdateDevicePosition",
+                      "geo:GetDevicePositionHistory"
+                  ],
+                  "Resource": "arn:aws:geo:region:accountID:tracker/ExampleTracker"
               }
           ]
       }

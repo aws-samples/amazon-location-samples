@@ -1,0 +1,37 @@
+/* 
+Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+SPDX-License-Identifier: MIT-0
+*/
+
+.wrapper {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 24rem;
+  z-index: 3;
+  user-select: text;
+}
+
+/* Increase specificity to override Amplify UI card style */
+.wrapper > .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 28rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}

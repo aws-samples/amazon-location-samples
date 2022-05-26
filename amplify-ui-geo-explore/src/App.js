@@ -5,11 +5,21 @@ import { useState, useEffect } from "react";
 import Amplify, { Auth } from "aws-amplify";
 import { LocationClient } from "@aws-sdk/client-location";
 import { IDENTITY_POOL_ID, REGION, MAP, PLACE } from "./configuration";
+import {
+  ROUTES_PANEL,
+  GEOFENCES_PANEL,
+  TRACKERS_PANEL,
+  MAP_CONTAINER,
+  GEOFENCE_DRAWING_MODE,
+  DEVICE_POSITION_HISTORY_VIEWER,
+} from "./constants";
 import PlacesLayer from "./components/places/PlacesLayer";
 import RoutesLayer from "./components/routes/RoutesLayer";
-import { MapView } from "@aws-amplify/ui-react";
+import GeofencesLayer from "./components/geofences/GeofencesLayer";
+import TrackersLayer from "./components/trackers/TrackersLayer";
+import { AmplifyProvider, MapView } from "@aws-amplify/ui-react";
 import { NavigationControl } from "react-map-gl";
-import WebMercatorViewport from "@math.gl/web-mercator";
+import { theme } from "./theme";
 import "@aws-amplify/ui-react/styles.css";
 import "./index.css";
 
@@ -42,12 +52,9 @@ Amplify.configure({
 const App = () => {
   const [credentials, setCredentials] = useState();
   const [client, setClient] = useState();
-  const [viewport, setViewport] = useState({
-    longitude: -123.1187,
-    latitude: 49.2819,
-    zoom: 11,
-  });
   const [clickedLngLat, setClickedLngLat] = useState();
+  const [openedPanel, setOpenedPanel] = useState();
+  const [openedInfoBox, setOpenedInfoBox] = useState();
 
   //Fetch credentials when the app loads
   useEffect(() => {
@@ -71,28 +78,6 @@ const App = () => {
     }
   }, [credentials]);
 
-  // Adjust the viewport based on bounding box
-  const handleViewportChangeFromLayer = (bbox) => {
-    if (bbox) {
-      // Adjusting viewport based on bounding box array input
-      const boundingBox = [
-        [bbox[0], bbox[1]],
-        [bbox[2], bbox[3]],
-      ];
-
-      // Get the new viewport based on the bounding box
-      const newViewport = new WebMercatorViewport({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        ...viewport,
-      }).fitBounds(boundingBox, {
-        padding: 250,
-      });
-
-      setViewport(newViewport);
-    }
-  };
-
   // Store coordinates of clicked position on the map
   const handleMapClick = (e) => {
     if (e.lngLat) {
@@ -100,15 +85,24 @@ const App = () => {
     }
   };
 
+  // Update state of the currently opened panel
+  const handlePanelChange = (panel) => {
+    setOpenedPanel(panel);
+  };
+
   return (
-    <>
+    <AmplifyProvider theme={theme}>
       {client ? (
         <MapView
-          {...viewport}
+          id={MAP_CONTAINER}
           width="100%"
           height="100vh"
+          initialViewState={{
+            longitude: -123.1187,
+            latitude: 49.2819,
+            zoom: 11,
+          }}
           mapStyle={MAP.NAME}
-          onMove={(e) => setViewport(e.viewState)}
           onClick={handleMapClick}
           maxZoom={16}
         >
@@ -117,13 +111,33 @@ const App = () => {
           <RoutesLayer
             client={client}
             clickedLngLat={clickedLngLat}
-            onViewportChangeFromLayer={handleViewportChangeFromLayer}
+            isOpenedPanel={openedPanel === ROUTES_PANEL ? true : false}
+            onPanelChange={handlePanelChange}
+          />
+          <GeofencesLayer
+            client={client}
+            isOpenedPanel={openedPanel === GEOFENCES_PANEL ? true : false}
+            onPanelChange={handlePanelChange}
+            isDrawing={openedInfoBox === GEOFENCE_DRAWING_MODE ? true : false}
+            onDrawingChange={(status) =>
+              status ? setOpenedInfoBox(GEOFENCE_DRAWING_MODE) : setOpenedInfoBox()
+            }
+          />
+          <TrackersLayer
+            client={client}
+            clickedLngLat={clickedLngLat}
+            isOpenedPanel={openedPanel === TRACKERS_PANEL ? true : false}
+            onPanelChange={handlePanelChange}
+            isViewingDeviceHistory={openedInfoBox === DEVICE_POSITION_HISTORY_VIEWER ? true : false}
+            onViewingDeviceHistoryChange={(status) =>
+              status ? setOpenedInfoBox(DEVICE_POSITION_HISTORY_VIEWER) : setOpenedInfoBox()
+            }
           />
         </MapView>
       ) : (
         <h1>Loading...</h1>
       )}
-    </>
+    </AmplifyProvider>
   );
 };
 

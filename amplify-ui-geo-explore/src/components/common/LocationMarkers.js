@@ -5,10 +5,10 @@ import { useState } from "react";
 import { Marker, Popup } from "react-map-gl";
 import PinIcon from "./PinIcon";
 import styles from "./LocationMarkers.module.css";
+import { PIN_ICON_SIZE } from "../../constants";
 
 // Render markers with popup on map
 const LocationMarkers = ({ markers }) => {
-  const iconSize = 45;
   const [selectedMarker, setSelectedMarker] = useState();
 
   return (
@@ -20,7 +20,7 @@ const LocationMarkers = ({ markers }) => {
               <Marker
                 latitude={marker.latitude}
                 longitude={marker.longitude}
-                offset={[0, -iconSize / 2]}
+                offset={[0, -PIN_ICON_SIZE / 2]}
                 key={index}
                 onClick={(e) => {
                   e.originalEvent.stopPropagation();
@@ -28,7 +28,7 @@ const LocationMarkers = ({ markers }) => {
                 }}
                 className={styles.marker}
               >
-                <PinIcon label={index + 1} size={iconSize} color={marker.color} />
+                <PinIcon label={index + 1} size={PIN_ICON_SIZE} color={marker.color} />
               </Marker>
             );
           })}
@@ -37,7 +37,7 @@ const LocationMarkers = ({ markers }) => {
             <Popup
               latitude={selectedMarker.latitude}
               longitude={selectedMarker.longitude}
-              offset={[0, -iconSize]}
+              offset={[0, -PIN_ICON_SIZE]}
               closeButton={true}
               closeOnClick={true}
               onClose={() => setSelectedMarker()}

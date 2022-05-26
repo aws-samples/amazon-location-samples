@@ -5,20 +5,18 @@ import { Geocoder } from "@aws-amplify/ui-react";
 import { renderToString } from "react-dom/server";
 import PinIcon from "../common/PinIcon";
 import styles from "./PlacesLayer.module.css";
+import { PIN_ICON_SIZE } from "../../constants";
 
 //Max search results
 const MAX_RESULT = 9;
 
-// Marker icon size
-const ICON_SIZE = 45;
-
 // Override default popup offset
-const popup = { offset: [0, -ICON_SIZE], anchor: "bottom" };
+const popup = { offset: [0, -PIN_ICON_SIZE], anchor: "bottom" };
 
 // Override default marker icon
 const icon = document.createElement("div");
-icon.innerHTML = renderToString(<PinIcon size={ICON_SIZE} color={"rgb(0, 0, 0)"} />);
-const markerIcon = { element: icon, offset: [0, -ICON_SIZE/2] };
+icon.innerHTML = renderToString(<PinIcon size={PIN_ICON_SIZE} color={"rgb(0, 0, 0)"} />);
+const markerIcon = { element: icon, offset: [0, -PIN_ICON_SIZE/2] };
 
 // Override search box's default style
 const render = (item) => {

@@ -12,3 +12,9 @@ export const MAP = {
 export const PLACE = "XXXXXXXXXXX"; // REQUIRED - Amazon Location Service place index resource name
 
 export const ROUTE = "XXXXXXXXXXX"; // REQUIRED - Amazon Location Service route calculator resource name
+
+export const GEOFENCE = "XXXXXXXXXXX"; // REQUIRED - Amazon Location Service geofence collection resource name
+
+export const TRACKER = "XXXXXXXXXXX"; // REQUIRED - Amazon Location Service tracker resource name
+
+export const TRACKER_SIMULATED_DEVICE = "Vehicle-1";  // REQUIRED - Simulated Device ID (Defaulting to Vehicle-1)

@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: MIT-0
 
 import { useState } from "react";
-import { Heading, Card, Button, RadioGroupField, Radio } from "@aws-amplify/ui-react";
+import { Heading, Button, RadioGroupField, Radio } from "@aws-amplify/ui-react";
+import Panel from "../common/Panel";
 import styles from "./RoutesPanel.module.css";
 
 const initialState = {
@@ -64,86 +65,15 @@ const RoutesPanel = ({ onCalculate, onReset, onClose, departurePosition, destina
   };
 
   return (
-    <div className={styles.wrapper}>
-      <Card variation="elevated">
-        <div className={styles.header}>
+    <Panel
+      header={
+        <>
           <Heading level={4}>Routes</Heading>
           <div>Plot route positions on the map to calculate a route.</div>
-        </div>
-        <div className={styles.content}>
-          <div className={styles.field}>
-            <div className={styles.field__label}>Departure Position</div>
-            <em className={styles.field__coordinates} style={{ color: !departurePosition ? "#3eb0ce" : "#606060" }}>{departurePosition ? departurePosition : "Click on the map to set the position"}</em>
-          </div>
-          <div className={styles.field}>
-            <div className={styles.field__label}>Destination Position</div>
-            <em className={styles.field__coordinates} style={{ color: getDestinationTextColor(departurePosition, destinationPosition) }}>{destinationPosition ? destinationPosition : "Click on the map to set the position"}</em>
-          </div>
-          <RadioGroupField
-            label="Travel Mode"
-            name="travelMode"
-            value={travelMode}
-            onChange={(e) => setTravelMode(e.target.value)}
-            style={{ marginBottom: "1rem" }}
-          >
-            <Radio value="Car">Car</Radio>
-            <Radio value="Truck">Truck</Radio>
-            <Radio value="Walking">Walking</Radio>
-          </RadioGroupField>
-          <RadioGroupField
-            label="Departure Time"
-            name="departureTime"
-            value={departureTimeMode}
-            onChange={(e) => setDepartureTimeMode(e.target.value)}
-            style={{ marginBottom: "1rem" }}
-          >
-            <Radio value="none">None (no traffic)</Radio>
-            <Radio value="now">Now (live traffic)</Radio>
-            <Radio value="future">Future (predicted traffic)</Radio>
-          </RadioGroupField>
-          <div className={styles.field}>
-            <label htmlFor="departureDate" className={styles.field__label}>
-              Date
-            </label>
-            <input
-              id="departureDate"
-              type="date"
-              className={styles.field__input}
-              disabled={departureTimeMode !== "future" ? true : false}
-              min={new Date().toISOString().split("T")[0]}
-              onChange={(e) => {
-                setDepartureDate(e.target.value);
-              }}
-              value={departureDate}
-            />
-            {departureDateTimeError && (
-              <div className={styles.error}>A valid date and time are required.</div>
-            )}
-            <em className={pastDepartureDateTimeError ? styles.error : undefined}>
-              Departure date must be in the future.
-            </em>
-          </div>
-          <div className={styles.field}>
-            <label htmlFor="departureTime" className={styles.field__label}>
-              Time
-            </label>
-            <input
-              id="departureTime"
-              type="time"
-              className={styles.field__input}
-              disabled={departureTimeMode !== "future" ? true : false}
-              onChange={(e) => setDepartureTime(e.target.value)}
-              value={departureTime}
-            />
-            {departureDateTimeError && (
-              <div className={styles.error}>A valid date and time are required.</div>
-            )}
-            <em className={pastDepartureDateTimeError ? styles.error : undefined}>
-              Departure time must be in the future.
-            </em>
-          </div>
-        </div>
-        <div className={styles.footer}>
+        </>
+      }
+      footer={
+        <>
           <Button size="small" onClick={onClose}>
             Close
           </Button>
@@ -160,9 +90,91 @@ const RoutesPanel = ({ onCalculate, onReset, onClose, departurePosition, destina
               Calculate
             </Button>
           </div>
-        </div>
-      </Card>
-    </div>
+        </>
+      }
+    >
+      <div className={styles.field}>
+        <div className={styles.field__label}>Departure Position</div>
+        <em
+          className={styles.field__coordinates}
+          style={{ color: !departurePosition ? "#3eb0ce" : "#606060" }}
+        >
+          {departurePosition ? departurePosition : "Click on the map to set the position"}
+        </em>
+      </div>
+      <div className={styles.field}>
+        <div className={styles.field__label}>Destination Position</div>
+        <em
+          className={styles.field__coordinates}
+          style={{ color: getDestinationTextColor(departurePosition, destinationPosition) }}
+        >
+          {destinationPosition ? destinationPosition : "Click on the map to set the position"}
+        </em>
+      </div>
+      <RadioGroupField
+        label="Travel Mode"
+        name="travelMode"
+        value={travelMode}
+        onChange={(e) => setTravelMode(e.target.value)}
+        style={{ marginBottom: "1rem" }}
+      >
+        <Radio value="Car">Car</Radio>
+        <Radio value="Truck">Truck</Radio>
+        <Radio value="Walking">Walking</Radio>
+      </RadioGroupField>
+      <RadioGroupField
+        label="Departure Time"
+        name="departureTime"
+        value={departureTimeMode}
+        onChange={(e) => setDepartureTimeMode(e.target.value)}
+        style={{ marginBottom: "1rem" }}
+      >
+        <Radio value="none">None (no traffic)</Radio>
+        <Radio value="now">Now (live traffic)</Radio>
+        <Radio value="future">Future (predicted traffic)</Radio>
+      </RadioGroupField>
+      <div className={styles.field}>
+        <label htmlFor="departureDate" className={styles.field__label}>
+          Date
+        </label>
+        <input
+          id="departureDate"
+          type="date"
+          className={styles.field__input}
+          disabled={departureTimeMode !== "future" ? true : false}
+          min={new Date().toISOString().split("T")[0]}
+          onChange={(e) => {
+            setDepartureDate(e.target.value);
+          }}
+          value={departureDate}
+        />
+        {departureDateTimeError && (
+          <div className={styles.error}>A valid date and time are required.</div>
+        )}
+        <em className={pastDepartureDateTimeError ? styles.error : undefined}>
+          Departure date must be in the future.
+        </em>
+      </div>
+      <div className={styles.field}>
+        <label htmlFor="departureTime" className={styles.field__label}>
+          Time
+        </label>
+        <input
+          id="departureTime"
+          type="time"
+          className={styles.field__input}
+          disabled={departureTimeMode !== "future" ? true : false}
+          onChange={(e) => setDepartureTime(e.target.value)}
+          value={departureTime}
+        />
+        {departureDateTimeError && (
+          <div className={styles.error}>A valid date and time are required.</div>
+        )}
+        <em className={pastDepartureDateTimeError ? styles.error : undefined}>
+          Departure time must be in the future.
+        </em>
+      </div>
+    </Panel>
   );
 };
 

@@ -14,27 +14,18 @@ SPDX-License-Identifier: MIT-0
   color: #304050;
 }
 
-.field__coordinates {
+.field__value {
   margin: 0.5rem 0 0.15rem 0;
   font-size: 0.8rem;
   font-weight: 500;
+  color: #606060;
 }
 
-.field__input {
-  margin: 0.5rem 0 0.15rem 0;
-  max-width: 10rem;
-  border-style: solid;
-  border-color: #858585;
-  padding: 0.25rem 1rem;
-  text-align: center;
-  font-size: 0.9rem;
+.information {
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
-.field__input:disabled {
-  border-color: #d1d1d1;
-  background: #d1d1d1;
-}
-
-.error {
-  color: red;
+.refresh {
+  padding-top: 0.25rem;
 }
