@@ -1,0 +1,37 @@
+/* 
+Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+SPDX-License-Identifier: MIT-0
+*/
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.collection {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.empty {
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+  color: #6d6d6d;
+}
+
+.empty__header {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.empty__body {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.max {
+  margin-top: 0.25rem;
+  text-align: center;
+}

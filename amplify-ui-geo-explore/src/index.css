@@ -11,3 +11,7 @@ body {
 .mapboxgl-ctrl-top-left .mapboxgl-ctrl, .maplibregl-ctrl-top-left .maplibregl-ctrl {
   min-width: 360px;
 }
+
+.crosshair-cursor canvas {
+  cursor: crosshair;
+}

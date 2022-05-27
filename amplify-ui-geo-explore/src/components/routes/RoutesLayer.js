@@ -4,12 +4,14 @@
 import { useEffect, useState } from "react";
 import { CalculateRouteCommand } from "@aws-sdk/client-location";
 import { Button } from "@aws-amplify/ui-react";
+import { useMap } from "react-map-gl";
 import { ROUTE } from "../../configuration";
 import LocationMarkers from "../common/LocationMarkers";
 import RoutesPanel from "./RoutesPanel";
 import CalculatedRoutePath from "./CalculatedRoutePath";
 import CalculatedRoutePoints from "./CalculatedRoutePoints";
 import { Marker } from "../common/Marker";
+import { ROUTES_PANEL } from "../../constants";
 
 // Get calculated route result
 const callCalculateRouteCommand = async (client, markers, options) => {
@@ -27,19 +29,26 @@ const callCalculateRouteCommand = async (client, markers, options) => {
     });
 
     return client.send(command);
+  } else {
+    alert("Set a departure and destination point on the map before calculating the route.");
   }
 };
 
 // Layer in the app that contains Routes functionalities
-const RoutesLayer = ({ client, clickedLngLat, onViewportChangeFromLayer }) => {
+const RoutesLayer = ({
+  client,
+  clickedLngLat,
+  isOpenedPanel,
+  onPanelChange,
+}) => {
   const [markers, setMarkers] = useState([]);
   const [route, setRoute] = useState();
-  const [panelOpen, setPanelOpen] = useState(false);
   const [index, setIndex] = useState(0);
+  const { current: map } = useMap();
 
   useEffect(() => {
     // Store clicked coordinates into markers to be displayed on the map only when routes panel is open
-    if (clickedLngLat && panelOpen) {
+    if (clickedLngLat && isOpenedPanel) {
       const markerData = new Marker(clickedLngLat, index);
       setMarkers((current) => [...current, markerData]);
       setIndex(index + 1);
@@ -47,12 +56,32 @@ const RoutesLayer = ({ client, clickedLngLat, onViewportChangeFromLayer }) => {
   }, [clickedLngLat]);
 
   const handleCalculate = async (options) => {
-    const calculatedRoute = await callCalculateRouteCommand(client, markers, options);
-    // Update viewport to fit calculated route
-    if (calculatedRoute) {
-      onViewportChangeFromLayer(calculatedRoute.Summary.RouteBBox);
+    try {
+      const calculatedRoute = await callCalculateRouteCommand(client, markers, options);
+      if (calculatedRoute) {
+        // Update viewport to fit calculated route
+        const boundingBox = calculatedRoute.Summary.RouteBBox;
+        map.fitBounds(
+          [
+            [boundingBox[0], boundingBox[1]],
+            [boundingBox[2], boundingBox[3]],
+          ],
+          {
+            padding: {
+              top: 200,
+              bottom: 200,
+              left: 100,
+              right: 500,
+            },
+            speed: 0.8,
+            linear: false,
+          }
+        );
+        setRoute(calculatedRoute);
+      }
+    } catch {
+      alert("There was an error calculating the route.");
     }
-    setRoute(calculatedRoute);
   };
 
   const handleReset = () => {
@@ -67,11 +96,13 @@ const RoutesLayer = ({ client, clickedLngLat, onViewportChangeFromLayer }) => {
         style={{
           position: "absolute",
           top: "0.59rem",
-          left: "24rem",
+          left: "24.1rem",
         }}
       >
         <Button
-          onClick={() => setPanelOpen((value) => !value)}
+          onClick={() => {
+            isOpenedPanel ? onPanelChange() : onPanelChange(ROUTES_PANEL);
+          }}
           backgroundColor="white"
           size="small"
           gap="0.5rem"
@@ -85,9 +116,9 @@ const RoutesLayer = ({ client, clickedLngLat, onViewportChangeFromLayer }) => {
           Routes
         </Button>
       </div>
-      {panelOpen && (
+      {isOpenedPanel && (
         <RoutesPanel
-          onClose={() => setPanelOpen(false)}
+          onClose={() => onPanelChange()}
           onCalculate={handleCalculate}
           onReset={handleReset}
           departurePosition={
