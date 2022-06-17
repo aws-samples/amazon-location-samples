@@ -71,9 +71,8 @@ const DevicePositionHistory = ({ deviceHistoryEntries }) => {
           <div className={styles.popup__content}>
             <div className={styles.popup__title}>{selectedHistoryPoint.DeviceId}</div>
             <div className={styles.popup__coordinates}>
-              {`${selectedHistoryPoint.Position[0].toFixed(
-                6
-              )}, ${selectedHistoryPoint.Position[0].toFixed(6)}`}
+              {`${selectedHistoryPoint.Position[1].toFixed(6)},
+              ${selectedHistoryPoint.Position[0].toFixed(6)}`}
             </div>
             <div className={styles.popup__item}>
               <div className={styles.popup__subtitle}>Reported Time</div>
