@@ -30,13 +30,13 @@ npm install amazon-location-helpers
     <script>
       AmazonLocation.createMap(
         {
-          "us-east-1:54f2ba88-9390-498d-aaa5-0d97fb7ca3bd",
+          identityPoolId: "us-east-1:54f2ba88-9390-498d-aaa5-0d97fb7ca3bd",
         },
         {
           container: "map",
           center: [-123.1187, 49.2819], // initial map centerpoint
           zoom: 10, // initial map zoom
-          style: "explore.map,
+          style: "explore.map",
           hash: true,
         }
       );
@@ -64,9 +64,9 @@ function createMap(
 This will instantiate a [`Map`](https://maplibre.org/maplibre-gl-js-docs/api/map/), exchange the provided Amazon Cognito Identity Pool ID for AWS credentials, load the style associated with the `explore.map` Map resource, and render it to the `<div>` identified as `map`, centered on Vancouver, British Columbia:
 
 ```javascript
-const map = await AmazonLocation.createMap(
-  "us-east-1:54f2ba88-9390-498d-aaa5-0d97fb7ca3bd",
-  {
+const map = await AmazonLocation.createMap({
+    identityPoolId: "us-east-1:54f2ba88-9390-498d-aaa5-0d97fb7ca3bd",
+  }, {
     container: "map",
     center: [-123.1187, 49.2819], // initial map centerpoint
     zoom: 10, // initial map zoom
