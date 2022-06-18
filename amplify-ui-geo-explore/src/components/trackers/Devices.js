@@ -39,7 +39,7 @@ const SingleDevice = ({ device, selectedDevice, onChangeSelectedDevice, onViewDe
           <div className={styles.popup__content}>
             <div className={styles.popup__title}>{device.DeviceId}</div>
             <div className={styles.popup__coordinates}>
-              {`${device.Position[0].toFixed(6)}, ${device.Position[0].toFixed(6)}`}
+              {`${device.Position[1].toFixed(6)}, ${device.Position[0].toFixed(6)}`}
             </div>
             <div className={styles.popup__item}>
               <div className={styles.popup__subtitle}>Last Reported</div>
