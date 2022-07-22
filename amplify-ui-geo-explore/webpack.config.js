@@ -32,4 +32,7 @@ module.exports = {
       template: "./public/index.html",
     }),
   ],
+  devServer: {
+    allowedHosts: "all",
+  }
 };
