@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <el-header>
-        <el-form-item label="Pitch">
+        <el-form-item>
           <el-input-number v-model="pitch" :min="0" :max="60" :step="5" @change="pitchChange" />
         </el-form-item>
       </el-header>

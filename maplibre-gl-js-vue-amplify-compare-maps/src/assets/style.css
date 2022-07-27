@@ -9,11 +9,13 @@
 .el-header {
   background: linear-gradient(225deg, #fe5151, #bd0916);;
   color: #FFFFFF;
-  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }
-
-.el-form {
-  height: 32px;
+.el-form-item {
+  margin-bottom: 0px !important;
+  color: #FFFFFF;
 }
 
 .map {
