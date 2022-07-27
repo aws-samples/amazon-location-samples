@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP');
+#app {
+  font-family: 'Noto Sans JP', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+.el-header {
+  background: linear-gradient(225deg, #fe5151, #bd0916);;
+  color: #FFFFFF;
+  font-size: 24px;
+}
+
+.el-form {
+  height: 32px;
+}
+
+.map {
+  height: 70vh;
+}
