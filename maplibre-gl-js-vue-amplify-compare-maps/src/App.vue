@@ -1,24 +1,15 @@
 <template>
   <div>
     <el-container>
-      <el-header>
-        <el-form inline="true">
-          <el-form-item label="Pitch">
-            <el-input-number v-model="pitch" :min="0" :max="60" :step="5" @change="pitchChange" />
-          </el-form-item>
-          <el-form-item>
-            <el-switch v-model="sync" active-text="Sync" inactive-text="Not Sync" />
-          </el-form-item>
-        </el-form>
-      </el-header>
+      <el-header> Amazon Location × Amplify Geo</el-header>
       <el-main>
         <el-row>
           <el-col :span="12">
             <Map
               id="left"
               :availableMaps="availableMaps"
-              @updateState="updateState"
-              @updateActiveMap="updateActiveMap"
+              @state-update="updateState"
+              @active-map-update="updateActiveMap"
               :zoom="zoom"
               :center="center"
               :pitch="pitch"
@@ -29,8 +20,9 @@
             <Map
               id="right"
               :availableMaps="availableMaps"
-              @updateState="updateState"
-              @updateActiveMap="updateActiveMap"
+              @state-update="updateState"
+              @active-map-update="updateActiveMap"
+              @pitch-update="updatePitch"
               :zoom="zoom"
               :center="center"
               :pitch="pitch"
@@ -56,16 +48,21 @@ export default {
     const center = ref([139.7648, 35.6794]);
     const pitch = ref(30);
     const sync = ref(true);
-    const ActiveMap = ref('left');
+    const ActiveMap = ref(null);
 
-    const updateState = (...args) => {
+    function updateState(...args) {
+      console.log('updateState');
       zoom.value = args[0];
       center.value = args[1];
-    };
+    }
 
-    const updateActiveMap = (...args) => {
+    function updateActiveMap(...args) {
       ActiveMap.value = args[0];
-    };
+    }
+
+    function updatePitch(...args) {
+      pitch.value = args[0];
+    }
     return {
       availableMaps,
       zoom,
@@ -75,6 +72,7 @@ export default {
       ActiveMap,
       updateState,
       updateActiveMap,
+      updatePitch,
     };
   },
 };
