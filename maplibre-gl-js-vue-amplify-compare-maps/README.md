@@ -10,7 +10,11 @@ This sample is used to compare maps provided by Amazon Location.
 1. Install Amplify CLI: `npm install -g @aws-amplify/cli`
 1. Install project dependencies: `yarn` (If you have not installed yarn, please execute `npm install -g yarn` first.)
 1. Create a new Amplify project environment: `amplify init`
-    1. 
+    
+    1. Enter a name for the project (dev):`dev` 
+    1. Choose your default editor: `Visual Studio Code`
+    1. Select the authentication method you want to use: `AWS Profile`
+    1. Create IAM User and set credentials (See [here](https://docs.amplify.aws/cli/start/install/#option-2-follow-the-instructions) for more details.)
 1. Create Auth and Geo resources: `amplify push`
 
 ## Compiles for development
