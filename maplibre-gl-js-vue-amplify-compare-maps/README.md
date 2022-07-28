@@ -8,8 +8,9 @@ This sample is used to compare maps provided by Amazon Location.
 
 ## Getting started
 1. Install Amplify CLI: `npm install -g @aws-amplify/cli`
-1. Install project dependencies: `yarn`
+1. Install project dependencies: `yarn` (If you have not installed yarn, please execute `npm install -g yarn` first.)
 1. Create a new Amplify project environment: `amplify init`
+    1. 
 1. Create Auth and Geo resources: `amplify push`
 
 ## Compiles for development
