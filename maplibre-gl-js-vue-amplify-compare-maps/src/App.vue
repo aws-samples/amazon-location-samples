@@ -51,7 +51,6 @@ export default {
     const ActiveMap = ref(null);
 
     function updateState(...args) {
-      console.log('updateState');
       zoom.value = args[0];
       center.value = args[1];
     }

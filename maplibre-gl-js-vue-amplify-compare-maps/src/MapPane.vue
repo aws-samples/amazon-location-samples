@@ -61,9 +61,7 @@ export default {
         }
       });
       map.on('move', () => {
-        console.log(props.id, props.ActiveMap);
         if (props.id === props.ActiveMap) {
-          console.log('L66: ', props.id === props.ActiveMap);
           context.emit('state-update', map.getZoom(), map.getCenter());
         }
       });
@@ -85,14 +83,12 @@ export default {
     };
 
     const zoomChange = function (value) {
-      console.log(value);
       if (null !== props.ActiveMap && props.id !== props.ActiveMap) {
         createdMap.value.setZoom(value);
       }
     };
 
     const centerChange = function (value) {
-      console.log('centerChange:', props.id, props.ActiveMap);
       if (null !== props.ActiveMap && props.id !== props.ActiveMap) {
         createdMap.value.setCenter(value);
       }
