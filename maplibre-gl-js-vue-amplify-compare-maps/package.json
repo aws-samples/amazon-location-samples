@@ -13,7 +13,7 @@
     "aws-amplify": "^4.3.27",
     "core-js": "^3.8.3",
     "element-plus": "^2.2.9",
-    "maplibre-gl": "1",
+    "maplibre-gl": "2.1.9",
     "maplibre-gl-js-amplify": "^2.0.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
