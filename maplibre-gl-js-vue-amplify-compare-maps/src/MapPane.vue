@@ -75,7 +75,6 @@ export default {
 
     watch(renderedMap, (renderedMap) => {
       map.value.setStyle(renderedMap);
-      map.value.resize();
     });
 
     watch(zoom, (zoom) => {

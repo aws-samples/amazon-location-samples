@@ -1,15 +1,15 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-showmaps-dev-202613-authRole",
-      "UnauthRoleArn": "arn:aws:iam::365795763117:role/amplify-showmaps-dev-202613-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::365795763117:role/amplify-showmaps-dev-202613-authRole",
-      "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-showmaps-dev-202613-deployment",
-      "UnauthRoleName": "amplify-showmaps-dev-202613-unauthRole",
-      "StackName": "amplify-showmaps-dev-202613",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:365795763117:stack/amplify-showmaps-dev-202613/4161dc60-0f31-11ed-bc04-0a55129c2e89",
-      "AmplifyAppId": "d1ecu4zpjg0cj6"
+      "AuthRoleName": "amplify-showmaps-main-11338-authRole",
+      "UnauthRoleArn": "arn:aws:iam::095952647934:role/amplify-showmaps-main-11338-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::095952647934:role/amplify-showmaps-main-11338-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-showmaps-main-11338-deployment",
+      "UnauthRoleName": "amplify-showmaps-main-11338-unauthRole",
+      "StackName": "amplify-showmaps-main-11338",
+      "StackId": "arn:aws:cloudformation:us-east-1:095952647934:stack/amplify-showmaps-main-11338/693cc650-0f59-11ed-b943-0ecdace6c1a9",
+      "AmplifyAppId": "dsv6j39h42g17"
     }
   },
   "auth": {
@@ -35,7 +35,23 @@
         "verificationMechanisms": [
           "EMAIL"
         ]
-      }
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/auth/showmaps2956ae8b-cloudformation-template.json",
+        "logicalId": "authshowmaps2956ae8b"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.529Z",
+      "output": {
+        "CreatedSNSRole": "arn:aws:iam::095952647934:role/sns2956ae8b11338-main",
+        "UserPoolId": "us-east-1_4OjbSpSTc",
+        "AppClientIDWeb": "6c5riqgu0cspkp0ci56qlrh0b",
+        "AppClientID": "1uhc2qm88ue353ok3q5j0g49lt",
+        "IdentityPoolId": "us-east-1:5135668d-a759-4cb6-9459-4dedcf715f5e",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:095952647934:userpool/us-east-1_4OjbSpSTc",
+        "IdentityPoolName": "showmaps2956ae8b_identitypool_2956ae8b__main",
+        "UserPoolName": "showmaps2956ae8b_userpool_2956ae8b"
+      },
+      "lastPushDirHash": "nGwWvZQLkwtQO1tXP64lnNZ+cIg="
     }
   },
   "geo": {
@@ -53,7 +69,19 @@
             "UserPoolId"
           ]
         }
-      ]
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/geo/esristreet-cloudformation-template.json",
+        "logicalId": "geoesristreet"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.532Z",
+      "output": {
+        "Style": "VectorEsriStreets",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:095952647934:map/esristreet-main",
+        "Name": "esristreet-main"
+      },
+      "lastPushDirHash": "ZU7mpd5D9WVdqtg+6glTAGcoqoI="
     },
     "esrinavigation": {
       "isDefault": false,
@@ -69,7 +97,19 @@
             "UserPoolId"
           ]
         }
-      ]
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/geo/esrinavigation-cloudformation-template.json",
+        "logicalId": "geoesrinavigation"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.537Z",
+      "output": {
+        "Style": "VectorEsriNavigation",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:095952647934:map/esrinavigation-main",
+        "Name": "esrinavigation-main"
+      },
+      "lastPushDirHash": "wZM5B1+7Aq1rYCU3Okhn3Pi+K1E="
     },
     "esridarkgray": {
       "isDefault": false,
@@ -85,7 +125,19 @@
             "UserPoolId"
           ]
         }
-      ]
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/geo/esridarkgray-cloudformation-template.json",
+        "logicalId": "geoesridarkgray"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.540Z",
+      "output": {
+        "Style": "VectorEsriDarkGrayCanvas",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:095952647934:map/esridarkgray-main",
+        "Name": "esridarkgray-main"
+      },
+      "lastPushDirHash": "bJ1ziJO1fVV8tKlbFGyXwL4Rd/s="
     },
     "esrilightgray": {
       "isDefault": false,
@@ -101,7 +153,19 @@
             "UserPoolId"
           ]
         }
-      ]
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/geo/esrilightgray-cloudformation-template.json",
+        "logicalId": "geoesrilightgray"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.550Z",
+      "output": {
+        "Style": "VectorEsriLightGrayCanvas",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:095952647934:map/esrilightgray-main",
+        "Name": "esrilightgray-main"
+      },
+      "lastPushDirHash": "fWxFmgl+p3UwZkAL4RSatmg/grU="
     },
     "esriimagery": {
       "isDefault": false,
@@ -117,7 +181,19 @@
             "UserPoolId"
           ]
         }
-      ]
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/geo/esriimagery-cloudformation-template.json",
+        "logicalId": "geoesriimagery"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.554Z",
+      "output": {
+        "Style": "RasterEsriImagery",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:095952647934:map/esriimagery-main",
+        "Name": "esriimagery-main"
+      },
+      "lastPushDirHash": "xW/Q4HIe2uFAStI0Vtr4PU5mfGs="
     },
     "hereexolore": {
       "isDefault": false,
@@ -133,7 +209,19 @@
             "UserPoolId"
           ]
         }
-      ]
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/geo/hereexolore-cloudformation-template.json",
+        "logicalId": "geohereexolore"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.557Z",
+      "output": {
+        "Style": "VectorHereExplore",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:095952647934:map/hereexolore-main",
+        "Name": "hereexolore-main"
+      },
+      "lastPushDirHash": "b4dIzp7FPHICw9J4K7XIb50VK5o="
     },
     "heretruck": {
       "isDefault": false,
@@ -149,7 +237,19 @@
             "UserPoolId"
           ]
         }
-      ]
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/geo/heretruck-cloudformation-template.json",
+        "logicalId": "geoheretruck"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.559Z",
+      "output": {
+        "Style": "VectorHereExploreTruck",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:095952647934:map/heretruck-main",
+        "Name": "heretruck-main"
+      },
+      "lastPushDirHash": "7hZCp1B6LTCfOlU4neLnfZ8/Gr0="
     },
     "hereberlin": {
       "isDefault": false,
@@ -165,7 +265,19 @@
             "UserPoolId"
           ]
         }
-      ]
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/geo/hereberlin-cloudformation-template.json",
+        "logicalId": "geohereberlin"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.561Z",
+      "output": {
+        "Style": "VectorHereBerlin",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:095952647934:map/hereberlin-main",
+        "Name": "hereberlin-main"
+      },
+      "lastPushDirHash": "zZJpmhbzDYSbdKdBQrwklpPgDuw="
     },
     "placeindex25da5c3c": {
       "isDefault": true,
@@ -182,7 +294,18 @@
             "UserPoolId"
           ]
         }
-      ]
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/geo/placeindex25da5c3c-cloudformation-template.json",
+        "logicalId": "geoplaceindex25da5c3c"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.563Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:095952647934:place-index/placeindex25da5c3c-main",
+        "Name": "placeindex25da5c3c-main"
+      },
+      "lastPushDirHash": "h6OCao4xnWU/trrlXiCz9prizAU="
     },
     "esrilight": {
       "isDefault": true,
@@ -198,14 +321,33 @@
             "UserPoolId"
           ]
         }
-      ]
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/geo/esrilight-cloudformation-template.json",
+        "logicalId": "geoesrilight"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.568Z",
+      "output": {
+        "Style": "VectorEsriTopographic",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:geo:us-east-1:095952647934:map/esrilight-main",
+        "Name": "esrilight-main"
+      },
+      "lastPushDirHash": "i+pyxjhz2TB5jeOkxAV9ForaOcU="
     }
   },
   "hosting": {
     "amplifyhosting": {
       "service": "amplifyhosting",
       "providerPlugin": "awscloudformation",
-      "type": "manual"
+      "type": "manual",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-main-11338-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
+        "logicalId": "hostingamplifyhosting"
+      },
+      "lastPushTimeStamp": "2022-07-29T16:36:58.572Z",
+      "output": {},
+      "lastPushDirHash": "+g7Vx6El4MkCR3EOGjplwRN6w6M="
     }
   }
 }
