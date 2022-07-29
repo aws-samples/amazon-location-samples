@@ -21,3 +21,10 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# environment-specific Amplify files (useful when co-developing; irrelevant
+# when distributing)
+amplify/README.md
+amplify/cli.json
+amplify/hooks/
+amplify/team-provider-info.json

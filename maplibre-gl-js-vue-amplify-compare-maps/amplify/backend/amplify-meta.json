@@ -35,23 +35,7 @@
         "verificationMechanisms": [
           "EMAIL"
         ]
-      },
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/auth/showmaps2956ae8b-cloudformation-template.json",
-        "logicalId": "authshowmaps2956ae8b"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.590Z",
-      "output": {
-        "CreatedSNSRole": "arn:aws:iam::365795763117:role/sns2956ae8b202613-dev",
-        "UserPoolId": "ap-northeast-1_3xxU94tG3",
-        "AppClientIDWeb": "69apmdujff8qqmuiig4h5moa4k",
-        "AppClientID": "650c3m0fado1u8dq8sjj74hb3v",
-        "IdentityPoolId": "ap-northeast-1:157a1508-4000-41d9-8b63-33da98b65f31",
-        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:365795763117:userpool/ap-northeast-1_3xxU94tG3",
-        "IdentityPoolName": "showmaps2956ae8b_identitypool_2956ae8b__dev",
-        "UserPoolName": "showmaps2956ae8b_userpool_2956ae8b"
-      },
-      "lastPushDirHash": "nGwWvZQLkwtQO1tXP64lnNZ+cIg="
+      }
     }
   },
   "geo": {
@@ -69,19 +53,7 @@
             "UserPoolId"
           ]
         }
-      ],
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/geo/esristreet-cloudformation-template.json",
-        "logicalId": "geoesristreet"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.599Z",
-      "output": {
-        "Style": "VectorEsriStreets",
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:geo:ap-northeast-1:365795763117:map/esristreet-dev",
-        "Name": "esristreet-dev"
-      },
-      "lastPushDirHash": "ZU7mpd5D9WVdqtg+6glTAGcoqoI="
+      ]
     },
     "esrinavigation": {
       "isDefault": false,
@@ -97,19 +69,7 @@
             "UserPoolId"
           ]
         }
-      ],
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/geo/esrinavigation-cloudformation-template.json",
-        "logicalId": "geoesrinavigation"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.603Z",
-      "output": {
-        "Style": "VectorEsriNavigation",
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:geo:ap-northeast-1:365795763117:map/esrinavigation-dev",
-        "Name": "esrinavigation-dev"
-      },
-      "lastPushDirHash": "wZM5B1+7Aq1rYCU3Okhn3Pi+K1E="
+      ]
     },
     "esridarkgray": {
       "isDefault": false,
@@ -125,19 +85,7 @@
             "UserPoolId"
           ]
         }
-      ],
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/geo/esridarkgray-cloudformation-template.json",
-        "logicalId": "geoesridarkgray"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.605Z",
-      "output": {
-        "Style": "VectorEsriDarkGrayCanvas",
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:geo:ap-northeast-1:365795763117:map/esridarkgray-dev",
-        "Name": "esridarkgray-dev"
-      },
-      "lastPushDirHash": "bJ1ziJO1fVV8tKlbFGyXwL4Rd/s="
+      ]
     },
     "esrilightgray": {
       "isDefault": false,
@@ -153,19 +101,7 @@
             "UserPoolId"
           ]
         }
-      ],
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/geo/esrilightgray-cloudformation-template.json",
-        "logicalId": "geoesrilightgray"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.609Z",
-      "output": {
-        "Style": "VectorEsriLightGrayCanvas",
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:geo:ap-northeast-1:365795763117:map/esrilightgray-dev",
-        "Name": "esrilightgray-dev"
-      },
-      "lastPushDirHash": "fWxFmgl+p3UwZkAL4RSatmg/grU="
+      ]
     },
     "esriimagery": {
       "isDefault": false,
@@ -181,19 +117,7 @@
             "UserPoolId"
           ]
         }
-      ],
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/geo/esriimagery-cloudformation-template.json",
-        "logicalId": "geoesriimagery"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.613Z",
-      "output": {
-        "Style": "RasterEsriImagery",
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:geo:ap-northeast-1:365795763117:map/esriimagery-dev",
-        "Name": "esriimagery-dev"
-      },
-      "lastPushDirHash": "xW/Q4HIe2uFAStI0Vtr4PU5mfGs="
+      ]
     },
     "hereexolore": {
       "isDefault": false,
@@ -209,19 +133,7 @@
             "UserPoolId"
           ]
         }
-      ],
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/geo/hereexolore-cloudformation-template.json",
-        "logicalId": "geohereexolore"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.615Z",
-      "output": {
-        "Style": "VectorHereExplore",
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:geo:ap-northeast-1:365795763117:map/hereexolore-dev",
-        "Name": "hereexolore-dev"
-      },
-      "lastPushDirHash": "b4dIzp7FPHICw9J4K7XIb50VK5o="
+      ]
     },
     "heretruck": {
       "isDefault": false,
@@ -237,19 +149,7 @@
             "UserPoolId"
           ]
         }
-      ],
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/geo/heretruck-cloudformation-template.json",
-        "logicalId": "geoheretruck"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.619Z",
-      "output": {
-        "Style": "VectorHereExploreTruck",
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:geo:ap-northeast-1:365795763117:map/heretruck-dev",
-        "Name": "heretruck-dev"
-      },
-      "lastPushDirHash": "7hZCp1B6LTCfOlU4neLnfZ8/Gr0="
+      ]
     },
     "hereberlin": {
       "isDefault": false,
@@ -265,19 +165,7 @@
             "UserPoolId"
           ]
         }
-      ],
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/geo/hereberlin-cloudformation-template.json",
-        "logicalId": "geohereberlin"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.621Z",
-      "output": {
-        "Style": "VectorHereBerlin",
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:geo:ap-northeast-1:365795763117:map/hereberlin-dev",
-        "Name": "hereberlin-dev"
-      },
-      "lastPushDirHash": "zZJpmhbzDYSbdKdBQrwklpPgDuw="
+      ]
     },
     "placeindex25da5c3c": {
       "isDefault": true,
@@ -294,18 +182,7 @@
             "UserPoolId"
           ]
         }
-      ],
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/geo/placeindex25da5c3c-cloudformation-template.json",
-        "logicalId": "geoplaceindex25da5c3c"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.623Z",
-      "output": {
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:geo:ap-northeast-1:365795763117:place-index/placeindex25da5c3c-dev",
-        "Name": "placeindex25da5c3c-dev"
-      },
-      "lastPushDirHash": "h6OCao4xnWU/trrlXiCz9prizAU="
+      ]
     },
     "esrilight": {
       "isDefault": true,
@@ -321,33 +198,14 @@
             "UserPoolId"
           ]
         }
-      ],
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/geo/esrilight-cloudformation-template.json",
-        "logicalId": "geoesrilight"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.626Z",
-      "output": {
-        "Style": "VectorEsriTopographic",
-        "Region": "ap-northeast-1",
-        "Arn": "arn:aws:geo:ap-northeast-1:365795763117:map/esrilight-dev",
-        "Name": "esrilight-dev"
-      },
-      "lastPushDirHash": "i+pyxjhz2TB5jeOkxAV9ForaOcU="
+      ]
     }
   },
   "hosting": {
     "amplifyhosting": {
       "service": "amplifyhosting",
       "providerPlugin": "awscloudformation",
-      "type": "manual",
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-202613-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
-        "logicalId": "hostingamplifyhosting"
-      },
-      "lastPushTimeStamp": "2022-07-29T15:23:42.631Z",
-      "output": {},
-      "lastPushDirHash": "+g7Vx6El4MkCR3EOGjplwRN6w6M="
+      "type": "manual"
     }
   }
 }
