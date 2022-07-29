@@ -14,6 +14,7 @@
               :center="center"
               :pitch="pitch"
               :ActiveMap="ActiveMap"
+              :sync="sync"
             ></Map
           ></el-col>
           <el-col :span="12">
@@ -23,10 +24,12 @@
               @state-update="updateState"
               @active-map-update="updateActiveMap"
               @pitch-update="updatePitch"
+              @sync-update="updateSync"
               :zoom="zoom"
               :center="center"
               :pitch="pitch"
               :ActiveMap="ActiveMap"
+              :sync="sync"
             ></Map
           ></el-col>
         </el-row>
@@ -62,6 +65,11 @@ export default {
     function updatePitch(...args) {
       pitch.value = args[0];
     }
+
+    function updateSync(...args) {
+      sync.value = args[0];
+    }
+
     return {
       availableMaps,
       zoom,
@@ -72,6 +80,7 @@ export default {
       updateState,
       updateActiveMap,
       updatePitch,
+      updateSync,
     };
   },
 };

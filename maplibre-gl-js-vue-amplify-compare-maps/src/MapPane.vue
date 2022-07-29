@@ -4,16 +4,16 @@
       <div class="card-header">
         <el-form :inline="true">
           <el-form-item label="Map Style">
-            <el-select v-model="selectedMaps" @change="mapChange">
+            <el-select v-model="renderedMap">
               <el-option v-for="map in availableMaps" :key="map.mapName" :label="map.style" :value="map.mapName">
               </el-option>
             </el-select>
           </el-form-item>
           <el-form-item v-if="id === 'right'" label="Pitch">
-            <el-input-number v-model="inputPitch" :min="0" :max="60" :step="5" @change="pitchChange" />
+            <el-input-number v-model="pitch" :min="0" :max="60" :step="5" />
           </el-form-item>
           <el-form-item v-if="id === 'right'" label="Sync">
-            <el-switch v-model="sync" active-value="true" inactive-value="false" @change="syncChange" />
+            <el-switch v-model="sync" />
           </el-form-item>
         </el-form>
       </div>
@@ -25,7 +25,7 @@
 <script>
 import { createMap, createAmplifyGeocoder } from 'maplibre-gl-js-amplify';
 import { Geo } from 'aws-amplify';
-import { ref } from 'vue';
+import { ref, watch, toRefs } from 'vue';
 
 export default {
   props: {
@@ -35,87 +35,71 @@ export default {
     center: Object,
     pitch: Number,
     ActiveMap: String,
+    sync: Boolean,
   },
   setup(props, context) {
-    const selectedMaps = ref(Geo.getDefaultMap());
-    const createdMap = ref(null);
-    const inputPitch = ref(30);
-    const sync = ref(true);
+    const renderedMap = ref(Geo.getDefaultMap());
+    const map = ref(null);
+    const { id, zoom, center, pitch, sync, ActiveMap } = toRefs(props);
 
     const mapCreate = async () => {
-      const map = await createMap({
-        container: props.id,
-        zoom: props.zoom,
-        center: props.center,
-        pitch: props.pitch,
+      map.value = await createMap({
+        container: id.value,
+        zoom: zoom.value,
+        center: center.value,
+        pitch: pitch.value,
       });
-      map.addControl(createAmplifyGeocoder());
+      map.value.addControl(createAmplifyGeocoder());
 
-      map.on('movestart', () => {
-        if (props.ActiveMap == null) {
-          context.emit('active-map-update', props.id);
-        } else if (props.id === props.ActiveMap) {
-          context.emit('update-active-map', props.id);
+      map.value.on('movestart', () => {
+        if (ActiveMap.value == null && sync.value) {
+          context.emit('active-map-update', id.value);
         }
       });
-      map.on('move', () => {
-        if (props.id === props.ActiveMap) {
-          context.emit('state-update', map.getZoom(), map.getCenter());
+      map.value.on('move', () => {
+        if (ActiveMap.value == id.value || ActiveMap.value == null) {
+          context.emit('state-update', map.value.getZoom(), map.value.getCenter());
         }
       });
 
-      map.on('moveend', () => {
-        if (props.id === props.ActiveMap) {
+      map.value.on('moveend', () => {
+        if (ActiveMap.value == id.value) {
           context.emit('active-map-update', null);
         }
       });
-
-      createdMap.value = map;
     };
 
     mapCreate();
 
-    const mapChange = function (value) {
-      createdMap.value.setStyle(value);
-      createdMap.value.resize();
-    };
+    watch(renderedMap, (renderedMap) => {
+      map.value.setStyle(renderedMap);
+      map.value.resize();
+    });
 
-    const zoomChange = function (value) {
-      if (null !== props.ActiveMap && props.id !== props.ActiveMap) {
-        createdMap.value.setZoom(value);
+    watch(zoom, (zoom) => {
+      if (ActiveMap.value && ActiveMap.value !== id.value && sync.value) {
+        map.value.setZoom(zoom);
       }
-    };
+    });
 
-    const centerChange = function (value) {
-      if (null !== props.ActiveMap && props.id !== props.ActiveMap) {
-        createdMap.value.setCenter(value);
+    watch(center, (center) => {
+      if (ActiveMap.value && ActiveMap.value !== id.value && sync.value) {
+        map.value.setCenter([center.lng, center.lat]);
       }
-    };
+    });
 
-    const pitchChange = function (value) {
-      context.emit('pitch-update', inputPitch.value);
-      createdMap.value.setPitch(value);
-    };
+    watch(pitch, (pitch) => {
+      context.emit('pitch-update', pitch);
+      map.value.setPitch(pitch);
+    });
 
-    const syncChange = function (value) {
-      sync.value = value;
-    };
+    watch(sync, (sync) => {
+      context.emit('sync-update', sync);
+    });
 
     return {
-      selectedMaps,
-      inputPitch,
-      sync,
-      mapChange,
-      zoomChange,
-      centerChange,
-      pitchChange,
-      syncChange,
+      renderedMap,
     };
-  },
-  watch: {
-    zoom: 'zoomChange',
-    center: 'centerChange',
-    pitch: 'pitchChange',
   },
 };
 </script>
