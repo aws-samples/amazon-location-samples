@@ -10,10 +10,12 @@
   background: linear-gradient(225deg, #fe5151, #bd0916);;
   color: #FFFFFF;
   font-size: 24px;
+  height:50px !important;
 }
 
-.el-form {
-  height: 32px;
+.el-form-item {
+  margin-top: 5 !important;
+  margin-bottom: 0 !important;
 }
 
 .map {

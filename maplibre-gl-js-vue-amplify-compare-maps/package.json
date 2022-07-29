@@ -11,21 +11,37 @@
     "@aws-amplify/ui-vue": "^2.4.12",
     "@vue/cli": "5.0.8",
     "aws-amplify": "^4.3.27",
-    "core-js": "^3.8.3",
     "element-plus": "^2.2.9",
-    "maplibre-gl": "1",
+    "maplibre-gl": "^2.1.9",
     "maplibre-gl-js-amplify": "^2.0.2",
-    "vue": "^3.2.13",
-    "vue-router": "^4.0.3"
+    "vue": "^3.2.13"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3"
-  }
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "_id": "amplify-demo@0.1.0",
+  "readme": "ERROR: No README data found!"
 }
