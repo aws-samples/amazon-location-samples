@@ -10,10 +10,10 @@
             </el-select>
           </el-form-item>
           <el-form-item v-if="id === 'right'" label="Pitch">
-            <el-input-number v-model="pitch" :min="0" :max="60" :step="5" />
+            <el-input-number v-model="num" :min="0" :max="60" :step="5" />
           </el-form-item>
           <el-form-item v-if="id === 'right'" label="Sync">
-            <el-switch v-model="sync" />
+            <el-switch v-model="toggle" />
           </el-form-item>
         </el-form>
       </div>
@@ -40,6 +40,8 @@ export default {
   setup(props, context) {
     const renderedMap = ref(Geo.getDefaultMap());
     const map = ref(null);
+    const toggle = ref(true);
+    const num = ref(30);
     const { id, zoom, center, pitch, sync, ActiveMap } = toRefs(props);
 
     const mapCreate = async () => {
@@ -88,17 +90,22 @@ export default {
       }
     });
 
+    watch(num, (num) => {
+      context.emit('pitch-update', num);
+    });
+
     watch(pitch, (pitch) => {
-      context.emit('pitch-update', pitch);
       map.value.setPitch(pitch);
     });
 
-    watch(sync, (sync) => {
-      context.emit('sync-update', sync);
+    watch(toggle, (toggle) => {
+      context.emit('sync-update', toggle);
     });
 
     return {
       renderedMap,
+      num,
+      toggle,
     };
   },
 };

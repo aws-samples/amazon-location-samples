@@ -1,0 +1,11 @@
+{
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "mapName": "esrilight",
+  "mapStyle": "VectorEsriTopographic",
+  "isDefault": true
+}
