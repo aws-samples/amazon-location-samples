@@ -13,9 +13,7 @@
             <el-input-number v-model="inputPitch" :min="0" :max="60" :step="5" @change="pitchChange" />
           </el-form-item>
           <el-form-item v-if="id === 'right'" label="Sync">
-            <el-tooltip :content="'Sync maps: ' + sync" placement="top">
-              <el-switch v-model="sync" active-value="true" inactive-value="false" @change="syncChange" />
-            </el-tooltip>
+            <el-switch v-model="sync" active-value="true" inactive-value="false" @change="syncChange" />
           </el-form-item>
         </el-form>
       </div>

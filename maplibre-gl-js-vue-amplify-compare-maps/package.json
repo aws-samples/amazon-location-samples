@@ -11,11 +11,11 @@
     "@vue/cli": "5.0.8",
     "aws-amplify": "^4.3.27",
     "element-plus": "^2.2.9",
-    "maplibre-gl": "2.1.9",
     "maplibre-gl-js-amplify": "^2.0.2",
     "vue": "^3.2.13"
   },
   "devDependencies": {
-    "@vue/cli-service": "~5.0.0"
+    "@vue/cli-service": "~5.0.0",
+    "babel-plugin-component": "^1.1.1"
   }
 }
