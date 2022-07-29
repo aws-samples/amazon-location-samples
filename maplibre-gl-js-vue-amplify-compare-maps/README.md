@@ -1,5 +1,5 @@
 # Amazon Location Map Comparison
-![](./image/demo.gif)
+![](./image/README.png)
 
 This sample is used to compare maps provided by Amazon Location.
 ## Execution environment
