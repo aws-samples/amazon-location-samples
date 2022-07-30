@@ -1,46 +1,26 @@
 {
-  "name": "explore",
-  "version": "0.1.0",
+  "name": "amplify-ui-geo-explore",
   "private": true,
-  "license": "MIT-0",
-  "dependencies": {
-    "@aws-amplify/ui-react": "2.18.1",
-    "@aws-sdk/client-location": "^3.53.0",
-    "@mapbox/mapbox-gl-draw": "^1.3.0",
-    "aws-amplify": "^4.3.20",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-map-gl": "7.0.10"
-  },
+  "version": "1.5.0",
+  "type": "module",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production"
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@aws-amplify/ui-react": "^3.2.1",
+    "@aws-sdk/client-location": "^3.137.0",
+    "@mapbox/mapbox-gl-draw": "^1.3.0",
+    "aws-amplify": "^4.3.29",
+    "maplibre-gl-js-amplify": "^2.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.12",
-    "@babel/plugin-transform-runtime": "^7.16.10",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "babel-loader": "^8.2.3",
-    "css-loader": "^6.5.1",
-    "html-webpack-plugin": "^5.5.0",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.3"
-  },
-  "overrides": {
-    "maplibre-gl-js-amplify": {
-      "@maplibre/maplibre-gl-geocoder": {
-        "nanoid": "3.1.31"
-      }
-    },
-    "react-native": {
-      "@react-native-community/cli": {
-        "strip-ansi": {
-          "ansi-regex": "5.0.1"
-        }
-      }
-    }
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "vite": "^3.0.0"
   }
 }
