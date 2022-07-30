@@ -46,7 +46,7 @@
         "IdentityPoolName": "showmaps2956ae8b_identitypool_2956ae8b__dev",
         "UserPoolName": "showmaps2956ae8b_userpool_2956ae8b"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.005Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.314Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/auth/showmaps2956ae8b-cloudformation-template.json",
         "logicalId": "authshowmaps2956ae8b"
@@ -76,7 +76,7 @@
         "Arn": "arn:aws:geo:us-east-1:095952647934:map/esristreet-dev",
         "Name": "esristreet-dev"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.010Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.319Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/geo/esristreet-cloudformation-template.json",
         "logicalId": "geoesristreet"
@@ -104,7 +104,7 @@
         "Arn": "arn:aws:geo:us-east-1:095952647934:map/esrinavigation-dev",
         "Name": "esrinavigation-dev"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.012Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.323Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/geo/esrinavigation-cloudformation-template.json",
         "logicalId": "geoesrinavigation"
@@ -132,7 +132,7 @@
         "Arn": "arn:aws:geo:us-east-1:095952647934:map/esridarkgray-dev",
         "Name": "esridarkgray-dev"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.014Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.327Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/geo/esridarkgray-cloudformation-template.json",
         "logicalId": "geoesridarkgray"
@@ -160,7 +160,7 @@
         "Arn": "arn:aws:geo:us-east-1:095952647934:map/esrilightgray-dev",
         "Name": "esrilightgray-dev"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.017Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.331Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/geo/esrilightgray-cloudformation-template.json",
         "logicalId": "geoesrilightgray"
@@ -188,7 +188,7 @@
         "Arn": "arn:aws:geo:us-east-1:095952647934:map/esriimagery-dev",
         "Name": "esriimagery-dev"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.019Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.334Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/geo/esriimagery-cloudformation-template.json",
         "logicalId": "geoesriimagery"
@@ -216,7 +216,7 @@
         "Arn": "arn:aws:geo:us-east-1:095952647934:map/hereexolore-dev",
         "Name": "hereexolore-dev"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.021Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.338Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/geo/hereexolore-cloudformation-template.json",
         "logicalId": "geohereexolore"
@@ -244,7 +244,7 @@
         "Arn": "arn:aws:geo:us-east-1:095952647934:map/heretruck-dev",
         "Name": "heretruck-dev"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.023Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.342Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/geo/heretruck-cloudformation-template.json",
         "logicalId": "geoheretruck"
@@ -272,7 +272,7 @@
         "Arn": "arn:aws:geo:us-east-1:095952647934:map/hereberlin-dev",
         "Name": "hereberlin-dev"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.026Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.346Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/geo/hereberlin-cloudformation-template.json",
         "logicalId": "geohereberlin"
@@ -300,7 +300,7 @@
         "Arn": "arn:aws:geo:us-east-1:095952647934:map/esrilight-dev",
         "Name": "esrilight-dev"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.029Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.353Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/geo/esrilight-cloudformation-template.json",
         "logicalId": "geoesrilight"
@@ -327,7 +327,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/geo/placeindex-cloudformation-template.json",
         "logicalId": "geoplaceindex"
       },
-      "lastPushTimeStamp": "2022-07-30T18:34:45.786Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.357Z",
       "output": {
         "Region": "us-east-1",
         "Arn": "arn:aws:geo:us-east-1:095952647934:place-index/placeindex-dev",
@@ -342,7 +342,7 @@
       "providerPlugin": "awscloudformation",
       "type": "manual",
       "output": {},
-      "lastPushTimeStamp": "2022-07-30T18:34:45.032Z",
+      "lastPushTimeStamp": "2022-07-30T18:39:12.361Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-showmaps-dev-31723-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
         "logicalId": "hostingamplifyhosting"
