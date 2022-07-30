@@ -3,10 +3,10 @@
 
 const awsmobile = {
     "aws_project_region": "us-east-1",
-    "aws_cognito_identity_pool_id": "us-east-1:5135668d-a759-4cb6-9459-4dedcf715f5e",
+    "aws_cognito_identity_pool_id": "us-east-1:0ff3fa97-f987-4dfa-9605-5c3a693b7875",
     "aws_cognito_region": "us-east-1",
-    "aws_user_pools_id": "us-east-1_4OjbSpSTc",
-    "aws_user_pools_web_client_id": "6c5riqgu0cspkp0ci56qlrh0b",
+    "aws_user_pools_id": "us-east-1_XZVP1z29M",
+    "aws_user_pools_web_client_id": "5qmol0hjrdpi6u6s32n64pi9vo",
     "oauth": {},
     "aws_cognito_username_attributes": [],
     "aws_cognito_social_providers": [],
@@ -29,41 +29,41 @@ const awsmobile = {
             "region": "us-east-1",
             "maps": {
                 "items": {
-                    "esristreet-main": {
+                    "esristreet-dev": {
                         "style": "VectorEsriStreets"
                     },
-                    "esrinavigation-main": {
+                    "esrinavigation-dev": {
                         "style": "VectorEsriNavigation"
                     },
-                    "esridarkgray-main": {
+                    "esridarkgray-dev": {
                         "style": "VectorEsriDarkGrayCanvas"
                     },
-                    "esrilightgray-main": {
+                    "esrilightgray-dev": {
                         "style": "VectorEsriLightGrayCanvas"
                     },
-                    "esriimagery-main": {
+                    "esriimagery-dev": {
                         "style": "RasterEsriImagery"
                     },
-                    "hereexolore-main": {
+                    "hereexolore-dev": {
                         "style": "VectorHereExplore"
                     },
-                    "heretruck-main": {
+                    "heretruck-dev": {
                         "style": "VectorHereExploreTruck"
                     },
-                    "hereberlin-main": {
+                    "hereberlin-dev": {
                         "style": "VectorHereBerlin"
                     },
-                    "esrilight-main": {
+                    "esrilight-dev": {
                         "style": "VectorEsriTopographic"
                     }
                 },
-                "default": "esrilight-main"
+                "default": "esrilight-dev"
             },
             "search_indices": {
                 "items": [
-                    "placeindex25da5c3c-main"
+                    "placeindex25da5c3c-dev"
                 ],
-                "default": "placeindex25da5c3c-main"
+                "default": "placeindex25da5c3c-dev"
             }
         }
     }

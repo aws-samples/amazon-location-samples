@@ -12,20 +12,25 @@
 
 ## Getting started
 1. Clone the repository: `git clone https://github.com/aws-samples/amazon-location-samples.git`
-1. Go this folder: `cd maplibre-gl-js-vue-amplify-compare-maps`
+1. Go this folder: `cd amazon-location-samples/maplibre-gl-js-vue-amplify-compare-maps`
 1. Install Amplify CLI: `npm install -g @aws-amplify/cli`
 1. Install project dependencies: `npm install`
 1. Create a new Amplify project environment: `amplify init`
     
-    1. Enter a name for the project (main):`main` 
+    1. Enter a name for the project (dev):`dev` 
     1. Choose your default editor: `Visual Studio Code`
     1. Select the authentication method you want to use: `AWS Profile`
     1. Create IAM User and set credentials (See [here](https://docs.amplify.aws/cli/start/install/#option-2-follow-the-instructions) for more details.)
 1. Create Auth and Geo resources: `amplify push`
 
-## Compiles for development
+## Compiles and hot-reloads for development
 ```
-amplify serve
+npm run dev
+```
+
+## Compiles and minifies for production
+```
+npm run build
 ```
 
 ## Cleaning up
