@@ -1,23 +1,28 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP');
 #app {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
-
 .el-header {
-  background: linear-gradient(225deg, #fe5151, #bd0916);;
+  background: linear-gradient(225deg, #FE5151, #BD0916);;
   color: #FFFFFF;
   font-size: 24px;
   height:50px !important;
 }
-
 .el-form-item {
   margin-top: 5 !important;
   margin-bottom: 0 !important;
 }
-
 .map {
-  height: 70vh;
+  height: 80vh;
 }
+.el-main {
+  padding: 0px !important;
+}
+.el-card__body {
+  padding: 0px !important;
+}
+
+
+

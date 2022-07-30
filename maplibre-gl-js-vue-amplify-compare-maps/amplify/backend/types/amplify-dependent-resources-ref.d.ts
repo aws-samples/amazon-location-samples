@@ -60,14 +60,14 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "Arn": "string"
         },
-        "placeindex25da5c3c": {
-            "Name": "string",
-            "Region": "string",
-            "Arn": "string"
-        },
         "esrilight": {
             "Name": "string",
             "Style": "string",
+            "Region": "string",
+            "Arn": "string"
+        },
+        "placeindex": {
+            "Name": "string",
             "Region": "string",
             "Arn": "string"
         }

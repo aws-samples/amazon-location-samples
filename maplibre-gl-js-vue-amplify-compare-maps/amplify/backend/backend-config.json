@@ -154,12 +154,11 @@
         }
       ]
     },
-    "placeindex25da5c3c": {
+    "esrilight": {
       "isDefault": true,
       "providerPlugin": "awscloudformation",
-      "service": "PlaceIndex",
-      "dataProvider": "Here",
-      "dataSourceIntendedUse": "SingleUse",
+      "service": "Map",
+      "mapStyle": "VectorEsriTopographic",
       "accessType": "AuthorizedAndGuestUsers",
       "dependsOn": [
         {
@@ -171,11 +170,12 @@
         }
       ]
     },
-    "esrilight": {
+    "placeindex": {
       "isDefault": true,
       "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorEsriTopographic",
+      "service": "PlaceIndex",
+      "dataProvider": "Esri",
+      "dataSourceIntendedUse": "SingleUse",
       "accessType": "AuthorizedAndGuestUsers",
       "dependsOn": [
         {

@@ -5,8 +5,8 @@
   "unauthRoleName": {
     "Ref": "UnauthRoleName"
   },
-  "indexName": "placeindex25da5c3c",
-  "dataProvider": "Here",
+  "indexName": "placeindex",
+  "dataProvider": "Esri",
   "dataSourceIntendedUse": "SingleUse",
   "isDefault": true
 }
