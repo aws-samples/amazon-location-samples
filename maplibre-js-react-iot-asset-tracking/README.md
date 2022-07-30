@@ -17,7 +17,7 @@ For this project, you should have the following prerequisites:
 - An AWS account with access to create and edit resources in the architecture
 - AWS CLI installed and configured credentials
 - Node.js (`>=v14.x`) and `npm` (`>=v8.x`) installed on your machine
-- AWS Amplify CLI (`>=v7.6.x`) installed (`npm install -g @aws-amplify/cli`)
+- AWS Amplify CLI (`>=v9.2.x`) installed (`npm install -g @aws-amplify/cli`)
 
 ## Walkthrough
 
@@ -32,8 +32,8 @@ Overview of the steps:
 5. Add a Map and Authentication to your application by running `amplify add geo` (this will automatically prompt you to also add the required authentication resources)
 6. Create a custom Amplify resource for the Amazon Location Service Tracker (`amplify add custom`)
 7. Create an AWS Lambda function with Amplify using the code provided (`amplify add function`), this function will be used to update the tracker position in Amazon Location service
-9. Using the console, create an AWS IoT Core Certificate to allow the IoT Thing to connect to the AWS IoT Core
-8. Create a custom Amplify resource for the AWS IoT Core resources (`amplify add custom`)
+8. Using the console, create an AWS IoT Core Certificate to allow the IoT Thing to connect to the AWS IoT Core
+9. Create a custom Amplify resource for the AWS IoT Core resources (`amplify add custom`)
 10. Allow the IoT Rule to trigger the Lambda function
 11. Simulate the IoT Thing sending location updates to AWS IoT Core
 12. Run the Application
@@ -48,7 +48,7 @@ If this is the first time you're using Amplify, run `amplify configure` before c
 
 In the root of the project run the following command and the following options to start an Amplify application project and create it’s environment on AWS:
 
-```sh
+```
 amplify init
 Note: It is recommended to run this command from the root of your app directory
 ? Enter a name for the project maplibrejsreactiot
@@ -81,8 +81,8 @@ Amplify uses Amazon Cognito as an authentication provider and Amazon Location Se
 
 When you run `amplify add geo` in a empty project Amplify will ask you if you want to add the required Authentication resources to your project, follow the prompts to add an Amazon Location Service Map and Amazon Cognito resources to your project:
 
-```sh
- amplify add geo
+```
+amplify add geo
 ? Select which capability you want to add: Map (visualize the geospatial data)
 ✔ geo category resources require auth (Amazon Cognito). Do you want to add auth now? (Y/n) · yes
 
@@ -90,8 +90,7 @@ Using service: Cognito, provided by: awscloudformation
 
  The current configured provider is Amazon Cognito.
 
- Do you want to use the default authentication and security configuration? Defau
-lt configuration
+ Do you want to use the default authentication and security configuration? Default configuration
  Warning: you will not be able to edit these selections.
  How do you want users to be able to sign in? Username
  Do you want to configure advanced settings? No, I am done.
@@ -114,7 +113,7 @@ Available advanced settings:
 
 At the moment the Amplify Geo category doesn't support creating Trackers directly, but we can create a custom resource that will be used to create trackers using an [Amazon CDK](https://aws.amazon.com/cdk/) template.
 
-```sh
+```
 amplify add custom
 ✔ How do you want to define this custom resource? · AWS CDK
 ✔ Provide a name for your custom resource · trackerAsset
@@ -136,9 +135,9 @@ With the command above Amplify has created a skeleton CDK stack in the `amplify/
   },
   "dependencies": {
     "@aws-amplify/cli-extensibility-helper": "^2.0.0",
-    "@aws-cdk/core": "~1.151.0",
-    "@aws-cdk/aws-iam": "~1.151.0",
-    "@aws-cdk/aws-location": "~1.151.0"
+    "@aws-cdk/core": "~1.165.0",
+    "@aws-cdk/aws-iam": "~1.165.0",
+    "@aws-cdk/aws-location": "~1.165.0"
   },
   "devDependencies": {
     "typescript": "^4.2.4"
@@ -184,7 +183,7 @@ Finally, while in the main directory of your project, run `amplify override proj
 import { AmplifyRootStackTemplate } from "@aws-amplify/cli-extensibility-helper";
 
 export function override(resources: AmplifyRootStackTemplate) {
-  resources.authRole.addOverride("Properties.Policies", [
+  resources.unauthRole.addOverride("Properties.Policies", [
     {
       PolicyName: "trackerPolicy",
       PolicyDocument: {
@@ -193,8 +192,10 @@ export function override(resources: AmplifyRootStackTemplate) {
           {
             Effect: "Allow",
             Action: ["geo:GetDevicePositionHistory"],
-            Resource:
-              "arn:aws:geo:[region-name]:[account-id]:tracker/trackerAsset01",
+            Resource: {
+              "Fn::Sub":
+                "arn:aws:geo:${AWS::Region}:${AWS::AccountId}:tracker/trackerAsset01",
+            },
           },
         ],
       },
@@ -203,13 +204,11 @@ export function override(resources: AmplifyRootStackTemplate) {
 }
 ```
 
-**Note:** Make sure to update the arn to include the AWS Region and [account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html) of your Amplify project.
-
 ### 5. Create an AWS Lambda function to update your Tracker
 
 To update the Tracker position we need to create an AWS Lambda function that will be executed when a new event comes in from the IoT device. To create one using Amplify run the following command:
 
-```sh
+```
 amplify add function
 ? Select which capability you want to add: Lambda function (serverless function)
 
@@ -283,18 +282,17 @@ Finally we need to update the `amplify/backend/function/trackfunction1/custom-po
   {
     "Action": ["geo:BatchUpdateDevicePosition"],
     "Resource": [
-      "arn:aws:geo:[region-name]:[account-id]:tracker/trackerAsset01"
+      {
+        "Fn::Sub": "arn:aws:geo:${AWS::Region}:${AWS::AccountId}:tracker/trackerAsset01"
+      }
     ]
   }
 ]
 ```
 
-**Note:** Make sure to update the arn to include the AWS Region and [account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html) of your Amplify project.
-
-
 ### 6. Create an AWS IoT Certificate
 
-Before creating the AWS IoT resources with the Amplify CLI you need to create an AWS IoT certificate that is needed for the IoT Thing to authenticate and communicate with IoT Core. 
+Before creating the AWS IoT resources with the Amplify CLI you need to create an AWS IoT certificate that is needed for the IoT Thing to authenticate and communicate with IoT Core.
 
 To do this run the following command **while in the project root directory**, if you are in a different directory you will need to change the path of the output files accordingly:
 
@@ -327,6 +325,7 @@ If you prefer, you can also create the certificate in the AWS IoT console and th
 7. Move the certificate and private key files to the `generate_thing_events/certs/` directory of your project.
 
 After creating the certificate and obtaining the private key files, you should have the following files in the `generate_thing_events/` directory:
+
 ```sh
 generate_thing_events
 ├── certs
@@ -368,11 +367,11 @@ With the command above Amplify has created a skeleton CDK stack in the `amplify/
   },
   "dependencies": {
     "@aws-amplify/cli-extensibility-helper": "^2.0.0",
-    "@aws-cdk/core": "~1.151.0",
-    "@aws-cdk/aws-iam": "~1.151.0",
-    "@aws-cdk/aws-iot": "~1.151.0",
-    "@aws-cdk/aws-iot-actions": "~1.151.0",
-    "@aws-cdk/aws-lambda": "~1.151.0"
+    "@aws-cdk/core": "~1.165.0",
+    "@aws-cdk/aws-iam": "~1.165.0",
+    "@aws-cdk/aws-iot": "~1.165.0",
+    "@aws-cdk/aws-iot-actions": "~1.165.0",
+    "@aws-cdk/aws-lambda": "~1.165.0"
   },
   "devDependencies": {
     "typescript": "^4.2.4"
@@ -400,14 +399,14 @@ export class cdkStack extends cdk.Stack {
     });
 
     /* AWS CDK code goes here - learn more: https://docs.aws.amazon.com/cdk/latest/guide/home.html */
-    
+
     // Identifier for the IoT Core Certificate, REPLACE THIS WITH YOUR CERTIFICATE ID
     const CERTIFICATE_ID = <AWS IOT CERTIFICATE ID>;
 
-    // Access other Amplify Resources 
-    const retVal:AmplifyDependentResourcesAttributes = AmplifyHelpers.addResourceDependency(this, 
-      amplifyResourceProps.category, 
-      amplifyResourceProps.resourceName, 
+    // Access other Amplify Resources
+    const retVal:AmplifyDependentResourcesAttributes = AmplifyHelpers.addResourceDependency(this,
+      amplifyResourceProps.category,
+      amplifyResourceProps.resourceName,
       [
         {category: 'function', resourceName: 'trackFunction1'},
       ]
@@ -469,7 +468,7 @@ export class cdkStack extends cdk.Stack {
 
 Now that we have added the resource locally, we need to deploy them to the cloud by running:
 
-```sh
+```
 amplify push -y
 ```
 
@@ -479,7 +478,7 @@ When creating the IoT Rule we have referenced the `trackFunction1` function. Thi
 
 To fix this, we need to manually allow IoT Core to invoke the Lambda function. To do this, we need to add a new permission to the Lambda function:
 
-```sh
+```
 aws lambda add-permission --function-name trackFunction1-dev --statement-id iot-events --action "lambda:InvokeFunction" --principal iot.amazonaws.com
 ```
 
@@ -493,7 +492,7 @@ In order to update the Tracker position you need to send data to the AWS IoT Cor
 
 If you have followed the instructions at the step [#6](#6-create-an-aws-iot-certificate), the `generate_thing_events` folder should now have the following structure:
 
-```sh
+```
 generate_thing_events
 ├── certs
 ├ ├── certificate.pem.crt
@@ -556,9 +555,3 @@ To avoid incurring future charges, delete the resources used in this tutorial. H
 All Amplify resources are created by default in the `us-east-1` Region. If you are planning with interface with existing resources or might be looking to launch the application in other regions, you will need to configure it before running `amplify init`.
 To change the project default and region after installing the amplify CLI run `amplify configure`, you will be able to set a region and the username for the IAM user.
 For more information refer to [Amplify Documentation](https://docs.amplify.aws/cli/start/install#option-2-follow-the-instructions)
-
-### 2. Warnings in the logs while running the web application
-
-When running the web application, you might see a lot of warnings in the logs similar to the ones in the image below. These can be ignored and they are due to the fact that the sample is using a newly released version of webpack which while some of the other dependencies are not bundling their files correctly. **As long as webpack says something like `webpack 5.68.0 compiled with 13 warnings in 1243 ms` the build is successful, you can ignore the warnings.**
-
-![](assets/webpack-warnings.png)
