@@ -12,24 +12,16 @@ const clustersLayer = {
   filter: ["has", "point_count"],
   paint: {
     "circle-color": [
-      "step", 
-      ["get", "point_count"], 
-      "#a6caf3", 
-      10, 
-      "#fdd2a2", 
-      25, 
-      "#f39f9e"
+      "step",
+      ["get", "point_count"],
+      "#a6caf3",
+      10,
+      "#fdd2a2",
+      25,
+      "#f39f9e",
     ],
-    "circle-radius": [
-      "step", 
-      ["get", "point_count"], 
-      30, 
-      10, 
-      40, 
-      25, 
-      50
-    ]
-  }
+    "circle-radius": ["step", ["get", "point_count"], 30, 10, 40, 25, 50],
+  },
 };
 
 // Properties for points layer when zoomed in
@@ -42,14 +34,13 @@ const pointsLayer = {
     "circle-color": "#fff",
     "circle-radius": 3,
     "circle-stroke-width": 4,
-    "circle-stroke-color": "#f25a59"
-  }
+    "circle-stroke-color": "#f25a59",
+  },
 };
 
 // Displays clusters from GeoJSON data.
 const ClustersFeature = () => {
   return (
-
     // Create a source that specifies which data it should display
     <Source
       id="clusters-source"
@@ -59,12 +50,11 @@ const ClustersFeature = () => {
       clusterMaxZoom={14}
       clusterRadius={60}
     >
-
       {/* Create a map layer to display clusters or points based on the zoom */}
       <Layer {...clustersLayer} />
       <Layer {...pointsLayer} />
     </Source>
   );
-}
+};
 
 export default ClustersFeature;

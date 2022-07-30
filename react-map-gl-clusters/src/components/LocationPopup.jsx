@@ -4,23 +4,25 @@
 import { Popup } from "react-map-gl";
 
 // Display a popup that appears when points are clicked
-const LocationPopup = ({popupData, onPopupClose}) => {
+const LocationPopup = ({ popupData, onPopupClose }) => {
   return (
     <Popup
       latitude={popupData.latitude}
       longitude={popupData.longitude}
-      offsetTop={-15}
-      offsetLeft={0}
+      offset={[0, -10]}
       closeButton={true}
       closeOnClick={true}
       onClose={onPopupClose}
-      anchor="bottom" >
+      anchor="bottom"
+    >
+      <div>
         <div>
-          <div><strong>{popupData.title}</strong></div>
-          <div>{popupData.description}</div>
+          <strong>{popupData.title}</strong>
         </div>
+        <div>{popupData.description}</div>
+      </div>
     </Popup>
   );
-}
+};
 
 export default LocationPopup;
