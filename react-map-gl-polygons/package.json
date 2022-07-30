@@ -13,7 +13,7 @@
     "maplibre-gl-js-amplify": "^2.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-map-gl": "^7.0.15"
+    "react-map-gl": "^7.0.18"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",
