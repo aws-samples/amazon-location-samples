@@ -92,7 +92,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <>
       {transformRequest ? (
         <Map
           initialViewState={{
@@ -125,7 +125,7 @@ const App = () => {
       ) : (
         <h1>Loading...</h1>
       )}
-    </div>
+    </>
   );
 };
 
