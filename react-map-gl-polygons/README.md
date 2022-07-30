@@ -6,7 +6,7 @@ Service](https://aws.amazon.com/location), and [AWS Amplify](https://aws.amazon.
 
 ## Implementation
 
-See [`src/index.js`](src/index.js).
+See [`src/main.jsx`](src/main.jsx).
 
 ## Dependencies
 
