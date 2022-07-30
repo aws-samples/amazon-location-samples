@@ -5,51 +5,55 @@ import { useState, memo } from "react";
 import { createPortal } from "react-dom";
 import { useControl } from "react-map-gl";
 import CustomControl from "./CustomControl";
-import { View, SelectField } from "@aws-amplify/ui-react";
 
 // Component: LanguagesList - A list that allows to select a language for the map
 const LanguagesList = memo(({ languagesList, setLanguage }) => {
   const renderOptions = (languagesList) => {
     const options = [];
     languagesList.forEach((value, key) => {
-      options.push(<option key={value} value={value}>{key}</option>)
+      options.push(
+        <option key={value} value={value}>
+          {key}
+        </option>
+      );
     });
     return options;
   };
 
   return (
-    <View
+    <div
       style={{
         zIndex: 50,
-        top: '10px',
-        right: '10px',
-        pointerEvents: "all"
+        top: "10px",
+        left: "10px",
+        pointerEvents: "all",
+        position: "relative",
+        backgroundColor: "white",
+        borderRadius: "5px",
+        margin: "0 0 5px 0",
+        width: "15rem",
       }}
-      width="15rem"
-      position="relative"
-      backgroundColor="white"
-      borderRadius="5px"
-      margin="0 0 5px 0"
     >
-      <SelectField
-        label="Map Language"
-        labelHidden
+      <select
         placeholder="Select a language"
         onChange={(e) => setLanguage(e.target.value)}
       >
         {renderOptions(languagesList)}
-      </SelectField>
-    </View>
+      </select>
+    </div>
   );
 });
 
 const LanguagesControl = (props) => {
   const [, setVersion] = useState(0);
 
-  const ctrl = useControl(() => {
-    const forceUpdate = () => setVersion((v) => v + 1);
-    return new CustomControl(forceUpdate, "languages-list");
-  }, { position: "top-right" });
+  const ctrl = useControl(
+    () => {
+      const forceUpdate = () => setVersion((v) => v + 1);
+      return new CustomControl(forceUpdate, "languages-list");
+    },
+    { position: "top-left" }
+  );
 
   if (!ctrl.getElement() || !ctrl.getMap()) {
     return null;
