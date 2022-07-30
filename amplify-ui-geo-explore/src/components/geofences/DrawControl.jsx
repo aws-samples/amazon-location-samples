@@ -1,9 +1,10 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useControl } from "react-map-gl";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
+import { useCallback } from "react";
+import { useControl } from "react-map-gl";
 
 // Instantiate mapbox-gl-draw
 const draw = new MapboxDraw({
@@ -42,17 +43,22 @@ const DrawControl = ({ onCreate, onModeChange, onGeofenceCompletable }) => {
     }
   };
 
+  // This is needed because the bundler is not making the passed
+  // function available to the mapbox-gl-draw library.
+  const drawCreate = useCallback((e) => onCreate(e), []);
+  const drawModeChange = useCallback((e) => onModeChange(e), []);
+
   useControl(
     ({ map }) => {
-      map.on("draw.create", onCreate);
-      map.on("draw.modechange", onModeChange);
+      map.on("draw.create", drawCreate);
+      map.on("draw.modechange", drawModeChange);
       map.on("draw.render", onRender);
 
       return draw;
     },
     ({ map }) => {
-      map.off("draw.create", onCreate);
-      map.off("draw.modechange", onModeChange);
+      map.off("draw.create", drawCreate);
+      map.off("draw.modechange", drawModeChange);
       map.off("draw.render", onRender);
     }
   );

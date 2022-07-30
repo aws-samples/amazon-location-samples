@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Amplify, { Auth } from "aws-amplify";
 import { LocationClient } from "@aws-sdk/client-location";
 import { IDENTITY_POOL_ID, REGION, MAP, PLACE } from "./configuration";
@@ -34,7 +34,8 @@ Amplify.configure({
     AmazonLocationService: {
       maps: {
         items: {
-          [MAP.NAME]: { // REQUIRED - Amazon Location Service Map resource name
+          [MAP.NAME]: {
+            // REQUIRED - Amazon Location Service Map resource name
             style: MAP.STYLE, // REQUIRED - String representing the style of map resource
           },
         },
@@ -120,7 +121,9 @@ const App = () => {
             onPanelChange={handlePanelChange}
             isDrawing={openedInfoBox === GEOFENCE_DRAWING_MODE ? true : false}
             onDrawingChange={(status) =>
-              status ? setOpenedInfoBox(GEOFENCE_DRAWING_MODE) : setOpenedInfoBox()
+              status
+                ? setOpenedInfoBox(GEOFENCE_DRAWING_MODE)
+                : setOpenedInfoBox()
             }
           />
           <TrackersLayer
@@ -128,9 +131,13 @@ const App = () => {
             clickedLngLat={clickedLngLat}
             isOpenedPanel={openedPanel === TRACKERS_PANEL ? true : false}
             onPanelChange={handlePanelChange}
-            isViewingDeviceHistory={openedInfoBox === DEVICE_POSITION_HISTORY_VIEWER ? true : false}
+            isViewingDeviceHistory={
+              openedInfoBox === DEVICE_POSITION_HISTORY_VIEWER ? true : false
+            }
             onViewingDeviceHistoryChange={(status) =>
-              status ? setOpenedInfoBox(DEVICE_POSITION_HISTORY_VIEWER) : setOpenedInfoBox()
+              status
+                ? setOpenedInfoBox(DEVICE_POSITION_HISTORY_VIEWER)
+                : setOpenedInfoBox()
             }
           />
         </MapView>
