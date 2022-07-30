@@ -1,3 +1,6 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 import { Amplify, Auth, Geo } from "aws-amplify";
 import maplibregl from "maplibre-gl";
 import { AmplifyMapLibreRequest } from "maplibre-gl-js-amplify";
