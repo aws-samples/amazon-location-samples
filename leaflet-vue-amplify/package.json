@@ -2,7 +2,7 @@
   "name": "leaflet-vue-amplify",
   "version": "0.2.0",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "vite build",
     "preview": "vite preview --port 5050"
   },
@@ -22,15 +22,12 @@
   "overrides": {
     "react-native": {
       "@react-native-community/cli": {
-        "strip-ansi": {
-          "ansi-regex": "5.0.1"
-        }
+        "shell-quote": "1.7.3"
       }
     },
-    "aws-amplify": {
-      "xcode": {
-        "simple-plist": "1.3.1"
-      }
+    "minimist": "1.2.6",
+    "nomnom": {
+      "underscore": "1.13.4"
     }
   }
 }
