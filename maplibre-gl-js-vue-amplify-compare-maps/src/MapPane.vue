@@ -34,6 +34,7 @@ export default {
     zoom: Number,
     center: Object,
     pitch: Number,
+    bearing: Number,
     ActiveMap: String,
     sync: Boolean,
   },
@@ -42,7 +43,7 @@ export default {
     const map = ref(null);
     const toggle = ref(true);
     const num = ref(30);
-    const { id, zoom, center, pitch, sync, ActiveMap } = toRefs(props);
+    const { id, zoom, center, pitch, bearing, sync, ActiveMap } = toRefs(props);
 
     const mapCreate = async () => {
       map.value = await createMap({
@@ -50,23 +51,26 @@ export default {
         zoom: zoom.value,
         center: center.value,
         pitch: pitch.value,
+        bearing: bearing.value,
       });
+
       map.value.addControl(createAmplifyGeocoder());
 
-      map.value.on('movestart', () => {
-        if (ActiveMap.value == null && sync.value) {
+      map.value.on('mouseover', () => {
+        if (sync.value) {
           context.emit('active-map-update', id.value);
         }
       });
-      map.value.on('move', () => {
-        if (ActiveMap.value == id.value || ActiveMap.value == null) {
-          context.emit('state-update', map.value.getZoom(), map.value.getCenter());
-        }
-      });
 
-      map.value.on('moveend', () => {
+      map.value.on('move', () => {
         if (ActiveMap.value == id.value) {
-          context.emit('active-map-update', null);
+          context.emit(
+            'state-update',
+            map.value.getZoom(),
+            map.value.getCenter(),
+            map.value.getBearing(),
+            map.value.getPitch()
+          );
         }
       });
     };
@@ -78,18 +82,25 @@ export default {
     });
 
     watch(zoom, (zoom) => {
-      if (ActiveMap.value && ActiveMap.value !== id.value && sync.value) {
+      if (ActiveMap.value !== id.value && sync.value) {
         map.value.setZoom(zoom);
       }
     });
 
     watch(center, (center) => {
-      if (ActiveMap.value && ActiveMap.value !== id.value && sync.value) {
+      if (ActiveMap.value !== id.value && sync.value) {
         map.value.setCenter([center.lng, center.lat]);
       }
     });
 
+    watch(bearing, (bearing) => {
+      if (ActiveMap.value !== id.value && sync.value) {
+        map.value.setBearing(bearing);
+      }
+    });
+
     watch(num, (num) => {
+      context.emit('active-map-update', id.value);
       context.emit('pitch-update', num);
     });
 

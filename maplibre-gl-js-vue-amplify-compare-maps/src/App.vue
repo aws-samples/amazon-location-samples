@@ -13,6 +13,7 @@
               :zoom="zoom"
               :center="center"
               :pitch="pitch"
+              :bearing="bearing"
               :ActiveMap="ActiveMap"
               :sync="sync"
             ></Map
@@ -28,10 +29,11 @@
               :zoom="zoom"
               :center="center"
               :pitch="pitch"
+              :bearing="bearing"
               :ActiveMap="ActiveMap"
               :sync="sync"
-            ></Map
-          ></el-col>
+            ></Map>
+          </el-col>
         </el-row>
       </el-main>
     </el-container>
@@ -50,12 +52,15 @@ export default {
     const zoom = ref(14);
     const center = ref([139.7648, 35.6794]);
     const pitch = ref(30);
+    const bearing = ref(0);
     const sync = ref(true);
     const ActiveMap = ref(null);
 
     function updateState(...args) {
       zoom.value = args[0];
       center.value = args[1];
+      bearing.value = args[2];
+      pitch.value = args[3];
     }
 
     function updateActiveMap(...args) {
@@ -75,6 +80,7 @@ export default {
       zoom,
       center,
       pitch,
+      bearing,
       sync,
       ActiveMap,
       updateState,
