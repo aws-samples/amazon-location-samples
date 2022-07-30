@@ -1,4 +1,4 @@
-# Amazon Location Map Comparison
+# Amazon Location Service Map Comparison
 ![](./image/README.png)
 
 This sample is used to compare maps provided by Amazon Location.
