@@ -170,6 +170,22 @@
           ]
         }
       ]
+    },
+    "hereberlin": {
+      "isDefault": false,
+      "providerPlugin": "awscloudformation",
+      "service": "Map",
+      "mapStyle": "VectorHereBerlin",
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
     }
   },
   "hosting": {}

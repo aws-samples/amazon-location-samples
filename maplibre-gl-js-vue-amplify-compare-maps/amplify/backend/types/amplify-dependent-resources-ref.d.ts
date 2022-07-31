@@ -7,7 +7,8 @@ export type AmplifyDependentResourcesAttributes = {
             "UserPoolArn": "string",
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
-            "AppClientID": "string"
+            "AppClientID": "string",
+            "CreatedSNSRole": "string"
         }
     },
     "geo": {
@@ -59,6 +60,12 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string"
         },
         "esrilight": {
+            "Name": "string",
+            "Style": "string",
+            "Region": "string",
+            "Arn": "string"
+        },
+        "hereberlin": {
             "Name": "string",
             "Style": "string",
             "Region": "string",
