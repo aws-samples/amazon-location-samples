@@ -12,7 +12,6 @@
     "vue-router": "^4.0.12",
     "@aws-amplify/ui-vue": "^2.4.12",
     "aws-amplify": "^4.3.27",
-    "element-plus": "^2.2.9",
     "maplibre-gl": "^2.1.9",
     "maplibre-gl-js-amplify": "^2.0.2"
   },

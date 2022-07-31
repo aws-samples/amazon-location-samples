@@ -1,17 +1,21 @@
 export type AmplifyDependentResourcesAttributes = {
     "auth": {
-        "showmaps2956ae8b": {
+        "maplibreglvue0e55c8d4": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
-            "AppClientID": "string",
-            "CreatedSNSRole": "string"
+            "AppClientID": "string"
         }
     },
     "geo": {
+        "placeindex": {
+            "Name": "string",
+            "Region": "string",
+            "Arn": "string"
+        },
         "esristreet": {
             "Name": "string",
             "Style": "string",
@@ -42,7 +46,7 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "Arn": "string"
         },
-        "hereexolore": {
+        "hereexplore": {
             "Name": "string",
             "Style": "string",
             "Region": "string",
@@ -54,20 +58,9 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "Arn": "string"
         },
-        "hereberlin": {
-            "Name": "string",
-            "Style": "string",
-            "Region": "string",
-            "Arn": "string"
-        },
         "esrilight": {
             "Name": "string",
             "Style": "string",
-            "Region": "string",
-            "Arn": "string"
-        },
-        "placeindex": {
-            "Name": "string",
             "Region": "string",
             "Arn": "string"
         }

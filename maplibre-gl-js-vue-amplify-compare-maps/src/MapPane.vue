@@ -1,29 +1,18 @@
 <template>
-  <el-card class="box-card">
-    <template #header>
-      <div class="card-header">
-        <el-form :inline="true">
-          <el-form-item label="Map Style">
-            <el-select v-model="renderedMap">
-              <el-option v-for="map in availableMaps" :key="map.mapName" :label="map.style" :value="map.mapName">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item v-if="id === 'right'" label="Pitch">
-            <el-input-number v-model="num" :min="0" :max="60" :step="5" />
-          </el-form-item>
-          <el-form-item v-if="id === 'right'" label="Sync">
-            <el-switch v-model="toggle" />
-          </el-form-item>
-        </el-form>
-      </div>
-    </template>
-    <div :id="id" class="map"></div>
-  </el-card>
+  <div class="map-header">
+    <div>
+      <label>Map Style</label>
+      <select v-model="renderedMap">
+        <option v-for="map in availableMaps" :key="map.mapName" :label="map.style" :value="map.mapName" />
+      </select>
+    </div>
+  </div>
+  <div :id="id" class="map"></div>
 </template>
 
 <script>
 import { createMap, createAmplifyGeocoder } from 'maplibre-gl-js-amplify';
+import { NavigationControl } from 'maplibre-gl';
 import { Geo } from 'aws-amplify';
 import { ref, watch, toRefs } from 'vue';
 
@@ -36,14 +25,11 @@ export default {
     pitch: Number,
     bearing: Number,
     ActiveMap: String,
-    sync: Boolean,
   },
   setup(props, context) {
     const renderedMap = ref(Geo.getDefaultMap());
     const map = ref(null);
-    const toggle = ref(true);
-    const num = ref(30);
-    const { id, zoom, center, pitch, bearing, sync, ActiveMap } = toRefs(props);
+    const { id, zoom, center, pitch, bearing, ActiveMap } = toRefs(props);
 
     const mapCreate = async () => {
       map.value = await createMap({
@@ -55,11 +41,10 @@ export default {
       });
 
       map.value.addControl(createAmplifyGeocoder());
+      map.value.addControl(new NavigationControl({ visualizePitch: true }));
 
       map.value.on('mouseover', () => {
-        if (sync.value) {
-          context.emit('active-map-update', id.value);
-        }
+        context.emit('active-map-update', id.value);
       });
 
       map.value.on('move', () => {
@@ -82,40 +67,31 @@ export default {
     });
 
     watch(zoom, (zoom) => {
-      if (ActiveMap.value !== id.value && sync.value) {
+      if (ActiveMap.value !== id.value) {
         map.value.setZoom(zoom);
       }
     });
 
     watch(center, (center) => {
-      if (ActiveMap.value !== id.value && sync.value) {
+      if (ActiveMap.value !== id.value) {
         map.value.setCenter([center.lng, center.lat]);
       }
     });
 
     watch(bearing, (bearing) => {
-      if (ActiveMap.value !== id.value && sync.value) {
+      if (ActiveMap.value !== id.value) {
         map.value.setBearing(bearing);
       }
     });
 
-    watch(num, (num) => {
-      context.emit('active-map-update', id.value);
-      context.emit('pitch-update', num);
-    });
-
     watch(pitch, (pitch) => {
-      map.value.setPitch(pitch);
-    });
-
-    watch(toggle, (toggle) => {
-      context.emit('sync-update', toggle);
+      if (ActiveMap.value !== id.value) {
+        map.value.setPitch(pitch);
+      }
     });
 
     return {
       renderedMap,
-      num,
-      toggle,
     };
   },
 };

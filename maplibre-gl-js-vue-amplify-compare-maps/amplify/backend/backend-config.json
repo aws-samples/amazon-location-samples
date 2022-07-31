@@ -1,6 +1,6 @@
 {
   "auth": {
-    "showmaps2956ae8b": {
+    "maplibreglvue0e55c8d4": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -26,6 +26,23 @@
     }
   },
   "geo": {
+    "placeindex": {
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex",
+      "dataProvider": "Here",
+      "dataSourceIntendedUse": "SingleUse",
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    },
     "esristreet": {
       "isDefault": false,
       "providerPlugin": "awscloudformation",
@@ -35,7 +52,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "showmaps2956ae8b",
+          "resourceName": "maplibreglvue0e55c8d4",
           "attributes": [
             "UserPoolId"
           ]
@@ -51,7 +68,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "showmaps2956ae8b",
+          "resourceName": "maplibreglvue0e55c8d4",
           "attributes": [
             "UserPoolId"
           ]
@@ -67,7 +84,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "showmaps2956ae8b",
+          "resourceName": "maplibreglvue0e55c8d4",
           "attributes": [
             "UserPoolId"
           ]
@@ -83,7 +100,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "showmaps2956ae8b",
+          "resourceName": "maplibreglvue0e55c8d4",
           "attributes": [
             "UserPoolId"
           ]
@@ -99,14 +116,14 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "showmaps2956ae8b",
+          "resourceName": "maplibreglvue0e55c8d4",
           "attributes": [
             "UserPoolId"
           ]
         }
       ]
     },
-    "hereexolore": {
+    "hereexplore": {
       "isDefault": false,
       "providerPlugin": "awscloudformation",
       "service": "Map",
@@ -115,7 +132,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "showmaps2956ae8b",
+          "resourceName": "maplibreglvue0e55c8d4",
           "attributes": [
             "UserPoolId"
           ]
@@ -131,23 +148,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "showmaps2956ae8b",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
-    "hereberlin": {
-      "isDefault": false,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorHereBerlin",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "showmaps2956ae8b",
+          "resourceName": "maplibreglvue0e55c8d4",
           "attributes": [
             "UserPoolId"
           ]
@@ -163,24 +164,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "showmaps2956ae8b",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
-    "placeindex": {
-      "isDefault": true,
-      "providerPlugin": "awscloudformation",
-      "service": "PlaceIndex",
-      "dataProvider": "Esri",
-      "dataSourceIntendedUse": "SingleUse",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "showmaps2956ae8b",
+          "resourceName": "maplibreglvue0e55c8d4",
           "attributes": [
             "UserPoolId"
           ]

@@ -6,7 +6,7 @@
     "Ref": "UnauthRoleName"
   },
   "indexName": "placeindex",
-  "dataProvider": "Esri",
+  "dataProvider": "Here",
   "dataSourceIntendedUse": "SingleUse",
   "isDefault": true
 }

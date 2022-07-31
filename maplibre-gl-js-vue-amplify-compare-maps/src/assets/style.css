@@ -1,28 +1,56 @@
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body, body::after, body::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+header {
+  background: linear-gradient(225deg, #FE5151, #BD0916);
+  width: 100%;
+  height: var(--amplify-space-xxl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header h1 {
+  font-size: var(--amplify-font-sizes-xl);
+  font-weight: var(--amplify-font-weights-light);
+  color: var(--amplify-colors-white);
+  margin: 0;
+  padding: 0;
   text-align: center;
-}
-.el-header {
-  background: linear-gradient(225deg, #FE5151, #BD0916);;
-  color: #FFFFFF;
-  font-size: 24px;
-  height:50px !important;
-}
-.el-form-item {
-  margin-top: 5 !important;
-  margin-bottom: 0 !important;
-}
-.map {
-  height: 80vh;
-}
-.el-main {
-  padding: 0px !important;
-}
-.el-card__body {
-  padding: 0px !important;
+  line-height: var(--amplify-space-xl);
 }
 
+section {
+  width: 100%;
+  height: calc(100vh - var(--amplify-space-xxl));
+  display: flex;
+}
 
+section > div {
+  width: 50%;
+  height: 100%;
+}
 
+section > div > .map-header {
+  width: 100%;
+  height: var(--amplify-space-xxl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section > div > .map {
+  width: 100%;
+  height: calc(100% - var(--amplify-space-xxl));
+}

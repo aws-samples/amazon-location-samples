@@ -1,43 +1,38 @@
 <template>
-  <div>
-    <el-container>
-      <el-header> Amazon Location × Amplify Geo</el-header>
-      <el-main>
-        <el-row>
-          <el-col :span="12">
-            <Map
-              id="left"
-              :availableMaps="availableMaps"
-              @state-update="updateState"
-              @active-map-update="updateActiveMap"
-              :zoom="zoom"
-              :center="center"
-              :pitch="pitch"
-              :bearing="bearing"
-              :ActiveMap="ActiveMap"
-              :sync="sync"
-            ></Map
-          ></el-col>
-          <el-col :span="12">
-            <Map
-              id="right"
-              :availableMaps="availableMaps"
-              @state-update="updateState"
-              @active-map-update="updateActiveMap"
-              @pitch-update="updatePitch"
-              @sync-update="updateSync"
-              :zoom="zoom"
-              :center="center"
-              :pitch="pitch"
-              :bearing="bearing"
-              :ActiveMap="ActiveMap"
-              :sync="sync"
-            ></Map>
-          </el-col>
-        </el-row>
-      </el-main>
-    </el-container>
-  </div>
+  <main>
+    <header>
+      <h1>Amazon Location × Amplify Geo</h1>
+    </header>
+    <section>
+      <div>
+        <Map
+          id="left"
+          :availableMaps="availableMaps"
+          @state-update="updateState"
+          @active-map-update="updateActiveMap"
+          :zoom="zoom"
+          :center="center"
+          :pitch="pitch"
+          :bearing="bearing"
+          :ActiveMap="ActiveMap"
+          :sync="sync"
+        />
+      </div>
+      <div>
+        <Map
+          id="right"
+          :availableMaps="availableMaps"
+          @state-update="updateState"
+          @active-map-update="updateActiveMap"
+          :zoom="zoom"
+          :center="center"
+          :pitch="pitch"
+          :bearing="bearing"
+          :ActiveMap="ActiveMap"
+        />
+      </div>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -67,26 +62,15 @@ export default {
       ActiveMap.value = args[0];
     }
 
-    function updatePitch(...args) {
-      pitch.value = args[0];
-    }
-
-    function updateSync(...args) {
-      sync.value = args[0];
-    }
-
     return {
       availableMaps,
       zoom,
       center,
       pitch,
       bearing,
-      sync,
       ActiveMap,
       updateState,
       updateActiveMap,
-      updatePitch,
-      updateSync,
     };
   },
 };
