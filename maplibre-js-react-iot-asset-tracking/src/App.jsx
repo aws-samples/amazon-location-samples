@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { Geo } from "aws-amplify";
-import { MapView, Text } from "@aws-amplify/ui-react";
+import { MapView } from "@aws-amplify/ui-react";
 import { NavigationControl } from "react-map-gl";
 import Markers from "./components/Markers";
 import LineOverlay from "./components/LineOverlay";
