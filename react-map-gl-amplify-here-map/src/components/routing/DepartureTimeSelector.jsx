@@ -207,10 +207,7 @@ const DepartureTimeSelector = ({ isOptionOpen, setIsOptionOpen }) => {
             backgroundColor="transparent"
             onClick={() => setIsOptionOpen(!isOptionOpen)}
           >
-            <Text
-              textTransform="uppercase"
-              fontWeight="lighter"
-            >
+            <Text textTransform="uppercase" fontWeight="lighter">
               {isOptionOpen ? "Close" : "Options"}
             </Text>
           </Button>
@@ -226,7 +223,12 @@ const DepartureTimeSelector = ({ isOptionOpen, setIsOptionOpen }) => {
               setDepartureTime={setDepartureTime}
             />
           </View>
-          <Flex width="50%" gap="0" justifyContent="flex-end" padding="5px 0 5px 0">
+          <Flex
+            width="50%"
+            gap="0"
+            justifyContent="flex-end"
+            padding="5px 0 5px 0"
+          >
             {/* TODO: disable buttons when limits reached */}
             <Button
               size="small"

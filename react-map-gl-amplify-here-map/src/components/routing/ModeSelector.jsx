@@ -8,18 +8,24 @@ import { RoutingModesEnum } from "../../AppContext";
 
 const Mode = ({ value, isSelected, nth }) => {
   let borderRadius = "";
-  if (nth === "first") borderRadius = "var(--amplify-radii-small) 0 0 var(--amplify-radii-small)";
-  if (nth === "last") borderRadius = "0 var(--amplify-radii-small) var(--amplify-radii-small) 0";
+  if (nth === "first")
+    borderRadius = "var(--amplify-radii-small) 0 0 var(--amplify-radii-small)";
+  if (nth === "last")
+    borderRadius = "0 var(--amplify-radii-small) var(--amplify-radii-small) 0";
 
   return (
     <View
       width="calc(100% / 3)"
-      backgroundColor={isSelected ? "var(--amplify-colors-brand-primary)" : "var(--amplify-colors-background-secondary)"}
+      backgroundColor={
+        isSelected
+          ? "var(--amplify-colors-brand-primary)"
+          : "var(--amplify-colors-background-secondary)"
+      }
       style={{
         cursor: "pointer",
         borderRadius: borderRadius,
         border: "1px solid",
-        borderColor: "var(--amplify-colors-background-secondary)"
+        borderColor: "var(--amplify-colors-background-secondary)",
       }}
       padding="var(--amplify-space-xxxs) 0"
       title={value}
@@ -45,7 +51,13 @@ const ModeSelector = () => {
   };
 
   return (
-    <Flex width="100%" justifyContent="center" alignItems="center" gap="0" margin="10px 0 0 0">
+    <Flex
+      width="100%"
+      justifyContent="center"
+      alignItems="center"
+      gap="0"
+      margin="10px 0 0 0"
+    >
       <RadioGroupField
         label="Routing Mode"
         labelHidden={true}

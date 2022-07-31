@@ -48,9 +48,13 @@ const NumberField = (props) => {
         >
           -
         </Button>
-        <input style={{
-          width: "40%",
-        }} {...inputProps} ref={inputRef} />
+        <input
+          style={{
+            width: "40%",
+          }}
+          {...inputProps}
+          ref={inputRef}
+        />
         <Button
           size="small"
           backgroundColor="var(--amplify-colors-background-secondary)"

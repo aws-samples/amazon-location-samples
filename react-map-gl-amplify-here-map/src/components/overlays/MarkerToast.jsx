@@ -35,7 +35,7 @@ function MarkerToast() {
       style={{
         zIndex: 50,
         right: "calc(50vw - calc(20rem / 2))",
-        pointerEvents: "all"
+        pointerEvents: "all",
       }}
       position="relative"
       height="4rem"
@@ -52,22 +52,42 @@ function MarkerToast() {
         <Flex height="100%">
           {/* Place Info */}
           <View width="70%">
-            <Text textAlign="left" fontSize="small" fontWeight="bold" lineHeight="normal">
+            <Text
+              textAlign="left"
+              fontSize="small"
+              fontWeight="bold"
+              lineHeight="normal"
+            >
               {marker.street}
               {marker.addressNumber && `, ${marker.addressNumber}`}
             </Text>
-            <Text textAlign="left" fontSize="small" fontWeight="bold" lineHeight="normal">
+            <Text
+              textAlign="left"
+              fontSize="small"
+              fontWeight="bold"
+              lineHeight="normal"
+            >
               {marker.postalCode}
               {marker.municipality && ` ${marker.municipality}`}
               {marker.country && ", "}
               {marker.country}
             </Text>
-            <Text textAlign="left" color="var(--amplify-colors-font-tertiary)" fontSize="small" lineHeight="normal">
+            <Text
+              textAlign="left"
+              color="var(--amplify-colors-font-tertiary)"
+              fontSize="small"
+              lineHeight="normal"
+            >
               {marker.geometry.point[1]}, {marker.geometry.point[0]}
             </Text>
           </View>
           {/* Routing button */}
-          <Flex width="15%" height="100%" justifyContent="center" alignItems="center">
+          <Flex
+            width="15%"
+            height="100%"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Button
               title="Start Routing"
               style={{
@@ -80,7 +100,7 @@ function MarkerToast() {
                 width: "2rem",
                 boxShadow: "var(--amplify-shadows-medium)",
                 backgroundColor: "var(--amplify-colors-brand-primary)",
-                border: "1px solid var(--amplify-colors-brand-primary)"
+                border: "1px solid var(--amplify-colors-brand-primary)",
               }}
               onPress={() => Hub.dispatch("Routing", { event: "startRouting" })}
             >
@@ -89,7 +109,7 @@ function MarkerToast() {
                 height="24"
                 style={{
                   transform: "rotate(-45deg)",
-                  fill: "white"
+                  fill: "white",
                 }}
               />
             </Button>
@@ -118,10 +138,13 @@ function MarkerToast() {
 const MarkerControl = () => {
   const [, setVersion] = useState(0);
 
-  const ctrl = useControl(() => {
-    const forceUpdate = () => setVersion((v) => v + 1);
-    return new CustomControl(forceUpdate, "marker-toast");
-  }, { position: "bottom-right" });
+  const ctrl = useControl(
+    () => {
+      const forceUpdate = () => setVersion((v) => v + 1);
+      return new CustomControl(forceUpdate, "marker-toast");
+    },
+    { position: "bottom-right" }
+  );
 
   if (!ctrl.getElement() || !ctrl.getMap()) {
     return null;

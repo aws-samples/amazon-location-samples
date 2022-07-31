@@ -32,7 +32,7 @@ The demo uses [MapLibre GL JS](https://maplibre.org/maplibre-gl-js-docs/api/) an
 used to display maps. [`react-map-gl-amplify`](../react-map-gl-amplify/) demonstrates how to use
 `react-map-gl` with Amazon Location and AWS Amplify. The demo also uses [@aws-amplify/ui-react](https://ui.docs.amplify.aws/getting-started/installation) to build part of the UI.
 
-See [`src/index.js`](src/index.js).
+See [`src/main.jsx`](src/main.jsx).
 
 ## Dependencies
 
@@ -42,7 +42,7 @@ See [`package.json`](package.json#L6-L22).
 
 To deploy clone this repo and run:
 
-1. Install the Amplify CLI: `npm install -g @aws-amplify/cli`
+1. Install the Amplify CLI: `npm install -g @aws-amplify/cli` (`v9.1.0` or later)
 1. Install project dependencies: `npm install`
 1. Create a new Amplify project environment: `amplify init`
 1. Create Auth and Geo resources: `amplify push`
@@ -51,7 +51,7 @@ To deploy clone this repo and run:
 
 To clean up all resources created for this application, run the following:
 
-```bash
+```sh
 amplify delete
 ```
 
