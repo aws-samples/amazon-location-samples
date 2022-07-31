@@ -15,7 +15,6 @@
           :pitch="pitch"
           :bearing="bearing"
           :ActiveMap="ActiveMap"
-          :sync="sync"
         />
       </div>
       <div>
@@ -48,7 +47,6 @@ export default {
     const center = ref([139.7648, 35.6794]);
     const pitch = ref(30);
     const bearing = ref(0);
-    const sync = ref(true);
     const ActiveMap = ref(null);
 
     function updateState(...args) {
