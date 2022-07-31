@@ -1,62 +1,23 @@
 {
   "name": "create-custom-map-style",
-  "description": "Create a custom map style with AWS Location Service",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "private": true,
   "dependencies": {
-    "@aws-amplify/ui-react": "^2.11.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "aws-amplify": "^4.3.18",
-    "aws-sdk": "^2.17.0",
-    "maplibre-gl": "^1.15.2",
-    "maplibre-gl-js-amplify": "^1.2.5",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "^5.0.0"
+    "@aws-amplify/ui-react": "^3.2.1",
+    "aws-amplify": "^4.3.29",
+    "maplibre-gl-js-amplify": "^2.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "scripts": {
-    "lint": "eslint src --ext .js,.jsx --fix",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "eslint": "^7.22.0",
-    "eslint-plugin-react": "^7.23.0"
-  },
-  "overrides": {
-    "react-scripts": {
-      "resolve-url-loader": "5.0.0",
-      "css-select": {
-        "nth-check": "2.0.1"
-      }
-    },
-    "aws-amplify": {
-      "xcode": {
-        "simple-plist": "1.3.1"
-      }
-    }
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "vite": "^3.0.0"
   }
 }

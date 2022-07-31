@@ -1,26 +1,48 @@
 {
   "auth": {
-    "createcustommapstyle5982835e": {
+    "createcustommapstyle6210c835": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
-      "customAuth": false
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
     }
   },
   "geo": {
-    "CreateCustomMapStyle": {
+    "customStyleMap": {
       "isDefault": true,
       "providerPlugin": "awscloudformation",
       "service": "Map",
       "mapStyle": "VectorEsriStreets",
-      "pricingPlan": "RequestBasedUsage",
-      "accessType": "AuthorizedUsers"
-    }
-  },
-  "hosting": {
-    "S3AndCloudFront": {
-      "service": "S3AndCloudFront",
-      "providerPlugin": "awscloudformation"
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "createcustommapstyle6210c835",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
     }
   }
 }

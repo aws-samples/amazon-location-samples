@@ -5,8 +5,7 @@
   "unauthRoleName": {
     "Ref": "UnauthRoleName"
   },
-  "mapName": "CreateCustomMapStyle",
+  "mapName": "customStyleMap",
   "mapStyle": "VectorEsriStreets",
-  "pricingPlan": "RequestBasedUsage",
   "isDefault": true
 }
