@@ -26,10 +26,7 @@ function Controls() {
       {context.windowSize.width > 768 ? (
         <ScaleControl position="bottom-left" />
       ) : null}
-      <AttributionControl
-        compact={false}
-        position="bottom-right"
-      />
+      <AttributionControl compact={false} position="bottom-right" />
     </>
   );
 }

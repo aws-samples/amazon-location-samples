@@ -103,12 +103,10 @@ const NavigateNow = ({ inputs, suggestionsAmount, isDirty }) => {
         size="small"
         onClick={() => Hub.dispatch("Routing", { event: "startRouting" })}
       >
-        <Text color="white" padding="0 10px 0 0">Directions</Text>
-        <NavigationIcon
-          width="24"
-          height="24"
-          style={{ fill: "white" }}
-        />
+        <Text color="white" padding="0 10px 0 0">
+          Directions
+        </Text>
+        <NavigationIcon width="24" height="24" style={{ fill: "white" }} />
       </Button>
     </Flex>
   );
@@ -117,23 +115,21 @@ const NavigateNow = ({ inputs, suggestionsAmount, isDirty }) => {
 const Suggestions = ({ suggestions, handleResultClick }) => {
   if (suggestions.length === 0) return null;
 
-  return (
-    suggestions.map((result, idx) => (
-      <View
-        key={idx}
-        style={{
-          cursor: "pointer",
-          borderColor: "var(--amplify-colors-text-normal)",
-          borderStyle: "solid",
-          borderWidth: "0 0 1px 0",
-        }}
-        margin="5px 0"
-        onClick={() => handleResultClick(result)}
-      >
-        <Text fontSize="small">{formatAddress(result)}</Text>
-      </View>
-    ))
-  );
+  return suggestions.map((result, idx) => (
+    <View
+      key={idx}
+      style={{
+        cursor: "pointer",
+        borderColor: "var(--amplify-colors-text-normal)",
+        borderStyle: "solid",
+        borderWidth: "0 0 1px 0",
+      }}
+      margin="5px 0"
+      onClick={() => handleResultClick(result)}
+    >
+      <Text fontSize="small">{formatAddress(result)}</Text>
+    </View>
+  ));
 };
 
 // Component: Inputs - Routing inputs
@@ -223,11 +219,7 @@ const Inputs = ({ setHasSuggestions }) => {
 
   return (
     <>
-      <Flex
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="center"
-      >
+      <Flex direction="row" justifyContent="flex-start" alignItems="center">
         <View width={inputs.length === 1 ? "100%" : "90%"}>
           {inputs.map((marker, idx) => (
             <div
@@ -255,19 +247,21 @@ const Inputs = ({ setHasSuggestions }) => {
               Hub.dispatch("Markers", { event: "swapMarkers" });
             }}
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="black"
-            >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="black">
               <path d="M18 9v-3c-1 0-3.308-.188-4.506 2.216l-4.218 8.461c-1.015 2.036-3.094 3.323-5.37 3.323h-3.906v-2h3.906c1.517 0 2.903-.858 3.58-2.216l4.218-8.461c1.356-2.721 3.674-3.323 6.296-3.323v-3l6 4-6 4zm-9.463 1.324l1.117-2.242c-1.235-2.479-2.899-4.082-5.748-4.082h-3.906v2h3.906c2.872 0 3.644 2.343 4.631 4.324zm15.463 8.676l-6-4v3c-3.78 0-4.019-1.238-5.556-4.322l-1.118 2.241c1.021 2.049 2.1 4.081 6.674 4.081v3l6-4z" />
             </svg>
           </Flex>
         ) : null}
       </Flex>
-      <NavigateNow isDirty={isDirtyRef.current} suggestionsAmount={suggestions.length} inputs={inputs} />
-      <Suggestions suggestions={suggestions} handleResultClick={handleResultClick} />
+      <NavigateNow
+        isDirty={isDirtyRef.current}
+        suggestionsAmount={suggestions.length}
+        inputs={inputs}
+      />
+      <Suggestions
+        suggestions={suggestions}
+        handleResultClick={handleResultClick}
+      />
     </>
   );
 };

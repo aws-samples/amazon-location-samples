@@ -3,25 +3,36 @@
 
 import React, { useState } from "react";
 import { Hub } from "@aws-amplify/core";
-import { Flex, View, Radio, RadioGroupField, Text } from "@aws-amplify/ui-react";
+import {
+  Flex,
+  View,
+  Radio,
+  RadioGroupField,
+  Text,
+} from "@aws-amplify/ui-react";
 import { UnitsEnum } from "../../AppContext";
-
 
 // Component: Unit - Renders a single unit option
 function Unit({ label, value, isSelected, nth }) {
   let borderRadius = "";
-  if (nth === "first") borderRadius = "var(--amplify-radii-small) 0 0 var(--amplify-radii-small)";
-  if (nth === "last") borderRadius = "0 var(--amplify-radii-small) var(--amplify-radii-small) 0";
+  if (nth === "first")
+    borderRadius = "var(--amplify-radii-small) 0 0 var(--amplify-radii-small)";
+  if (nth === "last")
+    borderRadius = "0 var(--amplify-radii-small) var(--amplify-radii-small) 0";
 
   return (
     <View
       width="calc(100% / 3)"
-      backgroundColor={isSelected ? "var(--amplify-colors-brand-primary)" : "var(--amplify-colors-background-secondary)"}
+      backgroundColor={
+        isSelected
+          ? "var(--amplify-colors-brand-primary)"
+          : "var(--amplify-colors-background-secondary)"
+      }
       style={{
         cursor: "pointer",
         borderRadius: borderRadius,
         border: "1px solid",
-        borderColor: "var(--amplify-colors-background-secondary)"
+        borderColor: "var(--amplify-colors-background-secondary)",
       }}
       padding="var(--amplify-space-xxxs) 0"
       title={label}

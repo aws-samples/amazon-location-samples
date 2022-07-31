@@ -71,7 +71,9 @@ function TruckOptions() {
       <Text fontSize="small">Truck Specs</Text>
       <View width="100%">
         <SliderField
-          label={`Weight (${context.units === UnitsEnum.METRIC.value ? "kg" : "lbs"})`}
+          label={`Weight (${
+            context.units === UnitsEnum.METRIC.value ? "kg" : "lbs"
+          })`}
           fontSize="small"
           min={0}
           max={3500}

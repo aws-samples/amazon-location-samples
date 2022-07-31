@@ -33,10 +33,7 @@ const ModeOptions = ({ isOptionOpen, setIsOptionOpen }) => {
           backgroundColor="transparent"
           onClick={() => setIsOptionOpen(!isOptionOpen)}
         >
-          <Text
-            textTransform="uppercase"
-            fontWeight="lighter"
-          >
+          <Text textTransform="uppercase" fontWeight="lighter">
             {isOptionOpen ? "Close" : "Options"}
           </Text>
         </Button>

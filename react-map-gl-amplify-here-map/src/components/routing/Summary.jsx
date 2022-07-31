@@ -50,13 +50,17 @@ const Summary = ({ data }) => {
 
   return (
     <View padding="5px 0">
-      <Text fontWeight="bold" fontSize="medium">Your Itinerary:</Text>
+      <Text fontWeight="bold" fontSize="medium">
+        Your Itinerary:
+      </Text>
       <Flex padding="5px 0">
         <Text fontSize="medium" width="50%" className="text-md w-1/2">
           {action} for {formatTime(duration)}
         </Text>
         <Flex width="50%" alignItems="end" justifyContent="flex-end">
-          <Text fontSize="small" color="var(--amplify-colors-font-tertiary)">{formattedDistance} {formattedUnit}</Text>
+          <Text fontSize="small" color="var(--amplify-colors-font-tertiary)">
+            {formattedDistance} {formattedUnit}
+          </Text>
         </Flex>
       </Flex>
     </View>

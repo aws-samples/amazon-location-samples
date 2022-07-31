@@ -23,7 +23,7 @@ function RoutingMenu() {
         zIndex: 50,
         pointerEvents: "all",
         top: 10,
-        right: 10
+        right: 10,
       }}
       backgroundColor="var(--amplify-colors-neutral-20)"
       borderRadius="var(--amplify-radii-medium)"
@@ -35,9 +35,7 @@ function RoutingMenu() {
       {/* Inputs for the routing menu */}
       <Inputs setHasSuggestions={setHasSuggestions} />
       {/* Mode selector shown only when routing and there's a route available */}
-      {hasSuggestions || !context.isRouting ? null : (
-        <ModeSelector />
-      )}
+      {hasSuggestions || !context.isRouting ? null : <ModeSelector />}
       {/* If there's a route show its summary */}
       {hasSuggestions || !context.isRouting ? null : <Options />}
       {"Summary" in context.route && hasSuggestions === false ? (
@@ -50,10 +48,13 @@ function RoutingMenu() {
 const MarkerControl = () => {
   const [, setVersion] = useState(0);
 
-  const ctrl = useControl(() => {
-    const forceUpdate = () => setVersion((v) => v + 1);
-    return new CustomControl(forceUpdate, "routing-menu");
-  }, { position: "top-right" });
+  const ctrl = useControl(
+    () => {
+      const forceUpdate = () => setVersion((v) => v + 1);
+      return new CustomControl(forceUpdate, "routing-menu");
+    },
+    { position: "top-right" }
+  );
 
   if (!ctrl.getElement() || !ctrl.getMap()) {
     return null;

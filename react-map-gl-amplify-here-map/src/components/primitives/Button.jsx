@@ -11,7 +11,13 @@ const Button = (props) => {
   let { children } = props;
 
   return (
-    <button className={className} title={title} style={style} {...buttonProps} ref={ref}>
+    <button
+      className={className}
+      title={title}
+      style={style}
+      {...buttonProps}
+      ref={ref}
+    >
       {children}
     </button>
   );
