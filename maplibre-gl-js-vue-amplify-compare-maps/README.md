@@ -1,9 +1,9 @@
 # Amazon Location Service Map Comparison
-![](./image/README.png)
-
 * This is a web based sample built with Vue that uses AWS Amplify Geo to display two maps side by side.
 * Amazon Location Service offers several map styles from several providers, and this sample will help you compare them. Because the two maps are synchronized and can be compared under the same circumstances.
 * The AWS resources (Amazon Cognito & Amazon Location Service Maps) are created via Amplify CLI. The sample already comes with predefined configurations that you only have to deploy using the Amplify CLI.
+
+![](./image/README.png)
 
 ## Prerequisites
 * node v16.x
