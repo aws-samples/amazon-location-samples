@@ -103,7 +103,7 @@ App has been tested on Node.js v16.13.2 and NPM v8.1.2
 8. Start the app: run `npm start` from the sample app location on your computer.
 
 ## Deploying to Amplify
-In order to run our app in the AWS Cloud vs locally, we can deploy to AWS Amplify. Follow these steps to deploy:
+In order to run our app in the AWS Cloud vs locally, we can deploy to AWS Amplify using the [Amplify CLI](https://docs.amplify.aws/cli/). Follow these steps to deploy:
 
 From the `amplify-ui-geo-explore` location in your terminal, run
 ```
