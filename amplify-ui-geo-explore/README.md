@@ -102,6 +102,85 @@ App has been tested on Node.js v16.13.2 and NPM v8.1.2
 7. Fill in required fields for Amazon Cognito and Amazon Location Service in [`src/configuration.js`](src/configuration.js).
 8. Start the app: run `npm start` from the sample app location on your computer.
 
+## Deploying to Amplify
+In order to run our app in the AWS Cloud vs locally, we can deploy to AWS Amplify. Follow these steps to deploy:
+
+From the `amplify-ui-geo-explore` location in your terminal, run
+```
+amplify init
+```
+
+Accept the default options.
+```
+Note: It is recommended to run this command from the root of your app directory
+? Enter a name for the project amplifyuigeoexplore
+The following configuration will be applied:
+
+Project information
+| Name: amplifyuigeoexplore
+| Environment: dev
+| Default editor: Visual Studio Code
+| App type: javascript
+| Javascript framework: react
+| Source Directory Path: src
+| Distribution Directory Path: build
+| Build Command: npm run-script build
+| Start Command: npm run-script start
+```
+
+Select your authentication method. For more information about authentication using the Amplify CLI, see [here](https://docs.amplify.aws/cli/start/workflows/)
+
+Wait for the initialization to complete.
+
+Enter
+```
+amplify add hosting
+```
+
+Select `Hosting with Amplify Console (Managed hosting with custom domains, Continuous deployment)` and `Manual Deployment`
+
+Now enter
+```
+amplify publish
+```
+
+Hit enter to accept the changes
+
+```
+✔ Successfully pulled backend environment dev from the cloud.
+
+    Current Environment: dev
+
+┌──────────┬────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name  │ Operation │ Provider plugin   │
+├──────────┼────────────────┼───────────┼───────────────────┤
+│ Hosting  │ amplifyhosting │ Create    │ awscloudformation │
+└──────────┴────────────────┴───────────┴───────────────────┘
+? Are you sure you want to continue? (Y/n)
+```
+
+If you receive an error like this:
+```
+🛑 An error occurred during the push operation: /
+Must use import to load ES Module: /home/ec2-user/environment/amazon-location-samples/amplify-ui-geo-explore/src/aws-exports.js
+require() of ES modules is not supported.
+```
+
+We need to rename a file. Enter
+```
+mv src/aws-exports.js src/aws-exports.cjs
+```
+and run
+```
+amplify publish
+```
+again. When the deployment is finished you will see a URL where you can visit your application hosted in AWS Amplify
+```
+✔ Zipping artifacts completed.
+✔ Deployment complete!
+https://dev.**********.amplifyapp.com
+```
+
 ## Important notes
 
 - You may see the following AuthError in your browser's developer console:
