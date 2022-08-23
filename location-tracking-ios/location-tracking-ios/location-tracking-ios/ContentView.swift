@@ -59,7 +59,7 @@ struct MapView: View {
                             awsLocation.batchUpdateDevicePosition(request) { response, error in
                                 if(response != nil)
                                 {
-                                    print(Some!)
+                                    print(response!)
                                 }
                                 else if(error != nil)
                                 {
