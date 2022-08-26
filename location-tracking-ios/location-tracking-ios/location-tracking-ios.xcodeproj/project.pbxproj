@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8100285A28AC12B00079C5DD /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 8100285828AC12B00079C5DD /* amplifyconfiguration.json */; };
 		8100285B28AC12B00079C5DD /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 8100285928AC12B00079C5DD /* awsconfiguration.json */; };
 		81D1942528B541B500AFE435 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81D1942428B541B500AFE435 /* AWSAPIPlugin */; };
 		81D1942728B541B500AFE435 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81D1942628B541B500AFE435 /* AWSCognitoAuthPlugin */; };
@@ -19,9 +18,6 @@
 		81F468AF28AABE6300E7E682 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F468AE28AABE6300E7E682 /* ContentView.swift */; };
 		81F468B128AABE6500E7E682 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81F468B028AABE6500E7E682 /* Assets.xcassets */; };
 		81F468B428AABE6500E7E682 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81F468B328AABE6500E7E682 /* Preview Assets.xcassets */; };
-		81F468BE28AABE6500E7E682 /* location_tracking_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F468BD28AABE6500E7E682 /* location_tracking_iosTests.swift */; };
-		81F468C828AABE6500E7E682 /* location_tracking_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F468C728AABE6500E7E682 /* location_tracking_iosUITests.swift */; };
-		81F468CA28AABE6500E7E682 /* location_tracking_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F468C928AABE6500E7E682 /* location_tracking_iosUITestsLaunchTests.swift */; };
 		81F468D828AAC2B900E7E682 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468D728AAC2B900E7E682 /* AWSAPIPlugin */; };
 		81F468DA28AAC2B900E7E682 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468D928AAC2B900E7E682 /* AWSCognitoAuthPlugin */; };
 		81F468DC28AAC2B900E7E682 /* AWSLocationGeoPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468DB28AAC2B900E7E682 /* AWSLocationGeoPlugin */; };
@@ -33,8 +29,6 @@
 		81F468F128AACD5800E7E682 /* AmplifyMapLibreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468F028AACD5800E7E682 /* AmplifyMapLibreAdapter */; };
 		81F468F328AACD5800E7E682 /* AmplifyMapLibreUI in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468F228AACD5800E7E682 /* AmplifyMapLibreUI */; };
 		81F468F528AACE6800E7E682 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F468F428AACE6800E7E682 /* MapViewModel.swift */; };
-		92062E671A9B98A99D9B89A6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 61E5061FE1FAE60CA0EF00A0 /* amplifyconfiguration.json */; };
-		FD597552AB80DE6FE5EC263F /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 669AA9F7AC596C2E2C91F604 /* awsconfiguration.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,11 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		61E5061FE1FAE60CA0EF00A0 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
-		669AA9F7AC596C2E2C91F604 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		8100285828AC12B00079C5DD /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = SOURCE_ROOT; };
 		8100285928AC12B00079C5DD /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
-		81BF0DE928AC28090048BB87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		81BF0DEA28AC28360048BB87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		81F468A928AABE6300E7E682 /* location-tracking-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "location-tracking-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F468AC28AABE6300E7E682 /* location_tracking_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = location_tracking_iosApp.swift; sourceTree = "<group>"; };
@@ -67,10 +57,7 @@
 		81F468B028AABE6500E7E682 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81F468B328AABE6500E7E682 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		81F468B928AABE6500E7E682 /* location-tracking-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "location-tracking-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81F468BD28AABE6500E7E682 /* location_tracking_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = location_tracking_iosTests.swift; sourceTree = "<group>"; };
 		81F468C328AABE6500E7E682 /* location-tracking-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "location-tracking-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81F468C728AABE6500E7E682 /* location_tracking_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = location_tracking_iosUITests.swift; sourceTree = "<group>"; };
-		81F468C928AABE6500E7E682 /* location_tracking_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = location_tracking_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		81F468F428AACE6800E7E682 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,10 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				81F468AB28AABE6300E7E682 /* location-tracking-ios */,
-				81F468BC28AABE6500E7E682 /* location-tracking-iosTests */,
-				81F468C628AABE6500E7E682 /* location-tracking-iosUITests */,
 				81F468AA28AABE6300E7E682 /* Products */,
-				FCCD41B07044B0ECAD2B16B4 /* AmplifyConfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,34 +140,6 @@
 				81F468B328AABE6500E7E682 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		81F468BC28AABE6500E7E682 /* location-tracking-iosTests */ = {
-			isa = PBXGroup;
-			children = (
-				81BF0DE928AC28090048BB87 /* Info.plist */,
-				81F468BD28AABE6500E7E682 /* location_tracking_iosTests.swift */,
-			);
-			path = "location-tracking-iosTests";
-			sourceTree = "<group>";
-		};
-		81F468C628AABE6500E7E682 /* location-tracking-iosUITests */ = {
-			isa = PBXGroup;
-			children = (
-				81F468C728AABE6500E7E682 /* location_tracking_iosUITests.swift */,
-				81F468C928AABE6500E7E682 /* location_tracking_iosUITestsLaunchTests.swift */,
-			);
-			path = "location-tracking-iosUITests";
-			sourceTree = "<group>";
-		};
-		FCCD41B07044B0ECAD2B16B4 /* AmplifyConfig */ = {
-			isa = PBXGroup;
-			children = (
-				669AA9F7AC596C2E2C91F604 /* awsconfiguration.json */,
-				61E5061FE1FAE60CA0EF00A0 /* amplifyconfiguration.json */,
-				8100285828AC12B00079C5DD /* amplifyconfiguration.json */,
-			);
-			name = AmplifyConfig;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,9 +273,6 @@
 				81F468B428AABE6500E7E682 /* Preview Assets.xcassets in Resources */,
 				81F468B128AABE6500E7E682 /* Assets.xcassets in Resources */,
 				8100285B28AC12B00079C5DD /* awsconfiguration.json in Resources */,
-				8100285A28AC12B00079C5DD /* amplifyconfiguration.json in Resources */,
-				FD597552AB80DE6FE5EC263F /* awsconfiguration.json in Resources */,
-				92062E671A9B98A99D9B89A6 /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,7 +307,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81F468BE28AABE6500E7E682 /* location_tracking_iosTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,8 +314,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81F468CA28AABE6500E7E682 /* location_tracking_iosUITestsLaunchTests.swift in Sources */,
-				81F468C828AABE6500E7E682 /* location_tracking_iosUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,13 +57,9 @@ struct MapView: View {
                             request.updates = arrayOfDevicePosition
                             
                             awsLocation.batchUpdateDevicePosition(request) { response, error in
-                                if(response != nil)
-                                {
-                                    print(response!)
-                                }
-                                else if(error != nil)
-                                {
-                                    print(error!)
+                                
+                                if let error = error {
+                                    print("Error \(error)")
                                 }
                             }
                         } catch {
