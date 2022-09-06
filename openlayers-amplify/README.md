@@ -4,7 +4,7 @@
 
 ![](./img/README02.png)
 
-This example demonstrates how to use OpenLayers with Amazon Location Service and AWS Amplify within a Vue.js application.
+This example demonstrates how to use OpenLayers with Amazon Location Service and AWS Amplify.
 
 ## Execution environment
 
