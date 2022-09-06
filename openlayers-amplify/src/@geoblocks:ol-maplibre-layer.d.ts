@@ -1,0 +1,1 @@
+declare module '@geoblocks/ol-maplibre-layer';
