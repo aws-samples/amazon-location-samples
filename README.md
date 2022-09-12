@@ -43,6 +43,10 @@ cleaning, validating, and enriching data in place.
 
 * [Using Leaflet with Amazon Location Service and AWS Amplify in a Vue.js application](leaflet-vue-amplify/) `#javascript` `#vue` `#amplify`
 
+### Maps / OpenLayers
+
+* [Using OpenLayers with Amazon Location Service and AWS Amplify](openlayers-amplify/) `#javascript` `#amplify`
+
 ### Maps / Tangram
 
 * [Using Tangram with Amazon Location Service](tangram-js/) `#javascript`
