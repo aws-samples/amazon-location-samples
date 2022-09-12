@@ -4,6 +4,7 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
+    "allowJs": true,
     "moduleResolution": "Node",
     "strict": true,
     "sourceMap": true,

@@ -18,7 +18,6 @@ This example demonstrates how to use OpenLayers with Amazon Location Service and
 2. Install project dependencies: `npm install`
 3. Create a new Amplify project environment: `amplify init`
 4. Create Auth and Geo resources: `amplify push`
-5. After deployment is complete, change the extension of `/src/aws-exports.js` to `/src/aws-exports.ts`
 
 ## Compiles and hot-reloads for development
 
