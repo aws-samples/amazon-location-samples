@@ -101,7 +101,7 @@ Using service: Cognito, provided by: awscloudformation
 "amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
 
 ✔ Provide a name for the Map: · mapiottracker
-✔ Who can access this Map? · Authorized users only
+✔ Who can access this Map? · Authorized and Guest users
 Available advanced settings:
 - Map style & Map data provider (default: Streets provided by Esri)
 
@@ -536,7 +536,7 @@ Publishing message to topic iot/trackedAssets: {"payload":{"deviceid":"thing123"
 
 With resources in place you are able to run the application and see the markers position on the rendered map.
 
-Run `npm start` and navigate in your browser to [http://localhost:3000](http://localhost:3000). **Create a new account** in the applicaiton and then **login**.
+Run `npm start` and navigate in your browser to [http://localhost:8080](http://localhost:8080).
 You should be able to get an application such as:
 
 ![](assets/application-image.png)
