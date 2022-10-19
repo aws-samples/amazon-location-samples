@@ -8,9 +8,9 @@ This example demonstrates how to use Leaflet with Amazon Location Service and AW
 
 ## Execution environment
 
-- node v18.x
-- npm v8.x
-- Amplify CLI v9.2.x
+- node v18.1.0
+- npm v8.19.2
+- Amplify CLI v9.2.1
 
 ## Getting started
 
