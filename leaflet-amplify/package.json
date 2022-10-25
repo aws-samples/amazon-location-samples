@@ -18,6 +18,6 @@
     "aws-amplify": "^4.3.38",
     "leaflet": "^1.9.2",
     "maplibre-gl": "^1.15.3",
-    "maplibre-gl-js-amplify": "^1.6.0"
+    "maplibre-gl-js-amplify": "^2.1.0"
   }
 }
