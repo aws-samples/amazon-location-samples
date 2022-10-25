@@ -41,6 +41,7 @@ cleaning, validating, and enriching data in place.
 
 ### Maps / Leaflet
 
+* [Using Leaflet with Amazon Location Service and AWS Amplify](leaflet-amplify/) `#javascript` `#amplify`
 * [Using Leaflet with Amazon Location Service and AWS Amplify in a Vue.js application](leaflet-vue-amplify/) `#javascript` `#vue` `#amplify`
 
 ### Maps / OpenLayers
