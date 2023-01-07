@@ -8,7 +8,7 @@
 ## Prerequisites
 * node v16.x
 * npm 8.x
-* Amplify CLI 9.1.0
+* Amplify CLI 10.6.0
 
 ## Getting started
 1. Clone the repository: `git clone https://github.com/aws-samples/amazon-location-samples.git`
