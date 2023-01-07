@@ -17,6 +17,7 @@
 1. Install project dependencies: `npm install`
 1. Create a new Amplify project environment: `amplify init`
 1. Create Auth and Geo resources: `amplify push`
+1. Publish your application: `amplify publish`
 
 ## Compiles and hot-reloads for development
 ```
