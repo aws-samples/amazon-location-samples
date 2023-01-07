@@ -27,7 +27,7 @@ export default {
     ActiveMap: String,
   },
   setup(props, context) {
-    const renderedMap = ref(Geo.getDefaultMap());
+    const renderedMap = ref(Geo.getDefaultMap().mapName);
     const map = ref(null);
     const { id, zoom, center, pitch, bearing, ActiveMap } = toRefs(props);
 

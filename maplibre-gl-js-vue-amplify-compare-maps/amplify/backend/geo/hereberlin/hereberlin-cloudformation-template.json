@@ -329,5 +329,5 @@
       }
     }
   },
-  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"9.1.0\",\"stackType\":\"geo-Map\",\"metadata\":{}}"
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.6.0\",\"stackType\":\"geo-Map\",\"metadata\":{}}"
 }

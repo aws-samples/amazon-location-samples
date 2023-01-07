@@ -8,7 +8,7 @@
 ## Prerequisites
 * node v16.x
 * npm 8.x
-* Amplify CLI 9.1.0
+* Amplify CLI 10.6.0
 
 ## Getting started
 1. Clone the repository: `git clone https://github.com/aws-samples/amazon-location-samples.git`
@@ -17,6 +17,7 @@
 1. Install project dependencies: `npm install`
 1. Create a new Amplify project environment: `amplify init`
 1. Create Auth and Geo resources: `amplify push`
+1. Publish your application: `amplify publish`
 
 ## Compiles and hot-reloads for development
 ```

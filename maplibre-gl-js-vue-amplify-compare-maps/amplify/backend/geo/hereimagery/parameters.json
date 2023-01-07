@@ -5,7 +5,7 @@
   "unauthRoleName": {
     "Ref": "UnauthRoleName"
   },
-  "mapName": "hereexplore",
-  "mapStyle": "VectorHereExplore",
-  "isDefault": true
+  "mapName": "hereimagery",
+  "mapStyle": "RasterHereExploreSatellite",
+  "isDefault": false
 }
