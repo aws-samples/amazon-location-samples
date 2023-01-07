@@ -1,198 +1,248 @@
 {
   "auth": {
     "maplibreglvue0e55c8d4": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
         ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
         "verificationMechanisms": [
           "EMAIL"
         ]
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
     }
   },
   "geo": {
-    "placeindex": {
-      "isDefault": true,
-      "providerPlugin": "awscloudformation",
-      "service": "PlaceIndex",
-      "dataProvider": "Here",
-      "dataSourceIntendedUse": "SingleUse",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
-    "esristreet": {
-      "isDefault": false,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorEsriStreets",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
-    "esrinavigation": {
-      "isDefault": false,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorEsriNavigation",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
     "esridarkgray": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
+        }
+      ],
       "isDefault": false,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
       "mapStyle": "VectorEsriDarkGrayCanvas",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
-    "esrilightgray": {
-      "isDefault": false,
       "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorEsriLightGrayCanvas",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
+      "service": "Map"
     },
     "esriimagery": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
+        }
+      ],
       "isDefault": false,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
       "mapStyle": "RasterEsriImagery",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
-    "hereexplore": {
-      "isDefault": false,
       "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorHereExplore",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
-    "heretruck": {
-      "isDefault": false,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorHereExploreTruck",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
+      "service": "Map"
     },
     "esrilight": {
-      "isDefault": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorEsriTopographic",
       "accessType": "AuthorizedAndGuestUsers",
       "dependsOn": [
         {
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4",
           "attributes": [
             "UserPoolId"
-          ]
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
         }
-      ]
+      ],
+      "isDefault": false,
+      "mapStyle": "VectorEsriTopographic",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "esrilightgray": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
+        }
+      ],
+      "isDefault": false,
+      "mapStyle": "VectorEsriLightGrayCanvas",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "esrinavigation": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
+        }
+      ],
+      "isDefault": false,
+      "mapStyle": "VectorEsriNavigation",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "esristreet": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
+        }
+      ],
+      "isDefault": false,
+      "mapStyle": "VectorEsriStreets",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
     },
     "hereberlin": {
-      "isDefault": false,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorHereBerlin",
       "accessType": "AuthorizedAndGuestUsers",
       "dependsOn": [
         {
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4",
           "attributes": [
             "UserPoolId"
-          ]
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
         }
-      ]
+      ],
+      "isDefault": false,
+      "mapStyle": "VectorHereBerlin",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "hereexplore": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
+        }
+      ],
+      "isDefault": true,
+      "mapStyle": "VectorHereExplore",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "herehybrid": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
+        }
+      ],
+      "isDefault": false,
+      "mapStyle": "HybridHereExploreSatellite",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "hereimagery": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
+        }
+      ],
+      "isDefault": false,
+      "mapStyle": "RasterHereExploreSatellite",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "heretruck": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
+        }
+      ],
+      "isDefault": false,
+      "mapStyle": "VectorHereExploreTruck",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "placeindex": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dataProvider": "Here",
+      "dataSourceIntendedUse": "SingleUse",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue0e55c8d4"
+        }
+      ],
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex"
     }
   },
   "hosting": {
     "amplifyhosting": {
-      "service": "amplifyhosting",
       "providerPlugin": "awscloudformation",
+      "service": "amplifyhosting",
       "type": "manual"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_hosting_amplifyhosting_appId": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
+    },
+    "AMPLIFY_hosting_amplifyhosting_type": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
     }
   }
 }
