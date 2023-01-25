@@ -85,16 +85,15 @@ When you run `amplify add geo` in a empty project Amplify will ask you if you wa
 amplify add geo
 ? Select which capability you want to add: Map (visualize the geospatial data)
 ✔ geo category resources require auth (Amazon Cognito). Do you want to add auth now? (Y/n) · yes
-
 Using service: Cognito, provided by: awscloudformation
-
- The current configured provider is Amazon Cognito.
-
+ 
+ The current configured provider is Amazon Cognito. 
+ 
  Do you want to use the default authentication and security configuration? Default configuration
- Warning: you will not be able to edit these selections.
+ Warning: you will not be able to edit these selections. 
  How do you want users to be able to sign in? Username
  Do you want to configure advanced settings? No, I am done.
-✅ Successfully added auth resource maplibrejsreactiotas09d74126 locally
+✅ Successfully added auth resource maplibrejsreactiotasf3978ca5 locally
 
 ✅ Some next steps:
 "amplify push" will build all your local backend resources and provision it in the cloud
@@ -105,7 +104,11 @@ Using service: Cognito, provided by: awscloudformation
 Available advanced settings:
 - Map style & Map data provider (default: Streets provided by Esri)
 
-✔ Do you want to configure advanced settings? (y/N) · no
+✔ Do you want to configure advanced settings? (y/N) · yes
+✔ Specify the map style. Refer https://docs.aws.amazon.com/location-maps/latest/APIReference/API_MapConfiguration.html · 
+Explore (data provided by HERE)
+⚠️ Auth configuration is required to allow unauthenticated users, but it is not configured properly.
+✅ Successfully updated auth resource locally.
 ✅ Successfully added resource mapiottracker locally.
 ```
 
