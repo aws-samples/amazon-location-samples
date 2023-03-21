@@ -1,6 +1,7 @@
 import { Signer } from "@aws-amplify/core";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
+import { LocationClient } from "@aws-sdk/client-location";
 import { identityPoolId } from "./config";
 
 const region = identityPoolId.split(":")[0];
@@ -13,8 +14,16 @@ const identityProvider = fromCognitoIdentityPool({
 });
 
 let credentials;
+let locationClient;
+
 const refreshCredentials = async () => {
   credentials = await identityProvider();
+
+  locationClient = new LocationClient({
+    credentials: credentials,
+    region: region,
+  });
+
   setTimeout(refreshCredentials, credentials.expiration - new Date());
 };
 
@@ -36,4 +45,10 @@ const transformRequest = (url, resourceType) => {
   return { url };
 };
 
-export { region, credentials, refreshCredentials, transformRequest };
+export {
+  region,
+  credentials,
+  refreshCredentials,
+  transformRequest,
+  locationClient,
+};

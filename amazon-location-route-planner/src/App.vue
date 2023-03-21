@@ -28,18 +28,10 @@
 
 <script setup>
 import { ref, watch, computed, reactive } from "vue";
-import {
-  LocationClient,
-  CalculateRouteCommand,
-} from "@aws-sdk/client-location";
+import { CalculateRouteCommand } from "@aws-sdk/client-location";
 import maplibregl from "maplibre-gl";
 import { point, lineString, featureCollection } from "@turf/helpers";
-import {
-  region,
-  credentials,
-  refreshCredentials,
-  transformRequest,
-} from "./auth";
+import { locationClient, refreshCredentials, transformRequest } from "./auth";
 import TravelMode from "./components/TravelMode.vue";
 import RouteSummary from "./components/RouteSummary.vue";
 import PositionFeed from "./components/PositionFeed.vue";
@@ -312,17 +304,12 @@ const initializeApp = async () => {
 
 // Calculate route
 const calculateRoute = async () => {
-  const client = new LocationClient({
-    credentials: credentials,
-    region: region,
-  });
-
   if (
     requestParams.value.DeparturePosition &&
     requestParams.value.DestinationPosition
   ) {
     const command = new CalculateRouteCommand(requestParams.value);
-    const response = await client.send(command);
+    const response = await locationClient.send(command);
     const routeFeature = lineString(
       response.Legs.flatMap((leg) => leg.Geometry.LineString),
       response.Summary
