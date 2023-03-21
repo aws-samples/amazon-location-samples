@@ -9,4 +9,7 @@ export default defineConfig({
       "./runtimeConfig": "./runtimeConfig.browser",
     },
   },
+  server: {
+    port: 8080,
+  },
 });
