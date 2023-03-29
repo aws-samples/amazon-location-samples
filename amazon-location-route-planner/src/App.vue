@@ -251,7 +251,7 @@ const initializeApp = async () => {
       paint: {
         "circle-radius": 5,
         "circle-color": "#ffffff",
-        "circle-stroke-color": "#00b0ff",
+        "circle-stroke-color": "#000",
         "circle-stroke-width": 3,
       },
     });
@@ -281,7 +281,7 @@ const initializeApp = async () => {
           "line-cap": "round",
         },
         paint: {
-          "line-color": "#00b0ff",
+          "line-color": "#000",
           "line-width": 5,
           "line-opacity": 1,
         },
