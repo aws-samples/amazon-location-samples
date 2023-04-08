@@ -1,6 +1,6 @@
 {
   "auth": {
-    "maplibreglvue0e55c8d4": {
+    "maplibreglvue8d050126": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -34,7 +34,7 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
+          "resourceName": "maplibreglvue8d050126"
         }
       ],
       "isDefault": false,
@@ -50,7 +50,7 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
+          "resourceName": "maplibreglvue8d050126"
         }
       ],
       "isDefault": false,
@@ -66,7 +66,7 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
+          "resourceName": "maplibreglvue8d050126"
         }
       ],
       "isDefault": false,
@@ -82,7 +82,7 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
+          "resourceName": "maplibreglvue8d050126"
         }
       ],
       "isDefault": false,
@@ -98,7 +98,7 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
+          "resourceName": "maplibreglvue8d050126"
         }
       ],
       "isDefault": false,
@@ -114,27 +114,11 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
+          "resourceName": "maplibreglvue8d050126"
         }
       ],
       "isDefault": false,
       "mapStyle": "VectorEsriStreets",
-      "providerPlugin": "awscloudformation",
-      "service": "Map"
-    },
-    "hereberlin": {
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
-        }
-      ],
-      "isDefault": false,
-      "mapStyle": "VectorHereBerlin",
       "providerPlugin": "awscloudformation",
       "service": "Map"
     },
@@ -146,43 +130,11 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
+          "resourceName": "maplibreglvue8d050126"
         }
       ],
-      "isDefault": true,
+      "isDefault": false,
       "mapStyle": "VectorHereExplore",
-      "providerPlugin": "awscloudformation",
-      "service": "Map"
-    },
-    "herehybrid": {
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
-        }
-      ],
-      "isDefault": false,
-      "mapStyle": "HybridHereExploreSatellite",
-      "providerPlugin": "awscloudformation",
-      "service": "Map"
-    },
-    "hereimagery": {
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
-        }
-      ],
-      "isDefault": false,
-      "mapStyle": "RasterHereExploreSatellite",
       "providerPlugin": "awscloudformation",
       "service": "Map"
     },
@@ -194,7 +146,7 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
+          "resourceName": "maplibreglvue8d050126"
         }
       ],
       "isDefault": false,
@@ -202,9 +154,25 @@
       "providerPlugin": "awscloudformation",
       "service": "Map"
     },
-    "placeindex": {
+    "opendatastandardlight": {
       "accessType": "AuthorizedAndGuestUsers",
-      "dataProvider": "Here",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue8d050126"
+        }
+      ],
+      "isDefault": true,
+      "mapStyle": "VectorOpenDataStandardLight",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "placeIndex": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dataProvider": "HERE",
       "dataSourceIntendedUse": "SingleUse",
       "dependsOn": [
         {
@@ -212,7 +180,7 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "maplibreglvue0e55c8d4"
+          "resourceName": "maplibreglvue8d050126"
         }
       ],
       "isDefault": true,

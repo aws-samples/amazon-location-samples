@@ -1,9 +1,8 @@
 export type AmplifyDependentResourcesAttributes = {
   "auth": {
-    "maplibreglvue0e55c8d4": {
+    "maplibreglvue8d050126": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
-      "CreatedSNSRole": "string",
       "IdentityPoolId": "string",
       "IdentityPoolName": "string",
       "UserPoolArn": "string",
@@ -48,25 +47,7 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string",
       "Style": "string"
     },
-    "hereberlin": {
-      "Arn": "string",
-      "Name": "string",
-      "Region": "string",
-      "Style": "string"
-    },
     "hereexplore": {
-      "Arn": "string",
-      "Name": "string",
-      "Region": "string",
-      "Style": "string"
-    },
-    "herehybrid": {
-      "Arn": "string",
-      "Name": "string",
-      "Region": "string",
-      "Style": "string"
-    },
-    "hereimagery": {
       "Arn": "string",
       "Name": "string",
       "Region": "string",
@@ -78,7 +59,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string",
       "Style": "string"
     },
-    "placeindex": {
+    "opendatastandardlight": {
+      "Arn": "string",
+      "Name": "string",
+      "Region": "string",
+      "Style": "string"
+    },
+    "placeIndex": {
       "Arn": "string",
       "Name": "string",
       "Region": "string"
