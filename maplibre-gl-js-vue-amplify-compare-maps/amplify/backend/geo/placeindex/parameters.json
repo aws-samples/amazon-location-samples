@@ -5,7 +5,7 @@
   "unauthRoleName": {
     "Ref": "UnauthRoleName"
   },
-  "indexName": "placeindex",
+  "indexName": "placeIndex",
   "dataProvider": "Here",
   "dataSourceIntendedUse": "SingleUse",
   "isDefault": true
