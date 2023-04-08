@@ -1,7 +1,7 @@
 const awsIot = require("aws-iot-device-sdk");
 
 // Replace with your AWS IoT endpoint
-const THING_ENDPOINT = "a1t514jpw0kny1-ats.iot.eu-west-1.amazonaws.com";
+const THING_ENDPOINT = "<code>-ats.iot.us-east-1.amazonaws.com";
 const CLIENT_ID = "trackThing01";
 const IOT_TOPIC = "iot/trackedAssets";
 
