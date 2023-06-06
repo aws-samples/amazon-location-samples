@@ -10,7 +10,7 @@
   "keywords": [],
   "devDependencies": {
     "typescript": "^4.8.4",
-    "vite": "^3.1.8"
+    "vite": "^3.2.7"
   },
   "dependencies": {
     "@maplibre/maplibre-gl-leaflet": "^0.0.17",
