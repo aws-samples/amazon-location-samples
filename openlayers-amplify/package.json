@@ -12,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "typescript": "^4.7.4",
-    "vite": "^3.0.4"
+    "vite": "^3.2.7"
   },
   "dependencies": {
     "@geoblocks/ol-maplibre-layer": "^0.0.4",
