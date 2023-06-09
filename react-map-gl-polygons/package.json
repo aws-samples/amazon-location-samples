@@ -1,7 +1,7 @@
 {
   "name": "react-map-gl-polygons",
-  "private": true,
   "version": "2.0.0",
+  "description": "This sample app demonstrates using Amazon Location Service to display a polygon on an interactive map. The borders of Vancouver, BC, Canada are loaded from geoJSON and displayed on a map as a polygon. The sample app uses [`react-map-gl`](https://visgl.github.io/react-map-gl/) with [MapLibre GL JS](https://maplibre.org/maplibre-gl-js-docs/api/), [Amazon Location Service](https://aws.amazon.com/location), and [AWS Amplify](https://aws.amazon.com/amplify/).",
   "type": "module",
   "scripts": {
     "start": "vite",
@@ -9,16 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "aws-amplify": "^4.3.29",
-    "maplibre-gl-js-amplify": "^2.0.2",
+    "aws-amplify": "^5.2.5",
+    "maplibre-gl-js-amplify": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-map-gl": "^7.0.18"
+    "react-map-gl": "^7.0.25"
   },
   "devDependencies": {
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.0.0",
-    "vite": "^3.2.7"
-  }
+    "@types/react": "^18.2.9",
+    "@types/react-dom": "^18.2.4",
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.3.9"
+  },
+  "license": "MIT-0"
 }

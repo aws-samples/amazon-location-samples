@@ -1,46 +1,46 @@
 {
   "auth": {
     "openlayersstarter20b33ecd": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
         ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
         "verificationMechanisms": [
           "EMAIL"
         ]
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
     }
   },
   "geo": {
     "mapce7dbf38": {
-      "isDefault": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorHereExplore",
       "accessType": "AuthorizedAndGuestUsers",
       "dependsOn": [
         {
-          "category": "auth",
-          "resourceName": "openlayersstarter20b33ecd",
           "attributes": [
             "UserPoolId"
-          ]
+          ],
+          "category": "auth",
+          "resourceName": "openlayersstarter20b33ecd"
         }
-      ]
+      ],
+      "isDefault": true,
+      "mapStyle": "VectorHereExplore",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
     }
   }
 }

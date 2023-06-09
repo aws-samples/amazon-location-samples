@@ -1,6 +1,5 @@
 {
   "name": "maplibre-js-react-iot-asset-tracking",
-  "private": true,
   "version": "2.0.0",
   "scripts": {
     "start": "vite",
@@ -20,5 +19,6 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.0",
     "vite": "^3.2.7"
-  }
+  },
+  "license": "MIT-0"
 }

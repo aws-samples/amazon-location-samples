@@ -85,5 +85,5 @@
       }
     }
   },
-  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"9.1.0\",\"stackType\":\"customgeo-RouteCalculator\",\"metadata\":{}}"
+  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"11.0.3\",\"stackType\":\"customgeo-RouteCalculator\",\"metadata\":{}}"
 }

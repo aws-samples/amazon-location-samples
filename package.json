@@ -1,0 +1,47 @@
+{
+  "name": "amazon-location-samples",
+  "version": "1.0.0",
+  "keywords": [
+    "amazon location",
+    "map",
+    "location",
+    "als",
+    "amazon location service",
+    "maplibre"
+  ],
+  "author": {
+    "name": "Amazon Web Services",
+    "url": "https://aws.amazon.com"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "react-map-gl-polygons",
+    "react-map-gl-markers",
+    "react-map-gl-map-styles",
+    "react-map-gl-clusters",
+    "react-map-gl-change-map-language",
+    "react-map-gl-amplify-here-map",
+    "openlayers-amplify",
+    "maplibre-js-react-iot-asset-tracking",
+    "create-custom-map-style",
+    "amplify-ui-geo-explore",
+    "amazon-location-helpers"
+  ],
+  "overrides": {
+    "aws-amplify": {
+      "@aws-sdk/client-sts": "3.348.0",
+      "@aws-sdk/client-lex-runtime-service": "3.348.0",
+      "@aws-sdk/client-lex-runtime-v2": "3.348.0",
+      "@aws-sdk/client-location": "3.348.0",
+      "@aws-sdk/client-s3": "3.348.0"
+    },
+    "@aws-amplify/ui-react": {
+      "@aws-sdk/client-sts": "3.348.0",
+      "@aws-sdk/client-location": "3.348.0"
+    },
+    "maplibre-gl-js": {
+      "@aws-sdk/client-sts": "3.348.0",
+      "@aws-sdk/client-location": "3.348.0"
+    }
+  }
+}
