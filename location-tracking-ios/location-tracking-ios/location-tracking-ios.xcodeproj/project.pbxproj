@@ -1,0 +1,754 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8100285B28AC12B00079C5DD /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 8100285928AC12B00079C5DD /* awsconfiguration.json */; };
+		81D1942528B541B500AFE435 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81D1942428B541B500AFE435 /* AWSAPIPlugin */; };
+		81D1942728B541B500AFE435 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81D1942628B541B500AFE435 /* AWSCognitoAuthPlugin */; };
+		81D1942928B541B500AFE435 /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81D1942828B541B500AFE435 /* AWSDataStorePlugin */; };
+		81D1942B28B541B500AFE435 /* AWSLocationGeoPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81D1942A28B541B500AFE435 /* AWSLocationGeoPlugin */; };
+		81D1942D28B541B500AFE435 /* AWSPluginsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 81D1942C28B541B500AFE435 /* AWSPluginsCore */; };
+		81D1942F28B541B500AFE435 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 81D1942E28B541B500AFE435 /* Amplify */; };
+		81F468AD28AABE6300E7E682 /* location_tracking_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F468AC28AABE6300E7E682 /* location_tracking_iosApp.swift */; };
+		81F468AF28AABE6300E7E682 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F468AE28AABE6300E7E682 /* ContentView.swift */; };
+		81F468B128AABE6500E7E682 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81F468B028AABE6500E7E682 /* Assets.xcassets */; };
+		81F468B428AABE6500E7E682 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81F468B328AABE6500E7E682 /* Preview Assets.xcassets */; };
+		81F468D828AAC2B900E7E682 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468D728AAC2B900E7E682 /* AWSAPIPlugin */; };
+		81F468DA28AAC2B900E7E682 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468D928AAC2B900E7E682 /* AWSCognitoAuthPlugin */; };
+		81F468DC28AAC2B900E7E682 /* AWSLocationGeoPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468DB28AAC2B900E7E682 /* AWSLocationGeoPlugin */; };
+		81F468DE28AAC2B900E7E682 /* AWSPluginsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468DD28AAC2B900E7E682 /* AWSPluginsCore */; };
+		81F468E028AAC2B900E7E682 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468DF28AAC2B900E7E682 /* Amplify */; };
+		81F468EA28AAC73C00E7E682 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468E928AAC73C00E7E682 /* AWSCognitoAuthPlugin */; };
+		81F468EC28AAC73C00E7E682 /* AWSLocationGeoPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468EB28AAC73C00E7E682 /* AWSLocationGeoPlugin */; };
+		81F468EE28AAC73C00E7E682 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468ED28AAC73C00E7E682 /* Amplify */; };
+		81F468F128AACD5800E7E682 /* AmplifyMapLibreAdapter in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468F028AACD5800E7E682 /* AmplifyMapLibreAdapter */; };
+		81F468F328AACD5800E7E682 /* AmplifyMapLibreUI in Frameworks */ = {isa = PBXBuildFile; productRef = 81F468F228AACD5800E7E682 /* AmplifyMapLibreUI */; };
+		81F468F528AACE6800E7E682 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F468F428AACE6800E7E682 /* MapViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		81F468BA28AABE6500E7E682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81F468A128AABE6300E7E682 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81F468A828AABE6300E7E682;
+			remoteInfo = "location-tracking-ios";
+		};
+		81F468C428AABE6500E7E682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81F468A128AABE6300E7E682 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81F468A828AABE6300E7E682;
+			remoteInfo = "location-tracking-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8100285928AC12B00079C5DD /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
+		81BF0DEA28AC28360048BB87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		81F468A928AABE6300E7E682 /* location-tracking-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "location-tracking-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81F468AC28AABE6300E7E682 /* location_tracking_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = location_tracking_iosApp.swift; sourceTree = "<group>"; };
+		81F468AE28AABE6300E7E682 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		81F468B028AABE6500E7E682 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		81F468B328AABE6500E7E682 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		81F468B928AABE6500E7E682 /* location-tracking-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "location-tracking-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81F468C328AABE6500E7E682 /* location-tracking-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "location-tracking-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81F468F428AACE6800E7E682 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		81F468A628AABE6300E7E682 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81D1942B28B541B500AFE435 /* AWSLocationGeoPlugin in Frameworks */,
+				81F468EC28AAC73C00E7E682 /* AWSLocationGeoPlugin in Frameworks */,
+				81F468EE28AAC73C00E7E682 /* Amplify in Frameworks */,
+				81F468DE28AAC2B900E7E682 /* AWSPluginsCore in Frameworks */,
+				81F468E028AAC2B900E7E682 /* Amplify in Frameworks */,
+				81F468F128AACD5800E7E682 /* AmplifyMapLibreAdapter in Frameworks */,
+				81F468DC28AAC2B900E7E682 /* AWSLocationGeoPlugin in Frameworks */,
+				81F468D828AAC2B900E7E682 /* AWSAPIPlugin in Frameworks */,
+				81F468F328AACD5800E7E682 /* AmplifyMapLibreUI in Frameworks */,
+				81D1942F28B541B500AFE435 /* Amplify in Frameworks */,
+				81F468DA28AAC2B900E7E682 /* AWSCognitoAuthPlugin in Frameworks */,
+				81D1942928B541B500AFE435 /* AWSDataStorePlugin in Frameworks */,
+				81F468EA28AAC73C00E7E682 /* AWSCognitoAuthPlugin in Frameworks */,
+				81D1942528B541B500AFE435 /* AWSAPIPlugin in Frameworks */,
+				81D1942728B541B500AFE435 /* AWSCognitoAuthPlugin in Frameworks */,
+				81D1942D28B541B500AFE435 /* AWSPluginsCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81F468B628AABE6500E7E682 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81F468C028AABE6500E7E682 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		81F468A028AABE6300E7E682 = {
+			isa = PBXGroup;
+			children = (
+				81F468AB28AABE6300E7E682 /* location-tracking-ios */,
+				81F468AA28AABE6300E7E682 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		81F468AA28AABE6300E7E682 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				81F468A928AABE6300E7E682 /* location-tracking-ios.app */,
+				81F468B928AABE6500E7E682 /* location-tracking-iosTests.xctest */,
+				81F468C328AABE6500E7E682 /* location-tracking-iosUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		81F468AB28AABE6300E7E682 /* location-tracking-ios */ = {
+			isa = PBXGroup;
+			children = (
+				81BF0DEA28AC28360048BB87 /* Info.plist */,
+				8100285928AC12B00079C5DD /* awsconfiguration.json */,
+				81F468AC28AABE6300E7E682 /* location_tracking_iosApp.swift */,
+				81F468AE28AABE6300E7E682 /* ContentView.swift */,
+				81F468B028AABE6500E7E682 /* Assets.xcassets */,
+				81F468B228AABE6500E7E682 /* Preview Content */,
+				81F468F428AACE6800E7E682 /* MapViewModel.swift */,
+			);
+			path = "location-tracking-ios";
+			sourceTree = "<group>";
+		};
+		81F468B228AABE6500E7E682 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				81F468B328AABE6500E7E682 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		81F468A828AABE6300E7E682 /* location-tracking-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81F468CD28AABE6500E7E682 /* Build configuration list for PBXNativeTarget "location-tracking-ios" */;
+			buildPhases = (
+				81F468A528AABE6300E7E682 /* Sources */,
+				81F468A628AABE6300E7E682 /* Frameworks */,
+				81F468A728AABE6300E7E682 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "location-tracking-ios";
+			packageProductDependencies = (
+				81F468D728AAC2B900E7E682 /* AWSAPIPlugin */,
+				81F468D928AAC2B900E7E682 /* AWSCognitoAuthPlugin */,
+				81F468DB28AAC2B900E7E682 /* AWSLocationGeoPlugin */,
+				81F468DD28AAC2B900E7E682 /* AWSPluginsCore */,
+				81F468DF28AAC2B900E7E682 /* Amplify */,
+				81F468E928AAC73C00E7E682 /* AWSCognitoAuthPlugin */,
+				81F468EB28AAC73C00E7E682 /* AWSLocationGeoPlugin */,
+				81F468ED28AAC73C00E7E682 /* Amplify */,
+				81F468F028AACD5800E7E682 /* AmplifyMapLibreAdapter */,
+				81F468F228AACD5800E7E682 /* AmplifyMapLibreUI */,
+				81D1942428B541B500AFE435 /* AWSAPIPlugin */,
+				81D1942628B541B500AFE435 /* AWSCognitoAuthPlugin */,
+				81D1942828B541B500AFE435 /* AWSDataStorePlugin */,
+				81D1942A28B541B500AFE435 /* AWSLocationGeoPlugin */,
+				81D1942C28B541B500AFE435 /* AWSPluginsCore */,
+				81D1942E28B541B500AFE435 /* Amplify */,
+			);
+			productName = "location-tracking-ios";
+			productReference = 81F468A928AABE6300E7E682 /* location-tracking-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		81F468B828AABE6500E7E682 /* location-tracking-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81F468D028AABE6500E7E682 /* Build configuration list for PBXNativeTarget "location-tracking-iosTests" */;
+			buildPhases = (
+				81F468B528AABE6500E7E682 /* Sources */,
+				81F468B628AABE6500E7E682 /* Frameworks */,
+				81F468B728AABE6500E7E682 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				81F468BB28AABE6500E7E682 /* PBXTargetDependency */,
+			);
+			name = "location-tracking-iosTests";
+			productName = "location-tracking-iosTests";
+			productReference = 81F468B928AABE6500E7E682 /* location-tracking-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		81F468C228AABE6500E7E682 /* location-tracking-iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81F468D328AABE6500E7E682 /* Build configuration list for PBXNativeTarget "location-tracking-iosUITests" */;
+			buildPhases = (
+				81F468BF28AABE6500E7E682 /* Sources */,
+				81F468C028AABE6500E7E682 /* Frameworks */,
+				81F468C128AABE6500E7E682 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				81F468C528AABE6500E7E682 /* PBXTargetDependency */,
+			);
+			name = "location-tracking-iosUITests";
+			productName = "location-tracking-iosUITests";
+			productReference = 81F468C328AABE6500E7E682 /* location-tracking-iosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		81F468A128AABE6300E7E682 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					81F468A828AABE6300E7E682 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					81F468B828AABE6500E7E682 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 81F468A828AABE6300E7E682;
+					};
+					81F468C228AABE6500E7E682 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 81F468A828AABE6300E7E682;
+					};
+				};
+			};
+			buildConfigurationList = 81F468A428AABE6300E7E682 /* Build configuration list for PBXProject "location-tracking-ios" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 81F468A028AABE6300E7E682;
+			packageReferences = (
+				81F468D628AAC2B900E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */,
+				81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */,
+				81F468EF28AACD5800E7E682 /* XCRemoteSwiftPackageReference "amplify-ios-maplibre" */,
+				81D1942328B541B500AFE435 /* XCRemoteSwiftPackageReference "amplify-ios" */,
+			);
+			productRefGroup = 81F468AA28AABE6300E7E682 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				81F468A828AABE6300E7E682 /* location-tracking-ios */,
+				81F468B828AABE6500E7E682 /* location-tracking-iosTests */,
+				81F468C228AABE6500E7E682 /* location-tracking-iosUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		81F468A728AABE6300E7E682 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81F468B428AABE6500E7E682 /* Preview Assets.xcassets in Resources */,
+				81F468B128AABE6500E7E682 /* Assets.xcassets in Resources */,
+				8100285B28AC12B00079C5DD /* awsconfiguration.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81F468B728AABE6500E7E682 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81F468C128AABE6500E7E682 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		81F468A528AABE6300E7E682 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81F468AF28AABE6300E7E682 /* ContentView.swift in Sources */,
+				81F468AD28AABE6300E7E682 /* location_tracking_iosApp.swift in Sources */,
+				81F468F528AACE6800E7E682 /* MapViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81F468B528AABE6500E7E682 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81F468BF28AABE6500E7E682 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		81F468BB28AABE6500E7E682 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81F468A828AABE6300E7E682 /* location-tracking-ios */;
+			targetProxy = 81F468BA28AABE6500E7E682 /* PBXContainerItemProxy */;
+		};
+		81F468C528AABE6500E7E682 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81F468A828AABE6300E7E682 /* location-tracking-ios */;
+			targetProxy = 81F468C428AABE6500E7E682 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		81F468CB28AABE6500E7E682 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		81F468CC28AABE6500E7E682 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		81F468CE28AABE6500E7E682 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"location-tracking-ios/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "location-tracking-ios/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location Services used for mapping";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aws.samples.location-tracking-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		81F468CF28AABE6500E7E682 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"location-tracking-ios/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "location-tracking-ios/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location Services used for mapping";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aws.samples.location-tracking-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		81F468D128AABE6500E7E682 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2BY8MZ9P4A;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "location-tracking-iosTests/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aws.samples.location-tracking-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/location-tracking-ios.app/location-tracking-ios";
+			};
+			name = Debug;
+		};
+		81F468D228AABE6500E7E682 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2BY8MZ9P4A;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "location-tracking-iosTests/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aws.samples.location-tracking-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/location-tracking-ios.app/location-tracking-ios";
+			};
+			name = Release;
+		};
+		81F468D428AABE6500E7E682 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2BY8MZ9P4A;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aws.samples.location-tracking-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "location-tracking-ios";
+			};
+			name = Debug;
+		};
+		81F468D528AABE6500E7E682 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2BY8MZ9P4A;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aws.samples.location-tracking-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "location-tracking-ios";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		81F468A428AABE6300E7E682 /* Build configuration list for PBXProject "location-tracking-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81F468CB28AABE6500E7E682 /* Debug */,
+				81F468CC28AABE6500E7E682 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81F468CD28AABE6500E7E682 /* Build configuration list for PBXNativeTarget "location-tracking-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81F468CE28AABE6500E7E682 /* Debug */,
+				81F468CF28AABE6500E7E682 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81F468D028AABE6500E7E682 /* Build configuration list for PBXNativeTarget "location-tracking-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81F468D128AABE6500E7E682 /* Debug */,
+				81F468D228AABE6500E7E682 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81F468D328AABE6500E7E682 /* Build configuration list for PBXNativeTarget "location-tracking-iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81F468D428AABE6500E7E682 /* Debug */,
+				81F468D528AABE6500E7E682 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		81D1942328B541B500AFE435 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		81F468D628AAC2B900E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		81F468EF28AACD5800E7E682 /* XCRemoteSwiftPackageReference "amplify-ios-maplibre" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-ios-maplibre";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		81D1942428B541B500AFE435 /* AWSAPIPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSAPIPlugin;
+		};
+		81D1942628B541B500AFE435 /* AWSCognitoAuthPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSCognitoAuthPlugin;
+		};
+		81D1942828B541B500AFE435 /* AWSDataStorePlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSDataStorePlugin;
+		};
+		81D1942A28B541B500AFE435 /* AWSLocationGeoPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSLocationGeoPlugin;
+		};
+		81D1942C28B541B500AFE435 /* AWSPluginsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSPluginsCore;
+		};
+		81D1942E28B541B500AFE435 /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = Amplify;
+		};
+		81F468D728AAC2B900E7E682 /* AWSAPIPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468D628AAC2B900E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSAPIPlugin;
+		};
+		81F468D928AAC2B900E7E682 /* AWSCognitoAuthPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468D628AAC2B900E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSCognitoAuthPlugin;
+		};
+		81F468DB28AAC2B900E7E682 /* AWSLocationGeoPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468D628AAC2B900E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSLocationGeoPlugin;
+		};
+		81F468DD28AAC2B900E7E682 /* AWSPluginsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468D628AAC2B900E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSPluginsCore;
+		};
+		81F468DF28AAC2B900E7E682 /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468D628AAC2B900E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = Amplify;
+		};
+		81F468E928AAC73C00E7E682 /* AWSCognitoAuthPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSCognitoAuthPlugin;
+		};
+		81F468EB28AAC73C00E7E682 /* AWSLocationGeoPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSLocationGeoPlugin;
+		};
+		81F468ED28AAC73C00E7E682 /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468E828AAC73C00E7E682 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = Amplify;
+		};
+		81F468F028AACD5800E7E682 /* AmplifyMapLibreAdapter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468EF28AACD5800E7E682 /* XCRemoteSwiftPackageReference "amplify-ios-maplibre" */;
+			productName = AmplifyMapLibreAdapter;
+		};
+		81F468F228AACD5800E7E682 /* AmplifyMapLibreUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81F468EF28AACD5800E7E682 /* XCRemoteSwiftPackageReference "amplify-ios-maplibre" */;
+			productName = AmplifyMapLibreUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 81F468A128AABE6300E7E682 /* Project object */;
+}
