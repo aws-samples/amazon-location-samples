@@ -1,70 +1,88 @@
 {
   "auth": {
     "awsheredemo4fc859b5": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
         "loginMechanisms": [
           "PREFERRED_USERNAME"
         ],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS"
         ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
         "verificationMechanisms": [
           "EMAIL"
         ]
-      }
-    }
-  },
-  "geo": {
-    "map2bf94dcb": {
-      "isDefault": true,
+      },
       "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorHereBerlin",
-      "pricingPlan": "RequestBasedUsage",
-      "accessType": "AuthorizedAndGuestUsers"
-    },
-    "placeindex0e5572f7": {
-      "isDefault": true,
-      "providerPlugin": "awscloudformation",
-      "service": "PlaceIndex",
-      "dataProvider": "Here",
-      "dataSourceIntendedUse": "SingleUse",
-      "pricingPlan": "RequestBasedUsage",
-      "accessType": "AuthorizedAndGuestUsers"
+      "service": "Cognito"
     }
   },
   "customgeo": {
     "routecalculator": {
       "dependsOn": [
         {
-          "category": "geo",
-          "resourceName": "map2bf94dcb",
           "attributes": [
             "Name"
-          ]
+          ],
+          "category": "geo",
+          "resourceName": "map2bf94dcb"
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "RouteCalculator"
     }
   },
+  "geo": {
+    "map2bf94dcb": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "isDefault": true,
+      "mapStyle": "VectorHereBerlin",
+      "pricingPlan": "RequestBasedUsage",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "placeindex0e5572f7": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dataProvider": "Here",
+      "dataSourceIntendedUse": "SingleUse",
+      "isDefault": true,
+      "pricingPlan": "RequestBasedUsage",
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex"
+    }
+  },
   "hosting": {
     "amplifyhosting": {
-      "service": "amplifyhosting",
       "providerPlugin": "awscloudformation",
+      "service": "amplifyhosting",
       "type": "manual"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_hosting_amplifyhosting_appId": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
+    },
+    "AMPLIFY_hosting_amplifyhosting_type": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
     }
   }
 }

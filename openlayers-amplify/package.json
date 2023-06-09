@@ -1,23 +1,21 @@
 {
   "name": "openlayers-amplify",
-  "version": "6.15.1",
-  "description": "",
+  "version": "1.0.0",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "Yasunori Kirimoto",
-  "license": "ISC",
   "devDependencies": {
-    "typescript": "^4.7.4",
-    "vite": "^3.2.7"
+    "typescript": "^5.1.3",
+    "vite": "^4.3.9"
   },
   "dependencies": {
-    "@geoblocks/ol-maplibre-layer": "^0.0.4",
-    "aws-amplify": "^4.3.30",
-    "maplibre-gl-js-amplify": "^2.0.3",
-    "ol": "^6.15.1"
-  }
+    "@geoblocks/ol-maplibre-layer": "^0.1.1",
+    "aws-amplify": "^5.2.5",
+    "maplibre-gl-js-amplify": "^3.1.0",
+    "ol": "^7.4.0"
+  },
+  "license": "MIT-0",
+  "author": "Yasunori Kirimoto"
 }

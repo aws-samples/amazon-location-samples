@@ -22,7 +22,7 @@ This example demonstrates how to use OpenLayers with Amazon Location Service and
 ## Compiles and hot-reloads for development
 
 ```sh
-npm run dev
+npm run start
 ```
 
 ## Compiles and minifies for production

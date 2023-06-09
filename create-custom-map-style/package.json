@@ -1,11 +1,10 @@
 {
   "name": "create-custom-map-style",
-  "version": "0.5.0",
-  "private": true,
+  "version": "1.0.0",
   "dependencies": {
-    "@aws-amplify/ui-react": "^3.2.1",
-    "aws-amplify": "^4.3.29",
-    "maplibre-gl-js-amplify": "^2.0.2",
+    "@aws-amplify/ui-react": "^5.0.0",
+    "aws-amplify": "^5.2.5",
+    "maplibre-gl-js-amplify": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -15,9 +14,10 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.0.0",
-    "vite": "^3.2.7"
-  }
+    "@types/react": "^18.2.9",
+    "@types/react-dom": "^18.2.4",
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.3.9"
+  },
+  "license": "MIT-0"
 }

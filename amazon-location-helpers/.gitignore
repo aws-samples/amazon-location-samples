@@ -1,2 +1,5 @@
 node_modules/
 dist/
+
+# ignore package-lock.json because it's managed at the project root level
+package-lock.json
