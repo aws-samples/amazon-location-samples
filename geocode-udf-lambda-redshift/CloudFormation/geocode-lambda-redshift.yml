@@ -18,6 +18,11 @@ Parameters:
     Description: Redshift cluster identifier
     Type: String
     ConstraintDescription: Cluster identifier for Amazon Redshift
+  RedshiftMaxBatchSize:
+    Description: Max Batch Size per function for Redshift Lambda UDF
+    Type: Number
+    ConstraintDescription: 
+    Default: 9000
 Mappings:
   RegionBucketMap:
     us-east-1:
