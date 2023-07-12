@@ -24,24 +24,6 @@
     "openlayers-amplify",
     "maplibre-js-react-iot-asset-tracking",
     "create-custom-map-style",
-    "amplify-ui-geo-explore",
     "amazon-location-helpers"
-  ],
-  "overrides": {
-    "aws-amplify": {
-      "@aws-sdk/client-sts": "3.348.0",
-      "@aws-sdk/client-lex-runtime-service": "3.348.0",
-      "@aws-sdk/client-lex-runtime-v2": "3.348.0",
-      "@aws-sdk/client-location": "3.348.0",
-      "@aws-sdk/client-s3": "3.348.0"
-    },
-    "@aws-amplify/ui-react": {
-      "@aws-sdk/client-sts": "3.348.0",
-      "@aws-sdk/client-location": "3.348.0"
-    },
-    "maplibre-gl-js": {
-      "@aws-sdk/client-sts": "3.348.0",
-      "@aws-sdk/client-location": "3.348.0"
-    }
-  }
+  ]
 }
