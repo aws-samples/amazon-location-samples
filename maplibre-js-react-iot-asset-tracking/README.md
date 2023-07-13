@@ -76,6 +76,10 @@ To send a position to the map, log in into the IoT Core AWS Console and publish 
 
 ![](assets/iot-core-screen.png)
 
+If you refresh the page after publishing a message, you should see the device position in the map.
+
+![](assets/application-image.png)
+
 ## Walkthrough
 
 For a step-by-step walkthrough of how to build and deploy the project using the Amplicy CLI, please check the [Build a Real-Time Asset Tracking Application with Amazon Location Service](https://community.aws/tutorials/build-a-real-time-asset-tracking-app-with-amazon-location#deploy-the-tracking-app) post.
