@@ -7,18 +7,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@aws-amplify/ui-react": "^3.2.1",
-    "@aws-sdk/client-location": "^3.137.0",
-    "aws-amplify": "^4.3.29",
-    "maplibre-gl-js-amplify": "^2.0.2",
+    "@aws-amplify/ui-react": "^5.0.4",
+    "@aws-amplify/ui-react-geo": "^1.0.1",
+    "@aws-sdk/client-location": "^3.370.0",
+    "aws-amplify": "^5.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.0.0",
-    "vite": "^3.2.7"
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@vitejs/plugin-react": "^4.0.1",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.1",
+    "vite": "^4.4.0"
   },
   "license": "MIT-0"
 }

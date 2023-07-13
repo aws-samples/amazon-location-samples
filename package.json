@@ -22,7 +22,6 @@
     "react-map-gl-change-map-language",
     "react-map-gl-amplify-here-map",
     "openlayers-amplify",
-    "maplibre-js-react-iot-asset-tracking",
     "create-custom-map-style",
     "amazon-location-helpers"
   ]
