@@ -1,5 +1,8 @@
 # Amazon Location Service Samples
 
+> [!IMPORTANT]
+> This repository will be archived on December 31 2023 and is no longer accepting contributions. Before that date, we will move the samples to dedicated repositories and update this README with links to the new locations. Please subscribe to new repositories to receive updates.
+
 ## Introduction
 
 This is a set of sample applications for Amazon Location Service. For more information, please
