@@ -1,7 +1,7 @@
 # Amazon Location Service Samples
 
 > [!IMPORTANT]
-> This repository will be archived on December 31 2023 and is no longer accepting contributions. Before that date, we will move the samples to dedicated repositories and update this README with links to the new locations. Please subscribe to new repositories to receive updates.
+> This repository will be archived on December 31 2023 and is no longer accepting contributions. Before that date, we will move the samples to dedicated repositories and update this README with links to the new locations. Please subscribe to the new repositories or check the [AWS Geospatial](https://github.com/aws-geospatial) GitHub organization to continue receiving updates.
 
 ## Introduction
 
