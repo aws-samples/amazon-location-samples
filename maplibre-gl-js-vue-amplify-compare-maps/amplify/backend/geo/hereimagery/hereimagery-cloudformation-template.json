@@ -73,13 +73,10 @@
     "unauthRoleName": {
       "Type": "String"
     },
-    "indexName": {
+    "mapName": {
       "Type": "String"
     },
-    "dataProvider": {
-      "Type": "String"
-    },
-    "dataSourceIntendedUse": {
+    "mapStyle": {
       "Type": "String"
     },
     "env": {
@@ -90,7 +87,7 @@
     }
   },
   "Resources": {
-    "CustomPlaceIndexLambdaServiceRoleFD2F3C9D": {
+    "CustomMapLambdaServiceRole4EE7732C": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -121,25 +118,25 @@
         ]
       }
     },
-    "CustomPlaceIndexLambdaServiceRoleDefaultPolicy818068B1": {
+    "CustomMapLambdaServiceRoleDefaultPolicy983FDD4E": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyDocument": {
           "Statement": [
             {
-              "Action": "geo:CreatePlaceIndex",
+              "Action": "geo:CreateMap",
               "Effect": "Allow",
               "Resource": "*"
             },
             {
               "Action": [
-                "geo:UpdatePlaceIndex",
-                "geo:DeletePlaceIndex"
+                "geo:UpdateMap",
+                "geo:DeleteMap"
               ],
               "Effect": "Allow",
               "Resource": {
                 "Fn::Sub": [
-                  "arn:aws:geo:${region}:${account}:place-index/${indexName}",
+                  "arn:aws:geo:${region}:${account}:map/${mapName}",
                   {
                     "region": {
                       "Fn::FindInMap": [
@@ -153,12 +150,12 @@
                     "account": {
                       "Ref": "AWS::AccountId"
                     },
-                    "indexName": {
+                    "mapName": {
                       "Fn::Join": [
                         "-",
                         [
                           {
-                            "Ref": "indexName"
+                            "Ref": "mapName"
                           },
                           {
                             "Ref": "env"
@@ -173,50 +170,50 @@
           ],
           "Version": "2012-10-17"
         },
-        "PolicyName": "CustomPlaceIndexLambdaServiceRoleDefaultPolicy818068B1",
+        "PolicyName": "CustomMapLambdaServiceRoleDefaultPolicy983FDD4E",
         "Roles": [
           {
-            "Ref": "CustomPlaceIndexLambdaServiceRoleFD2F3C9D"
+            "Ref": "CustomMapLambdaServiceRole4EE7732C"
           }
         ]
       }
     },
-    "CustomPlaceIndexLambda79813BB9": {
+    "CustomMapLambda51D5D430": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
-          "ZipFile": "const response = require('cfn-response');\nconst aws = require('aws-sdk');\nexports.handler = async function (event, context) {\n  try {\n    console.log('REQUEST RECEIVED:' + JSON.stringify(event));\n    const pricingPlan = 'RequestBasedUsage';\n    if (event.RequestType == 'Create') {\n      const params = {\n        IndexName: event.ResourceProperties.indexName,\n        DataSource: event.ResourceProperties.dataSource,\n        DataSourceConfiguration: {\n          IntendedUse: event.ResourceProperties.dataSourceIntendedUse,\n        },\n        PricingPlan: pricingPlan,\n      };\n      const locationClient = new aws.Location({ apiVersion: '2020-11-19', region: event.ResourceProperties.region });\n      const res = await locationClient.createPlaceIndex(params).promise();\n      console.log('create resource response data' + JSON.stringify(res));\n      if (res.IndexName && res.IndexArn) {\n        event.PhysicalResourceId = res.IndexName;\n        await response.send(event, context, response.SUCCESS, res, params.IndexName);\n      } else {\n        await response.send(event, context, response.FAILED, res, params.IndexName);\n      }\n    }\n    if (event.RequestType == 'Update') {\n      const params = {\n        IndexName: event.ResourceProperties.indexName,\n        DataSourceConfiguration: {\n          IntendedUse: event.ResourceProperties.dataSourceIntendedUse,\n        },\n        PricingPlan: pricingPlan,\n      };\n      const locationClient = new aws.Location({ apiVersion: '2020-11-19', region: event.ResourceProperties.region });\n      const res = await locationClient.updatePlaceIndex(params).promise();\n      console.log('update resource response data' + JSON.stringify(res));\n      if (res.IndexName && res.IndexArn) {\n        event.PhysicalResourceId = res.IndexName;\n        await response.send(event, context, response.SUCCESS, res, params.IndexName);\n      } else {\n        await response.send(event, context, response.FAILED, res, params.IndexName);\n      }\n    }\n    if (event.RequestType == 'Delete') {\n      const params = {\n        IndexName: event.ResourceProperties.indexName,\n      };\n      const locationClient = new aws.Location({ apiVersion: '2020-11-19', region: event.ResourceProperties.region });\n      const res = await locationClient.deletePlaceIndex(params).promise();\n      event.PhysicalResourceId = event.ResourceProperties.indexName;\n      console.log('delete resource response data' + JSON.stringify(res));\n      await response.send(event, context, response.SUCCESS, res, params.IndexName);\n    }\n  } catch (err) {\n    console.log(err.stack);\n    const res = { Error: err };\n    await response.send(event, context, response.FAILED, res, event.ResourceProperties.indexName);\n    throw err;\n  }\n};\n"
+          "ZipFile": "const response = require('cfn-response');\nconst { LocationClient, CreateMapCommand, DeleteMapCommand, UpdateMapCommand } = require('@aws-sdk/client-location');\nexports.handler = async function (event, context) {\n  try {\n    console.log('REQUEST RECEIVED:' + JSON.stringify(event));\n    const pricingPlan = 'RequestBasedUsage';\n    if (event.RequestType === 'Create') {\n      let params = {\n        MapName: event.ResourceProperties.mapName,\n        Configuration: {\n          Style: event.ResourceProperties.mapStyle,\n        },\n        PricingPlan: pricingPlan,\n      };\n      const locationClient = new LocationClient({ region: event.ResourceProperties.region });\n      const res = await locationClient.send(new CreateMapCommand(params));\n      console.log('create resource response data' + JSON.stringify(res));\n      if (res.MapName && res.MapArn) {\n        await response.send(event, context, response.SUCCESS, res, params.MapName);\n      } else {\n        await response.send(event, context, response.FAILED, res, params.MapName);\n      }\n    }\n    if (event.RequestType === 'Update') {\n      let params = {\n        MapName: event.ResourceProperties.mapName,\n        PricingPlan: pricingPlan,\n      };\n      const locationClient = new LocationClient({ region: event.ResourceProperties.region });\n      const res = await locationClient.send(new UpdateMapCommand(params));\n      console.log('update resource response data' + JSON.stringify(res));\n      if (res.MapName && res.MapArn) {\n        await response.send(event, context, response.SUCCESS, res, params.MapName);\n      } else {\n        await response.send(event, context, response.FAILED, res, params.MapName);\n      }\n    }\n    if (event.RequestType === 'Delete') {\n      let params = {\n        MapName: event.ResourceProperties.mapName,\n      };\n      const locationClient = new LocationClient({ region: event.ResourceProperties.region });\n      const res = await locationClient.send(new DeleteMapCommand(params));\n      console.log('delete resource response data' + JSON.stringify(res));\n      await response.send(event, context, response.SUCCESS, res, params.MapName);\n    }\n  } catch (err) {\n    console.log(err.stack);\n    const res = { Error: err };\n    await response.send(event, context, response.FAILED, res, event.ResourceProperties.mapName);\n    throw err;\n  }\n};\n"
         },
         "Role": {
           "Fn::GetAtt": [
-            "CustomPlaceIndexLambdaServiceRoleFD2F3C9D",
+            "CustomMapLambdaServiceRole4EE7732C",
             "Arn"
           ]
         },
         "Handler": "index.handler",
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 300
       },
       "DependsOn": [
-        "CustomPlaceIndexLambdaServiceRoleDefaultPolicy818068B1",
-        "CustomPlaceIndexLambdaServiceRoleFD2F3C9D"
+        "CustomMapLambdaServiceRoleDefaultPolicy983FDD4E",
+        "CustomMapLambdaServiceRole4EE7732C"
       ]
     },
-    "CustomPlaceIndex": {
+    "CustomMap": {
       "Type": "Custom::LambdaCallout",
       "Properties": {
         "ServiceToken": {
           "Fn::GetAtt": [
-            "CustomPlaceIndexLambda79813BB9",
+            "CustomMapLambda51D5D430",
             "Arn"
           ]
         },
-        "indexName": {
+        "mapName": {
           "Fn::Join": [
             "-",
             [
               {
-                "Ref": "indexName"
+                "Ref": "mapName"
               },
               {
                 "Ref": "env"
@@ -224,11 +221,8 @@
             ]
           ]
         },
-        "dataSource": {
-          "Ref": "dataProvider"
-        },
-        "dataSourceIntendedUse": {
-          "Ref": "dataSourceIntendedUse"
+        "mapStyle": {
+          "Ref": "mapStyle"
         },
         "region": {
           "Fn::FindInMap": [
@@ -246,23 +240,23 @@
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"
     },
-    "PlaceIndexPolicy": {
+    "MapPolicy": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyDocument": {
           "Statement": [
             {
               "Action": [
-                "geo:SearchPlaceIndexForPosition",
-                "geo:SearchPlaceIndexForText",
-                "geo:SearchPlaceIndexForSuggestions",
-                "geo:GetPlace"
+                "geo:GetMapStyleDescriptor",
+                "geo:GetMapGlyphs",
+                "geo:GetMapSprites",
+                "geo:GetMapTile"
               ],
               "Effect": "Allow",
               "Resource": {
                 "Fn::GetAtt": [
-                  "CustomPlaceIndex",
-                  "IndexArn"
+                  "CustomMap",
+                  "MapArn"
                 ]
               }
             }
@@ -278,7 +272,7 @@
                   "-",
                   [
                     {
-                      "Ref": "indexName"
+                      "Ref": "mapName"
                     },
                     {
                       "Ref": "env"
@@ -305,9 +299,14 @@
     "Name": {
       "Value": {
         "Fn::GetAtt": [
-          "CustomPlaceIndex",
-          "IndexName"
+          "CustomMap",
+          "MapName"
         ]
+      }
+    },
+    "Style": {
+      "Value": {
+        "Ref": "mapStyle"
       }
     },
     "Region": {
@@ -324,11 +323,11 @@
     "Arn": {
       "Value": {
         "Fn::GetAtt": [
-          "CustomPlaceIndex",
-          "IndexArn"
+          "CustomMap",
+          "MapArn"
         ]
       }
     }
   },
-  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.7.1\",\"stackType\":\"geo-PlaceIndex\",\"metadata\":{}}"
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.7.1\",\"stackType\":\"geo-Map\",\"metadata\":{}}"
 }

@@ -8,16 +8,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@aws-amplify/ui-vue": "^2.4.12",
-    "aws-amplify": "^4.3.27",
-    "maplibre-gl": "^2.1.9",
-    "maplibre-gl-js-amplify": "^2.0.2",
-    "vue": "^3.2.45",
-    "vue-router": "^4.0.12"
+    "@aws-amplify/ui-vue": "^3.1.27",
+    "aws-amplify": "^5.3.10",
+    "maplibre-gl": "^2.4.0",
+    "maplibre-gl-js-amplify": "^3.1.0",
+    "vue": "^3.3.7",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.0.1",
-    "vite": "^3.2.7"
+    "@vitejs/plugin-vue": "^4.4.0",
+    "vite": "^4.5.0"
   },
   "license": "MIT-0"
 }

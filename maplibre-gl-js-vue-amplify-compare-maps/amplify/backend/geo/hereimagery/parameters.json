@@ -5,7 +5,7 @@
   "unauthRoleName": {
     "Ref": "UnauthRoleName"
   },
-  "mapName": "opendatastandardlight",
-  "mapStyle": "VectorOpenDataStandardLight",
-  "isDefault": false
+  "mapName": "hereimagery",
+  "mapStyle": "RasterHereExploreSatellite",
+  "isDefault": true
 }

@@ -122,6 +122,22 @@
       "providerPlugin": "awscloudformation",
       "service": "Map"
     },
+    "hereberlin": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue8d050126"
+        }
+      ],
+      "isDefault": false,
+      "mapStyle": "VectorHereBerlin",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
     "hereexplore": {
       "accessType": "AuthorizedAndGuestUsers",
       "dependsOn": [
@@ -135,6 +151,38 @@
       ],
       "isDefault": false,
       "mapStyle": "VectorHereExplore",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "herehybrid": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue8d050126"
+        }
+      ],
+      "isDefault": false,
+      "mapStyle": "HybridHereExploreSatellite",
+      "providerPlugin": "awscloudformation",
+      "service": "Map"
+    },
+    "hereimagery": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "maplibreglvue8d050126"
+        }
+      ],
+      "isDefault": true,
+      "mapStyle": "RasterHereExploreSatellite",
       "providerPlugin": "awscloudformation",
       "service": "Map"
     },
@@ -165,7 +213,7 @@
           "resourceName": "maplibreglvue8d050126"
         }
       ],
-      "isDefault": true,
+      "isDefault": false,
       "mapStyle": "VectorOpenDataStandardLight",
       "providerPlugin": "awscloudformation",
       "service": "Map"
