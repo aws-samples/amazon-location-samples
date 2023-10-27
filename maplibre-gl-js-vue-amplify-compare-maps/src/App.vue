@@ -1,3 +1,27 @@
+<script setup>
+import { Geo } from 'aws-amplify';
+import { ref } from 'vue';
+import Map from './MapPane.vue';
+
+const availableMaps = ref(Geo.getAvailableMaps());
+const zoom = ref(14);
+const center = ref([139.7648, 35.6794]);
+const pitch = ref(30);
+const bearing = ref(0);
+const ActiveMap = ref(null);
+
+const updateState = (...args) => {
+  zoom.value = args[0];
+  center.value = args[1];
+  bearing.value = args[2];
+  pitch.value = args[3];
+};
+
+const updateActiveMap = (...args) => {
+  ActiveMap.value = args[0];
+};
+</script>
+
 <template>
   <main>
     <header>
@@ -33,46 +57,6 @@
     </section>
   </main>
 </template>
-
-<script>
-import { Geo } from 'aws-amplify';
-import { ref } from 'vue';
-import Map from './MapPane.vue';
-
-export default {
-  components: { Map },
-  setup() {
-    const availableMaps = ref(Geo.getAvailableMaps());
-    const zoom = ref(14);
-    const center = ref([139.7648, 35.6794]);
-    const pitch = ref(30);
-    const bearing = ref(0);
-    const ActiveMap = ref(null);
-
-    function updateState(...args) {
-      zoom.value = args[0];
-      center.value = args[1];
-      bearing.value = args[2];
-      pitch.value = args[3];
-    }
-
-    function updateActiveMap(...args) {
-      ActiveMap.value = args[0];
-    }
-
-    return {
-      availableMaps,
-      zoom,
-      center,
-      pitch,
-      bearing,
-      ActiveMap,
-      updateState,
-      updateActiveMap,
-    };
-  },
-};
-</script>
 
 <style>
 @import '@/assets/style.css';
