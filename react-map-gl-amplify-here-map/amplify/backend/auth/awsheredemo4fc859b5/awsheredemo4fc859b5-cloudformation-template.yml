@@ -237,7 +237,7 @@ Resources:
               - ' }'
               - '};'
       Handler: index.handler
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Timeout: 300
       Role:
         Fn::GetAtt:
@@ -381,4 +381,4 @@ Outputs:
         - appSecret
     Condition: ShouldOutputAppClientSecrets
 Description: >-
-  {"createdOn":"Linux","createdBy":"Amplify","createdWith":"9.1.0","stackType":"auth-Cognito","metadata":{}}
+  {"createdOn":"Linux","createdBy":"Amplify","createdWith":"11.0.3","stackType":"auth-Cognito","metadata":{}}

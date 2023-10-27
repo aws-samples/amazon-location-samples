@@ -1,0 +1,28 @@
+{
+  "name": "amazon-location-samples",
+  "version": "1.0.0",
+  "keywords": [
+    "amazon location",
+    "map",
+    "location",
+    "als",
+    "amazon location service",
+    "maplibre"
+  ],
+  "author": {
+    "name": "Amazon Web Services",
+    "url": "https://aws.amazon.com"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "react-map-gl-polygons",
+    "react-map-gl-markers",
+    "react-map-gl-map-styles",
+    "react-map-gl-clusters",
+    "react-map-gl-change-map-language",
+    "react-map-gl-amplify-here-map",
+    "openlayers-amplify",
+    "create-custom-map-style",
+    "amazon-location-helpers"
+  ]
+}

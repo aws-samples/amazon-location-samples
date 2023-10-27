@@ -54,3 +54,6 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+# ignore package-lock.json because it's managed at the project root level
+package-lock.json

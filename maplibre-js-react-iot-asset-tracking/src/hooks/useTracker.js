@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Auth, Geo, Hub } from "aws-amplify";
+import { Geo } from "@aws-amplify/geo";
+import { Auth } from "@aws-amplify/auth";
 import {
   LocationClient,
   GetDevicePositionHistoryCommand,

@@ -1,6 +1,6 @@
 {
   "name": "leaflet-vue-amplify",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "scripts": {
     "start": "vite",
     "build": "vite build",
@@ -17,17 +17,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.1.0",
-    "vite": "^2.7.13"
+    "vite": "^2.9.16"
   },
-  "overrides": {
-    "react-native": {
-      "@react-native-community/cli": {
-        "shell-quote": "1.7.3"
-      }
-    },
-    "minimist": "1.2.6",
-    "nomnom": {
-      "underscore": "1.13.4"
-    }
-  }
+  "license": "MIT-0"
 }

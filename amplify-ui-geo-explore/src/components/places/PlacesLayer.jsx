@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { Geocoder } from "@aws-amplify/ui-react";
+import { LocationSearch } from "@aws-amplify/ui-react-geo";
 import { renderToString } from "react-dom/server";
 import PinIcon from "../common/PinIcon";
 import styles from "./PlacesLayer.module.css";
@@ -23,7 +23,7 @@ const markerIcon = { element: icon, offset: [0, -PIN_ICON_SIZE / 2] };
 // Override search box's default style
 const render = (item) => {
   // render as a search result
-  let placeName = item.place_name.split(",");
+  let placeName = item.text.split(",");
   return renderToString(
     <div className="mapboxgl-ctrl-geocoder--result maplibregl-ctrl-geocoder--result">
       <div>
@@ -57,7 +57,7 @@ const popupRender = (item) => {
 // Layer in the app that contains Places functionalities
 const PlacesLayer = () => {
   return (
-    <Geocoder
+    <LocationSearch
       position="top-left"
       placeholder="Search Places"
       showResultsWhileTyping={false}

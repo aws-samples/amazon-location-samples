@@ -51,6 +51,31 @@ Looking at the existing issues is a great way to find something to contribute on
 projects, by default, use the default GitHub issue labels (enhancement/bug/duplicate/help
 wanted/invalid/question/wontfix), looking at any 'help wanted' issues is a great place to start.
 
+## Setting up a new sample
+
+> **Note**
+> The information below apply only to samples that use Node.js (i.e. Web apps, etc.). All other
+> samples can simply create a new folder and add the sample files.
+
+Each folder in this repository is a separate sample, however all samples share the same
+`package.json` and `package-lock.json` files. This is known as a [monorepo](https://en.wikipedia.org/wiki/Monorepo)
+ and it's done via [npm workspaces](https://docs.npmjs.com/cli/v9/using-npm/workspaces?v=true).
+
+To create a new sample, you need to:
+- Create an empty new folder in the root of the repository (e.g. `my-sample`)
+- Run `npm init -w my-sample` to initialize the new sample (replace `my-sample` with the name of
+  the folder you created)
+- Add the sample files to the new folder
+
+Whenever you want to install a new dependency, you need to run `npm install <package-name> -w my-sample` (replace `my-sample` with the name of the folder you created). When adding new dependencies, please try to align version numbers with similar dependencies in other samples.
+
+> **Warning**
+> Do not run `npm install` directly in the sample folder. This will install the dependency in the
+> sample folder, but not in the root folder, which will cause issues with the monorepo.
+
+The resulting sample should not have any `package-lock.json` and the main `package.json` at the root of
+the repository should now have the name of the new sample in the `workspaces` section.
+
 ## Code of Conduct
 
 This project has adopted the [Amazon Open Source Code of

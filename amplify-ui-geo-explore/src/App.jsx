@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 
 import React, { useState, useEffect } from "react";
-import Amplify, { Auth } from "aws-amplify";
+import { Amplify, Auth } from "aws-amplify";
 import { LocationClient } from "@aws-sdk/client-location";
 import { IDENTITY_POOL_ID, REGION, MAP, PLACE } from "./configuration";
 import {
@@ -17,10 +17,12 @@ import PlacesLayer from "./components/places/PlacesLayer";
 import RoutesLayer from "./components/routes/RoutesLayer";
 import GeofencesLayer from "./components/geofences/GeofencesLayer";
 import TrackersLayer from "./components/trackers/TrackersLayer";
-import { AmplifyProvider, MapView } from "@aws-amplify/ui-react";
+import { AmplifyProvider } from "@aws-amplify/ui-react";
+import { MapView } from "@aws-amplify/ui-react-geo";
 import { NavigationControl } from "react-map-gl";
 import { theme } from "./theme";
 import "@aws-amplify/ui-react/styles.css";
+import "@aws-amplify/ui-react-geo/styles.css";
 import "./index.css";
 
 // Configuring Amplify Geo with existing Amazon Cognito and Amazon Location Service information
@@ -31,7 +33,7 @@ Amplify.configure({
     region: REGION, // REQUIRED - Amazon Cognito Region
   },
   geo: {
-    AmazonLocationService: {
+    amazon_location_service: {
       maps: {
         items: {
           [MAP.NAME]: {
