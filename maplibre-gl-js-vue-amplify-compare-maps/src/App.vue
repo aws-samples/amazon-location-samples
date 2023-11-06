@@ -3,13 +3,15 @@ import { Geo } from 'aws-amplify';
 import { ref } from 'vue';
 import Map from './MapPane.vue';
 
+// Common properties shared between Map components
 const availableMaps = ref(Geo.getAvailableMaps());
 const zoom = ref(14);
 const center = ref([139.7648, 35.6794]);
-const pitch = ref(30);
 const bearing = ref(0);
+const pitch = ref(30);
 const ActiveMap = ref(null);
 
+// Function to update the map state
 const updateState = (...args) => {
   zoom.value = args[0];
   center.value = args[1];
@@ -17,6 +19,7 @@ const updateState = (...args) => {
   pitch.value = args[3];
 };
 
+// Function to update the active map
 const updateActiveMap = (...args) => {
   ActiveMap.value = args[0];
 };
@@ -25,7 +28,7 @@ const updateActiveMap = (...args) => {
 <template>
   <main>
     <header>
-      <h1>Amazon Location × Amplify Geo</h1>
+      <h1>Amazon Location Service × Amplify Geo</h1>
     </header>
     <section>
       <div>
