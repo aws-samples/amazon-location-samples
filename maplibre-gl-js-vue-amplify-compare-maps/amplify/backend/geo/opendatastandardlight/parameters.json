@@ -7,5 +7,5 @@
   },
   "mapName": "opendatastandardlight",
   "mapStyle": "VectorOpenDataStandardLight",
-  "isDefault": false
+  "isDefault": true
 }

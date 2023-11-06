@@ -181,7 +181,7 @@
           "resourceName": "maplibreglvue8d050126"
         }
       ],
-      "isDefault": true,
+      "isDefault": false,
       "mapStyle": "RasterHereExploreSatellite",
       "providerPlugin": "awscloudformation",
       "service": "Map"
@@ -213,7 +213,7 @@
           "resourceName": "maplibreglvue8d050126"
         }
       ],
-      "isDefault": false,
+      "isDefault": true,
       "mapStyle": "VectorOpenDataStandardLight",
       "providerPlugin": "awscloudformation",
       "service": "Map"
